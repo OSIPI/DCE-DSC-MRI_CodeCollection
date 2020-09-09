@@ -1,0 +1,1 @@
+This folder will contain information and resources necessary to test the contirbuted source code using TRAVIS-CI
