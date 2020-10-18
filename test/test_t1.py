@@ -29,7 +29,7 @@ def test_fit_vfa_2_point(S_t,fa_array, tr_S, T1_est, S0):
 """
 If invalid flip angles are used i.e. <=0, then raise an exception
 """
-@pytest.mark.parametrize('fa_array',[(np.array([-10,8,6,4])),
+@pytest.mark.parametrize('fa_array',[(np.array([0,8,6,4])),
                                       (np.array([0,2,4,6])),
                                       (np.array([20,10,0,-5]))])
 def test_negative_favals(fa_array):
