@@ -104,6 +104,6 @@ before_install:
   - pip install codecov
 install:
   - pip install ".[test]"
-script: pytest
+script: coverage run -m pytest
 after_success:
   - codecov # submit coverage
