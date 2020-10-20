@@ -105,5 +105,7 @@ before_install:
 install:
   - pip install ".[test]"
 script: coverage run -m pytest
+env:
+  - CODECOV_TOKEN=1aacc422-7cef-4a66-9204-94bf2de5b1dc
 after_success:
   - codecov # submit coverage
