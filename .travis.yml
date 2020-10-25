@@ -43,6 +43,7 @@ matrix:
         - pip3 install -U pip
         - pip3 install -U pytest
         - pip3 install codecov
+        - pip3 install lmfit
       script: python3 -m pytest
       after_success: python 3 -m codecov
     - name: "Python 3.8.0 on macOS 10.14"
@@ -54,6 +55,7 @@ matrix:
         - pip3 install -U pip
         - pip3 install -U pytest
         - pip3 install codecov
+        - pip3 install lmfit
       script: python3 -m pytest
       after_success: python 3 -m codecov
     #  ====== WINDOWS =========
@@ -66,6 +68,7 @@ matrix:
         - python -m pip install --upgrade pip
         - pip install --upgrade pytest
         - pip install codecov
+        - pip install lmfit
       env: PATH=/c/Python27:/c/Python27/Scripts:$PATH
     - name: "Python 3.5.4 on Windows"
       os: windows           # Windows 10.0.17134 N/A Build 17134
@@ -76,6 +79,7 @@ matrix:
         - python -m pip install --upgrade pip
         - pip3 install --upgrade pytest
         - pip3 install codecov
+        - pip3 install lmfit
       env: PATH=/c/Python35:/c/Python35/Scripts:$PATH
     - name: "Python 3.6.8 on Windows"
       os: windows           # Windows 10.0.17134 N/A Build 17134
@@ -86,6 +90,7 @@ matrix:
         - python -m pip install --upgrade pip
         - pip3 install --upgrade pytest
         - pip3 install codecov
+        - pip3 install lmfit
       env: PATH=/c/Python36:/c/Python36/Scripts:$PATH
     - name: "Python 3.7.4 on Windows"
       os: windows           # Windows 10.0.17134 N/A Build 17134
@@ -96,12 +101,14 @@ matrix:
         - python -m pip install --upgrade pip
         - pip3 install --upgrade pytest
         - pip3 install codecov
+        - pip3 install lmfit
       env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
 before_install:
   - python --version
   - pip install -U pip
   - pip install -U pytest
   - pip install codecov
+  - pip install lmfit
 install:
   - pip install ".[test]"
 script: coverage run -m pytest
