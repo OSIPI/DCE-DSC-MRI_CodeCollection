@@ -49,3 +49,4 @@ command is sufficient for the local changes ot be reflected on the remote reposi
 1. [Cloning a repository across different Operating Systems](https://docs.github.com/en/free-pro-team@latest/github/creating-cloning-and-archiving-repositories/cloning-a-repository)
 2. [Working with Pull Requests](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/about-pull-requests)
 3. [Using the Issue Tracker](https://docs.github.com/en/free-pro-team@latest/github/managing-your-work-on-github/creating-an-issue)
+4. [Git cheat sheet](https://training.github.com/downloads/github-git-cheat-sheet.pdf)
