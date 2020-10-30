@@ -12,7 +12,7 @@ The **doc** folder contains all documentation pertaining to the operation of TF 
 *   Guidelines to creating a test file
 *   Guidelines for code contribution
 
-The **src** folder contains the community contributed src code. Within **src**, the **orignial** folder contains the code to be tested, and the **tested** folder will house code that has been tested in the current or previous milestones.
+The **src** folder contains the community contributed src code. Within **src**, the **original** folder contains the code to be tested, and the **tested** folder will house code that has been tested in the current or previous milestones.
 
 The **test** folder contains the test files corresponding to the contributed code in **src**. Each contributed source code will have a corresponding test file in this folder. The directory structure does not necessarily have to mirror that of the **src** folder. 
 
