@@ -1,6 +1,6 @@
 # Navigating through TF2.3-CodeLibrary
 
-The **TF2.3-CodeLibrary** respository will house all contributed source code from the OSIPI and Perfusion MR community, that belong to the DCE and DSC pipelines. To learn more about the role of Task Force 2.3, please visit the [OSIPI website](https://www.osipi.org/task-force-2-3/).
+The **TF2.3-CodeLibrary** respository will house all contributed source code from the OSIPI and Perfusion MR community, that belong to DCE and DSC analysis. To learn more about the role of Task Force 2.3, please visit the [OSIPI website](https://www.osipi.org/task-force-2-3/).
 
 ## Repository Organization
 
