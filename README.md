@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.com/OSIPI/TF2.3-CodeLibrary.svg?token=gKUxg5qhLHFRNjKTZy8a&branch=Milestone-2)](https://travis-ci.com/OSIPI/TF2.3-CodeLibrary) 
 [![codecov](https://codecov.io/gh/OSIPI/TF2.3-CodeLibrary/branch/Milestone-2/graph/badge.svg?token=ZR3RPV8Y0B)](undefined)
 
-The **TF2.3-CodeLibrary** respository will house all contributed source code from the OSIPI and Perfusion MR community, that belong to the DCE and DSC pipelines. To learn more about the role of Task Force 2.3, please visit the [OSIPI website](https://www.osipi.org/task-force-2-3/).
+The **TF2.3-CodeLibrary** respository will house all contributed source code from the OSIPI and Perfusion MR community, that belong to the analysis of DCE and DSC-MRI data. To learn more about the role of Task Force 2.3, please visit the [OSIPI website](https://www.osipi.org/task-force-2-3/).
 
 ## Repository Organization
 
