@@ -1,1 +1,0 @@
-This folder will contain all the necessary documentation for Milestone-2. This will include information about the code contribution from the taskforce members, compilation of the list of units / functions that will be tested for this milestone, and any other relavant documentation pertaining towards achieveing the milestone objectives.  
