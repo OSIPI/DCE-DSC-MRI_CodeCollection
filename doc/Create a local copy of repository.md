@@ -1,4 +1,5 @@
-#Create a copy of the respository and contribute changes
+# Create a copy of the respository and contribute changes
+
 
 *Note: The guidelines and instructions presented in this document use examples evaluated on the macOS operating system. Where applicable, links referencing documentation to perform the same task on a different operating system has been provided. Please note that these links may not be exhaustive and we welcome users to report any issues they face while working through the steps outlined, on the [issue tracker](https://github.com/OSIPI/TF2.3-CodeLibrary/issues) for the repository.*
 
