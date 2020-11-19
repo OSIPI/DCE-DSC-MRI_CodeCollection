@@ -4,10 +4,8 @@
 name: Test CodeCollection
 
 on:
-  push:
-    branches: [ Milestone-2 ]
-  pull_request:
-    branches: [ Milestone-2 ]
+  - push
+  - pull_request
 
 jobs:
   build:
