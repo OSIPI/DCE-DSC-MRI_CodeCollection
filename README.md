@@ -27,3 +27,4 @@ To install a fresh copy of Git or to upgrade to the latest version, please follo
 ## View Testing Reports
 
 **TRAVIS CI** has been utilized for automated testing of the community contributed source code. The status of testing is shown at the beginning of this document by the **TRAVIS** status image denoted by **build passing**. Clicking on it will take you to [TRAVIS CI](https://travis-ci.com/OSIPI/TF2.3-CodeLibrary) where a detailed report with past build information will be available. 
+
