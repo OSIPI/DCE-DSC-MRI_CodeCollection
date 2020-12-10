@@ -26,5 +26,4 @@ To install a fresh copy of Git or to upgrade to the latest version, please follo
 
 ## View Testing Reports
 **Github Actions** has been utilized for automated testing of the community contributed source code. The status of testing is shown at the beginning of this document by the **Github** status image denoted by **ci passing**. Clicking on it will take you to [Github Actions](https://github.com/OSIPI/DCE-DSC-MRI_CodeCollection/actions) where a detailed report with past build information will be available. 
-=======
-**TRAVIS CI** has been utilized for automated testing of the community contributed source code. The status of testing is shown at the beginning of this document by the **TRAVIS** status image denoted by **build passing**. Clicking on it will take you to [TRAVIS CI](https://travis-ci.com/OSIPI/TF2.3-CodeLibrary) where a detailed report with past build information will be available. 
+
