@@ -1,6 +1,6 @@
 # Overview of TF2.3-CodeLibrary
 
-[![Build Status](https://travis-ci.com/OSIPI/DCE-DSC-MRI_CodeCollection.svg?branch=Milestone-2)](https://travis-ci.com/OSIPI/DCE-DSC-MRI_CodeCollection)
+![ci](https://github.com/OSIPI/DCE-DSC-MRI_CodeCollection/workflows/ci/badge.svg)
 [![codecov](https://codecov.io/gh/OSIPI/DCE-DSC-MRI_CodeCollection/branch/Milestone-2/graph/badge.svg?token=ZR3RPV8Y0B)](https://codecov.io/gh/OSIPI/DCE-DSC-MRI_CodeCollection)
 
 The ISMRM Open-Source Initiative for Perfusion Imaging ([OSIPI](https://www.osipi.org/)) aims to promote the sharing of perfusion imaging software in order to reduce duplication, improve reproducibility and speed up translation. This **TF2.3-CodeLibrary** code library is maintained by [Taskforce 2.3](https://www.osipi.org/task-force-2-3/) of OSIPI and aims to collect, test and share open-source perfusion imaging code for use in research and software development. Code contributions can include modules covering one or more steps within the image processing pipeline, for example T1 mapping, converting signal to concentration and pharmacokinetic modelling. A further aim of OSIPI is to develop a fully tested and harmonised code library, drawing on the contributions within this repository.
