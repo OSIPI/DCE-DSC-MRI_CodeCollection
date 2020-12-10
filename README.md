@@ -1,9 +1,9 @@
-# Overview of TF2.3-CodeLibrary
+# Overview of DCE-DSC-MRI_CodeCollection
 
-[![Build Status](https://travis-ci.com/OSIPI/DCE-DSC-MRI_CodeCollection.svg?branch=Milestone-2)](https://travis-ci.com/OSIPI/DCE-DSC-MRI_CodeCollection)
+[![build Actions Status](https://github.com/OSIPI/DCE-DSC-MRI_CodeCollection/workflows/ci/badge.svg)](https://github.com/OSIPI/DCE-DSC-MRI_CodeCollection/actions)
 [![codecov](https://codecov.io/gh/OSIPI/DCE-DSC-MRI_CodeCollection/branch/Milestone-2/graph/badge.svg?token=ZR3RPV8Y0B)](https://codecov.io/gh/OSIPI/DCE-DSC-MRI_CodeCollection)
 
-The ISMRM Open-Source Initiative for Perfusion Imaging ([OSIPI](https://www.osipi.org/)) aims to promote the sharing of perfusion imaging software in order to reduce duplication, improve reproducibility and speed up translation. This **TF2.3-CodeLibrary** code library is maintained by [Taskforce 2.3](https://www.osipi.org/task-force-2-3/) of OSIPI and aims to collect, test and share open-source perfusion imaging code for use in research and software development. Code contributions can include modules covering one or more steps within the image processing pipeline, for example T1 mapping, converting signal to concentration and pharmacokinetic modelling. A further aim of OSIPI is to develop a fully tested and harmonised code library, drawing on the contributions within this repository.
+The ISMRM Open-Source Initiative for Perfusion Imaging ([OSIPI](https://www.osipi.org/)) aims to promote the sharing of perfusion imaging software in order to reduce duplication, improve reproducibility and speed up translation. This **DCE-DSC-MRI_CodeCollection** code library is maintained by [Taskforce 2.3](https://www.osipi.org/task-force-2-3/) of OSIPI and aims to collect, test and share open-source perfusion imaging code for use in research and software development. Code contributions can include modules covering one or more steps within the image processing pipeline, for example T1 mapping, converting signal to concentration and pharmacokinetic modelling. A further aim of OSIPI is to develop a fully tested and harmonised code library, drawing on the contributions within this repository.
 
 If you would like to contribute to this initiative please email the contacts listed on our website.
 
@@ -26,4 +26,4 @@ To install a fresh copy of Git or to upgrade to the latest version, please follo
 
 ## View Testing Reports
 
-**TRAVIS CI** has been utilized for automated testing of the community contributed source code. The status of testing is shown at the beginning of this document by the **TRAVIS** status image denoted by **build passing**. Clicking on it will take you to [TRAVIS CI](https://travis-ci.com/OSIPI/TF2.3-CodeLibrary) where a detailed report with past build information will be available. 
+**Github Actions** has been utilized for automated testing of the community contributed source code. The status of testing is shown at the beginning of this document by the **Github** status image denoted by **ci passing**. Clicking on it will take you to [Github Actions](https://github.com/OSIPI/DCE-DSC-MRI_CodeCollection/actions) where a detailed report with past build information will be available. 
