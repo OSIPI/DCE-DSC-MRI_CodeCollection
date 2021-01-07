@@ -1,8 +1,7 @@
-from src.original.VFAT1mapping import spgr_linear, spgr_nonlinear, VFAT1mapping
+from src.original.T1_mapping.t1 import fit_vfa_nonlinear, fit_vfa_2_point, fit_vfa_linear
 import pytest
 import numpy as np
 from math import pi
-from lmfit import Model
 
 # Test for specific inputs and expected outputs :
 """
@@ -12,10 +11,19 @@ Additional test cases with varying degrees of noise should be included, from may
     
 @pytest.mark.parametrize('S_t, fa_array, tr_S, T1_est, S0', [(np.array([48.86,58.95,69.14,63.22]),np.array([20,15,10,5]),0.01,1.,1000.)])
 
-def test_VFAT1mapping(fa_array, S_t, tr_S, S0, T1_est):
-    fa_array_rad = fa_array 
-    np.testing.assert_array_almost_equal(VFAT1mapping(fa_array_rad,S_t,tr_S),[S0,T1_est],decimal=2)
+def test_fit_vfa_nonlinear(S_t, fa_array, tr_S, T1_est, S0):
+    fa_array_rad = fa_array * pi/180.
+    np.testing.assert_array_almost_equal(fit_vfa_nonlinear(S_t,fa_array_rad,tr_S),[S0,T1_est],decimal=2)
 
+@pytest.mark.parametrize('S_t, fa_array, tr_S, T1_est, S0', [(np.array([48.86,58.95,69.14,63.22]),np.array([20,15,10,5]),0.01,1.,1000.)])
+def test_fit_vfa_linear(S_t, fa_array, tr_S, T1_est, S0):
+    fa_array_rad = fa_array * pi/180.
+    np.testing.assert_array_almost_equal(fit_vfa_linear(S_t,fa_array_rad,tr_S),[S0,T1_est],decimal=2)
+
+@pytest.mark.parametrize('S_t, fa_array, tr_S, T1_est, S0', [(np.array([48.86,58.95,69.14,63.22]),np.array([20,15,10,5]),0.01,1.,1000.)])
+def test_fit_vfa_2_point(S_t,fa_array, tr_S, T1_est, S0):
+    fa_array_rad = fa_array * pi/180.
+    np.testing.assert_array_almost_equal(np.round(fit_vfa_2_point(S_t,fa_array_rad,tr_S)),[[S0],[T1_est]],decimal=2)
 
 # Test for valid input values :
 """
