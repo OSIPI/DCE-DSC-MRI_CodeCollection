@@ -1,4 +1,4 @@
-from src.original.VFAT1mapping import spgr_linear, spgr_nonlinear, VFAT1mapping
+from src.original.T1_mapping.VFAT1mapping import spgr_linear, spgr_nonlinear, VFAT1mapping
 import pytest
 import numpy as np
 from math import pi
