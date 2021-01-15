@@ -1,0 +1,3 @@
+This is a contribution from Mike Berks in the QBI lab, Manchester UK.
+
+It is not yet ready (it requires proper checking and tests to be written), but I have prematurely added via a pull request to show an example of the process.
