@@ -4,11 +4,12 @@
 
 ## Contributor Information
 
-To help facilitate an organized approach to house community contributed source code for the different components of the DCE/DSC pipeline, we would like the contributors to provide the following information in addition to the source code files:
+To help facilitate an organized approach to house community contributed source code for the different components of the DCE/DSC pipeline, we would like the contributors to provide the following information as part of the source code filenames:
 
 - Identify the component of the DCE/DCE pipeline that the code is intended to represent
 - Name of the contributor's institution / organization
 - Name of the contributor's lab / research group ( if applicable)
+- Author of code (maybe include in the source code) 
 
 ## Source code format 
 
