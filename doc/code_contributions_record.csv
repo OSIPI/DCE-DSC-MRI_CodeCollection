@@ -1,3 +1,3 @@
-Contribution ID,Author,Institution,Categories,Notes,Tester,Test status
+Contribution ID,Author,Institution,Category (create 1 entry per category),Notes,Tester,Test status (empty/in-progress/complete)
 example_entry,John Smith,University of Nowhere,T1,,PVH,in progress
 example_entry_2,Jane Smith,University of Somewhere,bol_arr,,MJT,
