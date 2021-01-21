@@ -1,4 +1,3 @@
-Notes: If a contribution spans multiple categories use 1 row per category.,,,,,,
 Contribution ID,Author,Institution,Categories,Notes,Tester,Test status
 example_entry,John Smith,University of Nowhere,T1,,PVH,in progress
 example_entry_2,Jane Smith,University of Somewhere,bol_arr,,MJT,
