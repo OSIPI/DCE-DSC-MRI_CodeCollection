@@ -13,9 +13,9 @@ The main components of the repository comprise of 3 folders and the configuratio
 
 The **doc** folder contains all documentation pertaining to the operation of TF 2.3.
 
-*   [How to create a copy of the respository and contribute changes to the repository](doc/Create a local copy of repository.md)
-*   [Guidelines for code contribution](doc/Guidelines for code contribution.md)
-*   [Guidelines to creating a test file](doc/Creating a Python test file.md)   
+*   [How to create a copy of the respository and contribute changes to the repository](doc/Create%20a%20local%20copy%20of%20repository.md)
+*   [Guidelines for code contribution](doc/Guidelines%20for%20code%20contribution.md)
+*   [Guidelines to creating a test file](doc/Creating%20a%20Python%20test%20file.md)   
 
 The **src** folder contains the community contributed src code. Within **src**, the **original** folder contains the code to be tested, and the **tested** folder will house code that has been tested in the current or previous milestones.
 
