@@ -2,23 +2,30 @@
 
 *Note: The guidelines for code contribution will be updated if necessary, as we progress through different milestones of the OSIPI initiative. All queries regarding code submission can be submitted using the label 'question' on the [issue tracker](https://github.com/OSIPI/TF2.3-CodeLibrary/issues) or addressed to [Sudarshan Ragunathan](mailto:sudarshan.ragunathan@gmail.com).*
 
-## Contributor Information
+## Process for code contribution
 
-To help facilitate an organized approach to house community contributed source code for the different components of the DCE/DSC pipeline, we would like the contributors to provide the following information **as part of the source code folder names**:
+We invite colleagues to contribute source code for performing one or more DCE-MRI or DSC-MRI processing steps. Currently, TF2.3 is accepting code written in Python. Code can be submitted directly as .py files by creating a feature branch of this repository (described below).
+
+Contribution of the following is **optional** but helpful:
+- .py test files
+- test data
+- files containing other relevant data or information, e.g. typical real-world applications of code, scripts, known features and limitations, citations etc.
+
+If you would prefer to contribute via email or another mechanism, please contact the [task force leads](https://www.osipi.org/task-force-2-3/) or [Sudarshan Ragunathan](mailto:sudarshan.ragunathan@gmail.com).
+
+
+## Essential contributor information
+
+To help facilitate an organized approach to house community contributed source code for the different components of the DCE/DSC pipeline, we ask contributors to provide the following information **as part of the source code folder names**:
 
 - Identify the component of the DCE/DCE pipeline that the code is intended to represent
 - Name of the contributor's institution / organization
 - Name of the contributor's lab / research group ( if applicable)
 - Author of code (can also include in the source code) 
 
-## Source code format 
+Further details can be submitted in a text file if necessary.
 
-Currently, TF2.3 is accepting code written in Python. If the submission
-
- - **is a single .py file**: Submit an additional text file with the additional contributor information as specified in the previous section.
- - **contains multiple .py files**: Submit the collective as a single .zip file and include the text file with the contributor information as specified in the previous section. 
-
-## Submission details
+## How to submit code
 
 Code submission can be performed directly to the repository by creating a feature branch containing the contributor information described above. A step by step guide is provided as follows:
 
