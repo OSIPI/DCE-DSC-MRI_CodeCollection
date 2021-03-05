@@ -1,4 +1,4 @@
-from src.original.T1_mapping.MJT_EdinburghUK.t1 import fit_vfa_nonlinear, fit_vfa_2_point, fit_vfa_linear
+from src.original.MJT_EdinburghUK.t1 import fit_vfa_nonlinear, fit_vfa_2_point, fit_vfa_linear
 import pytest
 import numpy as np
 from math import pi
