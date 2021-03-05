@@ -1,4 +1,5 @@
-from src.original.T1_mapping.ST_SydneyAus.VFAT1mapping import spgr_linear, spgr_nonlinear, VFAT1mapping
+#from src.original.T1_mapping.ST_SydneyAus.VFAT1mapping import spgr_linear, spgr_nonlinear, VFAT1mapping
+from src.original.ST_SydneyAus.VFAT1mapping import spgr_linear, spgr_nonlinear, VFAT1mapping
 import pytest
 import numpy as np
 from math import pi
@@ -31,14 +32,7 @@ def test_negative_favals(fa_array):
             assert exc_info.type is ValueError
     
 
-# Test for valid input data types:
+# Test for valid input data types, array dimensionality etc:
     """
-    Check if the correct data types aree used for the variables 
-    """
-
-    
-
-# Test for len(Signal array) == len(fa_array):
-    """
-    Check for array dimensionality mismatch whiich could result in an error while computing fit
+    TO BE IMPLEMENTED IN FUTURE MILESTONE
     """
