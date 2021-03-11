@@ -11,7 +11,9 @@ def t1_brain_data():
     Data summary: in-vivo 3-T T1 mapping data
     Patient(s): voxels from single white matter ROI in 1 patient
     Reference values: fitted using TBC
-    Citation: TBC    
+    Citation: TBC  
+    Comments: reference T1 values are not B1-corrected, thus do not reflect true T1.
+
 
     Returns
     -------
