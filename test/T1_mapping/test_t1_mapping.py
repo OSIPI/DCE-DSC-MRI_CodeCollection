@@ -19,12 +19,15 @@ def test_ST_SydneyAus(label, fa_array, tr_array, s_array, r1_ref, s0_ref):
     tr = tr_array[0] * 1000. # convert s to ms
     t1_ref = (1./r1_ref) * 1000. # convert R1 in /s to T1 in ms
  
-    # run tests
-    [s0_meas, t1_meas] = VFAT1mapping( fa_array, s_array, tr, method = 'nonlinear' )
-    r1_meas = 1000./t1_meas
-    
-    np.testing.assert_allclose( [s0_meas, r1_meas], [s0_ref, r1_ref], rtol=0.01, atol=0 )
+    # run test (non-linear)
+    [s0_nonlin_meas, t1_nonlin_meas] = VFAT1mapping( fa_array, s_array, tr, method = 'nonlinear' )
+    r1_nonlin_meas = 1000./t1_nonlin_meas    
+    np.testing.assert_allclose( [s0_nonlin_meas, r1_nonlin_meas], [s0_ref, r1_ref], rtol=0.05, atol=0 )
 
+    # run test (linear)
+    [s0_lin_meas, t1_lin_meas] = VFAT1mapping( fa_array, s_array, tr, method = 'linear' )
+    r1_lin_meas = 1000./t1_lin_meas    
+    np.testing.assert_allclose( [s0_lin_meas, r1_lin_meas], [s0_ref, r1_ref], rtol=0.05, atol=0 )
 
 
 # Test another T1 mapping contribution, as above
