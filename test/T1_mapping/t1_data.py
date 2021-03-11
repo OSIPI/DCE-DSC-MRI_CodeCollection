@@ -5,13 +5,17 @@ import pandas as pd
 # Functions to return test for testing T1 mapping functionality
 # 1 function is defined per dataset
 
+
+
 def t1_brain_data():
     """
     Import variable flip angle T1 data for testing
     Data summary: in-vivo 3-T T1 mapping data
-    Patient(s): voxels from single white matter ROI in 1 patient
-    Reference values: fitted using TBC
-    Citation: TBC  
+    Patient(s): mild-stroke patient
+    Source: University of Edinburgh, Mild Stroke Study 3
+    Detailed info: each entry corresponds to a single voxel following spatial realignment of variable flip angle images, take from ROIs drawn in the white matter
+    Reference values: obtained using in-house matlab code https://github.com/mjt320/HIFI
+    Citation: Clancy, U., et al., "Rationale and design of a longitudinal study of cerebral small vessel diseases, clinical and imaging outcomes in patients presenting with mild ischaemic stroke: Mild Stroke Study 3." European Stroke Journal, 2020.
     Comments: reference T1 values are not B1-corrected, thus do not reflect true T1.
 
 
@@ -23,7 +27,7 @@ def t1_brain_data():
 
     """
     
-    filename = './data/mask_WM_data.csv'
+    filename = './data/t1_brain_data.csv'
     
     # read from CSV to pandas
     converters = {
@@ -34,14 +38,15 @@ def t1_brain_data():
     df = pd.read_csv(filename, converters = converters)
     
     # convert to lists
-    fa_array = df['FA'].tolist()
-    tr_array = df['TR'].tolist()
+    label = df['label'].tolist() # label describing entry
+    fa_array = df['FA'].tolist() # degrees
+    tr_array = df['TR'].tolist() # s
     s_array = df['s'].tolist()
-    r1_ref = df['R1'].tolist()
+    r1_ref = df['R1'].tolist() # /s
     s0_ref = df['s0'].tolist()
     
     # convert to list of tuples (input for pytest.mark.parametrize)
-    pars = list(zip(fa_array, tr_array, s_array, r1_ref, s0_ref))
+    pars = list(zip(label, fa_array, tr_array, s_array, r1_ref, s0_ref))
     
     return pars
 
@@ -52,3 +57,11 @@ def t1_prostate_data():
 def t1_some_more_data():
     return []
     # as above
+    
+# combine all test data to decorate test functions    
+parameters = pytest.mark.parametrize('label, fa_array, tr_array, s_array, r1_ref, s0_ref',
+                     t1_brain_data() +
+                     t1_prostate_data() +
+                     t1_some_more_data()
+                     )
+    
