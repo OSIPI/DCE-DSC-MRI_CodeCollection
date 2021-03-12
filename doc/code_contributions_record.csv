@@ -1,4 +1,18 @@
-Contribution ID,Author,Institution,Category (create 1 entry per category),Notes,Tester,Test status (empty/in-progress/complete)
-MB_QBIManchesterUK_T1,Michael Berks,"University of Manchester, UK",T1,,tbc,
-ST_SydneyAus_T1,Sirisha Tadimalla,"University of Sydney, Australia",T1,,tbc,
-MJT_EdinburghUK_T1,Michael Thrippleton,"University of Edinburgh, UK",T1,,tbc,
+Category (create 1 entry per category),Contribution ID,Author,Institution,Notes,Tester,Test status (empty/in-progress/complete)
+T1,MB_QBIManchesterUK_T1,Michael Berks,"University of Manchester, UK",code not yet implemented,tbc,
+T1,ST_SydneyAus_T1,Sirisha Tadimalla,"University of Sydney, Australia",VFA,"MJT, SR",in-progress
+T1,MJT_EdinburghUK_T1,Michael Thrippleton,"University of Edinburgh, UK",VFA,"MJT, SR",in-progress
+T1,OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","Amsterdam University Medical Center, the Netherlands; Institute of Cancer Research, UK",two flip angles,tbc,
+T1 ,McGill_VFA,Zaki Ahmed,"McGill University, Canada","despot, novifast",tbc,
+Pharmacokinetic models,LEK_UoEdinburgh,Lucy Kershaw,"University of Edinburgh, UK","Patlak, Tofts, extended Tofts, 2comp uptake model, 2 comp exchange model, AATH model",tbc,
+Pharmacokinetic models,ST_USydAUS_DCE,Sirisha Tadimalla,"University of Sydney, Australia","Patlak, extended Tofts, one-comp model, various dual inlet models",tbc,
+Pharmacokinetic models,OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","Amsterdam University Medical Center, the Netherlands; Institute of Cancer Research, UK",extended Tofts; testing example provided,tbc,
+SignalToConcentration,LEK_UoEdinburgh,Lucy Kershaw,"University of Edinburgh, UK",SPGR,tbc,
+SignalToConcentration,ST_USydAUS_DCE,Sirisha Tadimalla,"University of Sydney, Australia",SPGR,tbc,
+SignalToConcentration,OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","Amsterdam University Medical Center, the Netherlands; Institute of Cancer Research, UK",SPGR,tbc,
+ConcentrationToSignal,OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","Amsterdam University Medical Center, the Netherlands; Institute of Cancer Research, UK",,,
+Leakage correction,SR_TBG_BNIPhoenixUSA,Sudarshan Ragunathan,Barrow Neurological Institute,BSW correction,tbc,
+Input Functions,ST_USydAUS_DCE,Sirisha Tadimalla,"University of Sydney, Australia","Parker AIF, preclinical AIF, helper functions",tbc,
+Input Functions,OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","Amsterdam University Medical Center, the Netherlands; Institute of Cancer Research, UK",AIF parameterization,tbc,
+extra tools,ST_USydAUS_DCE,Sirisha Tadimalla,"University of Sydney, Australia",,tbc,
+Preprocessing,OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","Amsterdam University Medical Center, the Netherlands; Institute of Cancer Research, UK",check for enhancement,tbc,
