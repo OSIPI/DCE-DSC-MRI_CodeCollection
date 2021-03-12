@@ -51,19 +51,60 @@ def t1_brain_data():
     return pars
 
 
+def t1_quiba_data():
+    #TODO: document
+    """
+    Import variable flip angle T1 data for testing
+    Data summary: ADD INFO
+    Patient(s): 
+    Source: 
+    Detailed info: 
+    Reference values: 
+    Citation: 
+    Comments: 
+
+
+    Returns
+    -------
+    pars : list of tuples
+        Input for pytest.mark.parametrize
+        Each tuple is the set of values for 1 test
+
+    """
+    
+    filename = './data/t1_quiba_data.csv'
+    
+    # read from CSV to pandas
+    converters = {
+        's': lambda x:np.fromstring(x, dtype=float, sep=' '),
+        'FA': lambda x:np.fromstring(x, dtype=float, sep=' '),
+        'TR': lambda x:np.fromstring(x, dtype=float, sep=' ')
+        }              
+    df = pd.read_csv(filename, converters = converters)
+    
+    # convert to lists
+    label = df['label'].tolist() # label describing entry
+    fa_array = df['FA'].tolist() # degrees
+    tr_array = df['TR'].tolist() # s
+    s_array = df['s'].tolist()
+    r1_ref = (df['R1']*1000.).tolist() # /s
+    s0_ref = df['s0'].tolist()
+ 
+    # convert to list of tuples (input for pytest.mark.parametrize)
+    pars = list(zip(label, fa_array, tr_array, s_array, r1_ref, s0_ref))
+    
+    return pars
+
 def t1_prostate_data():
     # same idea...
     return []
 
     
-def t1_some_more_data():
-    return []
-    # as above
-    
+   
 # combine all test data to decorate test functions    
 parameters = pytest.mark.parametrize('label, fa_array, tr_array, s_array, r1_ref, s0_ref',
                      t1_brain_data() +
-                     t1_prostate_data() +
-                     t1_some_more_data()
+                     t1_quiba_data() +
+                     t1_prostate_data()                     
                      )
     
