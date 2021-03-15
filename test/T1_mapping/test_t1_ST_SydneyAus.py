@@ -4,7 +4,7 @@ from math import pi
 from lmfit import Model
 import pandas as pd
 
-from . import t1_data
+import t1_data
 from src.original.ST_SydneyAus.VFAT1mapping import spgr_linear, spgr_nonlinear, VFAT1mapping
 
 
