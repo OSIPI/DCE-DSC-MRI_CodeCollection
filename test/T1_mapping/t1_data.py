@@ -27,7 +27,7 @@ def t1_brain_data():
 
     """
     
-    filename = './data/t1_brain_data.csv'
+    filename = 'test/T1_mapping/data/t1_brain_data.csv'
     
     # read from CSV to pandas
     converters = {
@@ -72,7 +72,7 @@ def t1_quiba_data():
 
     """
     
-    filename = './data/t1_quiba_data.csv'
+    filename = 'test/T1_mapping/data/t1_quiba_data.csv'
     
     # read from CSV to pandas
     converters = {
