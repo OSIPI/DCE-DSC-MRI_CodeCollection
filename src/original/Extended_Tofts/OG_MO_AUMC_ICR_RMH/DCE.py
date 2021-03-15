@@ -32,6 +32,17 @@ from joblib import Parallel, delayed
 from matplotlib.pylab import *
 import numpy as np
 
+def aifPopHN(Hct = 0.4):
+    # defines plasma curve; note this is a population-based AIF for H&N patients (https://doi.org/10.2967/jnumed.116.174433). Please fit the AIF to determine your ideal ab, mb, ae and me parameters. You can use func aif and fit to your AIF for that.
+    aif = {'ab': 3.646/(1-Hct), 'mb': 25.5671, 'ae': 1.53, 'me': 0.2130, 't0': 0.1}
+    return aif
+
+def aifPopPMB(Hct = 0.4):
+    # defines plasma curve; note this is a population-based AIF based on https://onlinelibrary.wiley.com/doi/full/10.1002/mrm.21066 and https://iopscience.iop.org/article/10.1088/0031-9155/53/5/005
+    # NB the PMB paper neglected to include the Hct in the parameter ab, so we include this adjustment here with an assumed Hct
+    aif = {'ab': 2.84/(1-Hct), 'mb': 22.8, 'ae': 1.36, 'me': 0.171, 't0': 0.2}
+    return aif
+
 def Cosine4AIF(t,ab,ae,mb,me,dt):
     # input AIF model parameters; output AIF curve
     t = t - dt
@@ -69,10 +80,10 @@ def fit_aif(Caif,t, model='Cosine8'):
         aif = {'ab': popt[0], 'ar': popt[1], 'ae': popt[2], 'mb': popt[3], 'mm': popt[4], 'mr': popt[5], 'me': popt[6], 'tr': popt[7], 't0': popt[8]}
         fit_curve = Cosine8AIF(t, popt[0], popt[1], popt[2], popt[3], popt[4], popt[5], popt[6], popt[7], popt[8])
 
-    import matplotlib.pyplot as plt
-    plt.plot(t, fit_curve)
-    plt.plot(t, Caif, marker='.', linestyle='')
-    plt.show()
+    #import matplotlib.pyplot as plt
+    #plt.plot(t, fit_curve)
+    #plt.plot(t, Caif, marker='.', linestyle='')
+    #plt.show()
 
     return aif
 
@@ -148,6 +159,7 @@ def dce_to_r1eff(S, R1, TR, flip):
     return - log((S0*sin(flip) - S)/(S0*sin(flip)-S*cos(flip)))/TR
 
 def Cosine4AIF_ExtKety(t,aif,ke,dt,ve,vp):
+    # The Cosine4 AIF is further described by Orton et al. 2008 in https://doi.org/10.1088/0031-9155/53/5/005
     # offset time array
     t = t - aif['t0'] - dt
 
@@ -165,6 +177,7 @@ def Cosine4AIF_ExtKety(t,aif,ke,dt,ve,vp):
     return ct
 
 def Cosine8AIF_ExtKety(t, aif, ke, dt, ve, vp):
+    # The Cosine8 AIF is further described by Rata et al. 2016 in https://doi.org/10.1007/s00330-015-4012-9
     # offset time array
     t = t - aif['t0'] - dt
 
