@@ -68,7 +68,7 @@ def t1_quiba_data():
     Source: QIBA T1 DRO v3
     Detailed info: The DRO consists of multiple groups of 10x10 voxels, each with
         a different combination of of noise level, S0 and R1. 1 voxel is selected
-        per combination and only voxels with SNR < 30 are excluded.        
+        per combination and  voxels with S0/sigma < 1500 are excluded.        
     Reference values: R1 reference values are thosed used to generate the data.
     Citation: Daniel Barboriak, https://qidw.rsna.org/#collection/594810551cac0a4ec8ffe574
     Comments: Low SNR voxels are excluded since we cannot expect any code to find
