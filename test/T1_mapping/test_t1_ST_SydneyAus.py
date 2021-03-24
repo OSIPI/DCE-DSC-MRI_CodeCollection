@@ -31,7 +31,7 @@ def test_ST_SydneyAus_t1_VFA_nonlin(label, fa_array, tr_array, s_array, r1_ref, 
 @parameters
 def test_ST_SydneyAus_t1_VFA_lin(label, fa_array, tr_array, s_array, r1_ref, s0_ref, a_tol, r_tol):
     #NOTES:
-    #   Signal must be scaled to prevent multiple test failures.
+    #   Signal scaled to prevent multiple test failures for prostate test cases.
     #   Linear mode uses linear model but not linear regression(?)
         
     
