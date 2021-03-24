@@ -35,7 +35,8 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
-        coverage run -m --tb=no pytest
+        coverage run -m pytest
+      continue-on-error: true
     - name: Upload coverage to codecov
       run: |
         codecov
