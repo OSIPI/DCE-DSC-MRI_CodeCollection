@@ -9,15 +9,15 @@ from src.original.MJT_EdinburghUK.t1 import fit_vfa_nonlinear, fit_vfa_linear
 
 """
 
-# combine all test data to decorate test functions    
-parameters = pytest.mark.parametrize('label, fa_array, tr_array, s_array, r1_ref, s0_ref',
+# Combine all test data to decorate test functions    
+parameters = pytest.mark.parametrize('label, fa_array, tr_array, s_array, r1_ref, s0_ref, a_tol, r_tol',
                      t1_data.t1_brain_data() +
                      t1_data.t1_quiba_data() +
                      t1_data.t1_prostate_data()                     
                      )
 
 @parameters
-def test_MJT_EdinburghUK_t1_VFA_nonlin(label, fa_array, tr_array, s_array, r1_ref, s0_ref):
+def test_MJT_EdinburghUK_t1_VFA_nonlin(label, fa_array, tr_array, s_array, r1_ref, s0_ref, a_tol, r_tol):
     
     # prepare input data
     tr = tr_array[0]
@@ -25,13 +25,12 @@ def test_MJT_EdinburghUK_t1_VFA_nonlin(label, fa_array, tr_array, s_array, r1_re
     
     # run test (non-linear)
     [s0_nonlin_meas, t1_nonlin_meas] = fit_vfa_nonlinear(s_array,fa_array_rad,tr)
-
     r1_nonlin_meas = 1./t1_nonlin_meas    
-    np.testing.assert_allclose( [s0_nonlin_meas, r1_nonlin_meas], [s0_ref, r1_ref], rtol=0.15, atol=0 )
+    np.testing.assert_allclose( [r1_nonlin_meas], [r1_ref], rtol=r_tol, atol=a_tol )
 
 
 @parameters
-def test_MJT_EdinburghUK_t1_VFA_lin(label, fa_array, tr_array, s_array, r1_ref, s0_ref):
+def test_MJT_EdinburghUK_t1_VFA_lin(label, fa_array, tr_array, s_array, r1_ref, s0_ref, a_tol, r_tol):
     
     # prepare input data
     tr = tr_array[0]
@@ -39,6 +38,5 @@ def test_MJT_EdinburghUK_t1_VFA_lin(label, fa_array, tr_array, s_array, r1_ref, 
     
     # run test (non-linear)
     [s0_lin_meas, t1_lin_meas] = fit_vfa_linear(s_array,fa_array_rad,tr)
-
     r1_lin_meas = 1./t1_lin_meas    
-    np.testing.assert_allclose( [s0_lin_meas, r1_lin_meas], [s0_ref, r1_ref], rtol=0.15, atol=0 )
+    np.testing.assert_allclose( [r1_lin_meas], [r1_ref], rtol=r_tol, atol=a_tol )
