@@ -9,7 +9,7 @@ def osipi_parametrize(arg_names, test_data, xf_labels=[]):
     Parameters
     ----------
     arg_names: string
-        Comma-delimited string of parameter names for the function being tested.
+        Comma-delimited string of parameter names for the test function.
     test_data : list of tuples
         Input formated as input for pytest parametrize decorator.
         Each tuple contains the parameters corresponding to a single test case.
