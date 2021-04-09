@@ -25,9 +25,9 @@ def osipi_parametrize(arg_names, test_data, xf_labels=[]):
     Decorator for parametrizing test function.
 
     """
-    data = [ tup if tup[0] not in xf_labels
-            else pytest.param(*tup, marks=pytest.mark.xfail)
-            for tup in test_data ]
+    data = [ case if case[0] not in xf_labels
+            else pytest.param(*case, marks=pytest.mark.xfail)
+            for case in test_data ]
     
     p = pytest.mark.parametrize(arg_names, data)
     
