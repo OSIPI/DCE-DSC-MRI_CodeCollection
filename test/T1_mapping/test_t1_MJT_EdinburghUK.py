@@ -6,11 +6,6 @@ from . import t1_data
 from src.original.MJT_EdinburghUK.t1 import fit_vfa_nonlinear, fit_vfa_linear
 
 
-# Test for specific inputs and expected outputs :
-"""
-
-"""
-
 # All tests will use the same arguments and same data...
 arg_names = 'label, fa_array, tr_array, s_array, r1_ref, s0_ref, a_tol, r_tol'
 test_data = (

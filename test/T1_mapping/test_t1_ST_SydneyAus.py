@@ -1,15 +1,10 @@
 import pytest
 import numpy as np
 
-from ..helpers import osipi_parametrize
-from . import t1_data
-from src.original.ST_USydAUS_DCE.VFAT1mapping import VFAT1mapping
+from ..helpers import osipi_parametrize # helper for running tests on multiple cases
+from . import t1_data # module for providing all t1 test cases
+from src.original.ST_USydAUS_DCE.VFAT1mapping import VFAT1mapping # functions to test
 
-
-# Test for specific inputs and expected outputs :
-"""
-
-"""
 
 # All tests will use the same arguments and same data...
 arg_names = 'label, fa_array, tr_array, s_array, r1_ref, s0_ref, a_tol, r_tol'
