@@ -1,6 +1,6 @@
 import pytest
 
-def osipi_parametrize(arg_names, test_data, xf_labels=[]):
+def osipi_parametrize(arg_names, test_data, xf_labels=None):
     """
     Generate parametrize decorator with XFail marks.
     
@@ -17,7 +17,7 @@ def osipi_parametrize(arg_names, test_data, xf_labels=[]):
     xf_labels : list of strings, optional
         Each member should correspond to a test case label that is expected to
         fail. These cases will be marked as such in the parametrize decorator.
-        The default is [].
+        The default is None.
 
     Returns
     -------
@@ -25,6 +25,9 @@ def osipi_parametrize(arg_names, test_data, xf_labels=[]):
     Decorator for parametrizing test function.
 
     """
+    if xf_labels is None:
+        xf_labels = []
+        
     data = [ case if case[0] not in xf_labels
             else pytest.param(*case, marks=pytest.mark.xfail)
             for case in test_data ]
