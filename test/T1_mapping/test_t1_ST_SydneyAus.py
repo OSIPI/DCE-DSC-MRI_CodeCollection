@@ -1,25 +1,26 @@
 import pytest
 import numpy as np
 
-from . import t1_data
-from src.original.ST_SydneyAus.VFAT1mapping import VFAT1mapping
+from ..helpers import osipi_parametrize # helper for running tests on multiple cases
+from . import t1_data # module for providing all t1 test cases
+from src.original.ST_USydAUS_DCE.VFAT1mapping import VFAT1mapping # functions to test
 
 
-# Test for specific inputs and expected outputs :
-"""
+# All tests will use the same arguments and same data...
+arg_names = 'label, fa_array, tr_array, s_array, r1_ref, s0_ref, a_tol, r_tol'
+test_data = (
+    t1_data.t1_brain_data() +
+    t1_data.t1_quiba_data() +
+    t1_data.t1_prostate_data()
+    )
 
-"""
 
-# Combine all test data to decorate test functions    
-parameters = pytest.mark.parametrize('label, fa_array, tr_array, s_array, r1_ref, s0_ref, a_tol, r_tol',
-                     t1_data.t1_brain_data() +
-                     t1_data.t1_quiba_data() +
-                     t1_data.t1_prostate_data()                     
-                     )
-
-@parameters
+# Use the test data to generate a parametrize decorator. This causes the following
+# test to be run for every test case listed in test_data...
+@osipi_parametrize(arg_names, test_data, xf_labels = [])
 def test_ST_SydneyAus_t1_VFA_nonlin(label, fa_array, tr_array, s_array, r1_ref, s0_ref, a_tol, r_tol):
-    
+    # NOTES:
+
     # prepare input data
     tr = tr_array[0] * 1000. # convert s to ms
  
@@ -28,11 +29,14 @@ def test_ST_SydneyAus_t1_VFA_nonlin(label, fa_array, tr_array, s_array, r1_ref, 
     r1_nonlin_meas = 1000./t1_nonlin_meas # convert T1 (ms) to R1 (/s)   
     np.testing.assert_allclose( [r1_nonlin_meas], [r1_ref], rtol=r_tol, atol=a_tol )
 
-@parameters
+
+# In the following test, we specify 1 case that is expected to fail...
+@osipi_parametrize(arg_names, test_data, xf_labels = ['Pat5_voxel5_prostaat'])
 def test_ST_SydneyAus_t1_VFA_lin(label, fa_array, tr_array, s_array, r1_ref, s0_ref, a_tol, r_tol):
-    #NOTES:
-    #   Signal scaled to prevent multiple test failures for prostate test cases.
+    # NOTES:
+    #   Signal is scaled to prevent multiple test failures for prostate test cases.
     #   Linear mode uses linear model but not linear regression(?)
+    #   Expected fails: 1 low-SNR prostate voxel
         
     
     # prepare input data
