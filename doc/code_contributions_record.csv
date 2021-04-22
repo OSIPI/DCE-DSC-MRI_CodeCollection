@@ -14,5 +14,6 @@ ConcentrationToSignal,DCE,OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Or
 Leakage correction,DSC,SR_TBG_BNIPhoenixUSA,Sudarshan Ragunathan,Barrow Neurological Institute,BSW correction,tbc,
 Input Functions,DCE,ST_USydAUS_DCE,Sirisha Tadimalla,"University of Sydney, Australia","Parker AIF, preclinical AIF, helper functions",tbc,
 Input Functions,DCE,OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","Amsterdam University Medical Center, the Netherlands; Institute of Cancer Research, UK",AIF parameterization,tbc,
+Input Functions,DCE,PvH_NKI,Petra van Houdt,"the Netherlands Cancer Institute, the Netherlands","Parker AIF, Georgiou AIF",tbc,
 extra tools,DCE,ST_USydAUS_DCE,Sirisha Tadimalla,"University of Sydney, Australia",,tbc,
 Preprocessing,DCE,OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","Amsterdam University Medical Center, the Netherlands; Institute of Cancer Research, UK",check for enhancement,tbc,
