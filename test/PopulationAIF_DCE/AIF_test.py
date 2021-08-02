@@ -16,7 +16,7 @@ AIF_G=GeorgiouAIF(time)
 pyplot.figure(1)    
 pyplot.plot(time.tolist(), AIF_G.tolist(), 'r')
 
-timeaif, aifdata = np.loadtxt("./data/PopulationAIF_GeorgiouMRM2018.txt", delimiter='\t', unpack=True)
+timeaif, aifdata = np.loadtxt("./data/GeorgiouAIF_MRM2018.txt", delimiter='\t', unpack=True)
 timeaif=timeaif*60  # convert time to seconds
 
 # interpolate to a given time series
