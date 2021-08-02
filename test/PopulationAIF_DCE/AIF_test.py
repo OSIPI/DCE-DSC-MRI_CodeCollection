@@ -1,3 +1,4 @@
+import os
 import pytest
 import numpy as np
 import math
@@ -15,8 +16,8 @@ time = np.arange(0,endt+dt, dt)
 AIF_G=GeorgiouAIF(time)
 pyplot.figure(1)    
 pyplot.plot(time.tolist(), AIF_G.tolist(), 'r')
-
-timeaif, aifdata = np.loadtxt("./data/GeorgiouAIF_MRM2018.txt", delimiter='\t', unpack=True)
+filename = os.path.join(os.path.dirname(__file__), 'data', 'GeorgiouAIF_MRM2018.txt')  
+timeaif, aifdata = np.loadtxt(filename, delimiter='\t', unpack=True)
 timeaif=timeaif*60  # convert time to seconds
 
 # interpolate to a given time series
