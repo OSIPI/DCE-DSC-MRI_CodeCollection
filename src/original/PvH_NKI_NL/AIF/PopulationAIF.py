@@ -5,10 +5,12 @@ This module returns a population AIF given a certain time array
 options:
 - Parker AIF
 - Georgiou AIF (MRM 2018, doi: 10.1002/mrm.27524)
+
 @author p.v.houdt@nki.nl
 @lab Van der Heide group (https://www.nki.nl/research/research-groups/uulke-van-der-heide/)
 @institute department of Radiation Oncology, the Netherlands Cancer Institute
 """
+import os
 
 import numpy
 import math
@@ -16,12 +18,14 @@ import math
 def ParkerAIF(time):
     """
     Function to determine the Parker AIF given a certain time array
+
     Parameters
     ---------
     time
         time array in seconds.
     AIF
         array of concentration values for whole blood
+
     citation: Parker et al. Magn Reson Med 2006 https://doi.org/10.1002/mrm.21066
     """
 
@@ -83,15 +87,18 @@ def functionalform_GeorgiouAIF(time,par):
     """
     Function to create the Georgiou AIF based on the Horsefield model using input parameters par.
     Implementation based on the equation 1 in the paper and original implementation in Matlab by Georgiou et al.
+
     references
     Geourgiou et al. MRM 2018, doi: 10.1002/mrm.27524
     Horsfield et al. Phys Med Biol 2009, https://doi.org/10.1088/0031-9155/54/9/023
+
     Parameters
     ---------
     time
         time array in seconds.
     par
         set of input parameters (original values from Table 3 of paper)
+
     output
         AIF values for whole blood
     """
@@ -134,8 +141,10 @@ def GeorgiouAIF(time):
     """
     Function to determine the Georgiou AIF given a certain time array
     concentration values will be interpolated from original high temporal resolution AIF
+
     reference Geourgiou et al. MRM 2018, doi: 10.1002/mrm.27524
     xls file from supplemental materials has been taken
+
     Parameters
     ---------
     time
@@ -145,7 +154,10 @@ def GeorgiouAIF(time):
     """
 
     # import txt file
-    timeaif, aifdata = numpy.loadtxt("PopulationAIF_GeorgiouMRM2018.txt", delimiter='\t', unpack=True)
+
+filename = os.path.join(os.path.dirname(__file__),'PopulationAIF_GeorgiouMRM2018.txt')  
+
+    timeaif, aifdata = numpy.loadtxt(filename, delimiter='\t', unpack=True)
     timeaif=timeaif*60  # convert time to seconds
 
     # interpolate to a given time series
