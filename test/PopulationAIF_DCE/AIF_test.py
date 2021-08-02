@@ -3,7 +3,7 @@ import numpy as np
 import math
 import matplotlib.pyplot as pyplot
 
-from .src.original.PvH_NKI_NL.AIF.PopulationAIF import ParkerAIF, GeorgiouAIF
+from src.original.PvH_NKI_NL.AIF.PopulationAIF import ParkerAIF, GeorgiouAIF
 #from PopulationAIF import ParkerAIF, GeorgiouAIF
 
 
