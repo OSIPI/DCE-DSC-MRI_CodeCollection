@@ -155,7 +155,7 @@ def GeorgiouAIF(time):
 
     # import txt file
 
-filename = os.path.join(os.path.dirname(__file__),'PopulationAIF_GeorgiouMRM2018.txt')  
+    filename = os.path.join(os.path.dirname(__file__),'PopulationAIF_GeorgiouMRM2018.txt')  
 
     timeaif, aifdata = numpy.loadtxt(filename, delimiter='\t', unpack=True)
     timeaif=timeaif*60  # convert time to seconds
