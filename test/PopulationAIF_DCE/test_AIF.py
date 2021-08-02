@@ -4,6 +4,7 @@ import numpy as np
 import math
 import matplotlib.pyplot as pyplot
 
+from ..helpers import osipi_parametrize
 from src.original.PvH_NKI_NL.AIF.PopulationAIF import ParkerAIF, GeorgiouAIF
 #from PopulationAIF import ParkerAIF, GeorgiouAIF
 
@@ -33,13 +34,15 @@ pyplot.plot(time.tolist(), GeorgiouAIF_ref.tolist(), 'b')
 a_tol = 0.05
 r_tol = 0.05
 
-def test_Georgiou_AIF(t, ref, atol, rtol):
+arg_names = 'label, time_array, ref_array, a_tol, r_tol'
+@osipi_parametrize(arg_names, GeorgiouAIF_ref, xf_labels = [])
+def test_Georgiou_AIF(label, time_array, ref_array, a_tol, r_tol):
        
     # prepare input data
-    AIF_G=GeorgiouAIF(t)
-    np.testing.assert_allclose( [AIF_G], [ref], rtol=rtol, atol=atol )
+    AIF_G=GeorgiouAIF(time_array)
+    np.testing.assert_allclose( [AIF_G], [ref_array], rtol=r_tol, atol=a_tol )
     
-test_Georgiou_AIF(time, GeorgiouAIF_ref, a_tol, r_tol)    
+ 
 
 #np.testing.assert_allclose( [AIF_G], [GeorgiouAIF_ref], rtol=a_tol, atol=r_tol,err_msg='difference outside tolerance', verbose=True)
 
