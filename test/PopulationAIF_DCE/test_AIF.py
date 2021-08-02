@@ -36,10 +36,3 @@ r_tol = 0.05
 np.testing.assert_allclose( [AIF_G], [GeorgiouAIF_ref], rtol=a_tol, atol=r_tol,err_msg='difference outside tolerance', verbose=True)
 
 
-def test_Georgiou_AIF(time, GeorgiouAIF_ref, a_tol, r_tol):
-       
-    # prepare input data
-    AIF_G=GeorgiouAIF(time)
-    np.testing.assert_allclose( [AIF_G], [r1_ref], rtol=r_tol, atol=a_tol )
-
-
