@@ -33,6 +33,14 @@ pyplot.plot(time.tolist(), GeorgiouAIF_ref.tolist(), 'b')
 a_tol = 0.05
 r_tol = 0.05
 
-np.testing.assert_allclose( [AIF_G], [GeorgiouAIF_ref], rtol=a_tol, atol=r_tol,err_msg='difference outside tolerance', verbose=True)
+def test_Georgiou_AIF(t, ref, atol, rtol):
+       
+    # prepare input data
+    AIF_G=GeorgiouAIF(t)
+    np.testing.assert_allclose( [AIF_G], [ref], rtol=rtol, atol=atol )
+    
+test_Georgiou_AIF(time, GeorgiouAIF_ref, a_tol, r_tol)    
+
+#np.testing.assert_allclose( [AIF_G], [GeorgiouAIF_ref], rtol=a_tol, atol=r_tol,err_msg='difference outside tolerance', verbose=True)
 
 
