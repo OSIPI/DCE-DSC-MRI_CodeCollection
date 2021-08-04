@@ -4,7 +4,6 @@ import numpy as np
 import math
 import matplotlib.pyplot as pyplot
 
-from ..helpers import osipi_parametrize
 from src.original.PvH_NKI_NL.AIF.PopulationAIF import ParkerAIF, GeorgiouAIF
 #from PopulationAIF import ParkerAIF, GeorgiouAIF
 
@@ -31,19 +30,20 @@ if last_time <= last_timeaif:
 pyplot.plot(time.tolist(), GeorgiouAIF_ref.tolist(), 'b')
 
 # set the tolerance to use for this dataset
-a_tol = 0.05
-r_tol = 0.05
 
-arg_names = 'label, time_array, ref_array, a_tol, r_tol'
-@osipi_parametrize(arg_names, GeorgiouAIF_ref, xf_labels = [])
-def test_Georgiou_AIF(label, time_array, ref_array, a_tol, r_tol):
-       
-    # prepare input data
-    AIF_G=GeorgiouAIF(time_array)
-    np.testing.assert_allclose( [AIF_G], [ref_array], rtol=r_tol, atol=a_tol )
-    
- 
 
 #np.testing.assert_allclose( [AIF_G], [GeorgiouAIF_ref], rtol=a_tol, atol=r_tol,err_msg='difference outside tolerance', verbose=True)
 
+dt = 1 #temp resolution in s
+endt = 280 # end time in s
+notimepoints = endt/dt
+time_array= np.arange(0,endt+dt, dt)
 
+
+def test_Georgiou_AIF():#(time_array, ref_array, a_tol, r_tol):
+    a_tol = 0.05
+    r_tol = 0.05
+    
+    AIF_G=GeorgiouAIF(time_array)       
+    # prepare input data
+    np.testing.assert_allclose([AIF_G], [GeorgiouAIF_ref], rtol=r_tol, atol=a_tol) 
