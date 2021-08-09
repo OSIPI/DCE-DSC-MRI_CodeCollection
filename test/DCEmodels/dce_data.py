@@ -49,7 +49,7 @@ def dce_test_data():
     label = df['label'].tolist() # label describing entry
     t_array = df['t'].tolist() # seconds
     C_array = df['C'].tolist() # mM
-    ca_array = df['s'].tolist() # mM
+    ca_array = df['ca'].tolist() # mM
     ta_ref = df['ta'].tolist() # seconds
     ve_ref = df['ve'].tolist()
     vp_ref = df['vp'].tolist()
