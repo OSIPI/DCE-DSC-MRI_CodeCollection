@@ -3,7 +3,7 @@ import numpy as np
 
 from ..helpers import osipi_parametrize
 from . import t1_data
-from src.original.MJT_EdinburghUK.t1 import fit_vfa_nonlinear, fit_vfa_linear
+from src.original.MJT_UoEdinburghUK.t1_fit import fit_vfa_linear, fit_vfa_nonlinear
 
 
 # All tests will use the same arguments and same data...
