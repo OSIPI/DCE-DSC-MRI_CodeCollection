@@ -41,8 +41,9 @@ def dce_test_data():
     converters = {
         'C': lambda x:np.fromstring(x, dtype=float, sep=' '),
         't': lambda x:np.fromstring(x, dtype=float, sep=' '),
-        'ca': lambda x:np.fromstring(x, dtype=float, sep=' ')
-        }              
+        'ca': lambda x:np.fromstring(x, dtype=float, sep=' '),
+        'ta': lambda x: np.fromstring(x, dtype=float, sep=' '),
+        }
     df = pd.read_csv(filename, converters = converters)
     
     # convert to lists
@@ -50,17 +51,18 @@ def dce_test_data():
     t_array = df['t'].tolist() # seconds
     C_array = df['C'].tolist() # mM
     ca_array = df['ca'].tolist() # mM
-    ta_ref = df['ta'].tolist() # seconds
+    ta_array = df['ta'].tolist() # seconds
     ve_ref = df['ve'].tolist()
     vp_ref = df['vp'].tolist()
     Ktrans_ref = df['Ktrans'].tolist()	
-    
+    arterial_delay_ref = df['arterialdelay'].tolist()
+
     # set the tolerance to use for this dataset
     a_tol = [0.05] * len(Ktrans_ref)
     r_tol = [0.05] * len(Ktrans_ref)
     
     # convert to list of tuples (input for pytest.mark.parametrize)
-    pars = list(zip(label, t_array, C_array, ca_array, ta_ref, ve_ref, vp_ref, Ktrans_ref, a_tol, r_tol))
+    pars = list(zip(label, t_array, C_array, ca_array, ta_array, ve_ref, vp_ref, Ktrans_ref, arterial_delay_ref, a_tol, r_tol))
     
     return pars
 
