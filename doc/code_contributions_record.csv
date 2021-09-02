@@ -14,7 +14,7 @@ Model-free derivation, DSC,LCB_BNI,Laura Bell,Barrow Neurological Institute,"CBV
 SignalToConcentration,DCE,LEK_UoEdinburgh,Lucy Kershaw,"University of Edinburgh, UK",SPGR,LK,in-progress
 SignalToConcentration,DCE,ST_USydAUS_DCE,Sirisha Tadimalla,"University of Sydney, Australia",SPGR,LK,in-progress
 SignalToConcentration,DCE,MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK",SPGR,LK,in-progress
-SignalToConcentration,DCE,MJT_UoEdinburghUK,LCB_BNI,Laura Bell,Barrow Neurological Institute,,LK,in-progress
+SignalToConcentration,DCE,LCB_BNI,Laura Bell,"Barrow Neurological Institute, USA",,LK,in-progress
 SignalToConcentration,DCE,OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","Amsterdam University Medical Center, the Netherlands; Institute of Cancer Research, UK",SPGR,LK,in-progress
 ConcentrationToSignal,DCE,OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","Amsterdam University Medical Center, the Netherlands; Institute of Cancer Research, UK",,tbc,
 SignalToRelaxivity, DSC,LCB_BNI,Laura Bell,Barrow Neurological Institute,StoR2* dual echo,tbc,
