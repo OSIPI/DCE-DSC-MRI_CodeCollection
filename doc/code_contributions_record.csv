@@ -10,7 +10,7 @@ Pharmacokinetic models,DCE,OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew O
 Pharmacokinetic models,DCE,OGJ_OsloU_Norway,Ole Gunnar Johansen,"University of Oslo, Norway","Tofts, extended Tofts, 2comp exchange, both NLLS and LLSQ fitting methods",ST,in-progress
 Pharmacokinetic models,DCE,MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK","steady-state vp, Patlak, Tofts, extended Tofts, 2comp uptake, 2 comp exchange",ST,in-progress
 Pharmacokinetic models,DCE,LCB_BNI,Laura Bell,Barrow Neurological Institute,"Tofts",ST,in-progress
-Model-free derivation, DSC,LCB_BNI,Laura Bell,Barrow Neurological Institute,CBV,CBF,MTT,tbc,
+Model-free derivation, DSC,LCB_BNI,Laura Bell,Barrow Neurological Institute,"CBV,CBF,MTT",tbc,
 SignalToConcentration,DCE,LEK_UoEdinburgh,Lucy Kershaw,"University of Edinburgh, UK",SPGR,LK,in-progress
 SignalToConcentration,DCE,ST_USydAUS_DCE,Sirisha Tadimalla,"University of Sydney, Australia",SPGR,LK,in-progress
 SignalToConcentration,DCE,MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK",SPGR,LK,in-progress
