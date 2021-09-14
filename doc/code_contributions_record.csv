@@ -25,5 +25,6 @@ Input Functions,DCE,OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","
 Input Functions,DCE,PvH_NKI,Petra van Houdt,"the Netherlands Cancer Institute, the Netherlands","Parker AIF, Georgiou AIF",JK,in-progress
 Input Functions,DCE,MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK", "Parker AIF, Parker-like AIF, measured AIF",JK,in-progress
 Input Functions,DCE,OGJ_OsloU_Norway,Ole Gunnar Johansen,"University of Oslo, Norway", "load AIF from txt, gamma-variate function",JK,in-progress
+Input Functions,DSC,JBJA_GUSahlgrenskaSWE,"Jesper Browall, Jonathan Arvidsson","Sahlgrenska University Hospital and Gothenburg University, Gothenburg, Sweden", automatic AIF selection,tbc,
 extra tools,DCE,ST_USydAUS_DCE,Sirisha Tadimalla,"University of Sydney, Australia",,tbc,
 Preprocessing,DCE,OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","Amsterdam University Medical Center, the Netherlands; Institute of Cancer Research, UK",check for enhancement,tbc,
