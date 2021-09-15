@@ -71,21 +71,14 @@ def dce_DRO_data():
     """
     Import dce concentration data for testing.
 
-    Data summary: in-vivo brain 3-T T1 mapping data
-    Patient(s): 1 mild-stroke patient
-    Source: University of Edinburgh, Mild Stroke Study 3
-    Detailed info: each entry corresponds to a voxel following spatial realignment
-        of variable flip angle SPGR images, taken from ROIs drawn in the white matter,
-        deep gray matter and cerebrospinal fluid.
-    Reference values: R1 reference values obtained using in-house Matlab code
-        (https://github.com/mjt320/HIFI)
-    Citation: Clancy, U., et al., "Rationale and design of a longitudinal study
-        of cerebral small vessel diseases, clinical and imaging outcomes in patients
-        presenting with mild ischaemic stroke: Mild Stroke Study 3." European Stroke
-        Journal, 2020.
-    Comments: R1 reference values are not B1-corrected here, thus may not reflect
-        true R1.
-    Tolerance: 0.05 /s + 0.05 (relative)
+    Data summary: digital reference object of the brain.
+    Patient(s): n.a.
+    Source: Creating an anthropomorphic digital MR phantom—an extensible tool for comparing and evaluating quantitative imaging algorithms. PMB 2016. RJ Bosca, EF Jackson: https://iopscience.iop.org/article/10.1088/0031-9155/61/2/974
+    Detailed info:
+    Reference values: R1 reference values obtained from their Mat files
+    Citation: Bosca, Ryan J., and Edward F. Jackson. "Creating an anthropomorphic digital MR phantom—an extensible tool for comparing and evaluating quantitative imaging algorithms." Physics in Medicine & Biology 61.2 (2016): 974.
+    Comments: the signal values were converted to concentration curves using dce_to_r1eff from https://github.com/welcheb/pydcemri/blob/master from David S. Smith
+    Tolerance: ? /s + ? (relative)
 
 
     Returns
