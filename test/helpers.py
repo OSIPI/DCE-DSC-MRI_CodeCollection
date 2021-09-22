@@ -56,7 +56,7 @@ def log_init(filename_prefix, filename_label, headers):
     -------
 
     """
-    pathlib.Path('./results/').mkdir(parents=True, exist_ok=True)
+    pathlib.Path('./test/results/').mkdir(parents=True, exist_ok=True)
     filename = './test/results/' + filename_prefix + filename_label + '.csv'
     with open(filename, 'w', newline='') as f:
         writer = csv.writer(f)
