@@ -36,7 +36,7 @@ def dce_test_data():
         Each tuple contains a set of parameters corresponding to 1 test case
 
     """    
-    filename = os.path.join(os.path.dirname(__file__), 'data', 'dce_test_data.csv')    
+    filename = os.path.join(os.path.dirname(__file__), 'data', 'dce_prostate_data.csv')    
     # read from CSV to pandas
     converters = {
         'C': lambda x:np.fromstring(x, dtype=float, sep=' '),
