@@ -58,11 +58,17 @@ def dce_test_data():
     arterial_delay_ref = df['arterialdelay'].tolist()
 
     # set the tolerance to use for this dataset
-    a_tol = [0.05] * len(Ktrans_ref) #absolute tolerance
-    r_tol = [0.10] * len(Ktrans_ref) #relative tolerance
-    
+    a_tol_ve = [0.1] * len(Ktrans_ref) #absolute tolerance
+    a_tol_vp = [0.01] * len(Ktrans_ref)  # absolute tolerance
+    a_tol_Ktrans = [0.5] * len(Ktrans_ref)  # absolute tolerance
+    a_tol_delay = [0.2] * len(Ktrans_ref)  # absolute tolerance
+    r_tol_ve = [0.10] * len(Ktrans_ref) #relative tolerance
+    r_tol_vp = [0.10] * len(Ktrans_ref) #relative tolerance
+    r_tol_Ktrans = [0.10] * len(Ktrans_ref) #relative tolerance
+    r_tol_delay = [0.10] * len(Ktrans_ref) #relative tolerance
+
     # convert to list of tuples (input for pytest.mark.parametrize)
-    pars = list(zip(label, t_array, C_array, ca_array, ta_array, ve_ref, vp_ref, Ktrans_ref, arterial_delay_ref, a_tol, r_tol))
+    pars = list(zip(label, t_array, C_array, ca_array, ta_array, ve_ref, vp_ref, Ktrans_ref, arterial_delay_ref, a_tol_ve, r_tol_ve, a_tol_vp,r_tol_vp,a_tol_Ktrans,r_tol_Ktrans,a_tol_delay,r_tol_delay))
     
     return pars
 
@@ -110,11 +116,19 @@ def dce_DRO_data():
     arterial_delay_ref = df['arterialdelay'].tolist()
 
     # set the tolerance to use for this dataset
-    a_tol = [0.05] * len(Ktrans_ref)  # absolute tolerance
-    r_tol = [0.10] * len(Ktrans_ref)  # relative tolerance
+    # set the tolerance to use for this dataset
+    a_tol_ve = [0.1] * len(Ktrans_ref)  # absolute tolerance
+    a_tol_vp = [0.01] * len(Ktrans_ref)  # absolute tolerance
+    a_tol_Ktrans = [0.5] * len(Ktrans_ref)  # absolute tolerance
+    a_tol_delay = [0.2] * len(Ktrans_ref)  # absolute tolerance
+    r_tol_ve = [0.10] * len(Ktrans_ref)  # relative tolerance
+    r_tol_vp = [0.10] * len(Ktrans_ref)  # relative tolerance
+    r_tol_Ktrans = [0.10] * len(Ktrans_ref)  # relative tolerance
+    r_tol_delay = [0.10] * len(Ktrans_ref)  # relative tolerance
 
     # convert to list of tuples (input for pytest.mark.parametrize)
     pars = list(
-        zip(label, t_array, C_array, ca_array, ta_array, ve_ref, vp_ref, Ktrans_ref, arterial_delay_ref, a_tol, r_tol))
+        zip(label, t_array, C_array, ca_array, ta_array, ve_ref, vp_ref, Ktrans_ref, arterial_delay_ref, a_tol_ve,
+            r_tol_ve, a_tol_vp, r_tol_vp, a_tol_Ktrans, r_tol_Ktrans, a_tol_delay, r_tol_delay))
 
     return pars
