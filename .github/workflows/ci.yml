@@ -36,14 +36,6 @@ jobs:
     - name: Test with pytest
       run: |
         coverage run -m pytest
-    - name: Commit results files and push to remote
-      if: ${{ matrix.os == 'ubuntu-latest' }} # (only need to do this for one build)
-      run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add test/results
-          git commit -m "Update test results files"
-          git push
     - name: Upload coverage to codecov
       run: |
         codecov
