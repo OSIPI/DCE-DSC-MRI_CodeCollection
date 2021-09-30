@@ -13,12 +13,13 @@ def SI2Conc_data():
     Patient(s): Randomly selected patient DCE-MRI of uterus 
     Source: University of Edinburgh, Mechanistic substudy of UCON https://www.birmingham.ac.uk/research/bctu/trials/womens/ucon/ucon-home.aspx used with permission.
     Detailed info: Each entry corresponds to signal intensity curve from voxels in uterus, or aorta.  They were converted to concentration
-    using code from then University of Edinburgh but with various flip angles, baseline T1 values etc rather than the actual values used in the 
-    acquisition, to test a wider range of possibilites.
+    using code from the University of Edinburgh (same as that used in Reavey, J.J., Walker, C., Nicol, M., Murray, A.A., Critchley, H.O.D., Kershaw, L.E., Maybin, J.A., 2021. 
+    Markers of human endometrial hypoxia can be detected in vivo and ex vivo during physiological menstruation. Hum. Reprod. 36, 941–950.)
+    but with various flip angles, baseline T1 values etc rather than the actual values used in the acquisition, to test a wider range of possibilites.
 
     Data file lines consist of; label, flip angle, TR, baseline T1, number of baseline points before contrast, r1, signal, concentration
 
-    Tolerance: 0.001 + 0.001 (relative) - this is just maths so it should be very similar for the different implementations
+    Tolerance: 0.00001 + 0.00001 (relative) - this is just maths so it should be very similar for the different implementations
    
     Returns
     -------
@@ -45,8 +46,8 @@ def SI2Conc_data():
     conc_array = df['conc'].tolist()
     
     # set the tolerance to use for this dataset
-    a_tol = [0.001] * len(s_array)
-    r_tol = [0.001] * len(s_array)
+    a_tol = [0.00001] * len(s_array)
+    r_tol = [0.00001] * len(s_array)
     
     # convert to list of tuples (input for pytest.mark.parametrize)
     pars = list(zip(label, fa, tr, T1base, BLpts, r1, s_array, conc_array, a_tol, r_tol))
