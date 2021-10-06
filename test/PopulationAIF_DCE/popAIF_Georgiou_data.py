@@ -37,13 +37,16 @@ def GeorgiouAIF_refdata():
     time.append(time_original)
     cb_ref_values.append(values_original)
 
-    # first permutation with a dt = 2 s
-    label.append('temp_res_2s')
-    dt = 2/60
-    time_int = np.arange(0, 5, dt)
-    cb = np.interp(time_int, time_original, values_original)
-    time.append(time_int)
-    cb_ref_values.append(cb)
+    # create for loop with different permutations of temporal resolution (original is at 0.1 s)
+    range_dt = np.array([0.5, 1, 2, 2.5, 5, 7.5])  #range of realistic temporal resolutions
+    for current_dt in range_dt:
+        current_label = 'temp_res_' + str(current_dt) + 's'
+        label.append(current_label)
+        current_dt_min = current_dt / 60
+        time_int = np.arange(0, 5, current_dt_min)
+        cb = np.interp(time_int, time_original, values_original)
+        time.append(time_int)
+        cb_ref_values.append(cb)
 
     # set the tolerance to use for this dataset
     a_tol = [0.05] * len(label)
