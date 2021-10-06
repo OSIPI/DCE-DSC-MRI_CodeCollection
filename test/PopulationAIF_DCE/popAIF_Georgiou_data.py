@@ -12,7 +12,7 @@ def GeorgiouAIF_refdata():
     are created within this function. This includes AIFs with different temporal resolutions.
 
     not included in test data yet:
-    - time arrays larger than 5 min!
+    - time arrays longer than 5 min
     - bolus arrival time variations
 
     References: Geourgiou et al. MRM 2018, doi: 10.1002/mrm.27524
@@ -24,17 +24,14 @@ def GeorgiouAIF_refdata():
         Each tuple contains a set of parameters corresponding to 1 test case
     """
 
-    #filename = os.path.join(os.path.dirname(__file__), 'data', 'GeorgiouAIF_testdata.csv')
-    # read from CSV to pandas
-    #df = pd.read_csv(filename)
-
     label = []
     time = []
     cb_ref_values = []
 
     label.append('original_AIF')
     # import xsl file
-    original_data_xls = pd.read_excel('mrm27524-sup-0002-figs2.xlsx')
+    filename_original_aif = os.path.join(os.path.dirname(__file__), 'data', 'mrm27524-sup-0002-figs2.xlsx')
+    original_data_xls = pd.read_excel(filename_original_aif)
     time_original = original_data_xls["time (min)"].to_numpy()
     values_original = original_data_xls["[Gd-DOTA] (mM)"].to_numpy()
     time.append(time_original)
@@ -42,7 +39,7 @@ def GeorgiouAIF_refdata():
 
     # first permutation with a dt = 2 s
     label.append('temp_res_2s')
-    dt = 2 / 60
+    dt = 2/60
     time_int = np.arange(0, 5, dt)
     cb = np.interp(time_int, time_original, values_original)
     time.append(time_int)

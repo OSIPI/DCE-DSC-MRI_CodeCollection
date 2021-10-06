@@ -3,16 +3,12 @@ import pytest
 import numpy as np
 from test.helpers import osipi_parametrize
 from src.original.PvH_NKI_NL.AIF.PopulationAIF import GeorgiouAIF
-from . import popAIF_Georgiou_data
+import popAIF_Georgiou_data
 
 
 # All tests will use the same arguments and same data...
-arg_names = 'label, time, Cb_ref_values, r_tol, a_tol'
+arg_names = 'label, time, cb_ref_values, r_tol, a_tol'
 test_data = popAIF_Georgiou_data.GeorgiouAIF_refdata()
-#test_data = (
-#    popAIF_Georgiou_data.GeorgiouAIF_refdata()
-#    )
-
 
 # Use the test data to generate a parametrize decorator. This causes the following
 # test to be run for every test case listed in test_data...
