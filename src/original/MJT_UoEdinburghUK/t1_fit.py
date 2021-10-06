@@ -15,6 +15,7 @@ Functions:
 import numpy as np
 from scipy.optimize import curve_fit
 
+from .dce_fit import minimize_global
 
 def fit_vfa_2_point(s, fa_rad, tr):
     """Return T1 based on 2 SPGR signals with different FA but same TR and TE.
@@ -122,8 +123,79 @@ def fit_vfa_nonlinear(s, fa_rad, tr):
     s0, t1 = popt[0], popt[1]
     return s0, t1
 
-def fit_hifi(s, esp, ti, n, b, a=180, td=0, centre=0.5):
-    pass
+
+def fit_hifi(s, esp, ti, n, b, a, td, centre, weights=None):
+    n_scans = len(s)   
+    is_ir = ~np.isnan(ti)
+    is_spgr = ~is_ir
+    idx_ir = np.where(is_ir)[0]
+    idx_spgr = np.where(is_spgr)[0]
+    n_ir = idx_ir.size
+    n_spgr = idx_spgr.size
+    if weights is None:
+        weights = np.ones(n_scans)
+    a_rad, b_rad = np.pi*a/180, np.pi*b/180
+
+    # quick linear s0 and T1 estimate
+    if n_spgr > 1 and np.all(np.isclose(esp[idx_spgr], esp[idx_spgr[0]])): # use VFA linear method
+        s0_vfa, t1_vfa = fit_vfa_linear(s[is_spgr], b_rad[is_spgr],
+                                          esp[idx_spgr[0]])
+        print(f"{s[is_spgr]}, {b_rad[is_spgr]}, {esp[is_spgr]}")
+        print(f"{s0_vfa, t1_vfa}")
+        if ~np.isnan(s0_vfa) & ~np.isnan(t1_vfa):
+            s0_init, t1_init = s0_vfa, t1_vfa
+            print(f"initial s0, t1 (using vfa): {s0_init, t1_init}")
+        else: # if invalid, assume T1=1
+            t1_init = 1
+            s0_init = s[idx_spgr[0]] / spgr_signal(1, t1_init,
+                                                   esp[idx_spgr[0]],
+                                                   b_rad[idx_spgr[0]])
+            print(f"initial s0, t1 (using vfa, invalid): {s0_init, t1_init}")
+    elif n_spgr == 1:
+            t1_init = 1
+            s0_init = s[idx_spgr[0]] / spgr_signal(1, t1_init,
+                                                   esp[idx_spgr[0]],
+                                                   b_rad[idx_spgr[0]])
+            print(f"initial s0, t1 (using first spgr): {s0_init, t1_init}")
+    else:
+        t1_init = 1
+        s0_init = s[0] / irspgr_signal(1, t1_init, esp[0], ti[0], n[0], b[0],
+                                       a[0], td[0], centre[0])
+        print(f"initial s0, t1 (using first ir-spgr): {s0_init, t1_init}")
+    
+    x_scalefactor = np.array([t1_init, s0_init, 1]) # t1, s0, k_fa
+    x_0_norm_all = [np.array([1, 1, 1])]
+    
+    # now perform non-linear fit
+    def cost(x_norm, *args):
+        t1_try, s0_try, k_fa_try = x_norm * x_scalefactor
+        s_try = np.zeros(n_scans)
+        s_try[is_ir] = irspgr_signal(s0_try, t1_try, esp[is_ir], ti[is_ir],
+                                      n[is_ir], k_fa_try*b[is_ir], a[is_ir],
+                                      td[is_ir], centre[is_ir])
+        s_try[is_spgr] = spgr_signal(s0_try, t1_try, esp[is_spgr],
+                                     k_fa_try*b_rad[is_spgr])
+        ssq = np.sum(weights * ((s_try - s)**2))
+        return ssq
+    
+    result = minimize_global(cost, x_0_norm_all, args=None,
+                             bounds=[(0,np.inf), (0, np.inf), (0, np.inf)],
+                             method='trust-constr')
+    
+    if result.success is False:
+        raise ArithmeticError(f'Unable to calculate T1'
+                              f': {result.message}')
+
+    t1_opt, s0_opt, k_fa_opt = result.x * x_scalefactor
+    s_opt = np.zeros(n_scans)
+    s_opt[is_ir] = irspgr_signal(s0_opt, t1_opt, esp[is_ir], ti[is_ir],
+                                      n[is_ir], k_fa_opt*b[is_ir], a[is_ir],
+                                      td[is_ir], centre[is_ir])
+    s_opt[is_spgr] = spgr_signal(s0_opt, t1_opt, esp[is_spgr],
+                                 k_fa_opt*b_rad[is_spgr])
+    s_opt[weights == 0] = np.nan
+
+    return t1_opt, s0_opt, k_fa_opt, s_opt
 
 
 def spgr_signal(s0, t1, tr, fa_rad):
