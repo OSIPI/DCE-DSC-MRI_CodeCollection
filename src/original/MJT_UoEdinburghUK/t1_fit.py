@@ -122,6 +122,9 @@ def fit_vfa_nonlinear(s, fa_rad, tr):
     s0, t1 = popt[0], popt[1]
     return s0, t1
 
+def fit_hifi(s, esp, ti, n, b, a=180, td=0, centre=0.5):
+    pass
+
 
 def spgr_signal(s0, t1, tr, fa_rad):
     """Return signal for SPGR sequence.
@@ -142,7 +145,41 @@ def spgr_signal(s0, t1, tr, fa_rad):
         s : float
             Steady-state SPGR signal.
     """
-    s = s0 * (((1.0-np.exp(-tr/t1))*np.sin(fa_rad)) /
-              (1.0-np.exp(-tr/t1)*np.cos(fa_rad)))
+    e = np.exp(-tr/t1)
+    s = s0 * (((1-e)*np.sin(fa_rad)) /
+              (1-e*np.cos(fa_rad)))
+
+    return s
+
+
+def irspgr_signal(s0, t1, esp, ti, n, b, a=180, td=0, centre=0.5):
+    """Return signal for IR-SPGR or SR-SPGR sequence.
+
+    Uses formula by Deichmann et al. (2000) to account for modified
+    apparent relaxation rate during the pulse train.
+    pass
+    """
+    
+    a_rad, b_rad = np.pi*a/180, np.pi*b/180
+    tau = esp * n
+    t1_star = (1/t1 - 1/esp*np.log(np.cos(b_rad)))**-1
+    m0_star = s0 * ((1-np.exp(-esp/t1)) / (1-np.exp(-esp/t1_star)))
+
+    r1 = -tau/t1_star
+    e1 = np.exp(r1)
+    e2 = np.exp(-td/t1)
+    e3 = np.exp(-ti/t1)
+
+    a1 = m0_star * (1-e1)
+    a2 = s0 * (1 - e2)
+    a3 = s0 * (1 - e3)
+    
+    a = a3 - a2*e3 - a1*e2*e3
+    b = -e1*e2*e3
+
+    m1 = a/(1-b)
+
+    s = np.abs((
+        m0_star + (m1-m0_star)*np.exp(centre*r1))*np.sin(b_rad))
 
     return s
