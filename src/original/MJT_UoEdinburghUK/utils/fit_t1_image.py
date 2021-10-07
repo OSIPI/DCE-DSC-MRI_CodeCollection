@@ -4,6 +4,8 @@ Created on Thu Aug 19 17:46:47 2021
 @author: Michael Thrippleton
 @email: m.j.thrippleton@ed.ac.uk
 @institution: University of Edinburgh, UK
+
+WORK IN PROGRESS
 '''
 
 import nibabel as nib

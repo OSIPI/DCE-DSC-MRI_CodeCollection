@@ -9,7 +9,9 @@ Functions:
     fit_vfa_2_point: obtain T1 using analytical formula based on two images
     fit_vfa_linear: obtain T1 using linear regression
     fit_vfa_nonlinear: obtain T1 using non-linear least squares fit
-
+    fit_hifi: obtain T1 by fitting a combination of SPGR and IR-SPGR scans
+    spgr_signal: get SPGR signal
+    irspgr_signal: get IR-SPGR signal
 """
 
 import numpy as np
