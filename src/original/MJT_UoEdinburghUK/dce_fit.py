@@ -19,7 +19,7 @@ Functions:
 
 import numpy as np
 from scipy.optimize import root
-from .utils.utilities import minimize_global
+from utils.utilities import minimize_global
 
 
 def sig_to_enh(s, base_idx):

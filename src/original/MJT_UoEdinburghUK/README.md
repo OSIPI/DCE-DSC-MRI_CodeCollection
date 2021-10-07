@@ -33,6 +33,6 @@ Created 28 September 2020
 - T1 fitting using other techniques
 
 TODO:
-- for DCE fitting, replace minimize with least_squares (faster)
+- for DCE fitting, ?replace minimize with least_squares (faster)
 - add variable BAT to DCE fitting
 - convert fitting functions to OO methods. Add image processing functions.
