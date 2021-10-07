@@ -10,8 +10,6 @@ import popAIF_data
 arg_names = 'label, time, cb_ref_values, r_tol, a_tol'
 test_data = popAIF_data.GeorgiouAIF_refdata()
 
-# Use the test data to generate a parametrize decorator. This causes the following
-# test to be run for every test case listed in test_data...
 @osipi_parametrize(arg_names, test_data, xf_labels=[])
 def test_Georgiou_AIF_PvH_NKI_NL(label, time, cb_ref_values, a_tol, r_tol):
 

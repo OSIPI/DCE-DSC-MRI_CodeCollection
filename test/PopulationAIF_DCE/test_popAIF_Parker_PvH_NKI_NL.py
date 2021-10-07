@@ -10,8 +10,7 @@ import popAIF_data
 arg_names = 'label, time, cb_ref_values, delay, r_tol, a_tol'
 test_data = popAIF_data.ParkerAIF_refdata()
 
-# Use the test data to generate a parametrize decorator. This causes the following
-# test to be run for every test case listed in test_data...
+# this function does not have an option to specify the delay of the aif, so the ParkerAIF_refdata_delay() are ignored here
 @osipi_parametrize(arg_names, test_data, xf_labels=[])
 def test_Parker_AIF_PvH_NKI_NL(label, time, cb_ref_values, delay, a_tol, r_tol):
 
