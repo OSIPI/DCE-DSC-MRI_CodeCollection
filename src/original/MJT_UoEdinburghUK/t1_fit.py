@@ -13,9 +13,7 @@ Functions:
 """
 
 import numpy as np
-from scipy.optimize import curve_fit
-
-from .utils.utilities import minimize_global
+from scipy.optimize import curve_fit, least_squares
 
 
 def fit_vfa_2_point(s, fa, tr):
@@ -130,85 +128,114 @@ def fit_vfa_nonlinear(s, fa, tr):
     return s0, t1
 
 
-def fit_hifi(s, esp, ti, n, b, a, td, centre, weights=None, k_fixed = None, **minimizer_kwargs):
-    n_scans = len(s)   
+def fit_hifi(s, esp, ti, n, b, td, centre, k_fixed=None):
+    """Fit any combination of (IR-)SPGR scans to estimate T1.
+
+    Note perfect inversion is assumed for IR-SPGR.
+
+    Parameters
+    ----------
+    s : ndarray
+        Array of signal intensities (1 float per acquisition).
+    esp : ndarray
+        Echo spacings (s, 1 float per acquisition). Equivalent to TR for SPGR
+        scans.
+    ti : ndarray
+        Inversion times (s, 1 per acquisition). Note this is the actual time
+        delay between the inversion pulse and the start of the echo train. The
+        effective TI may be different, e.g for linear phase encoding of the
+        echo train. For SPGR, set to np.nan
+    n : ndarray
+        Number of excitation pulses per inversion pulse (1 int per acquisition)
+        . For SPGR, set to np.nan
+    b : ndarray
+        Excitation flip angles (deg, 1 float per acquisition).
+    td : ndarray
+        Delay between readout train and next inversion pulse (s, 1 float per
+        acquisition).
+    centre : ndarray
+        Times in readout train when centre of k-space is acquired, expressed
+        as a fraction of the readout duration. e.g. = 0 for centric phase
+        encoding, = 0.5 for linear phase encoding (float, 1 per acquisition).
+    k_fixed : float, optional
+        Value to which k_fa (actual/nominal flip angle) is fixed. If set to
+        None (default) then the value of k_fa is optimised.
+
+    Returns
+    -------
+    tuple (t1_opt, s0_opt, k_fa_opt, s_opt)
+        t1_opt: float
+                T1 estimate (s).
+        s0_opt: float
+                Equilibrium signal estimate.
+        k_fa_opt: float
+                  k_fa (actual/nominal flip angle) estimate.
+
+    """
+    # get information about the scans
+    n_scans = len(s)
     is_ir = ~np.isnan(ti)
     is_spgr = ~is_ir
-    idx_ir = np.where(is_ir)[0]
     idx_spgr = np.where(is_spgr)[0]
-    n_ir = idx_ir.size
     n_spgr = idx_spgr.size
-    if weights is None:
-        weights = np.ones(n_scans)
 
-    # quick linear s0 and T1 estimate
-    if n_spgr > 1 and np.all(np.isclose(esp[idx_spgr], esp[idx_spgr[0]])): # use VFA linear method
+    # First get a quick linear T1 estimate
+    # If >1 SPGR, use linear VFA fit
+    if n_spgr > 1 and np.all(np.isclose(esp[idx_spgr], esp[idx_spgr[0]])):
         s0_vfa, t1_vfa = fit_vfa_linear(s[is_spgr], b[is_spgr],
-                                          esp[idx_spgr[0]])
-        #print(f"{s[is_spgr]}, {b[is_spgr]}, {esp[is_spgr]}")
-        #print(f"{s0_vfa, t1_vfa}")
-        if ~np.isnan(s0_vfa) & ~np.isnan(t1_vfa):
+                                        esp[idx_spgr[0]])
+        if ~np.isnan(s0_vfa) and ~np.isnan(t1_vfa):
             s0_init, t1_init = s0_vfa, t1_vfa
-            #print(f"initial s0, t1 (using vfa): {s0_init, t1_init}")
-        else: # if invalid, assume T1=1
+        else:  # if result invalid, assume T1=1
             t1_init = 1
             s0_init = s[idx_spgr[0]] / spgr_signal(1, t1_init,
                                                    esp[idx_spgr[0]],
                                                    b[idx_spgr[0]])
-            #print(f"initial s0, t1 (using vfa, invalid): {s0_init, t1_init}")
+    # If 1 SPGR, assume T1=1 and estimate s0 based on this scan
     elif n_spgr == 1:
-            t1_init = 1
-            s0_init = s[idx_spgr[0]] / spgr_signal(1, t1_init,
-                                                   esp[idx_spgr[0]],
-                                                   b[idx_spgr[0]])
-            #print(f"initial s0, t1 (using first spgr): {s0_init, t1_init}")
+        t1_init = 1
+        s0_init = s[idx_spgr[0]] / spgr_signal(1, t1_init,
+                                               esp[idx_spgr[0]],
+                                               b[idx_spgr[0]])
+    # If all scans are IR-SPGR, assume T1=1 and estimate s0 based on 1st scan
     else:
         t1_init = 1
         s0_init = s[0] / irspgr_signal(1, t1_init, esp[0], ti[0], n[0], b[0],
                                        180, td[0], centre[0])
-        #print(f"initial s0, t1 (using first ir-spgr): {s0_init, t1_init}")
-    
+
+    # Prepare for non-linear fit
     if k_fixed is None:
         k_init = 1
-        bounds = [(0,np.inf), (0, np.inf), (0, np.inf)]
+        bounds = ([0, 0, 0], [np.inf, np.inf, np.inf])
     else:
         k_init = k_fixed
-        bounds = [(0,np.inf), (0, np.inf), (1, 1)]
-    
-    x_scalefactor = np.array([t1_init, s0_init, k_init]) # t1, s0, k_fa
-    x_0_norm_all = [np.array([1, 1, 1])]
-    
-    # now perform non-linear fit
-    def cost(x_norm, *args):
-        t1_try, s0_try, k_fa_try = x_norm * x_scalefactor
+        bounds = ([0, 0, 1], [np.inf, np.inf, 1])
+    x_0 = np.array([t1_init, s0_init, k_init])
+
+    def residuals(x):
+        t1_try, s0_try, k_fa_try = x
         s_try = np.zeros(n_scans)
         s_try[is_ir] = irspgr_signal(s0_try, t1_try, esp[is_ir], ti[is_ir],
-                                      n[is_ir], k_fa_try*b[is_ir], a[is_ir],
-                                      td[is_ir], centre[is_ir])
+                                     n[is_ir], k_fa_try*b[is_ir], td[is_ir],
+                                     centre[is_ir])
         s_try[is_spgr] = spgr_signal(s0_try, t1_try, esp[is_spgr],
                                      k_fa_try*b[is_spgr])
-        ssq = np.sum(weights * ((s_try - s)**2))
-        return ssq
+        return s_try - s
 
-    # SLOW vs. matlab (10ms) - try different method
-    result = minimize_global(cost, x_0_norm_all, args=None,
-                             bounds=bounds,
-                             method='trust-ncg',
-                             **minimizer_kwargs)
-    
+    result = least_squares(residuals, x_0, bounds=bounds, method='trf',
+                           x_scale=(t1_init, s0_init, k_init)
+                           )
     if result.success is False:
-        raise ArithmeticError(f'Unable to calculate T1'
+        raise ArithmeticError(f'Unable to fit HIFI data'
                               f': {result.message}')
-    #print(result)
 
-    t1_opt, s0_opt, k_fa_opt = result.x * x_scalefactor
+    t1_opt, s0_opt, k_fa_opt = result.x
     s_opt = np.zeros(n_scans)
     s_opt[is_ir] = irspgr_signal(s0_opt, t1_opt, esp[is_ir], ti[is_ir],
-                                      n[is_ir], k_fa_opt*b[is_ir], a[is_ir],
-                                      td[is_ir], centre[is_ir])
+                                 n[is_ir], k_fa_opt*b[is_ir], td[is_ir],
+                                 centre[is_ir])
     s_opt[is_spgr] = spgr_signal(s0_opt, t1_opt, esp[is_spgr],
                                  k_fa_opt*b[is_spgr])
-    s_opt[weights == 0] = np.nan
 
     return t1_opt, s0_opt, k_fa_opt, s_opt
 
@@ -241,7 +268,7 @@ def spgr_signal(s0, t1, tr, fa):
     return s
 
 
-def irspgr_signal(s0, t1, esp, ti, n, b, a=180, td=0, centre=0.5):
+def irspgr_signal(s0, t1, esp, ti, n, b, td=0, centre=0.5):
     """Return signal for IR-SPGR sequence.
 
     Uses formula by Deichmann et al. (2000) to account for modified
@@ -264,8 +291,6 @@ def irspgr_signal(s0, t1, esp, ti, n, b, a=180, td=0, centre=0.5):
             Number of excitation pulses per inversion pulse
         b : float
             Readout pulse flip angle (deg)
-        a : float
-            Inversion pulse flip angle (deg). Not used in this implementation.
         td : float
              Delay between end of readout train and the next inversion (s).
         centre : float

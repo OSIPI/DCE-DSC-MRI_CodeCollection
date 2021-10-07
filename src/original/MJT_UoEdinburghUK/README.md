@@ -31,3 +31,7 @@ Created 28 September 2020
 - Fitting free water exchange parameters
 - Special model implementations, e.g. linear and graphical versions of Patlak model
 - T1 fitting using other techniques
+
+TODO:
+- for DCE fitting, replace minimize with least_squares (faster)
+- add variable BAT to DCE fitting
