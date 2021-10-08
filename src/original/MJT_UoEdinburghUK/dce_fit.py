@@ -19,7 +19,7 @@ Functions:
 
 import numpy as np
 from scipy.optimize import root
-from utils.utilities import minimize_global
+from utils.utilities import minimize_global, least_squares_global
 
 
 def sig_to_enh(s, base_idx):
@@ -162,27 +162,21 @@ def conc_to_pkp(C_t, pk_model, pk_pars_0=None, weights=None):
 
     # Convert initial pars from list of dicts to list of arrays
     x_0_all = [pk_model.pkp_array(pars) for pars in pk_pars_0]
-    x_scalefactor = pk_model.typical_vals
-    x_0_norm_all = [x_0 / x_scalefactor for x_0 in x_0_all]
 
-    # Define sum-of-squares function to minimise
-    def cost(x_norm, *args):
-        x = x_norm * x_scalefactor
+    # Define residuals function
+    def residuals(x):
         C_t_try, _C_cp, _C_e = pk_model.conc(*x)
-        ssq = np.sum(weights * ((C_t_try - C_t)**2))
-        return ssq
+        return weights * (C_t_try - C_t)
 
-    result = minimize_global(cost, x_0_norm_all, args=None, bounds=None,
-                             constraints=pk_model.constraints,
-                             method='trust-constr')
+    result = least_squares_global(residuals, x_0_all, method='trf',
+                                  x_scale=(pk_model.typical_vals))
 
     if result.success is False:
         raise ArithmeticError(f'Unable to calculate pharmacokinetic parameters'
                               f': {result.message}')
 
-    x_opt = result.x * x_scalefactor
-    pk_pars_opt = pk_model.pkp_dict(x_opt)  # convert parameters to dict
-    Ct_fit, _C_cp, _C_e = pk_model.conc(*x_opt)
+    pk_pars_opt = pk_model.pkp_dict(result.x)  # convert parameters to dict
+    Ct_fit, _C_cp, _C_e = pk_model.conc(*result.x)
     Ct_fit[weights == 0] = np.nan
 
     return pk_pars_opt, Ct_fit
