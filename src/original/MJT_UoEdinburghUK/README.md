@@ -34,5 +34,5 @@ Created 28 September 2020
 TODO:
 - replace minimize with least_squares (faster) for signal DCE fitting
 - add check for vp+ve <= 1
-- test update notebooks
+- check and update notebooks
 - convert fitting functions to OO methods. Add image processing functions.

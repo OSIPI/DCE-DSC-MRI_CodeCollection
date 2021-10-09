@@ -163,13 +163,12 @@ def conc_to_pkp(C_t, pk_model, pk_pars_0=None, weights=None):
     # Convert initial pars from list of dicts to list of arrays
     x_0_all = [pk_model.pkp_array(pars) for pars in pk_pars_0]
 
-    # Define residuals function
     def residuals(x):
         C_t_try, _C_cp, _C_e = pk_model.conc(*x)
         return weights * (C_t_try - C_t)
 
     result = least_squares_global(residuals, x_0_all, method='trf',
-                                  bounds = pk_model.bounds,
+                                  bounds=pk_model.bounds,
                                   x_scale=(pk_model.typical_vals))
 
     if result.success is False:
@@ -243,31 +242,25 @@ def enh_to_pkp(enh, hct, k, R10_tissue, R10_blood, pk_model, c_to_r_model,
 
     # get initial estimates as array, then scale
     x_0_all = [pk_model.pkp_array(pars) for pars in pk_pars_0]
-    x_scalefactor = pk_model.typical_vals
-    x_0_norm_all = [x_0 / x_scalefactor for x_0 in x_0_all]
 
-    # define function to minimise
-    def cost(x_norm, *args):
-        x = x_norm * x_scalefactor
+    def residuals(x):
         pk_pars_try = pk_model.pkp_dict(x)
         enh_try = pkp_to_enh(pk_pars_try, hct, k, R10_tissue, R10_blood,
                              pk_model, c_to_r_model, water_ex_model,
                              signal_model)
-        ssq = np.sum(weights * ((enh_try - enh)**2))
-        return ssq
+        return weights * (enh_try - enh)
 
     # minimise the cost function
-    result = minimize_global(cost, x_0_norm_all, args=None, bounds=None,
-                             constraints=pk_model.constraints,
-                             method='trust-constr')
+    result = least_squares_global(residuals, x_0_all, method='trf',
+                                  bounds=pk_model.bounds,
+                                  x_scale=(pk_model.typical_vals))
 
     if result.success is False:
         raise ArithmeticError(f'Unable to calculate pharmacokinetic parameters'
                               f': {result.message}')
 
     # generate optimal parameters (as dict) and predicted enh
-    x_opt = result.x * x_scalefactor
-    pk_pars_opt = pk_model.pkp_dict(x_opt)
+    pk_pars_opt = pk_model.pkp_dict(result.x)
     enh_fit = pkp_to_enh(pk_pars_opt, hct, k, R10_tissue, R10_blood, pk_model,
                          c_to_r_model, water_ex_model, signal_model)
     enh_fit[weights == 0] = np.nan
