@@ -44,21 +44,32 @@ class pk_model(ABC):
         interpolated time points (s)
     c_ap_interp : np.ndarray
         interpolated arterial plasma concentration time series (mM)
+        This is only defined if the arterial delay is fixed.
     n_interp : int
         number of interpolated time points
     n : int
-        number of time points requested
+        number of time points at which to predict concentration
+    fixed_delay : float
+        Fixed delay applied to AIF concentration. For variable AIF delay, this
+        is set to None and delay is supplied as an argument to the conc method.
+    parameter_names : tuple
+        names of variable parameters
     typical_vals : np.ndarray
         typical parameter values as 1D array (e.g. for scaling)
-    constraints : scipy.optimize.LinearConstraint
-        fitting constraints
-    PARAMETERS : list
-        list of parameter names
+    bounds : tuple
+        2-tuple giving lower and upper bounds for variable parameters. Refer to
+        documentation for scipy.optimize.least_squares
+
+    Class variables
+    ---------------
+    LOWER_BOUNDS: tuple
+        default lower bounds for model parameters
+    UPPER_BOUNDS: tuple
+        default upper bounds for model parameters
+    PARAMETER_NAME : tuple
+        tuple containing parameter names
     TYPICAL_VALS : np.ndarray
         default typical parameter values as 1D array (e.g. for scaling)
-    CONSTRAINTS : list
-        list of scipy.optimize.LinearConstraint objects
-        default constraints to use for the pharmacokinetic model
 
     Methods
     -------
@@ -75,29 +86,56 @@ class pk_model(ABC):
     #  The following class variables should be overridden by derived classes
     PARAMETER_NAMES = None
     TYPICAL_VALS = None
-    CONSTRAINTS = None
+    LOWER_BOUNDS = None
+    UPPER_BOUNDS = None
 
-    def __init__(self, t, aif, dt_interp_request=None):
-        """docstring."""
+    def __init__(self, t, aif, dt_interp_request=None, fixed_delay=0):
+        """Construct pk_model object.
+
+        Parameters
+        ----------
+        t : ndarray
+            1D float array of times at which concentration should be
+            calculated.
+        aif : aifs.aif
+            aif object to use.
+        dt_interp_request : float, optional
+            Requested time resolution for interpolated AIF and IRF. The actual
+            interpolated time resolution may be different since the scan must
+            be divided into an integer number of periods.
+            The default is None (no interpolation used).
+        fixed_delay : float, optional
+            Fixed delay to apply to AIF, reflecting the arterial arrival time.
+            The default is 0. If set to None, the AIF delay is assumed to be
+            a variable parameter.
+        """
         self.t = t
         self.aif = aif
-
         if dt_interp_request is None:
             dt_interp_request = self.t[1] - self.t[0]
-        self.dt_interp, self.t_interp = \
-            interpolate_time_series(dt_interp_request, t)
-        # get AIF concentration at interpolated time points
-        self.c_ap_interp = aif.c_ap(self.t_interp)
+        self.dt_interp, self.t_interp = interpolate_time_series(
+            dt_interp_request, t)
         self.n_interp = self.t_interp.size
         self.n = self.t.size
-        self.typical_vals = type(self).TYPICAL_VALS
-        self.constraints = type(self).CONSTRAINTS
+        self.fixed_delay = fixed_delay
 
-    def conc(self, *pk_pars, **pk_pars_kw):
+        if fixed_delay is None:  # add AIF delay as a variable parameter
+            self.parameter_names = type(self).PARAMETER_NAMES + ('delay',)
+            self.typical_vals = np.append(type(self).TYPICAL_VALS, 1)
+            self.bounds = (type(self).LOWER_BOUNDS + (-10,),
+                           type(self).UPPER_BOUNDS + (10,))
+        else:  # AIF delay is fixed; store AIF as vector for speed
+            self.parameter_names = type(self).PARAMETER_NAMES
+            self.typical_vals = type(self).TYPICAL_VALS
+            self.bounds = (type(self).LOWER_BOUNDS, type(self).UPPER_BOUNDS)
+            self.c_ap_interp = aif.c_ap(self.t_interp - fixed_delay)
+
+    def conc(self, *pars, **pars_kw):
         """Get concentration time series as function of model parameters.
 
         Parameters can be supplied either as individual arguments or as a dict.
-        This superclass implementation is used for all subclasses.
+        This superclass implementation is used for all subclasses. The required
+        parameters are defined by self.parameter_names.
 
         Parameters
         ----------
@@ -110,6 +148,7 @@ class pk_model(ABC):
                 ps : permeability-surface area product (min^-1)
                 fp : blood plasma flow rate (ml/100ml/min)
                 ktrans : volume transfer constant (min^-1)
+                delay : AIF delay (s)
 
         Returns
         -------
@@ -124,16 +163,23 @@ class pk_model(ABC):
             1D array of floats containing time series of EES concentrations
             (mM). Note: concentration is per unit tissue volume.
         """
+        # If delay is supplied as argument, use it to shift the AIF
+        if self.fixed_delay is None:
+            delay = pars_kw['delay'] if pars_kw else pars[-1]
+            c_ap_interp = self.aif.c_ap(self.t_interp - delay)
+        else:  # otherwise, use the stored AIF
+            c_ap_interp = self.c_ap_interp
+
         # Calculate IRF (using subclass implementation)
-        irf_cp, irf_e = self.irf(*pk_pars, **pk_pars_kw)
+        irf_cp, irf_e = self.irf(*pars, **pars_kw)
         irf_cp[0] /= 2
         irf_e[0] /= 2
 
         # Do the convolutions, taking only results in the required time range
         C_cp_interp = self.dt_interp * np.convolve(
-            self.c_ap_interp, irf_cp, mode='full')[:self.n_interp]
+            c_ap_interp, irf_cp, mode='full')[:self.n_interp]
         C_e_interp = self.dt_interp * np.convolve(
-            self.c_ap_interp, irf_e, mode='full')[:self.n_interp]
+            c_ap_interp, irf_e, mode='full')[:self.n_interp]
 
         # Resample concentrations at the measured time points
         C_cp = np.interp(self.t, self.t_interp, C_cp_interp)
@@ -163,7 +209,7 @@ class pk_model(ABC):
             PARAMETERS. Irrelevant input parameters are ignored.
 
         """
-        return np.array([pkp_dict[p] for p in type(self).PARAMETER_NAMES])
+        return np.array([pkp_dict[p] for p in self.parameter_names])
 
     def pkp_dict(self, pkp_array):
         """Convert phamacokinetic parameters from array to dict format.
@@ -180,7 +226,7 @@ class pk_model(ABC):
             Dict of pharmacokinetic parameters.
 
         """
-        return dict(zip(type(self).PARAMETER_NAMES, pkp_array))
+        return dict(zip(self.parameter_names, pkp_array))
         pass
 
 
@@ -194,11 +240,8 @@ class steady_state_vp(pk_model):
 
     PARAMETER_NAMES = ('vp',)
     TYPICAL_VALS = np.array([0.1])
-    CONSTRAINTS = [LinearConstraint(TYPICAL_VALS * np.array(
-        [[1]]),  # 0 < vp <= 1
-        np.array([1e-8]),
-        np.array([1]),
-        keep_feasible=True)]
+    LOWER_BOUNDS = (0,)
+    UPPER_BOUNDS = (1,)
 
     def irf(self, vp, **kwargs):
         """Get IRF for this model. Overrides superclass method."""
@@ -222,12 +265,8 @@ class patlak(pk_model):
 
     PARAMETER_NAMES = ('vp', 'ps')
     TYPICAL_VALS = np.array([0.1, 1.e-3])
-    CONSTRAINTS = [LinearConstraint(TYPICAL_VALS * np.array(
-        [[1, 0],  # 0 < vp <= 1
-         [0, 1]]),  # -1e-3 < ps <= 1
-        np.array([1e-8, -1e-3]),
-        np.array([1, 1]),
-        keep_feasible=True)]
+    LOWER_BOUNDS = (0, -1e-3)
+    UPPER_BOUNDS = (1, 1)
 
     def irf(self, vp, ps, **kwargs):
         """Get IRF for this model. Overrides superclass method."""
@@ -251,14 +290,8 @@ class extended_tofts(pk_model):
 
     PARAMETER_NAMES = ('vp', 'ps', 've')
     TYPICAL_VALS = np.array([0.1, 1e-3, 0.2])
-    CONSTRAINTS = [LinearConstraint(TYPICAL_VALS * np.array(
-        [[1, 0, 0],  # 0 < vp <= 1
-         [0, 1, 0],  # -1e-3 < ps <= 1
-         [1, 0, 1],  # 0 < vp + ve <= 1
-         [0, 0, 1]]),  # 0 < ve < 1
-        np.array([1e-8, -1e-3, 1e-8, 1e-8]),
-        np.array([1, 1, 1, 1]),
-        keep_feasible=True)]
+    LOWER_BOUNDS = (0, -1e-3, 1e-8)
+    UPPER_BOUNDS = (1, 1, 1)
 
     def irf(self, vp, ps, ve, **kwargs):
         """Get IRF for this model. Overrides superclass method."""
@@ -282,13 +315,8 @@ class tcum(pk_model):
 
     PARAMETER_NAMES = ('vp', 'ps', 'fp')
     TYPICAL_VALS = np.array([0.1, 0.05, 50.])
-    CONSTRAINTS = [LinearConstraint(TYPICAL_VALS * np.array(
-        [[1, 0, 0],  # 0 < vp <= 1
-         [0, 1, 0],  # -1e-3 < ps <= 1
-         [0, 0, 1]]),  # 0 < Fp < 200
-         np.array([1e-8, -1e-3, 1e-8]),
-         np.array([1, 1, 200]),
-         keep_feasible=True)]
+    LOWER_BOUNDS = (1e-8, -1e-3, 1e-8)
+    UPPER_BOUNDS = (1, 1, 200)
 
     def irf(self, vp, ps, fp, **kwargs):
         """Get IRF for this model. Overrides superclass method."""
@@ -316,17 +344,10 @@ class tcxm(pk_model):
 
     PARAMETER_NAMES = ('vp', 'ps', 've', 'fp')
     TYPICAL_VALS = np.array([0.1, 0.05, 0.5, 50.])
-    CONSTRAINTS = [LinearConstraint(TYPICAL_VALS * np.array(
-        [[1, 0, 1, 0],  # 0 < vp + ve <= 1
-         [1, 0, 0, 0],  # 0 < vp <= 1
-         [0, 1, 0, 0],  # -1e-3 < ps <= 1
-         [0, 0, 1, 0],  # 0 < ve <= 1
-         [0, 0, 0, 1]]),  # 0 < Fp < 200
-        np.array([1e-8, 1e-8, -1e-3, 1e-8, 1e-8]),
-        np.array([1, 1, 1, 1, 200]),
-        keep_feasible=True)]
+    LOWER_BOUNDS = (1e-8, -1e-3, 1e-8, 1e-8)
+    UPPER_BOUNDS = (1, 1, 1, 200)
 
-    def irf(self, vp, ps, ve, fp, **kwargs):
+    def irf(self, vp, ps, ve, fp, *args, **kwargs):
         """Get IRF for this model. Overrides superclass method."""
         fp_per_s = fp / (60. * 100.)
         ps_per_s = ps / 60.
@@ -361,12 +382,8 @@ class tofts(pk_model):
 
     PARAMETER_NAMES = ('ktrans', 've')
     TYPICAL_VALS = np.array([1e-2, 0.2])
-    CONSTRAINTS = [LinearConstraint(TYPICAL_VALS * np.array(
-        [[1, 0],  # -1e-3 < ktrans <= 1.0
-         [0, 0]]),  # 0 < ve < 1
-        np.array([1e-3, 0]),
-        np.array([1, 1]),
-        keep_feasible=True)]
+    LOWER_BOUNDS = (-1e-3, 1e-8)
+    UPPER_BOUNDS = (1, 1)
 
     def irf(self, ktrans, ve, **kwargs):
         """Get IRF for this model. Overrides superclass method."""

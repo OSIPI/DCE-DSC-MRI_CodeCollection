@@ -169,6 +169,7 @@ def conc_to_pkp(C_t, pk_model, pk_pars_0=None, weights=None):
         return weights * (C_t_try - C_t)
 
     result = least_squares_global(residuals, x_0_all, method='trf',
+                                  bounds = pk_model.bounds,
                                   x_scale=(pk_model.typical_vals))
 
     if result.success is False:

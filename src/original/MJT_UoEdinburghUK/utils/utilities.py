@@ -38,18 +38,19 @@ def minimize_global(cost, x_0_all, **minimizer_kwargs):
     cost = min(costs)
     idx = costs.index(cost)
     result = results[idx]
+    
     return result
 
 def least_squares_global(res, x_0_all, **least_squares_kwargs):
-    """Find global minimum by calling scipy.optimize.minimize multiple times.
+    """Find global minimum by calling scipy.optimize.least_squares multiple times.
 
     Parameters
     ----------
-    cost : function
-        Function to be minimised.
+    res : function
+          Function that generates vector of residuals. See scipy docs.
     x_0_all : list
         list of 1D ndarrays. Each contains a set of initial parameter values.
-    **minimizer_kwargs : optional keyword arguments accepted by minimize
+    **least_squares_kwargs : optional keyword arguments accepted by minimize
 
     Returns
     -------

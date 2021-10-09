@@ -1,5 +1,5 @@
-# Python code for fitting DCE-MRI data
-Code for simulating and fitting DCE-MRI data. It is primarily an exercise in writing object-oriented code that is general, i.e. it permits arbitrary combinations of pulse sequence, pharmacokinetic model, water exchange model, etc.
+# South Edinburgh Perfusion Analysis Library (SEPAL)
+Python library for simulating and fitting DCE-MRI data. It permits arbitrary combinations of pulse sequence, pharmacokinetic model, water exchange model, etc.  
 The code is a work-in-progress, has not been extensively tested and is not recommended or approved for use.
 
 Created 28 September 2020
@@ -13,10 +13,11 @@ Created 28 September 2020
 - Fit signal enhancement using pharmacokinetic model
 - Pharmacokinetic models: steady-state, Patlak, extended Tofts, Tofts, 2CXM, 2CUM
 - AIFs: patient-specific (measured), Parker, bi-exponential Parker
+- Fitting an AIF time delay
 - Relaxivity models: linear
 - Signal models: spoiled gradient echo
 - Water exchange models: FXL, NXL, NXL_be
-- T1 fitting using variable flip angle method
+- T1 fitting using variable flip angle method, IR-SPGR and DESPOT1-HIFI
 
 ### Not yet implemented/limitations:
 - Generally untested. Not optimised for speed or robustness.
@@ -27,12 +28,11 @@ Created 28 September 2020
 - Additional signal models (add by inheriting from signal_model class)
 - R2/R2* effects not included in fitting of enhancement curves (but is included for enhancement-to-concentration conversion)
 - Compartment-specific relaxivity parameters/models
-- Fitting a time delay/calculating bolus arrival time
 - Fitting free water exchange parameters
 - Special model implementations, e.g. linear and graphical versions of Patlak model
-- T1 fitting using other techniques
 
 TODO:
-- for DCE fitting, ?replace minimize with least_squares (faster)
-- add variable BAT to DCE fitting
+- replace minimize with least_squares (faster) for signal DCE fitting
+- add check for vp+ve <= 1
+- test update notebooks
 - convert fitting functions to OO methods. Add image processing functions.
