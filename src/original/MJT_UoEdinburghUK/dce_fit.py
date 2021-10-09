@@ -19,7 +19,7 @@ Functions:
 
 import numpy as np
 from scipy.optimize import root
-from utils.utilities import minimize_global, least_squares_global
+from utils.utilities import least_squares_global
 
 
 def sig_to_enh(s, base_idx):
@@ -174,8 +174,8 @@ def conc_to_pkp(C_t, pk_model, pk_pars_0=None, weights=None):
     if result.success is False:
         raise ArithmeticError(f'Unable to calculate pharmacokinetic parameters'
                               f': {result.message}')
-
     pk_pars_opt = pk_model.pkp_dict(result.x)  # convert parameters to dict
+    check_ve_vp_sum(pk_pars_opt)
     Ct_fit, _C_cp, _C_e = pk_model.conc(*result.x)
     Ct_fit[weights == 0] = np.nan
 
@@ -254,13 +254,13 @@ def enh_to_pkp(enh, hct, k, R10_tissue, R10_blood, pk_model, c_to_r_model,
     result = least_squares_global(residuals, x_0_all, method='trf',
                                   bounds=pk_model.bounds,
                                   x_scale=(pk_model.typical_vals))
-
     if result.success is False:
         raise ArithmeticError(f'Unable to calculate pharmacokinetic parameters'
                               f': {result.message}')
 
     # generate optimal parameters (as dict) and predicted enh
     pk_pars_opt = pk_model.pkp_dict(result.x)
+    check_ve_vp_sum(pk_pars_opt)
     enh_fit = pkp_to_enh(pk_pars_opt, hct, k, R10_tissue, R10_blood, pk_model,
                          c_to_r_model, water_ex_model, signal_model)
     enh_fit[weights == 0] = np.nan
@@ -401,3 +401,11 @@ def volume_fractions(pk_pars, hct):
 
     v = {'b': vb, 'e': ve, 'i': vi}
     return v
+
+
+def check_ve_vp_sum(pk_pars):
+    # check vp + ve <= 1
+    if (('vp' in pk_pars) and ('ve' in pk_pars)) and (
+            pk_pars['vp'] + pk_pars['ve'] > 1):
+        v_tot = pk_pars['vp'] + pk_pars['ve']
+        raise ValueError(f'vp + ve = {v_tot}!')
