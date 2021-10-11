@@ -25,7 +25,7 @@ def test_LEK_UoEdinburghUK_tofts_model(label, t_array, C_array, ca_array, ta_arr
     # prepare input data
     ta_array = ta_array/60
     #data=np.column_stack((ta_array,ca_array))
-    X0 = (0.02, 0.2, 0.6) 
+    X0 = ((0.02, 0.2, 0.6)) 
     bounds = ((0.0, 0.0, 0.0), (0.7, 1, 5.0))
     output, pcov = curve_fit(ExtKety, ta_array, ca_array, C_array, p0=X0, bounds=bounds)
 
