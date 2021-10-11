@@ -10,7 +10,7 @@ from src.original.OG_MO_AUMC_ICR_RMH.ExtendedTofts.DCE import Cosine4AIF, Cosine
 arg_names = 'label, t_array, C_array, ca_array, ta_array, ve_ref, vp_ref, Ktrans_ref, arterial_delay_ref,  a_tol_ve, r_tol_ve, a_tol_vp,r_tol_vp,a_tol_Ktrans,r_tol_Ktrans,a_tol_delay,r_tol_delay'
 test_data = (
     dce_data.dce_DRO_data() +
-    dce_data.dce_test_data()
+    dce_data.dce_DRO_data(delay=True)
     )
 
 
@@ -49,26 +49,26 @@ def testOG_MO_AUMC_ICR_RMH_tofts_model(label, t_array, C_array, ca_array, ta_arr
     except:
         ke, arterial_delay_meas, ve_meas, vp_meas = fit_tofts_model(C_array, t_array, AIF, idxs=None, X0=(0.6, 0.2, 0.2, 0.02), bounds=((0.0, 0, 0.0, 0.0), (5.0, 1, 0.7, 0.7)),
                         jobs=4, model='Cosine4')
-    ke_ref=Ktrans_ref/(ve_ref+0.00001)
-
-    plt.plot(t_array, np.squeeze(C_array), marker='x', markersize=3, linestyle='',
-             label='Measured signal')
-    try:
-        simdat = Cosine8AIF_ExtKety(t_array, AIF, ke, arterial_delay_meas, ve_meas, vp_meas)
-        plt.plot(t_array, simdat, marker='', markersize=3, linestyle='-',
-                 label='fitted')
-        simdat = Cosine8AIF_ExtKety(t_array, AIF, ke_ref+0.00000001, arterial_delay_ref, ve_ref, vp_ref)
-        plt.plot(t_array, simdat, marker='', markersize=3, linestyle='-',
-                 label='ref')
-    except:
-        simdat = Cosine4AIF_ExtKety(t_array, AIF, ke, arterial_delay_meas, ve_meas, vp_meas)
-        plt.plot(t_array, simdat, marker='', markersize=3, linestyle='-',
-                 label='fitted')
-        simdat = Cosine4AIF_ExtKety(t_array, AIF, ke_ref+0.00000001, arterial_delay_ref, ve_ref, vp_ref)
-        plt.plot(t_array, simdat, marker='', markersize=3, linestyle='-',
-                 label='ref')
-    plt.legend()
-    plt.show()
+    # ke_ref=Ktrans_ref/(ve_ref+0.00001)
+    #
+    # plt.plot(t_array, np.squeeze(C_array), marker='x', markersize=3, linestyle='',
+    #          label='Measured signal')
+    # try:
+    #     simdat = Cosine8AIF_ExtKety(t_array, AIF, ke, arterial_delay_meas, ve_meas, vp_meas)
+    #     plt.plot(t_array, simdat, marker='', markersize=3, linestyle='-',
+    #              label='fitted')
+    #     simdat = Cosine8AIF_ExtKety(t_array, AIF, ke_ref+0.00000001, arterial_delay_ref, ve_ref, vp_ref)
+    #     plt.plot(t_array, simdat, marker='', markersize=3, linestyle='-',
+    #              label='ref')
+    # except:
+    #     simdat = Cosine4AIF_ExtKety(t_array, AIF, ke, arterial_delay_meas, ve_meas, vp_meas)
+    #     plt.plot(t_array, simdat, marker='', markersize=3, linestyle='-',
+    #              label='fitted')
+    #     simdat = Cosine4AIF_ExtKety(t_array, AIF, ke_ref+0.00000001, arterial_delay_ref, ve_ref, vp_ref)
+    #     plt.plot(t_array, simdat, marker='', markersize=3, linestyle='-',
+    #              label='ref')
+    # plt.legend()
+    # plt.show()
     Ktrans_meas = ke * ve_meas
 
     print(['ve meas vs ref '+ str(ve_meas)+' vs '+str(ve_ref)])

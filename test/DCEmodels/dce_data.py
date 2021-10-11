@@ -73,7 +73,7 @@ def dce_test_data():
     return pars
 
 
-def dce_DRO_data():
+def dce_DRO_data(delay=False):
     """
     Import dce concentration data for testing.
 
@@ -114,13 +114,18 @@ def dce_DRO_data():
     vp_ref = df['vp'].tolist()
     Ktrans_ref = df['Ktrans'].tolist()
     arterial_delay_ref = df['arterialdelay'].tolist()
+    if delay:
+        t_array = np.array(t_array) + 15
+        arterial_delay_ref = np.array(arterial_delay_ref) + 15
+        for a in range(len(label)):
+            label[a] = label[a] + '_delayed'
 
     # set the tolerance to use for this dataset
     # set the tolerance to use for this dataset
-    a_tol_ve = [0.1] * len(Ktrans_ref)  # absolute tolerance
-    a_tol_vp = [0.01] * len(Ktrans_ref)  # absolute tolerance
-    a_tol_Ktrans = [0.5] * len(Ktrans_ref)  # absolute tolerance
-    a_tol_delay = [0.2] * len(Ktrans_ref)  # absolute tolerance
+    a_tol_ve = [0.01] * len(Ktrans_ref)  # absolute tolerance
+    a_tol_vp = [0.001] * len(Ktrans_ref)  # absolute tolerance
+    a_tol_Ktrans = [0.0075] * len(Ktrans_ref)  # absolute tolerance
+    a_tol_delay = [0.01] * len(Ktrans_ref)  # absolute tolerance
     r_tol_ve = [0.10] * len(Ktrans_ref)  # relative tolerance
     r_tol_vp = [0.10] * len(Ktrans_ref)  # relative tolerance
     r_tol_Ktrans = [0.10] * len(Ktrans_ref)  # relative tolerance

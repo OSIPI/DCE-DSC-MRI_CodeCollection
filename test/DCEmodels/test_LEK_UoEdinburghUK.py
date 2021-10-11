@@ -10,8 +10,7 @@ from scipy.optimize import curve_fit
 # All tests will use the same arguments and same data...
 arg_names = 'label, t_array, C_array, ca_array, ta_array, ve_ref, vp_ref, Ktrans_ref, arterial_delay_ref,  a_tol_ve, r_tol_ve, a_tol_vp,r_tol_vp,a_tol_Ktrans,r_tol_Ktrans,a_tol_delay,r_tol_delay'
 test_data = (
-    dce_data.dce_DRO_data() +
-    dce_data.dce_test_data()
+    dce_data.dce_DRO_data()
     )
 
 
@@ -23,11 +22,11 @@ def test_LEK_UoEdinburghUK_tofts_model(label, t_array, C_array, ca_array, ta_arr
     # NOTES:
 
     # prepare input data
-    ta_array = ta_array/60
+    t_array = t_array/60
     #data=np.column_stack((ta_array,ca_array))
-    X0 = ((0.02, 0.2, 0.6)) 
+    X0 = (0.02, 0.2, 0.6)
     bounds = ((0.0, 0.0, 0.0), (0.7, 1, 5.0))
-    output, pcov = curve_fit(ExtKety, ta_array, ca_array, C_array, p0=X0, bounds=bounds)
+    output, pcov = curve_fit(lambda t,x,y,z: ExtKety([x,y,z],t,ca_array), t_array, C_array, p0=X0, bounds=bounds)
 
     Ktrans_meas, ve_meas, vp_meas = output
     

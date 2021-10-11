@@ -10,8 +10,7 @@ from scipy.optimize import curve_fit
 # All tests will use the same arguments and same data...
 arg_names = 'label, t_array, C_array, ca_array, ta_array, ve_ref, vp_ref, Ktrans_ref, arterial_delay_ref,  a_tol_ve, r_tol_ve, a_tol_vp,r_tol_vp,a_tol_Ktrans,r_tol_Ktrans,a_tol_delay,r_tol_delay'
 test_data = (
-    dce_data.dce_DRO_data() +
-    dce_data.dce_test_data()
+    dce_data.dce_DRO_data()
     )
 
 
@@ -25,7 +24,7 @@ def testST_USydAUS_tofts_model(label, t_array, C_array, ca_array, ta_array, ve_r
     # prepare input data
     ta_array = ta_array/60
     data=np.column_stack((ta_array,ca_array))
-    X0 = ((0.6, 0.2, 0.02))
+    X0 = (0.6, 0.2, 0.02)
     bounds = ((0.0, 0.0, 0.0), (5.0, 1, 0.7))
     output, pcov = curve_fit(ExtendedTofts, data, C_array, p0=X0, bounds=bounds)
 
