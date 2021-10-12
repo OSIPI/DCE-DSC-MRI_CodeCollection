@@ -32,4 +32,5 @@ Created 28 September 2020
 - Special model implementations, e.g. linear and graphical versions of Patlak model
 
 TODO:
-- convert fitting functions to OO methods. Add image processing functions.
+- Convert fitting functions to OO methods. Add image processing functions.
+- Calculate IRF integrals exactly.
