@@ -1,7 +1,7 @@
 # Overview of DCE-DSC-MRI_CodeCollection
 
 [![build Actions Status](https://github.com/OSIPI/DCE-DSC-MRI_CodeCollection/workflows/ci/badge.svg)](https://github.com/OSIPI/DCE-DSC-MRI_CodeCollection/actions)
-[![codecov](https://codecov.io/gh/OSIPI/DCE-DSC-MRI_CodeCollection/branch/Milestone-2/graph/badge.svg?token=ZR3RPV8Y0B)](https://codecov.io/gh/OSIPI/DCE-DSC-MRI_CodeCollection)
+[![codecov](https://codecov.io/gh/OSIPI/DCE-DSC-MRI_CodeCollection/branch/develop/graph/badge.svg?token=ZR3RPV8Y0B)](https://codecov.io/gh/OSIPI/DCE-DSC-MRI_CodeCollection)
 
 **Click [here](https://github.com/OSIPI/DCE-DSC-MRI_CodeCollection/blob/develop/doc/code_contributions_record.csv) for database of code available and testing status**  
 
