@@ -1,2 +1,3 @@
-# don't include Jupyter Notebooks in language %
+# don't include Jupyter Notebooks in language proportion
+
 **/*.ipynb linguist-generated=true
