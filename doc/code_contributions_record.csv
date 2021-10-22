@@ -62,7 +62,7 @@ Pharmacokinetic models;active uptake and efflux model (AUEM);DCE;forward model, 
 Pharmacokinetic models;extended Tofts;DCE;forward model, LLSQ fitting methods;MB_QBI_UoManchesterUK;Michael Berks;University of Manchester, UK;ST/OGC;in-progress
 Pharmacokinetic models;2-cmp filtration model;DCE;forward model, LLSQ fitting methods;MB_QBI_UoManchesterUK;Michael Berks;University of Manchester, UK;ST/OGC;in-progress
 Pharmacokinetic models;2-cmp exchange model;DCE;forward model, LLSQ fitting methods;MB_QBI_UoManchesterUK;Michael Berks;University of Manchester, UK;ST/OGC;in-progress
-Pharmacokinetic models;dual-inlet general model;DCE;"works with 2CXM, 2CFM, AUEM;  LLSQ fitting methods";MB_QBI_UoManchesterUK;Michael Berks;University of Manchester, UK;ST/OGC;in-progress
+Pharmacokinetic models;dual-inlet general model;DCE;works with 2CXM, 2CFM, AUEM, LLSQ fitting methods;MB_QBI_UoManchesterUK;Michael Berks;University of Manchester, UK;ST/OGC;in-progress
 Parameter derivation;iAUC;DCE;;MB_QBI_UoManchesterUK;Michael Berks;University of Manchester, UK;tbd;
 Preprocessing;mask;DCE;check for enhancement;OG_MO_AUMC_ICR_RMH;Oliver Gurney-Champion, Matthew Orton;Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK;tbd;
 AIF deconvolution;;DSC;;SR_TBG_BNIPhoenixUSA;Sudarshan Ragunathan;Barrow Neurological Institute, USA;tbd;
