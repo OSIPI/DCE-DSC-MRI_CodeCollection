@@ -137,3 +137,67 @@ def dce_DRO_data(delay=False):
             r_tol_ve, a_tol_vp, r_tol_vp, a_tol_Ktrans, r_tol_Ktrans, a_tol_delay, r_tol_delay))
 
     return pars
+
+
+
+def dce_DRO_data_tofts(delay=False):
+    """
+    Import dce concentration data for testing.
+
+    Data summary: digital reference object of the brain.
+    Patient(s): n.a.
+    Source: Creating an anthropomorphic digital MR phantom—an extensible tool for comparing and evaluating quantitative imaging algorithms. PMB 2016. RJ Bosca, EF Jackson: https://iopscience.iop.org/article/10.1088/0031-9155/61/2/974
+    Detailed info:
+    Reference values: R1 reference values obtained from their Mat files
+    Citation: Bosca, Ryan J., and Edward F. Jackson. "Creating an anthropomorphic digital MR phantom—an extensible tool for comparing and evaluating quantitative imaging algorithms." Physics in Medicine & Biology 61.2 (2016): 974.
+    Comments: the signal values were converted to concentration curves using dce_to_r1eff from https://github.com/welcheb/pydcemri/blob/master from David S. Smith
+    Tolerance: ? /s + ? (relative)
+
+
+    Returns
+    -------
+    pars : list of tuples
+        Input for pytest.mark.parametrize
+        Each tuple contains a set of parameters corresponding to 1 test case
+
+    """
+    filename = os.path.join(os.path.dirname(__file__), 'data', 'dce_DRO_data_tofts.csv')
+    # read from CSV to pandas
+    converters = {
+        'C': lambda x: np.fromstring(x, dtype=float, sep=' '),
+        't': lambda x: np.fromstring(x, dtype=float, sep=' '),
+        'ca': lambda x: np.fromstring(x, dtype=float, sep=' '),
+        'ta': lambda x: np.fromstring(x, dtype=float, sep=' '),
+    }
+    df = pd.read_csv(filename, converters=converters)
+
+    # convert to lists
+    label = df['label'].tolist()  # label describing entry
+    t_array = df['t'].tolist()  # seconds
+    C_array = df['C'].tolist()  # mM
+    ca_array = df['ca'].tolist()  # mM
+    ta_array = df['ta'].tolist()  # seconds
+    ve_ref = df['ve'].tolist()
+    Ktrans_ref = df['Ktrans'].tolist()
+    arterial_delay_ref = df['arterialdelay'].tolist()
+    if delay:
+        t_array = np.array(t_array) + 15
+        arterial_delay_ref = np.array(arterial_delay_ref) + 15
+        for a in range(len(label)):
+            label[a] = label[a] + '_delayed'
+
+    # set the tolerance to use for this dataset
+    # set the tolerance to use for this dataset
+    a_tol_ve = [0.01] * len(Ktrans_ref)  # absolute tolerance
+    a_tol_Ktrans = [0.0075] * len(Ktrans_ref)  # absolute tolerance
+    a_tol_delay = [0.01] * len(Ktrans_ref)  # absolute tolerance
+    r_tol_ve = [0.10] * len(Ktrans_ref)  # relative tolerance
+    r_tol_Ktrans = [0.10] * len(Ktrans_ref)  # relative tolerance
+    r_tol_delay = [0.10] * len(Ktrans_ref)  # relative tolerance
+
+    # convert to list of tuples (input for pytest.mark.parametrize)
+    pars = list(
+        zip(label, t_array, C_array, ca_array, ta_array, ve_ref, Ktrans_ref, arterial_delay_ref, a_tol_ve,
+            r_tol_ve, a_tol_Ktrans, r_tol_Ktrans, a_tol_delay, r_tol_delay))
+
+    return pars
