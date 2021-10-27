@@ -26,6 +26,10 @@ jobs:
       run: |
         pip install -r notebooks/requirements.txt
 
+    - name: Test with pytest
+      run: |
+        pytest .
+
     # Build the book
     - name: Build the book
       run: |
