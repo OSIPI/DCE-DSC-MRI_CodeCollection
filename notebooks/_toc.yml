@@ -1,13 +1,16 @@
 # Table of contents
 # More info: https://jupyterbook.org/customize/toc.html
-- file: intro.md
+
+format: jb-article
+root: intro.md
+sections:
 - file: T1mapping.md
   sections:
-    - file: vfatestoverview.md
-    - file: T1mapping_QIBAv1.ipynb
-    - file: T1mapping_QIBAv2.ipynb
+  - file: vfatestoverview.md
+  - file: T1mapping_QIBAv1.ipynb
+  - file: T1mapping_QIBAv2.ipynb
 - file: guidelines.md
   sections:
-    - file: localguide.md
-    - file: localtests.md
+  - file: localguide.md
+  - file: localtests.md
 - file: contributors.ipynb
