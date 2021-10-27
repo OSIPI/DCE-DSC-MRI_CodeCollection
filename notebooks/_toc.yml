@@ -1,0 +1,15 @@
+# Table of contents
+# More info: https://jupyterbook.org/customize/toc.html
+- file: intro.md
+- file: T1mapping.md
+  sections:
+    - file: vfatestoverview.md
+    - file: T1mapping_QIBAv1.ipynb
+    - file: T1mapping_QIBAv2.ipynb
+    - file: T1mapping_RIDER.ipynb
+- file: RIDERneuro_overview.ipynb
+- file: guidelines.md
+  sections:
+    - file: localguide.md
+    - file: localtests.md
+- file: contributors.ipynb

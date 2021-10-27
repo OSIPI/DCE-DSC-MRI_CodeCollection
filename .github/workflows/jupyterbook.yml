@@ -1,0 +1,44 @@
+name: deploy
+
+on:
+  # Trigger the workflow on push to main branch
+  push:
+    branches:
+      - demo
+
+# This job installs dependencies, build the book, and pushes it to `gh-pages`
+jobs:
+  build-and-deploy-book:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        python-version: [3.8]
+    steps:
+    - uses: actions/checkout@v2
+
+    # Install dependencies
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        pip install -r notebooks/requirements.txt
+
+    # Build the book
+    - name: Build the book
+      run: |
+        jupyter-book build notebooks/
+        touch notebooks/_build/html/.nojekyll
+
+    # Deploy the book's HTML to another repo
+    - name: publish:starters
+      uses: cpina/github-action-push-to-another-repository@master
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.DEMO_TOKEN }}
+      with:
+        source-directory: 'notebooks/_build/html'
+        destination-github-username: 'notZaki'
+        destination-repository-name: 'osipidemo'
+        user-email: zaki@live.ca
