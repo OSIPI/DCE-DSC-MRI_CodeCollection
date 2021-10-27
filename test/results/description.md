@@ -1,1 +1,0 @@
-This directory will store the values obtained during the tests
