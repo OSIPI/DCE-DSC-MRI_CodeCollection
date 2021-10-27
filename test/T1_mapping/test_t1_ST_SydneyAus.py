@@ -1,7 +1,7 @@
 import pytest
 import numpy as np
 
-from ..helpers import osipi_parametrize # helper for running tests on multiple cases
+from ..helpers import osipi_parametrize, log_init, log_results # helper for running tests on multiple cases
 from . import t1_data # module for providing all t1 test cases
 from src.original.ST_USydAUS.VFAT1mapping import VFAT1mapping # functions to test
 
@@ -14,6 +14,14 @@ test_data = (
     t1_data.t1_prostate_data()
     )
 
+filename_prefix = ''
+
+def setup_module(module):
+    # initialize the logfiles
+    global filename_prefix # we want to change the global variable
+    filename_prefix = 'TestResults_T1mapping'
+    log_init(filename_prefix, '_test_ST_SydneyAus_t1_VFA_nonlin', ['label', 'r1_ref', 'r1_measured'])
+    log_init(filename_prefix, '_test_ST_SydneyAus_t1_VFA_lin', ['label', 'r1_ref', 'r1_measured'])
 
 # Use the test data to generate a parametrize decorator. This causes the following
 # test to be run for every test case listed in test_data...
@@ -25,9 +33,10 @@ def test_ST_SydneyAus_t1_VFA_nonlin(label, fa_array, tr_array, s_array, r1_ref, 
     tr = tr_array[0] * 1000. # convert s to ms
  
     # run test (non-linear)
-    [s0_nonlin_meas, t1_nonlin_meas] = VFAT1mapping( fa_array, s_array, tr, method = 'nonlinear' )
+    [s0_nonlin_meas, t1_nonlin_meas] = VFAT1mapping(fa_array, s_array, tr, method='nonlinear')
     r1_nonlin_meas = 1000./t1_nonlin_meas # convert T1 (ms) to R1 (/s)   
-    np.testing.assert_allclose( [r1_nonlin_meas], [r1_ref], rtol=r_tol, atol=a_tol )
+    np.testing.assert_allclose([r1_nonlin_meas], [r1_ref], rtol=r_tol, atol=a_tol)
+    log_results(filename_prefix, '_test_ST_SydneyAus_t1_VFA_nonlin', [label, r1_ref, r1_nonlin_meas])
 
 
 # In the following test, we specify 1 case that is expected to fail...
@@ -44,7 +53,8 @@ def test_ST_SydneyAus_t1_VFA_lin(label, fa_array, tr_array, s_array, r1_ref, s0_
     s_array /= 1000 # scale down signal to prevent test failure
  
     # run test (linear)
-    [s0_lin_meas, t1_lin_meas] = VFAT1mapping( fa_array, s_array, tr, method = 'linear' )
+    [s0_lin_meas, t1_lin_meas] = VFAT1mapping(fa_array, s_array, tr, method='linear')
     r1_lin_meas = 1000./t1_lin_meas # convert T1 (ms) to R1 (/s)
-    np.testing.assert_allclose( [r1_lin_meas], [r1_ref], rtol=r_tol, atol=a_tol )
+    np.testing.assert_allclose([r1_lin_meas], [r1_ref], rtol=r_tol, atol=a_tol)
+    log_results(filename_prefix, '_test_ST_SydneyAus_t1_VFA_lin', [label, r1_ref, r1_lin_meas])
 
