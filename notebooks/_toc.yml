@@ -7,6 +7,7 @@ sections:
 - file: T1mapping.md
   sections:
   - file: vfatestoverview.md
+  - file: T1_tests_output.ipynb
   - file: T1mapping_QIBAv1.ipynb
   - file: T1mapping_QIBAv2.ipynb
 - file: guidelines.md
