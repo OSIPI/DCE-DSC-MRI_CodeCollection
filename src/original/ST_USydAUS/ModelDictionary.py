@@ -27,6 +27,18 @@ def ExtendedTofts(X, vp, ve, ktrans):
     conc = vp*ca + ve*tools.expconv(Tc, t, ca)
     return(conc)
 
+######################################
+# conc = ktrans x exp(-t(ktrans/ve))*ca
+def Tofts(X, ve, ktrans):
+    t = X[:,0]
+    ca = X[:,1]
+
+    Tc = ve/ktrans
+    
+    # expconv calculates convolution of ca and (1/Tc)exp(-t/Tc)
+    conc = ve*tools.expconv(Tc, t, ca)
+    return(conc)
+
 ###################################### 
 # conc = Fp x exp(-t(Fp/vp))*ca 
 def OneCompartment(X, vp, Fp):
