@@ -115,8 +115,11 @@ def dce_DRO_data(delay=False):
     Ktrans_ref = df['Ktrans'].tolist()
     arterial_delay_ref = df['arterialdelay'].tolist()
     if delay:
-        t_array = np.array(t_array) + 15
-        arterial_delay_ref = np.array(arterial_delay_ref) + 15
+        C_array=np.array(C_array)
+        C_array=C_array[:,:-5]
+        C_array=np.concatenate((np.tile([0],[len(C_array),5]),C_array),axis=1)
+        #t_array = np.array(t_array) + 15
+        arterial_delay_ref = np.array(arterial_delay_ref) + t_array[0][5]/60
         for a in range(len(label)):
             label[a] = label[a] + '_delayed'
 
@@ -181,8 +184,11 @@ def dce_DRO_data_tofts(delay=False):
     Ktrans_ref = df['Ktrans'].tolist()
     arterial_delay_ref = df['arterialdelay'].tolist()
     if delay:
-        t_array = np.array(t_array) + 15
-        arterial_delay_ref = np.array(arterial_delay_ref) + 15
+        C_array=np.array(C_array)
+        C_array=C_array[:,:-5]
+        C_array=np.concatenate((np.tile([0],[len(C_array),5]),C_array),axis=1)
+        #t_array = np.array(t_array) + 15
+        arterial_delay_ref = np.array(arterial_delay_ref) + t_array[0][5]/60
         for a in range(len(label)):
             label[a] = label[a] + '_delayed'
 
