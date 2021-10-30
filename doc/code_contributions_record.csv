@@ -46,7 +46,7 @@ DCE,Pharmacokinetic models,Tofts,forward model,LEK_UoEdinburgh,Lucy Kershaw,"Uni
 DCE,Pharmacokinetic models,Tofts,"forward model, NLLS and LLSQ fitting methods",OGJ_OsloU_Norway,Ole Gunnar Johansen,"University of Oslo, Norway",ST/OGC,in-progress,
 DCE,Pharmacokinetic models,Tofts,"forward model, NLLS fitting (concentration), NLLS fitting (signal incl. water exchange)",MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK",ST/OGC,in-progress,
 DCE,Pharmacokinetic models,Tofts,"forward model, NLLS fitting methods",LCB_BNI,Laura Bell,"Barrow Neurological Institute, USA",ST/OGC,in-progress,
-DCE,Preprocessing,mask,check for enhancement,OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK",tbd,,"what is the significance of ""mask""?"
+DCE,Preprocessing,enhancement detection,check for enhancement,OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK",tbd,,"what is the significance of ""mask""?"
 DCE,R1 to concentration,,,OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK",tbd,in-progress,
 DCE,R1 to signal,SPGR,,ST_USydAUS_DCE,Sirisha Tadimalla,"University of Sydney, Australia",tbd,,
 DCE,R1 to signal,SPGR,,OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK",tbd,,
@@ -64,7 +64,7 @@ DCE,T1,VFA,"linear, nonlinear",ST_SydneyAus_T1,Sirisha Tadimalla,"University of 
 DCE,T1,VFA,"linear, nonlinear, two flip angles",MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK",MJT,complete,
 DCE,T1,VFA,two flip angles,OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK",MJT,in-progress,
 DCE,T1,VFA,"despot, novifast",McGill_VFA,Zaki Ahmed,"McGill University, Canada",MJT,complete,
-DCE/DSC,AIF deconvolution,,,SR_TBG_BNIPhoenixUSA,Sudarshan Ragunathan,"Barrow Neurological Institute, USA",tbd,,I guess this could be used for DCE too(?)
+DCE/DSC,AIF deconvolution,,,SR_TBG_BNIPhoenixUSA,Sudarshan Ragunathan,"Barrow Neurological Institute, USA",tbd,,
 DSC,Input Functions,automatic AIF selection,"fully automatic, semi-automatic",JBJA_GUSahlgrenskaSWE,"Jesper Browall, Jonathan Arvidsson","Sahlgrenska University Hospital and Gothenburg University, Gothenburg, Sweden",tbd,,
 DSC,Leakage correction,BSW,,SR_TBG_BNIPhoenixUSA,Sudarshan Ragunathan,"Barrow Neurological Institute, USA",tbd,,
 DSC,Leakage correction,BSW,,LCB_BNI,Laura Bell,"Barrow Neurological Institute, USA",tbd,,
