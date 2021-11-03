@@ -24,11 +24,11 @@ def test_OGJ_OsloU_Norway_tofts_model(label, t_array, C_array, ca_array, ta_arra
     # prepare input data
     t_array = t_array/60
     
-    X0 = (0.02, 0.02, 0.2, 0.6)
-    bounds = ((0.0, 0.0, 0.0, 0.0), (0.7, 0.7, 1, 5.0))
-    output, pcov = curve_fit(lambda t,x,y,z,w: ETM(t_array,ca_array,x,y,z,w), t_array, C_array, p0=X0, bounds=bounds)
+    X0 = (0.02,  0.2, 0.6)
+    bounds = ((0.0,  0.0, 0.0), (0.7, 1, 5.0))
+    output, pcov = curve_fit(lambda t,x,y,z: ETM(t_array,ca_array,z,v_p=x,v_e=y), t_array, C_array, p0=X0, bounds=bounds)
 
-    Ktrans_meas, Kep_meas, ve_meas, vp_meas = output
+    vp_meas, ve_meas,  Ktrans_meas = output
     
     print(['ve meas vs ref '+ str(ve_meas)+' vs '+str(ve_ref)])
     print(['vp meas vs ref '+ str(vp_meas) + ' vs ' +str(vp_ref)])

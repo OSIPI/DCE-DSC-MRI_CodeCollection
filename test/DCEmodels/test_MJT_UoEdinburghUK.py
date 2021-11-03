@@ -29,9 +29,9 @@ def test_MJT_UoEdinburghUK_tofts_model(label, t_array, C_array, ca_array, ta_arr
     # Create model object and initialise parameters
     pk_model = pk_models.extended_tofts(t_array, aif)
     pk_pars_0 = [{'vp': 0.6, 'ps': 0.02, 've': 0.2}]
-    weights = np.concatenate([np.zeros(5), np.ones(len(t_array)-5)])
+    #weights = np.concatenate([np.zeros(5), np.ones(len(t_array)-5)])
     
-    pk_pars, C_t_fit = dce_fit.conc_to_pkp(C_array, pk_model, pk_pars_0, weights)
+    pk_pars, C_t_fit = dce_fit.conc_to_pkp(C_array, pk_model, pk_pars_0)
     
     Ktrans_meas = pk_pars['ps']
     ve_meas = pk_pars['ve']
