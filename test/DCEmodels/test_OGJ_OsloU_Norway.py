@@ -35,6 +35,8 @@ def test_OGJ_OsloU_Norway_tofts_model(label, t_array, C_array, ca_array, ta_arra
     Ktrans_meas = output.K_trans
     vp_meas = output.v_p
     ve_meas = output.v_e
+
+    vp_meas, ve_meas,  Ktrans_meas = output
     
     print(['ve meas vs ref '+ str(ve_meas)+' vs '+str(ve_ref)])
     print(['vp meas vs ref '+ str(vp_meas) + ' vs ' +str(vp_ref)])
