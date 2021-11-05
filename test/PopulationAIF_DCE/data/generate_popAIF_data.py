@@ -31,7 +31,7 @@ def generate_GeorgiouAIF_refdata():
 
     label.append('original_AIF')
     # import xsl file
-    filename_original_aif = os.path.join(os.path.dirname(__file__), 'data', 'mrm27524-sup-0002-figs2.xlsx')
+    filename_original_aif = os.path.join(os.path.dirname(__file__), 'mrm27524-sup-0002-figs2.xlsx')
     original_data_xls = pd.read_excel(filename_original_aif)
     time_original = original_data_xls["time (min)"].to_numpy()
     values_original = original_data_xls["[Gd-DOTA] (mM)"].to_numpy()
@@ -49,11 +49,13 @@ def generate_GeorgiouAIF_refdata():
         time.append(time_int)
         cb_ref_values.append(cb)
 
-
-    # write to csv file
-    # label, time, cb_ref_values
-
-
+    # write to csv file: label, time, cb_ref_values
+    ref_values = []
+    for lb, tm, ref in zip(label, time, cb_ref_values):
+        for t, r in zip(tm, ref):
+            ref_values.append([lb, t, r])
+    filename_ref = os.path.join(os.path.dirname(__file__), '', 'GeorgiouAIF_ref.csv')
+    pd.DataFrame(data=ref_values, columns=["label", "time", "Cb"]).to_csv(filename_ref, index=False)
 
 def ParkerAIF_refdata():
     """
@@ -212,3 +214,5 @@ def ParkerAIF_refdata_delay():
     pars = list(zip(label, time, cb_ref_values, delay, a_tol, r_tol))
 
     return pars
+
+generate_GeorgiouAIF_refdata()
