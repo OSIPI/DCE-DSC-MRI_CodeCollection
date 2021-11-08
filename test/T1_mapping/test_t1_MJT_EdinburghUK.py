@@ -23,10 +23,9 @@ def test_MJT_EdinburghUK_t1_VFA_nonlin(label, fa_array, tr_array, s_array, r1_re
         
     # prepare input data
     tr = tr_array[0]
-    fa_array_rad = fa_array * np.pi/180.
     
     # run test (non-linear)
-    [s0_nonlin_meas, t1_nonlin_meas] = fit_vfa_nonlinear(s_array,fa_array_rad,tr)
+    [s0_nonlin_meas, t1_nonlin_meas] = fit_vfa_nonlinear(s_array,fa_array,tr)
     r1_nonlin_meas = 1./t1_nonlin_meas    
     np.testing.assert_allclose( [r1_nonlin_meas], [r1_ref], rtol=r_tol, atol=a_tol )
 
@@ -39,9 +38,8 @@ def test_MJT_EdinburghUK_t1_VFA_lin(label, fa_array, tr_array, s_array, r1_ref, 
     
     # prepare input data
     tr = tr_array[0]
-    fa_array_rad = fa_array * np.pi/180.
     
     # run test (non-linear)
-    [s0_lin_meas, t1_lin_meas] = fit_vfa_linear(s_array,fa_array_rad,tr)
+    [s0_lin_meas, t1_lin_meas] = fit_vfa_linear(s_array,fa_array,tr)
     r1_lin_meas = 1./t1_lin_meas    
     np.testing.assert_allclose( [r1_lin_meas], [r1_ref], rtol=r_tol, atol=a_tol )
