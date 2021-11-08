@@ -112,3 +112,73 @@ def ParkerAIF_refdata_delay():
         pars.append(new_list)
 
     return pars
+
+def preclinical_refdata():
+    """
+    This function imports the test data to test implementations of the preclinical AIF of McGrath et al.
+
+    To create the preclinical AIF the parameters of the functional form are copied from Table 1, model B of the reference
+
+    These parameters in combination with equation 5 were used to create different versions of the preclinicalAIF.
+    The original data had a temp resolution of 0.5s and tot acquisition time of 300s. This data was labeled as 'Original_AIF'
+    The other reference entries include AIF values with varying temporal resolutions and varying total acquisition times.
+    Data without a delay or pre-contrast value are assumed. Those are included in a separate testset
+
+    Bolus arrival time variations are included in preclinicalAIF_refdata_delay
+
+    References: McGrath et al. MRM 2009, DOI: 10.1002/mrm.21959
+
+    Returns
+    -------
+    pars : list of tuples
+        Input for pytest.mark.parametrize
+        Each tuple contains a set of parameters corresponding to 1 test case
+    """
+
+    # set the tolerances to use for this dataset
+    a_tol = 0.0001
+    r_tol = 0.01
+
+    # load csv file
+    filename = os.path.join(os.path.dirname(__file__), 'data', 'preclinicalAIF_ref.csv')
+    df = pd.read_csv(filename)
+    df_label = df.groupby('label')
+    pars = []
+    # convert to list as input for pytest.mark.parametrize
+    for current_label, values in df_label:
+        new_list = (current_label, values.time.to_numpy(), values.Cb.to_numpy(), values.delay.to_numpy()[0], a_tol, r_tol)
+        pars.append(new_list)
+
+    return pars
+
+def preclinical_refdata_delay():
+    """
+    This function imports the test data to test implementations of the preclinical AIF of McGrath et al. including a delay
+    for more details see preclinical_refdata()
+
+    To create the preclinical AIF the parameters of the functional form are copied from Table 1, model B of the reference
+
+    References: McGrath et al. MRM 2009, DOI: 10.1002/mrm.21959
+
+    Returns
+    -------
+    pars : list of tuples
+        Input for pytest.mark.parametrize
+        Each tuple contains a set of parameters corresponding to 1 test case
+    """
+
+    # set the tolerances to use for this dataset
+    a_tol = 0.0001
+    r_tol = 0.01
+
+    # load csv file
+    filename = os.path.join(os.path.dirname(__file__), 'data', 'preclinicalAIF_ref_delay.csv')
+    df = pd.read_csv(filename)
+    df_label = df.groupby('label')
+    pars = []
+    # convert to list as input for pytest.mark.parametrize
+    for current_label, values in df_label:
+        new_list = (current_label, values.time.to_numpy(), values.Cb.to_numpy(), values.delay.to_numpy()[0], a_tol, r_tol)
+        pars.append(new_list)
+
+    return pars
