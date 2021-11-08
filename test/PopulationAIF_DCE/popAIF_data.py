@@ -6,7 +6,7 @@ import math
 
 def GeorgiouAIF_refdata():
     """
-    This function imports and creates the test data to test implementations of the Georgiou AIF.
+    This function imports the test data to test implementations of the Georgiou AIF.
 
     The test data is based on the original data submitted with the manuscript (mrm27524-sup-0002-figs2.xlsx) from
     Georgiou et al. MRM 2018. This data is labeled as 'Original_AIF'
@@ -26,25 +26,26 @@ def GeorgiouAIF_refdata():
         Each tuple contains a set of parameters corresponding to 1 test case
     """
 
+    # set the tolerances to use for this dataset
+    a_tol = 0.0001
+    r_tol = 0.01
+
+    # load csv file
     filename = os.path.join(os.path.dirname(__file__), 'data', 'GeorgiouAIF_ref.csv')
     df = pd.read_csv(filename)
-    print(df)
-
-    # do something here to group the data per label
-
-    # set the tolerance to use for this dataset
-    a_tol = [0.05] * len(label)
-    r_tol = [0.05] * len(label)
-
-    # convert to list of tuples (input for pytest.mark.parametrize)
-    pars = list(zip(label, time, cb_ref_values, a_tol, r_tol))
+    df_label = df.groupby('label')
+    pars = []
+    # convert to list as input for pytest.mark.parametrize
+    for current_label, values in df_label:
+        new_list = (current_label, values.time.to_numpy(), values.Cb.to_numpy(), a_tol, r_tol)
+        pars.append(new_list)
 
     return pars
 
 
 def ParkerAIF_refdata():
     """
-    This function imports and creates the test data to test implementations of the Parker AIF.
+    This function imports the test data to test implementations of the Parker AIF.
 
     For the Parker AIF the parameters of the functional form are copied from Table 1 of the reference
 
@@ -64,84 +65,28 @@ def ParkerAIF_refdata():
         Each tuple contains a set of parameters corresponding to 1 test case
     """
 
-    # AIF parameters from Table 1 of Parker et al.
-    A1 = 0.809
-    sigma1 = 0.0563
-    T1 = 0.17046
-    A2 = 0.330
-    sigma2 = 0.132
-    T2 = 0.365
-    alpha = 1.05
-    beta = 0.1685
-    s = 38.078
-    tau = 0.483
+    # set the tolerances to use for this dataset
+    a_tol = 0.0001
+    r_tol = 0.01
 
-    label = []
-    time = []
-    cb_ref_values = []
-    delay = []
-
-    label.append('original_AIF')
-    time_original = np.arange(0, 5, 4.97/60) # in min
-    gaussian1 = A1 / (sigma1 * np.sqrt(2 * np.pi)) * np.exp(-np.square(time_original - T1) / (2 * np.square(sigma1)))
-    gaussian2 = A2 / (sigma2 * np.sqrt(2 * np.pi)) * np.exp(-np.square(time_original - T2) / (2 * np.square(sigma2)))
-    modSigm = (alpha * np.exp(-beta * time_original)) / (1 + np.exp(-s * (time_original - tau)))
-    cb = np.add(gaussian1, gaussian2)
-    cb = np.add(cb, modSigm)
-    time.append(time_original)
-    cb_ref_values.append(cb)
-    delay.append(0)  # assume no delay
-
-    # similar for a range of temporal resolutions
-    range_dt = np.array([0.5, 1, 2, 2.5, 5, 7.5])  # range of realistic temporal resolutions
-    for current_dt in range_dt:
-        current_label = 'temp_res_' + str(current_dt) + 's'
-        label.append(current_label)
-        current_dt_min = current_dt / 60
-        time_int = np.arange(0, 5, current_dt_min)
-        gaussian1 = A1 / (sigma1 * np.sqrt(2 * np.pi)) * np.exp(-np.square(time_int - T1) / (2 * np.square(sigma1)))
-        gaussian2 = A2 / (sigma2 * np.sqrt(2 * np.pi)) * np.exp(-np.square(time_int - T2) / (2 * np.square(sigma2)))
-        modSigm = (alpha * np.exp(-beta * time_int)) / (1 + np.exp(-s * (time_int - tau)))
-        cb = np.add(gaussian1, gaussian2)
-        cb = np.add(cb, modSigm)
-        time.append(time_int)
-        cb_ref_values.append(cb)
-        delay.append(0)  # assume no delay
-
-    # similar for different acquisition times
-    range_endt = np.array([3, 5, 7, 10])  # range of total acquisition time
-    current_dt_min = 2.5 / 60  # current temp resolution 2.5 s
-    for current_endt in range_endt:
-        current_label = 'acq_time_' + str(current_endt) + 'min'
-        label.append(current_label)
-        time_int = np.arange(0, current_endt, current_dt_min)
-        gaussian1 = A1 / (sigma1 * np.sqrt(2 * np.pi)) * np.exp(-np.square(time_int - T1) / (2 * np.square(sigma1)))
-        gaussian2 = A2 / (sigma2 * np.sqrt(2 * np.pi)) * np.exp(-np.square(time_int - T2) / (2 * np.square(sigma2)))
-        modSigm = (alpha * np.exp(-beta * time_int)) / (1 + np.exp(-s * (time_int - tau)))
-        cb = np.add(gaussian1, gaussian2)
-        cb = np.add(cb, modSigm)
-        time.append(time_int)
-        cb_ref_values.append(cb)
-        delay.append(0)  # assume no delay
-
-    # set the tolerance to use for this dataset
-    a_tol = [0.05] * len(label)
-    r_tol = [0.05] * len(label)
-
-    # convert to list of tuples (input for pytest.mark.parametrize)
-    pars = list(zip(label, time, cb_ref_values, delay, a_tol, r_tol))
+    # load csv file
+    filename = os.path.join(os.path.dirname(__file__), 'data', 'ParkerAIF_ref.csv')
+    df = pd.read_csv(filename)
+    df_label = df.groupby('label')
+    pars = []
+    # convert to list as input for pytest.mark.parametrize
+    for current_label, values in df_label:
+        new_list = (current_label, values.time.to_numpy(), values.Cb.to_numpy(), values.delay.to_numpy()[0], a_tol, r_tol)
+        pars.append(new_list)
 
     return pars
 
 
 def ParkerAIF_refdata_delay():
     """
-    This function creates the test data to test implementations of the Parker AIF including a delay or precontrast signal.
+    This function imports the test data to test implementations of the Parker AIF including a delay or pre-contrast signal.
 
     For the Parker AIF the parameters of the functional form are copied from Table 1 of the reference
-
-    In the function ParkerAIF_refdataa() no delay was assumed. In this case the original AIF was used as a starting point (temp resol 4.97s, tot acquisition time 5 min);
-    This was extended with delays of exact multiplications of the temporal resolution (4.97s) as well as random seconds
 
     References: Parker et al. MRM 2006, doi: 10.1002/mrm.21066
 
@@ -152,50 +97,18 @@ def ParkerAIF_refdata_delay():
         Each tuple contains a set of parameters corresponding to 1 test case
     """
 
-    # AIF parameters from Table 1 of Parker et al.
-    A1 = 0.809
-    sigma1 = 0.0563
-    T1 = 0.17046
-    A2 = 0.330
-    sigma2 = 0.132
-    T2 = 0.365
-    alpha = 1.05
-    beta = 0.1685
-    s = 38.078
-    tau = 0.483
+    # set the tolerances to use for this dataset
+    a_tol = 0.0001
+    r_tol = 0.01
 
-    label = []
-    time = []
-    cb_ref_values = []
-    delay = []
-
-    dt = 4.97  # temp resolution in seconds
-    time_current = np.arange(0, 5, dt/60)  # in min
-
-    # similar for a range of temporal resolutions
-    delay_range = np.array([0, dt, 2*dt, 5*dt, 2, 5, 10, 18, 31])  # indicated in seconds
-    for current_delay in delay_range:
-        current_label = 'delay_' + str(current_delay) + 's'
-        label.append(current_label)
-        gaussian1 = A1 / (sigma1 * np.sqrt(2 * np.pi)) * np.exp(-np.square(time_current - T1) / (2 * np.square(sigma1)))
-        gaussian2 = A2 / (sigma2 * np.sqrt(2 * np.pi)) * np.exp(-np.square(time_current - T2) / (2 * np.square(sigma2)))
-        modSigm = (alpha * np.exp(-beta * time_current)) / (1 + np.exp(-s * (time_current - tau)))
-        cb = np.add(gaussian1, gaussian2)
-        cb = np.add(cb, modSigm)
-        # shift cb according to delay value
-        n_shift = math.floor(current_delay/dt)
-        cb = np.pad(cb, (n_shift, 0), 'constant')
-        cb = cb[0:len(time_current)]  # keep array length constant
-        time.append(time_current)
-        cb_ref_values.append(cb)
-        delay.append(current_delay)  # assume no delay
-
-
-    # set the tolerance to use for this dataset
-    a_tol = [0.05] * len(label)
-    r_tol = [0.05] * len(label)
-
-    # convert to list of tuples (input for pytest.mark.parametrize)
-    pars = list(zip(label, time, cb_ref_values, delay, a_tol, r_tol))
+    # load csv file
+    filename = os.path.join(os.path.dirname(__file__), 'data', 'ParkerAIF_ref_with_delay.csv')
+    df = pd.read_csv(filename)
+    df_label = df.groupby('label')
+    pars = []
+    # convert to list as input for pytest.mark.parametrize
+    for current_label, values in df_label:
+        new_list = (current_label, values.time.to_numpy(), values.Cb.to_numpy(), values.delay.to_numpy()[0], a_tol, r_tol)
+        pars.append(new_list)
 
     return pars

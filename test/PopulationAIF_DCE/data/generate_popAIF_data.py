@@ -16,13 +16,10 @@ def generate_GeorgiouAIF_refdata():
     - time arrays longer than 5 min
     - bolus arrival time variations
 
+    data are saved in a csv file: GeorgiouAIF_ref.csv
+
     References: Georgiou et al. MRM 2018, doi: 10.1002/mrm.27524
 
-    Returns
-    -------
-    pars : list of tuples
-        Input for pytest.mark.parametrize
-        Each tuple contains a set of parameters corresponding to 1 test case
     """
 
     label = []
@@ -57,26 +54,24 @@ def generate_GeorgiouAIF_refdata():
     filename_ref = os.path.join(os.path.dirname(__file__), '', 'GeorgiouAIF_ref.csv')
     pd.DataFrame(data=ref_values, columns=["label", "time", "Cb"]).to_csv(filename_ref, index=False)
 
-def ParkerAIF_refdata():
+
+def generate_ParkerAIF_refdata():
     """
-    This function imports and creates the test data to test implementations of the Parker AIF.
+    This function creates the test data to test implementations of the Parker AIF.
 
     For the Parker AIF the parameters of the functional form are copied from Table 1 of the reference
 
     These parameters in combination with equation 1 were used to create different versions of the ParkerAIF.
     The original data had a temp resolution of 4.97 s and tot acquisition time of 372.75 s. This data was labeled as 'Original_AIF'
     The other reference entries include AIF values with varying temporal resolutions and varying total acquisition times.
-    Data without a delay or pre-contrast value are assumed. Those are included in a separate testset
+    Data without a delay or pre-contrast value are assumed. Those are included in a separate test-set
 
     Bolus arrival time variations are included in ParkerAIF_refdata_delay
 
+    data are saved in a csv file: ParkerAIF_ref.csv
+
     References: Parker et al. MRM 2006, doi: 10.1002/mrm.21066
 
-    Returns
-    -------
-    pars : list of tuples
-        Input for pytest.mark.parametrize
-        Each tuple contains a set of parameters corresponding to 1 test case
     """
 
     # AIF parameters from Table 1 of Parker et al.
@@ -139,32 +134,28 @@ def ParkerAIF_refdata():
         cb_ref_values.append(cb)
         delay.append(0)  # assume no delay
 
-    # set the tolerance to use for this dataset
-    a_tol = [0.05] * len(label)
-    r_tol = [0.05] * len(label)
+    # write to csv file: label, time, cb_ref_values, delay
+    ref_values = []
+    for lb, tm, ref, dl in zip(label, time, cb_ref_values, delay):
+        for t, r in zip(tm, ref):
+            ref_values.append([lb, t, r, dl])
+    filename_ref = os.path.join(os.path.dirname(__file__), '', 'ParkerAIF_ref.csv')
+    pd.DataFrame(data=ref_values, columns=["label", "time", "Cb", "delay"]).to_csv(filename_ref, index=False)
 
-    # convert to list of tuples (input for pytest.mark.parametrize)
-    pars = list(zip(label, time, cb_ref_values, delay, a_tol, r_tol))
 
-    return pars
-
-
-def ParkerAIF_refdata_delay():
+def generate_ParkerAIF_refdata_delay():
     """
-    This function creates the test data to test implementations of the Parker AIF including a delay or precontrast signal.
+    This function creates the test data to test implementations of the Parker AIF including a delay or pre-contrast signal.
 
     For the Parker AIF the parameters of the functional form are copied from Table 1 of the reference
 
-    In the function ParkerAIF_refdataa() no delay was assumed. In this case the original AIF was used as a starting point (temp resol 4.97s, tot acquisition time 5 min);
+    In the function ParkerAIF_refdata() no delay was assumed. In this case the original AIF was used as a starting point (temp resol 4.97s, tot acquisition time 5 min);
     This was extended with delays of exact multiplications of the temporal resolution (4.97s) as well as random seconds
+
+    data are saved in a csv file: ParkerAIF_ref_with_delay.csv
 
     References: Parker et al. MRM 2006, doi: 10.1002/mrm.21066
 
-    Returns
-    -------
-    pars : list of tuples
-        Input for pytest.mark.parametrize
-        Each tuple contains a set of parameters corresponding to 1 test case
     """
 
     # AIF parameters from Table 1 of Parker et al.
@@ -206,13 +197,14 @@ def ParkerAIF_refdata_delay():
         delay.append(current_delay)  # assume no delay
 
 
-    # set the tolerance to use for this dataset
-    a_tol = [0.05] * len(label)
-    r_tol = [0.05] * len(label)
-
-    # convert to list of tuples (input for pytest.mark.parametrize)
-    pars = list(zip(label, time, cb_ref_values, delay, a_tol, r_tol))
-
-    return pars
+    # write to csv file: label, time, cb_ref_values, delay
+    ref_values = []
+    for lb, tm, ref, dl in zip(label, time, cb_ref_values, delay):
+        for t, r in zip(tm, ref):
+            ref_values.append([lb, t, r, dl])
+    filename_ref = os.path.join(os.path.dirname(__file__), '', 'ParkerAIF_ref_with_delay.csv')
+    pd.DataFrame(data=ref_values, columns=["label", "time", "Cb", "delay"]).to_csv(filename_ref, index=False)
 
 generate_GeorgiouAIF_refdata()
+generate_ParkerAIF_refdata()
+generate_ParkerAIF_refdata_delay()
