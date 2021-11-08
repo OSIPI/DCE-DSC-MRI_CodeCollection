@@ -23,6 +23,8 @@ Input(s)/Ouput(s):
         TR - Recovery Time [s]
     OUTPUTS:
         mu_opt - The optimal mu for regularization using an L-curve criterion method
+        B - 
+        S - 
 """
 import numpy as np
 from numpy.linalg import svd
@@ -101,5 +103,5 @@ def AIFdeconvolution(dR2s_AIF, dR2s_leakagecorrected, TR):
         L_0 = L_minus1
         L_minus1 = L_curve[k-1]
         mu_opt = u[k-1]
-    return mu_opt
+    return mu_opt, B, S
 

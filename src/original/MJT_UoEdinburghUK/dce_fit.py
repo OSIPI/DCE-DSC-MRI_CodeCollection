@@ -18,7 +18,8 @@ Functions:
 
 
 import numpy as np
-from scipy.optimize import root, minimize
+from scipy.optimize import root
+from utils.utilities import least_squares_global
 
 
 def sig_to_enh(s, base_idx):
@@ -161,27 +162,21 @@ def conc_to_pkp(C_t, pk_model, pk_pars_0=None, weights=None):
 
     # Convert initial pars from list of dicts to list of arrays
     x_0_all = [pk_model.pkp_array(pars) for pars in pk_pars_0]
-    x_scalefactor = pk_model.typical_vals
-    x_0_norm_all = [x_0 / x_scalefactor for x_0 in x_0_all]
 
-    # Define sum-of-squares function to minimise
-    def cost(x_norm, *args):
-        x = x_norm * x_scalefactor
+    def residuals(x):
         C_t_try, _C_cp, _C_e = pk_model.conc(*x)
-        ssq = np.sum(weights * ((C_t_try - C_t)**2))
-        return ssq
+        return weights * (C_t_try - C_t)
 
-    result = minimize_global(cost, x_0_norm_all, args=None, bounds=None,
-                             constraints=pk_model.constraints,
-                             method='trust-constr')
+    result = least_squares_global(residuals, x_0_all, method='trf',
+                                  bounds=pk_model.bounds,
+                                  x_scale=(pk_model.typical_vals))
 
     if result.success is False:
         raise ArithmeticError(f'Unable to calculate pharmacokinetic parameters'
                               f': {result.message}')
-
-    x_opt = result.x * x_scalefactor
-    pk_pars_opt = pk_model.pkp_dict(x_opt)  # convert parameters to dict
-    Ct_fit, _C_cp, _C_e = pk_model.conc(*x_opt)
+    pk_pars_opt = pk_model.pkp_dict(result.x)  # convert parameters to dict
+    check_ve_vp_sum(pk_pars_opt)
+    Ct_fit, _C_cp, _C_e = pk_model.conc(*result.x)
     Ct_fit[weights == 0] = np.nan
 
     return pk_pars_opt, Ct_fit
@@ -247,31 +242,25 @@ def enh_to_pkp(enh, hct, k, R10_tissue, R10_blood, pk_model, c_to_r_model,
 
     # get initial estimates as array, then scale
     x_0_all = [pk_model.pkp_array(pars) for pars in pk_pars_0]
-    x_scalefactor = pk_model.typical_vals
-    x_0_norm_all = [x_0 / x_scalefactor for x_0 in x_0_all]
 
-    # define function to minimise
-    def cost(x_norm, *args):
-        x = x_norm * x_scalefactor
+    def residuals(x):
         pk_pars_try = pk_model.pkp_dict(x)
         enh_try = pkp_to_enh(pk_pars_try, hct, k, R10_tissue, R10_blood,
                              pk_model, c_to_r_model, water_ex_model,
                              signal_model)
-        ssq = np.sum(weights * ((enh_try - enh)**2))
-        return ssq
+        return weights * (enh_try - enh)
 
     # minimise the cost function
-    result = minimize_global(cost, x_0_norm_all, args=None, bounds=None,
-                             constraints=pk_model.constraints,
-                             method='trust-constr')
-
+    result = least_squares_global(residuals, x_0_all, method='trf',
+                                  bounds=pk_model.bounds,
+                                  x_scale=(pk_model.typical_vals))
     if result.success is False:
         raise ArithmeticError(f'Unable to calculate pharmacokinetic parameters'
                               f': {result.message}')
 
     # generate optimal parameters (as dict) and predicted enh
-    x_opt = result.x * x_scalefactor
-    pk_pars_opt = pk_model.pkp_dict(x_opt)
+    pk_pars_opt = pk_model.pkp_dict(result.x)
+    check_ve_vp_sum(pk_pars_opt)
     enh_fit = pkp_to_enh(pk_pars_opt, hct, k, R10_tissue, R10_blood, pk_model,
                          c_to_r_model, water_ex_model, signal_model)
     enh_fit[weights == 0] = np.nan
@@ -414,28 +403,9 @@ def volume_fractions(pk_pars, hct):
     return v
 
 
-def minimize_global(cost, x_0_all, **minimizer_kwargs):
-    """Find global minimum by calling scipy.optimize.minimize multiple times.
-
-    Parameters
-    ----------
-    cost : function
-        Function to be minimised.
-    x_0_all : list
-        list of 1D ndarrays. Each contains a set of initial parameter values.
-    **minimizer_kwargs : optional keyword arguments accepted by minimize
-
-    Returns
-    -------
-    result : OptimizeResult
-        OptimizeResult corresponding to the fitting attempt with the lowest
-        minimum.
-
-    """
-    results = [minimize(cost, x_0, **minimizer_kwargs) for x_0 in x_0_all]
-    costs = [result.fun if result.success is False else np.nan
-             for result in results]
-    cost = min(costs)
-    idx = costs.index(cost)
-    result = results[idx]
-    return result
+def check_ve_vp_sum(pk_pars):
+    # check vp + ve <= 1
+    if (('vp' in pk_pars) and ('ve' in pk_pars)) and (
+            pk_pars['vp'] + pk_pars['ve'] > 1):
+        v_tot = pk_pars['vp'] + pk_pars['ve']
+        raise ValueError(f'vp + ve = {v_tot}!')

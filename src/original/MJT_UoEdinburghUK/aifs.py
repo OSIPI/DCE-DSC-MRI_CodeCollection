@@ -72,7 +72,7 @@ class patient_specific(aif):
         self.c_ap_data = c_ap_data
         self.c_ap_func = interp1d(t_data, c_ap_data,
                                   kind='quadratic', bounds_error=False,
-                                  fill_value=(c_ap_data[0], c_ap_data[-1]))
+                                  fill_value=(0, c_ap_data[-1]))
 
     def c_ap(self, t):
         """Get AIF plasma concentration(t). Overrides superclass method."""

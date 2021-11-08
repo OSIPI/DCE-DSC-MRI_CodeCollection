@@ -140,5 +140,10 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
+
+# Pycharm
+/**/.idea
+
 # Misc
 .DS_Store
+
