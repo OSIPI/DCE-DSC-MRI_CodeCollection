@@ -1,5 +1,8 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
+*/__pycache__/
+*/*/__pycache__/
+*/*/*/__pycache__/
 *.py[cod]
 *$py.class
 
@@ -142,3 +145,11 @@ cython_debug/
 
 # test output
 test/results
+
+# Pycharm
+.idea
+/**/.idea
+
+# Misc
+.DS_Store
+
