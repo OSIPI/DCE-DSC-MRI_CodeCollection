@@ -3,10 +3,10 @@ import numpy as np
 
 from ..helpers import osipi_parametrize
 from . import SI2Conc_data
-from src.original.MJT_UoEdinburghUK.signal_models import spgr
-from src.original.MJT_UoEdinburghUK.relaxivity import c_to_r_linear
-from src.original.MJT_UoEdinburghUK.dce_fit import sig_to_enh
-from src.original.MJT_UoEdinburghUK.dce_fit import enh_to_conc
+from osipi.original.MJT_UoEdinburghUK.signal_models import spgr
+from osipi.original.MJT_UoEdinburghUK.relaxivity import c_to_r_linear
+from osipi.original.MJT_UoEdinburghUK.dce_fit import sig_to_enh
+from osipi.original.MJT_UoEdinburghUK.dce_fit import enh_to_conc
 
 
 

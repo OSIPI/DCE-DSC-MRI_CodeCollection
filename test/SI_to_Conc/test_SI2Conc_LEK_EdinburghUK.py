@@ -3,7 +3,7 @@ import numpy as np
 
 from ..helpers import osipi_parametrize
 from . import SI2Conc_data
-from src.original.LEK_UoEdinburghUK.SignalToConcentration import SI2Conc
+from osipi.original.LEK_UoEdinburghUK.SignalToConcentration import SI2Conc
 
 
 # All tests will use the same arguments and same data...

@@ -3,7 +3,7 @@ import numpy as np
 
 from ..helpers import osipi_parametrize
 from . import SI2Conc_data
-from src.original.ST_USydAUS.signals2conc import signals2conc
+from osipi.original.ST_USydAUS.signals2conc import signals2conc
 
 
 # All tests will use the same arguments and same data...
