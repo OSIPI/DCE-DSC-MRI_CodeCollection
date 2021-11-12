@@ -67,7 +67,7 @@ def vfa_fit(author, signal = None, fa = None, tr = None, fittype = "linear", mas
         T1 = _T1.reshape(spatialdims)
     return (M0, T1)
   
-def show_maps(fittedmaps = None, M0 = None, T1 = None, truth = None):
+def show_maps(fittedmaps = None, M0 = None, T1 = None, truth = None, returnfig = False):
     if not np.any(M0):
         M0, T1 = fittedmaps
 
@@ -91,7 +91,9 @@ def show_maps(fittedmaps = None, M0 = None, T1 = None, truth = None):
       plt.yticks(yticklocs, np.round((np.unique(truth.M0))).astype(int))
     
     fig.tight_layout()
-    return fig
+    if returnfig:
+        return fig
+    return
 
 def show_error_maps(fits, idx = -1, title = "", showcbar = False, truth = None, clim = (-100, 100), returnfig = False):
     M0, T1 = fits
@@ -124,7 +126,7 @@ def show_error_maps(fits, idx = -1, title = "", showcbar = False, truth = None, 
         fig.colorbar(im, ax=[ax1,ax2], orientation='horizontal', shrink = 0.5)
     else:
         fig.tight_layout()
-        
+
     if returnfig:
         return fig
     return
