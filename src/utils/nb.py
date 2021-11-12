@@ -37,7 +37,6 @@ def make_error_map_gif(drawfunc, filename, title = ""):
   plt.close('all')
 
 def fig2image(fig):
-    fig.tight_layout()
     fig.canvas.draw()
     image = np.frombuffer(fig.canvas.tostring_rgb(), dtype='uint8')
     image = image.reshape(fig.canvas.get_width_height()[::-1] + (3,))

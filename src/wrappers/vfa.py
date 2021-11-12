@@ -90,7 +90,7 @@ def show_maps(fittedmaps = None, M0 = None, T1 = None, truth = None, returnfig =
       plt.xticks(xticklocs, np.round((np.unique(truth.T1))).astype(int), rotation=45, ha="right")
       plt.yticks(yticklocs, np.round((np.unique(truth.M0))).astype(int))
     
-    fig.tight_layout()
+    # fig.tight_layout()
     if returnfig:
         return fig
     return
@@ -124,8 +124,8 @@ def show_error_maps(fits, idx = -1, title = "", showcbar = False, truth = None, 
     fig.suptitle(title)
     if showcbar:
         fig.colorbar(im, ax=[ax1,ax2], orientation='horizontal', shrink = 0.5)
-    else:
-        fig.tight_layout()
+    # else:
+    #     fig.tight_layout()
 
     if returnfig:
         return fig
