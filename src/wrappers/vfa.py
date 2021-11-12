@@ -93,7 +93,7 @@ def show_maps(fittedmaps = None, M0 = None, T1 = None, truth = None):
     fig.tight_layout()
     return fig
 
-def show_error_maps(fits, idx = -1, title = "", showcbar = False, truth = None, clim = (-100, 100)):
+def show_error_maps(fits, idx = -1, title = "", showcbar = False, truth = None, clim = (-100, 100), returnfig = False):
     M0, T1 = fits
 
     if (idx >= 0):
@@ -124,7 +124,10 @@ def show_error_maps(fits, idx = -1, title = "", showcbar = False, truth = None, 
         fig.colorbar(im, ax=[ax1,ax2], orientation='horizontal', shrink = 0.5)
     else:
         fig.tight_layout()
-    return fig
+        
+    if returnfig:
+        return fig
+    return
 
 def get_ticklocs(arr):
     if arr.shape[0] > 20:
