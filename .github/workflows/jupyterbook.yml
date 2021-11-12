@@ -26,6 +26,7 @@ jobs:
       run: |
         pip install pytest
         pip install -r notebooks/requirements.txt
+        pip install .
 
     - name: Test with pytest
       run: |
