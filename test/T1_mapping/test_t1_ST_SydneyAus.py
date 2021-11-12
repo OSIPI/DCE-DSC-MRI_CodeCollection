@@ -3,7 +3,7 @@ import numpy as np
 
 from ..helpers import osipi_parametrize, log_init, log_results # helper for running tests on multiple cases
 from . import t1_data # module for providing all t1 test cases
-from src.original.ST_USydAUS.VFAT1mapping import VFAT1mapping # functions to test
+from osipi.original.ST_USydAUS.VFAT1mapping import VFAT1mapping # functions to test
 
 
 # All tests will use the same arguments and same data...
