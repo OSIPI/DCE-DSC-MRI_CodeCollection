@@ -146,6 +146,9 @@ cython_debug/
 # test output
 test/results
 
+# notebook data
+notebooks/data
+
 # Pycharm
 .idea
 /**/.idea
