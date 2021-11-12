@@ -3,7 +3,7 @@ import pytest
 import numpy as np
 from test.helpers import osipi_parametrize
 import src.original.MJT_UoEdinburghUK.aifs as aifs
-import popAIF_data
+from . import popAIF_data
 
 
 # All tests will use the same arguments and same data...

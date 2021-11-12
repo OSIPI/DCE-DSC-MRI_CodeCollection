@@ -3,7 +3,7 @@ import pytest
 import numpy as np
 from test.helpers import osipi_parametrize
 from src.original.MB_QBI_UoManchesterUK.QbiPy.dce_models import dce_aif
-import popAIF_data
+from . import popAIF_data
 
 
 # All tests will use the same arguments and same data...

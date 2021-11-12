@@ -228,7 +228,7 @@ def generate_preclinicalAIF_refdata():
     A1 = 3.4  # mmol
     K1 = 0.045  # s-1
     A2 = 1.81  # mmol
-    K2 = 0.015  # s-1
+    K2 = 0.0015  # s-1
     t0 = 7  # s
 
     label = []
@@ -266,21 +266,22 @@ def generate_preclinicalAIF_refdata():
         cb_ref_values.append(cb)
         delay.append(0)  # assume no delay
 
-        # similar for different acquisition times
-        range_endt = np.array([3, 5, 7, 10])  # range of total acquisition time in min
-        current_dt = 2.5  # current temp resolution 2.5 s
-        for current_endt in range_endt:
-            current_label = 'acq_time_' + str(current_endt) + 'min'
-            label.append(current_label)
-            time_int = np.arange(0, current_endt*60, current_dt) #in seconds
-            for t in time_int:
-                if t <= t0:
-                    cb.append(A1 * (t / t0) + A2 * (t / t0))
-                else:
-                    cb.append(A1 * np.exp(-K1 * (t - t0)) + A2 * np.exp(-K2 * (t - t0)))
-            time.append(time_int)
-            cb_ref_values.append(cb)
-            delay.append(0)  # assume no delay
+    # similar for different acquisition times
+    range_endt = np.array([3, 5, 7, 10])  # range of total acquisition time in min
+    current_dt = 2.5  # current temp resolution 2.5 s
+    for current_endt in range_endt:
+        current_label = 'acq_time_' + str(current_endt) + 'min'
+        label.append(current_label)
+        time_int = np.arange(0, current_endt*60, current_dt) #in seconds
+        cb = []
+        for t in time_int:
+            if t <= t0:
+                cb.append(A1 * (t / t0) + A2 * (t / t0))
+            else:
+                cb.append(A1 * np.exp(-K1 * (t - t0)) + A2 * np.exp(-K2 * (t - t0)))
+        time.append(time_int)
+        cb_ref_values.append(cb)
+        delay.append(0)  # assume no delay
 
     # write to csv file: label, time, cb_ref_values, delay
     ref_values = []
@@ -302,7 +303,7 @@ def generate_preclinicalAIF_refdata_delay():
     A1 = 3.4  # mmol
     K1 = 0.045  # s-1
     A2 = 1.81  # mmol
-    K2 = 0.015  # s-1
+    K2 = 0.0015  # s-1
     t0 = 7  # s
 
     label = []
@@ -324,10 +325,10 @@ def generate_preclinicalAIF_refdata_delay():
         label.append(current_label)
         # shift cb according to delay value
         n_shift = math.floor(current_delay / dt)
-        cb = np.pad(cb, (n_shift, 0), 'constant')
-        cb = cb[0:len(time_int)]  # keep array length constant
+        cb_shift = np.pad(cb, (n_shift, 0), 'constant')
+        cb_shift = cb_shift[0:len(time_int)]  # keep array length constant
         time.append(time_int)
-        cb_ref_values.append(cb)
+        cb_ref_values.append(cb_shift)
         delay.append(current_delay)  # assume no delay
 
     # write to csv file: label, time, cb_ref_values, delay
