@@ -21,14 +21,12 @@ test_data = SI2Conc_data.SI2Conc_data()
 def test_MJT_UoEdinburghUK_sig_to_conc(label, fa, tr, T1base, BLpts, r1, s_array, conc_array, a_tol, r_tol):
 
     ##Prepare input data
-    #Convert fa to radians
-    fa_rad=fa * np.pi/180.
     
     #We need an array of integers to tell the function which points are for the baseline.  This will be 1:BLpts
     BL_idx=np.arange(1,BLpts,1)
 
     #We need to set the signal model to be spgr which will require the tr, the flip angle and a dummy te (ignored by default)
-    sigmod=spgr(tr, fa_rad, 1)
+    sigmod=spgr(tr, fa, 1)
     #We also need to set the c_to_r_model to be linear, with relaxivity r1 and dummy r2 relaxivity
     conc_to_r=c_to_r_linear(r1,0)
 
