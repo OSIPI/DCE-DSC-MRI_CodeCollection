@@ -175,26 +175,44 @@ def generate_ParkerAIF_refdata_delay():
     cb_ref_values = []
     delay = []
 
-    dt = 4.97  # temp resolution in seconds
+    dt = 1.5 # temp resolution in seconds
     time_current = np.arange(0, 5, dt/60)  # in min
 
-    # similar for a range of temporal resolutions
+    # for a range of different delays
     delay_range = np.array([0, dt, 2*dt, 5*dt, 2, 5, 10, 18, 31])  # indicated in seconds
+    # shifted cb_array
     for current_delay in delay_range:
-        current_label = 'delay_' + str(current_delay) + 's'
+         current_label = 'delay_shift' + str(current_delay) + 's'
+         label.append(current_label)
+         gaussian1 = A1 / (sigma1 * np.sqrt(2 * np.pi)) * np.exp(-np.square(time_current - T1) / (2 * np.square(sigma1)))
+         gaussian2 = A2 / (sigma2 * np.sqrt(2 * np.pi)) * np.exp(-np.square(time_current - T2) / (2 * np.square(sigma2)))
+         modSigm = (alpha * np.exp(-beta * time_current)) / (1 + np.exp(-s * (time_current - tau)))
+         cb = np.add(gaussian1, gaussian2)
+         cb = np.add(cb, modSigm)
+         # shift cb according to delay value
+         n_shift = math.floor(current_delay/dt)
+         cb = np.pad(cb, (n_shift, 0), 'constant')
+         cb = cb[0:len(time_current)]  # keep array length constant
+         time.append(time_current)
+         cb_ref_values.append(cb)
+         delay.append(current_delay)
+
+    # recalculate AIF concentration values based on change in start time.
+    time_original = np.arange(0, 5, dt / 60)  # in min
+    for current_delay in delay_range:
+        current_label = 'delay_recalc' + str(current_delay) + 's'
         label.append(current_label)
+        time_current = time_original - current_delay/60
         gaussian1 = A1 / (sigma1 * np.sqrt(2 * np.pi)) * np.exp(-np.square(time_current - T1) / (2 * np.square(sigma1)))
         gaussian2 = A2 / (sigma2 * np.sqrt(2 * np.pi)) * np.exp(-np.square(time_current - T2) / (2 * np.square(sigma2)))
         modSigm = (alpha * np.exp(-beta * time_current)) / (1 + np.exp(-s * (time_current - tau)))
         cb = np.add(gaussian1, gaussian2)
         cb = np.add(cb, modSigm)
         # shift cb according to delay value
-        n_shift = math.floor(current_delay/dt)
-        cb = np.pad(cb, (n_shift, 0), 'constant')
-        cb = cb[0:len(time_current)]  # keep array length constant
-        time.append(time_current)
+        cb[time_original < current_delay/60] = 0.
+        time.append(time_original)
         cb_ref_values.append(cb)
-        delay.append(current_delay)  # assume no delay
+        delay.append(current_delay)
 
 
     # write to csv file: label, time, cb_ref_values, delay

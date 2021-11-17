@@ -14,7 +14,7 @@ test_data = (
 
 # Use the test data to generate a parametrize decorator. This causes the following
 # test to be run for every test case listed in test_data...
-@osipi_parametrize(arg_names, test_data, xf_labels=[])
+@osipi_parametrize(arg_names, test_data, xf_labels=['delay_recalc5.0s','delay_recalc10.0s','delay_recalc31.0s','delay_recalc2.0s'])
 def test_Parker_AIF_ST_SydneyAus(label, time, cb_ref_values, delay, a_tol, r_tol):
 
     # prepare input data
