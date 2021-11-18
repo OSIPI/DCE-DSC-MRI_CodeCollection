@@ -1,4 +1,6 @@
 Technique,Category,Subcategory,Notes,Subfolder,Authors,Institution,Tester,Test status (empty/in-progress/complete),
+DCE,Bolus arrival time,piecewise linear quadratic function,Cheong et al (DOI: 10.1088/0031-9155/48/5/403),LEK_UoEdinburgh,Lucy Kershaw,"University of Edinburgh, UK",tbd,,
+DCE,Bolus arrival time,fitting Kety (Tofts) model to first third of the curve,,LEK_UoEdinburgh,Lucy Kershaw,"University of Edinburgh, UK",tbd,,
 DCE,Concentration to enhancement,,,MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK",tbd,in-progress,
 DCE,Concentration to R1,,,OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK",tbd,in-progress,
 DCE,Concentration to signal,SPGR,,LEK_UoEdinburgh,Lucy Kershaw,"University of Edinburgh, UK",tbd,,
