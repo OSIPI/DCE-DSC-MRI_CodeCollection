@@ -1,0 +1,21 @@
+{
+	"dt"                  : 2,
+	"units"               : "min",
+	"AIF"                 : "standard", 
+	"firstParamaterRange" : [0.02, 0.2], 
+	"secondParamaterRange": [0.02, 0.02],
+	"axisParamaterNames"  : {     
+		"first" : "K_trans",
+		"second": "v_p"
+	},
+	"F_p"           : 0.4,
+	"v_e"           : 0.2,
+	"noRows"        : 1,
+	"noCols"        : 10,
+	"sectionHeight" : 1, 
+	"sectionWidth"  : 1,
+	"sectionSpacing": 0,
+	"showAIFSection": true,
+	"model"         : "2CXM",
+	"noise"         : 0.015
+}
