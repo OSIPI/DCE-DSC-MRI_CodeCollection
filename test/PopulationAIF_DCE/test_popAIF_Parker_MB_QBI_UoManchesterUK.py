@@ -2,7 +2,7 @@ import os
 import pytest
 import numpy as np
 from test.helpers import osipi_parametrize
-from src.original.MB_QBI_UoManchesterUK.QbiPy.dce_models import dce_aif
+import src.original.MB_QBI_UoManchesterUK.QbiPy.dce_models.dce_aif as dce_aif
 from . import popAIF_data
 
 
@@ -20,10 +20,10 @@ def test_Parker_AIF_MB_QBI_UoManchesterUK(label, time, cb_ref_values, delay, a_t
 
     # prepare input data
     # time array is expected in minutes, so no changes needed.
-    hct = 0 # for now ignore hematocrit correction to obtain Cb values
-
+    hct = 0  # for now ignore hematocrit correction to obtain Cb values
+    #time = time*60  # put in seconds
     # Create the AIF object
-    aif =  dce_aif.Aif(time, hct)
-    # for corresponding time array
+    aif = dce_aif.Aif(times=time, hct=hct)
+    aif_values = aif.base_aif_[0,]
 
-    np.testing.assert_allclose([aif], [cb_ref_values], rtol=r_tol, atol=a_tol)
+    np.testing.assert_allclose([aif_values], [cb_ref_values], rtol=r_tol, atol=a_tol)
