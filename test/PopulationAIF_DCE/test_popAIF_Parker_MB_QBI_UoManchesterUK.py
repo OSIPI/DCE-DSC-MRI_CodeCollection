@@ -9,8 +9,7 @@ from . import popAIF_data
 # All tests will use the same arguments and same data...
 arg_names = 'label, time, cb_ref_values, delay, r_tol, a_tol'
 test_data = (
-        popAIF_data.ParkerAIF_refdata() +
-        popAIF_data.ParkerAIF_refdata_delay())
+        popAIF_data.ParkerAIF_refdata() )
 
 # Use the test data to generate a parametrize decorator. This causes the following
 # test to be run for every test case listed in test_data...
@@ -23,7 +22,8 @@ def test_Parker_AIF_MB_QBI_UoManchesterUK(label, time, cb_ref_values, delay, a_t
     hct = 0  # for now ignore hematocrit correction to obtain Cb values
     #time = time*60  # put in seconds
     # Create the AIF object
-    aif = dce_aif.Aif(times=time, hct=hct)
+
+    aif = dce_aif.Aif(times=time, hct=hct, prebolus=1) # default setting for prebolus = 8; offset = delay
     aif_values = aif.base_aif_[0,]
 
     np.testing.assert_allclose([aif_values], [cb_ref_values], rtol=r_tol, atol=a_tol)
