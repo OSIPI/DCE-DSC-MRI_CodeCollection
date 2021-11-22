@@ -7,7 +7,7 @@ from . import popAIF_data
 
 
 # All tests will use the same arguments and same data...
-arg_names = 'label, time, cb_ref_values, delay, r_tol, a_tol'
+arg_names = 'label, time, cb_ref_values, delay, a_tol, r_tol'
 test_data = popAIF_data.ParkerAIF_refdata()
 
 # this function does not have an option to specify the delay of the aif, so the ParkerAIF_refdata_delay() are ignored here

@@ -7,7 +7,7 @@ from . import popAIF_data
 
 
 # All tests will use the same arguments and same data...
-arg_names = 'label, time, cb_ref_values, r_tol, a_tol'
+arg_names = 'label, time, cb_ref_values, a_tol, r_tol'
 test_data = popAIF_data.GeorgiouAIF_refdata()
 
 
