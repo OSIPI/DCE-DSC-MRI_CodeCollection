@@ -1,7 +1,0 @@
-pytest
-numpy
-scipy
-lmfit
-pandas
-joblib
-matplotlib
