@@ -30,7 +30,7 @@ def test_OG_MO_AUMC_ICR_RMH_dce_to_r1eff(label, fa, tr, T1base, BLpts, r1, s_arr
     
     # run test
     #The code uses two functions to get from SI to conc
-    r1_curve = dce_to_r1eff(s_array, [s0], 1/T1base, tr, fa_rad)
+    r1_curve = dce_to_r1eff(s_array, 1/T1base, tr, fa_rad, BLpts)
     conc_curve = r1eff_to_conc(r1_curve, 1/T1base, r1)
 
 
