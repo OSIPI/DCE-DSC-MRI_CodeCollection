@@ -120,7 +120,7 @@ def fit_tofts_model(Ct, t, aif, idxs=None, X0 = (0.6, 1, 0.03, 0.0025), bounds =
                 except RuntimeError:
                     popt = popt_default
             return popt
-        output = Parallel(n_jobs=jobs, verbose=50)(delayed(parfun)(i) for i in idxs)
+        output = Parallel(n_jobs=jobs, verbose=5)(delayed(parfun)(i) for i in idxs) #tqdm.tqdm(idxs, position=0, leave=True))
         return np.transpose(output)
 
 

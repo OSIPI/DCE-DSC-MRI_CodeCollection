@@ -94,7 +94,7 @@ def dce_DRO_data(delay=False):
         Each tuple contains a set of parameters corresponding to 1 test case
 
     """
-    filename = os.path.join(os.path.dirname(__file__), 'data', 'dce_DRO_data.csv')
+    filename = os.path.join(os.path.dirname(__file__), 'data', 'dce_DRO_data_extended_tofts.csv')
     # read from CSV to pandas
     converters = {
         'C': lambda x: np.fromstring(x, dtype=float, sep=' '),
@@ -147,12 +147,12 @@ def dce_DRO_data_tofts(delay=False):
     """
     Import dce concentration data for testing.
 
-    Data summary: digital reference object of the brain.
+    Data summary: digital reference object.
     Patient(s): n.a.
-    Source: Creating an anthropomorphic digital MR phantom—an extensible tool for comparing and evaluating quantitative imaging algorithms. PMB 2016. RJ Bosca, EF Jackson: https://iopscience.iop.org/article/10.1088/0031-9155/61/2/974
-    Detailed info:
+    Source: https://qibawiki.rsna.org/images/1/14/QIBA_DRO_2015_v1.42.pdf and https://qidw.rsna.org/#collection/594810551cac0a4ec8ffe574/folder/5e20ccb8b3467a6a9210e9ff
+    Detailed info: digital reference3 object
     Reference values: R1 reference values obtained from their Mat files
-    Citation: Bosca, Ryan J., and Edward F. Jackson. "Creating an anthropomorphic digital MR phantom—an extensible tool for comparing and evaluating quantitative imaging algorithms." Physics in Medicine & Biology 61.2 (2016): 974.
+    Citation: QIBA Algorithm Comparison Activities: Digital Reference Objects and Software Evaluation
     Comments: the signal values were converted to concentration curves using dce_to_r1eff from https://github.com/welcheb/pydcemri/blob/master from David S. Smith
     Tolerance: ? /s + ? (relative)
 
