@@ -135,7 +135,7 @@ sigT1 = np.transpose([np.sqrt(np.mean(np.square(dce_signal_noisy[:, 0:rep1]), 1)
 R1map = dce.R1_two_fas(sigT1, flip_angles, hp.acquisition.TR)
 S0 = np.mean(dce_signal_noisy[:, rep1:rep1 + 10], axis=1)
 # with baseline R1 and S0 we can estimate R1 over time (effected by the contrast agent arriving)
-R1eff2 = dce.dce_to_r1eff(dce_signal_noisy[:, rep1:], S0, R1map, hp.acquisition.TR, hp.acquisition.FA2)
+R1eff2 = dce.dce_to_r1eff(dce_signal_noisy[:, rep1:],  R1map, hp.acquisition.TR, hp.acquisition.FA2, 9)
 
 C1 = dce.r1eff_to_conc(R1eff2, np.transpose([R1map]), hp.acquisition.r1)
 del sigT1, R1map, S0, R1eff2
