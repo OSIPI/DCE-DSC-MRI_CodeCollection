@@ -142,7 +142,7 @@ def enhance(signal,delay=20,sds=1,percentage=10):
     selected = np.sum(selects,1) < (percentage/100*(np.shape(signal)[1]-delay-5))
     return selected
 
-def dce_to_r1eff(S, R1, TR, flip):
+def dce_to_r1eff(S, R1, TR, flip, baseline_time=9):
     """
     Go from DCE seignal over time to R1 over time.
 
@@ -153,7 +153,7 @@ def dce_to_r1eff(S, R1, TR, flip):
 
     :return : The selected enhancing voxel indices
     """
-    S0 = np.mean(S[:,0:9],axis=1)*(1-np.exp(-R1*TR)*cos(flip)) / \
+    S0 = np.mean(S[:,1:baseline_time],axis=1)*(1-np.exp(-R1*TR)*cos(flip)) / \
          (sin(flip)*(1-np.exp(-TR*R1)))
     S0 = np.repeat(np.expand_dims(S0,axis=1),np.shape(S)[1],axis=1)
     return - log((S0*sin(flip) - S)/(S0*sin(flip)-S*cos(flip)))/TR
@@ -304,36 +304,6 @@ def R1_two_fas(images, flip_angles, TR):
                 R1map[j] = 0
                 print(j)
     return (R1map)
-
-def dce_to_r1eff(S, S0, R1, TR, flip):
-    #taken from https://github.com/welcheb/pydcemri/blob/master from David S. Smith
-    # Copyright (C) 2014   David S. Smith
-    #
-    # This program is free software; you can redistribute it and/or modify
-    # it under the terms of the GNU General Public License as published by
-    # the Free Software Foundation; either version 2 of the License, or
-    # (at your option) any later version.
-    #
-    # This program is distributed in the hope that it will be useful,
-    # but WITHOUT ANY WARRANTY; without even the implied warranty of
-    # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    # GNU General Public License for more details.
-    #
-    # You should have received a copy of the GNU General Public License along
-    # with this program; if not, write to the Free Software Foundation, Inc.,
-    # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-    #
-    print('converting DCE signal to effective R1')
-    assert(flip > 0.0)
-    assert(TR > 0.0 and TR < 1.0)
-    S = S.T
-    S0 = np.repeat(np.expand_dims(S0,axis=1),len(S),axis=1).T
-    A = S / S0  # normalize by pre-contrast signal
-    E0 = exp(-R1 * TR)
-    E = (1.0 - A + A*E0 - E0*cos(flip)) /\
-         (1.0 - A*cos(flip) + A*E0*cos(flip) - E0*cos(flip))
-    R = (-1.0 / TR) * log(E)
-    return R.T
 
 def r1eff_to_conc(R1eff, R1map, relaxivity):
     return (R1eff - R1map) / relaxivity
