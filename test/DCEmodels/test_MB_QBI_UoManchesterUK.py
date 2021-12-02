@@ -40,7 +40,6 @@ def test_MJT_UoEdinburghUK_tofts_model(label, t_array, C_array, ca_array, ta_arr
 
     data = [[inspect.stack()[0][3], label, ve_ref, vp_ref, Ktrans_ref, ve_meas, vp_meas, Ktrans_meas]]
     columns = ['testname', 'label', 've_ref', 'vp_ref', 'ktrans_ref', 've_meas', 'vp_meas', 'ktrans_meas']
-    append_to_excel(data, columns)
 
     np.testing.assert_allclose([ve_meas], [ve_ref], rtol=r_tol_ve, atol=a_tol_ve)
     np.testing.assert_allclose([vp_meas], [vp_ref], rtol=r_tol_vp, atol=a_tol_vp)
