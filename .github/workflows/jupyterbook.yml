@@ -35,6 +35,7 @@ jobs:
     # Build the book
     - name: Build the book
       run: |
+        mkdir notebooks/data
         jupyter-book build notebooks/
         touch notebooks/_build/html/.nojekyll
 
