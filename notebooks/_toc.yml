@@ -10,6 +10,9 @@ sections:
   - file: T1_tests_output.ipynb
   - file: T1mapping_QIBAv1.ipynb
   - file: T1mapping_QIBAv2.ipynb
+- file: ToftsModel.md
+  sections:
+  - file: DCE_ToftsModel.ipynb
 - file: guidelines.md
   sections:
   - file: localguide.md
