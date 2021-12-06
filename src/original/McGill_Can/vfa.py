@@ -25,9 +25,9 @@ def novifast(signal, alpha, TR, initialvalues = [5000, 1500], maxiter = 10, tol 
     numangles = signal.shape[-1]
     
     y = signal.reshape(-1, numangles)
-    sinfa = np.asmatrix(np.sin(alpha))
+    sinfa = np.asarray(np.sin(alpha)).reshape((1, -1))
     sinfa = np.broadcast_to(sinfa,(numvox, numangles))
-    cosfa = np.asmatrix(np.cos(alpha))
+    cosfa = np.asarray(np.cos(alpha)).reshape((1, -1))
     cosfa = np.broadcast_to(cosfa,(numvox, numangles))
     
     initialM0, initialT1 = initialvalues
@@ -38,8 +38,8 @@ def novifast(signal, alpha, TR, initialvalues = [5000, 1500], maxiter = 10, tol 
     done = False
     while not done:
         solB_prev = np.copy(solB)
-        solA = np.broadcast_to(np.asmatrix(solA).T, (numvox, numangles))
-        solB = np.broadcast_to(np.asmatrix(solB).T, (numvox, numangles))
+        solA = np.broadcast_to(np.asarray(solA).reshape((-1, 1)), (numvox, numangles))
+        solB = np.broadcast_to(np.asarray(solB).reshape((-1, 1)), (numvox, numangles))
         # Based on equations 24 to 27 in paper
         denominator = 1 - cosfa * solB
         Z = y / denominator

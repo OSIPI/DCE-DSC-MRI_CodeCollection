@@ -28,8 +28,8 @@ as a 1D-array
 '''
 
 import numpy as np
-from QbiPy.dce_models import dce_aif 
-from QbiPy import helpers
+from ..dce_models import dce_aif 
+from ...QbiPy import helpers
 
 #
 #---------------------------------------------------------------------------------
