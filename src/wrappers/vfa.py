@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 def vfa_fit(author, signal = None, fa = None, tr = None, fittype = "linear", mask = None, data = None):
+    # author could be: "edinburgh", "sydney", "mcgill"
     # signal: numpy array, last dimension must be flip angle
     # fa: flip angles, in radian
     # tr: repetition time, in ms
