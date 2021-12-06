@@ -55,9 +55,9 @@ def tofts_fit(author, ct = None, ca = None, t = None, fittype = "linear", mask =
     fitfunc = lambda C: itemgetter('ktrans', 've')(edinburgh2_fit.conc_to_pkp(C, pk_model)[0])
   elif author == "oslo":
     if fittype == "nonlinear":
-      fitfunc = lambda C: [x[0,0,:,0] for x in attrgetter("K_trans", "v_e")(oslo.fitToModel('TM', np.array([C.transpose()[:,:,np.newaxis]]), t, ca, method='NLLS'))]
+      fitfunc = lambda C: [x[0,0,:,0] for x in attrgetter("K_trans", "v_e")(oslo.fitToModel('TM', np.array([C.transpose()[:,:,np.newaxis]]), t, ca, showPbar=False, method='NLLS'))]
     else:
-      fitfunc = lambda C: [x[0,0,:,0] for x in attrgetter("K_trans", "v_e")(oslo.fitToModel('TM', np.array([C.transpose()[:,:,np.newaxis]]), t, ca, integrationMethod='trapezoidal', method='LLSQ'))]
+      fitfunc = lambda C: [x[0,0,:,0] for x in attrgetter("K_trans", "v_e")(oslo.fitToModel('TM', np.array([C.transpose()[:,:,np.newaxis]]), t, ca, showPbar=False, integrationMethod='trapezoidal', method='LLSQ'))]
   elif author == "sydney":
     time_and_aif = np.column_stack((t,ca))
     # Output is [ve, kt], so we need a switcharoo at the end
