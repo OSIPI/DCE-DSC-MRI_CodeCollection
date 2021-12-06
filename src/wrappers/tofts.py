@@ -156,7 +156,7 @@ def show_error_maps(fits, idx = -1, title = "", showcbar = False, truth = None, 
     
     fig.suptitle(title)
     if showcbar:
-        fig.colorbar(im, ax=[ax1,ax2], orientation='horizontal', shrink = 0.5)
+        fig.colorbar(im, ax=[ax1,ax2], orientation='vertical', shrink = 0.8)
 
     if returnfig:
         return fig
