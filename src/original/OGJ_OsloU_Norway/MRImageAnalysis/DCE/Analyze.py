@@ -364,7 +364,7 @@ def _fitToModelNLLS(model, img, t, C_a):
 	if model == 'TM':
 		TM  = lambda t, K_trans, k_ep: Models.TM(t, C_a, K_trans, k_ep)
 		parameterImage = np.zeros((nSlices, 2, nRows, nCols))
-		pbar = io.ProgressBar('Calculating slice 1/{}'.format(nSlices), nSlices*nRows*nCols)
+		# pbar = io.ProgressBar('Calculating slice 1/{}'.format(nSlices), nSlices*nRows*nCols)
 		for slc in range(nSlices):
 			for i in range(nRows):
 				for j in range(nCols):
@@ -373,9 +373,9 @@ def _fitToModelNLLS(model, img, t, C_a):
 
 					parameterImage[slc,0,i,j] = fit[0][0] # K_trans
 					parameterImage[slc,1,i,j] = fit[0][1] # k_ep
-					pbar.update()
-			pbar.update(-1, 'Calculating slice {}/{}'.format(slc+1,len(img)))
-		pbar.finish()
+					# pbar.update()
+			# pbar.update(-1, 'Calculating slice {}/{}'.format(slc+1,len(img)))
+		# pbar.finish()
 
 	if model == 'ETM':
 		ETM = lambda t, K_trans, k_ep, v_p: Models.ETM(t, C_a, K_trans, k_ep, v_p)
