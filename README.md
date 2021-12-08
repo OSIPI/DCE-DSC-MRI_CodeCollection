@@ -6,7 +6,7 @@
 
 ---
 ### [Database](https://github.com/OSIPI/DCE-DSC-MRI_CodeCollection/blob/develop/doc/code_contributions_record.csv): what code is available?
-### [Wiki](https://github.com/OSIPI/DCE-DSC-MRI_CodeCollection/wiki): info and how to contribute
+### [Wiki](https://github.com/OSIPI/DCE-DSC-MRI_CodeCollection/wiki): info for users and contributors
 ### [Website](https://www.osipi.org/task-force-2-3/): about the taskforce
 
 ---
