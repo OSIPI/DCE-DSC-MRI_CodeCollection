@@ -1,4 +1,4 @@
-# DCE-DSC-MRI_CodeCollection
+# DCE/DSC-MRI Code Collection
 
 [![build Actions Status](https://github.com/OSIPI/DCE-DSC-MRI_CodeCollection/workflows/ci/badge.svg)](https://github.com/OSIPI/DCE-DSC-MRI_CodeCollection/actions)
 [![codecov](https://codecov.io/gh/OSIPI/DCE-DSC-MRI_CodeCollection/branch/develop/graph/badge.svg?token=ZR3RPV8Y0B)](https://codecov.io/gh/OSIPI/DCE-DSC-MRI_CodeCollection)
