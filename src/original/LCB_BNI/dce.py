@@ -45,7 +45,7 @@ def estimate_delta_R1(s, basepts_range, t10, tr, fa):
     fa_rad = np.deg2rad(fa)
     R10 = 1 / t10
     s_base = np.mean(s[basepts_range[0]:basepts_range[1]+1])
-    s0 = ((np.exp(-R10*tr)*np.cos(fa_rad)*s_base) - s_base/np.sin(fa_rad)) / (
+    s0 = (((np.exp(-R10*tr)*np.cos(fa_rad)*s_base) - s_base)/np.sin(fa_rad)) / (
         np.exp(-R10*tr) - 1.)
     sin_fa_s0 = np.sin(fa_rad)*s0
     a = sin_fa_s0 - s

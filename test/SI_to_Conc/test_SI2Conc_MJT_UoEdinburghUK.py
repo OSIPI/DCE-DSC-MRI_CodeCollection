@@ -21,8 +21,6 @@ test_data = SI2Conc_data.SI2Conc_data()
 def test_MJT_UoEdinburghUK_sig_to_conc(label, fa, tr, T1base, BLpts, r1, s_array, conc_array, a_tol, r_tol):
 
     ##Prepare input data
-    #Convert fa to radians
-    #fa_rad=fa * np.pi/180.
     
     #We need an array of integers to tell the function which points are for the baseline.  This will be 1:BLpts
     BL_idx=np.arange(1,BLpts,1)
