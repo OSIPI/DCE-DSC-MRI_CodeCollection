@@ -15,7 +15,7 @@ test_data = (
 # Use the test data to generate a parametrize decorator. This causes the following
 # test to be run for every test case listed in test_data...
 # In the following test, we specify 5 cases that are expected to fail as this function expects the delay to be specified according to the temp resolution
-@osipi_parametrize(arg_names, test_data, xf_labels=['delay_shift2.0s','delay_shift5.0s','delay_shift10.0s','delay_shift18.0s','delay_shift31.0s'])
+@osipi_parametrize(arg_names, test_data, xf_labels=[])
 def test_Parker_AIF_MJT_EdinburghUK(label, time, cb_ref_values, delay, a_tol, r_tol):
 
     # prepare input data

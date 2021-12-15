@@ -175,32 +175,13 @@ def generate_ParkerAIF_refdata_delay():
     cb_ref_values = []
     delay = []
 
-    dt = 1.5 # temp resolution in seconds
-    time_current = np.arange(0, 5, dt/60)  # in min
-
+    dt = 1.5  # temp resolution in seconds
     # for a range of different delays
     delay_range = np.array([0, dt, 2*dt, 5*dt, 2, 5, 10, 18, 31])  # indicated in seconds
-    # shifted cb_array
-    for current_delay in delay_range:
-         current_label = 'delay_shift' + str(current_delay) + 's'
-         label.append(current_label)
-         gaussian1 = A1 / (sigma1 * np.sqrt(2 * np.pi)) * np.exp(-np.square(time_current - T1) / (2 * np.square(sigma1)))
-         gaussian2 = A2 / (sigma2 * np.sqrt(2 * np.pi)) * np.exp(-np.square(time_current - T2) / (2 * np.square(sigma2)))
-         modSigm = (alpha * np.exp(-beta * time_current)) / (1 + np.exp(-s * (time_current - tau)))
-         cb = np.add(gaussian1, gaussian2)
-         cb = np.add(cb, modSigm)
-         # shift cb according to delay value
-         n_shift = math.floor(current_delay/dt)
-         cb = np.pad(cb, (n_shift, 0), 'constant')
-         cb = cb[0:len(time_current)]  # keep array length constant
-         time.append(time_current)
-         cb_ref_values.append(cb)
-         delay.append(current_delay)
-
-    # recalculate AIF concentration values based on change in start time.
+    # recalculate concentration values based on change in start time.
     time_original = np.arange(0, 5, dt / 60)  # in min
     for current_delay in delay_range:
-        current_label = 'delay_recalc' + str(current_delay) + 's'
+        current_label = 'delay_' + str(current_delay) + 's'
         label.append(current_label)
         time_current = time_original - current_delay/60
         gaussian1 = A1 / (sigma1 * np.sqrt(2 * np.pi)) * np.exp(-np.square(time_current - T1) / (2 * np.square(sigma1)))
@@ -313,7 +294,7 @@ def generate_preclinicalAIF_refdata():
 def generate_preclinicalAIF_refdata_delay():
     """
         This function creates the test data to test implementations of the preclinical AIF including a delay or pre-contrast signal.
-        This is an extension of generate_preclinicalAIF_refdata
+        This is an extension of generate_preclinicalAIF_refdata. Approach is similar as for the Parker AIF
 
     """
 
@@ -330,24 +311,23 @@ def generate_preclinicalAIF_refdata_delay():
     delay = []
 
     dt = 0.5  # temp resolution in seconds
-    time_int = np.arange(0, 5 * 60, dt)  # in seconds
+    time_original = np.arange(0, 5 * 60, dt)  # in seconds
     delay_range = np.array([dt, 2 * dt, 5 * dt, 2, 5, 10, 18, 31])  # indicated in seconds
-    cb = []
-    for t in time_int:
-        if t <= t0:
-            cb.append(A1 * (t / t0) + A2 * (t / t0))
-        else:
-            cb.append(A1 * np.exp(-K1 * (t - t0)) + A2 * np.exp(-K2 * (t - t0)))
     for current_delay in delay_range:
         current_label = 'delay_' + str(current_delay) + 's'
         label.append(current_label)
-        # shift cb according to delay value
-        n_shift = math.floor(current_delay / dt)
-        cb_shift = np.pad(cb, (n_shift, 0), 'constant')
-        cb_shift = cb_shift[0:len(time_int)]  # keep array length constant
-        time.append(time_int)
-        cb_ref_values.append(cb_shift)
-        delay.append(current_delay)  # assume no delay
+        time_current = time_original - current_delay
+        cb = []
+        for t in time_current:
+            if t <= t0:
+                cb.append(A1 * (t / t0) + A2 * (t / t0))
+            else:
+                cb.append(A1 * np.exp(-K1 * (t - t0)) + A2 * np.exp(-K2 * (t - t0)))
+        cb = np.array(cb)
+        cb[time_original < current_delay] = 0.
+        time.append(time_original)
+        cb_ref_values.append(cb)
+        delay.append(current_delay)
 
     # write to csv file: label, time, cb_ref_values, delay
     ref_values = []
