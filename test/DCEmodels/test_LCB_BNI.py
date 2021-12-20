@@ -15,18 +15,8 @@ test_data = (
 # Use the test data to generate a parametrize decorator. This causes the following
 # test to be run for every test case listed in test_data...
 # In the following test, we specify 1 case that is expected to fail...
-@osipi_parametrize(arg_names, test_data, xf_labels = ['test_vox_VIF_T1_500_noiseless/20150428_085000dynamics016a001.nii',
-                                                      'test_vox_VIF_T1_500_noiseless/20150428_085000dynamics016a001.nii20',
-                                                      'test_vox_VIF_T1_500_noiseless/20150428_085000dynamics016a001.nii30',
-                                                      'test_vox_VIF_T1_500_noiseless/20150428_085000dynamics016a001.nii50',
-                                                      'test_vox_VIF_T1_500_noiseless/20150428_085000dynamics016a001.nii100',
-                                                        'test_vox_VIF_T1_500_noiseless/20150428_085000dynamics016a001.nii_delayed',
-                                                      'test_vox_VIF_T1_500_noiseless/20150428_085000dynamics016a001.nii20_delayed',
-                                                      'test_vox_VIF_T1_500_noiseless/20150428_085000dynamics016a001.nii30_delayed',
-                                                      'test_vox_VIF_T1_500_noiseless/20150428_085000dynamics016a001.nii50_delayed',
-                                                      'test_vox_VIF_T1_500_noiseless/20150428_085000dynamics016a001.nii100_delayed',
-                                                      ])
-def test_LEK_UoEdinburghUK_tofts_model(label, t_array, C_array, ca_array, ta_array, ve_ref, Ktrans_ref, arterial_delay_ref,a_tol_ve, r_tol_ve, a_tol_Ktrans,r_tol_Ktrans,a_tol_delay,r_tol_delay):
+@osipi_parametrize(arg_names, test_data, xf_labels = [])
+def test_LCB_BNI_extended_tofts_kety_model(label, t_array, C_array, ca_array, ta_array, ve_ref, Ktrans_ref, arterial_delay_ref,a_tol_ve, r_tol_ve, a_tol_Ktrans,r_tol_Ktrans,a_tol_delay,r_tol_delay):
     # NOTES:
 
     # prepare input data - create aif object

@@ -11,7 +11,7 @@ import inspect
 # All tests will use the same arguments and same data...
 arg_names = 'label, t_array, C_array, ca_array, ta_array, ve_ref, vp_ref, Ktrans_ref, arterial_delay_ref,  a_tol_ve, r_tol_ve, a_tol_vp,r_tol_vp,a_tol_Ktrans,r_tol_Ktrans,a_tol_delay,r_tol_delay'
 test_data = (
-    dce_data.dce_DRO_data()
+    dce_data.dce_DRO_data_extended_tofts_kety()
     )
 
 
@@ -19,7 +19,7 @@ test_data = (
 # test to be run for every test case listed in test_data...
 # In the following test, we specify 1 case that is expected to fail...
 @osipi_parametrize(arg_names, test_data, xf_labels = [])
-def testST_USydAUS_ext_tofts_model(label, t_array, C_array, ca_array, ta_array, ve_ref, vp_ref, Ktrans_ref, arterial_delay_ref,a_tol_ve, r_tol_ve, a_tol_vp,r_tol_vp,a_tol_Ktrans,r_tol_Ktrans,a_tol_delay,r_tol_delay):
+def testST_USydAUS_extended_tofts_kety_model(label, t_array, C_array, ca_array, ta_array, ve_ref, vp_ref, Ktrans_ref, arterial_delay_ref,a_tol_ve, r_tol_ve, a_tol_vp,r_tol_vp,a_tol_Ktrans,r_tol_Ktrans,a_tol_delay,r_tol_delay):
     # NOTES:
 
     # prepare input data
@@ -48,38 +48,7 @@ test_data = (
 # Use the test data to generate a parametrize decorator. This causes the following
 # test to be run for every test case listed in test_data...
 # In the following test, we specify 1 case that is expected to fail...
-@osipi_parametrize(arg_names, test_data, xf_labels = ['test_vox_VIF_T1_500_noiseless/20150428_085000dynamics016a001.nii',
-                                                      'test_vox_VIF_T1_500_noiseless/20150428_085000dynamics016a001.nii20',
-                                                      'test_vox_VIF_T1_500_noiseless/20150428_085000dynamics016a001.nii30',
-                                                      'test_vox_VIF_T1_500_noiseless/20150428_085000dynamics016a001.nii50',
-                                                      'test_vox_VIF_T1_500_noiseless/20150428_085000dynamics016a001.nii100',
-                                                      #   'test_vox_VIF_T1_500_noiseless/20150428_085000dynamics016a001.nii_delayed',
-                                                      # 'test_vox_VIF_T1_500_noiseless/20150428_085000dynamics016a001.nii20_delayed',
-                                                      # 'test_vox_VIF_T1_500_noiseless/20150428_085000dynamics016a001.nii30_delayed',
-                                                      # 'test_vox_VIF_T1_500_noiseless/20150428_085000dynamics016a001.nii50_delayed',
-                                                      # 'test_vox_VIF_T1_500_noiseless/20150428_085000dynamics016a001.nii100_delayed',
-                                                      #'test_vox_VIF_6s_jit_0s_T1_500_S0_500_sigma_5.nii.gz',
-                                                      #'test_vox_VIF_6s_jit_0s_T1_500_S0_1000_sigma_10.nii.gz',
-                                                      #'test_vox_VIF_6s_jit_0s_T1_500_S0_500_sigma_50.nii.gz',
-                                                      #'test_vox_VIF_6s_jit_3s_T1_500_S0_500_sigma_5.nii.gz',
-                                                      #'test_vox_T1_6s_jit_3s_T1_500_S0_500_sigma_5.nii.gz',
-                                                      #'test_vox_T2_6s_jit_3s_T1_500_S0_500_sigma_5.nii.gz',
-                                                      #'test_vox_T3_6s_jit_3s_T1_500_S0_500_sigma_5.nii.gz',
-                                                      #'test_vox_T4_6s_jit_3s_T1_500_S0_500_sigma_5.nii.gz',
-                                                      #'test_vox_T5_6s_jit_3s_T1_500_S0_500_sigma_5.nii.gz',
-                                                      #'test_vox_VIF_6s_jit_3s_T1_500_S0_1000_sigma_10.nii.gz',
-                                                      #'test_vox_T1_6s_jit_3s_T1_500_S0_1000_sigma_10.nii.gz',
-                                                      #'test_vox_T2_6s_jit_3s_T1_500_S0_1000_sigma_10.nii.gz',
-                                                      #'test_vox_T3_6s_jit_3s_T1_500_S0_1000_sigma_10.nii.gz',
-                                                      #'test_vox_T4_6s_jit_3s_T1_500_S0_1000_sigma_10.nii.gz',
-                                                      #'test_vox_T5_6s_jit_3s_T1_500_S0_1000_sigma_10.nii.gz',
-                                                      #'test_vox_VIF_6s_jit_3s_T1_500_S0_500_sigma_50.nii.gz',
-                                                      #'test_vox_T1_6s_jit_3s_T1_500_S0_500_sigma_50.nii.gz',
-                                                      #'test_vox_T2_6s_jit_3s_T1_500_S0_500_sigma_50.nii.gz',
-                                                      #'test_vox_T3_6s_jit_3s_T1_500_S0_500_sigma_50.nii.gz',
-                                                      #'test_vox_T4_6s_jit_3s_T1_500_S0_500_sigma_50.nii.gz',
-                                                      #'test_vox_T5_6s_jit_3s_T1_500_S0_500_sigma_50.nii.gz'
-                                                      ])
+@osipi_parametrize(arg_names, test_data, xf_labels = [])
 
 def testST_USydAUS_tofts_model(label, t_array, C_array, ca_array, ta_array, ve_ref, Ktrans_ref, arterial_delay_ref,a_tol_ve, r_tol_ve, a_tol_Ktrans,r_tol_Ktrans,a_tol_delay,r_tol_delay):
     # NOTES:

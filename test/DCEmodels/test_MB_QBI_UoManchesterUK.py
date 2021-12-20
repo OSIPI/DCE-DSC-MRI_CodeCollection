@@ -3,14 +3,13 @@ import numpy as np
 
 from ..helpers import osipi_parametrize
 from . import dce_data
-import inspect
 from src.original.MB_QBI_UoManchesterUK.QbiPy.dce_models import tofts_model, dce_aif
 
 
 # All tests will use the same arguments and same data...
 arg_names = 'label, t_array, C_array, ca_array, ta_array, ve_ref, vp_ref, Ktrans_ref, arterial_delay_ref,  a_tol_ve, r_tol_ve, a_tol_vp,r_tol_vp,a_tol_Ktrans,r_tol_Ktrans,a_tol_delay,r_tol_delay'
 test_data = (
-    dce_data.dce_DRO_data()
+    dce_data.dce_DRO_data_extended_tofts_kety()
 )
 
 
@@ -20,7 +19,7 @@ test_data = (
 @osipi_parametrize(arg_names, test_data,
                    xf_labels=['test_vox_VIF','test_vox_VIF_30','test_vox_VIF_50','test_vox_VIF_100','test_vox_WM', 'test_vox_GM', 'test_vox_WM_10', 'test_vox_GM_10', 'test_vox_WM_20',
                               'test_vox_GM_20', 'test_vox_WM_30', 'test_vox_GM_30', 'test_vox_WM_50', 'test_vox_GM_50'])
-def test_MJT_UoEdinburghUK_tofts_model(label, t_array, C_array, ca_array, ta_array, ve_ref, vp_ref, Ktrans_ref,
+def test_MB_QBI_UoManchester_extended_tofts_kety_model(label, t_array, C_array, ca_array, ta_array, ve_ref, vp_ref, Ktrans_ref,
                                        arterial_delay_ref, a_tol_ve, r_tol_ve, a_tol_vp, r_tol_vp, a_tol_Ktrans,
                                        r_tol_Ktrans, a_tol_delay, r_tol_delay):
     # NOTES:
