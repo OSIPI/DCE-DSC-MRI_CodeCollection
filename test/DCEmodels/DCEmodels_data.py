@@ -72,11 +72,11 @@ def dce_DRO_data_extended_tofts_kety(delay=False):
     a_tol_ve = [0.01] * len(Ktrans_ref)  # absolute tolerance
     a_tol_vp = [0.002] * len(Ktrans_ref)  # absolute tolerance
     a_tol_Ktrans = [0.005] * len(Ktrans_ref)  # absolute tolerance
-    a_tol_delay = [0.01] * len(Ktrans_ref)  # absolute tolerance
+    a_tol_delay = [0.5] * len(Ktrans_ref)  # absolute tolerance
     r_tol_ve = [0] * len(Ktrans_ref)  # relative tolerance
     r_tol_vp = [0] * len(Ktrans_ref)  # relative tolerance
     r_tol_Ktrans = [0.01] * len(Ktrans_ref)  # relative tolerance
-    r_tol_delay = [0.10] * len(Ktrans_ref)  # relative tolerance
+    r_tol_delay = [0] * len(Ktrans_ref)  # relative tolerance
 
     # convert to list of tuples (input for pytest.mark.parametrize)
     pars = list(
@@ -153,10 +153,10 @@ def dce_DRO_data_tofts(delay=False):
     # set the tolerance to use for this dataset
     a_tol_ve = [0.01] * len(Ktrans_ref)  # absolute tolerance
     a_tol_Ktrans = [0.0075] * len(Ktrans_ref)  # absolute tolerance
-    a_tol_delay = [0.03] * len(Ktrans_ref)  # absolute tolerance
+    a_tol_delay = [0.25] * len(Ktrans_ref)  # absolute tolerance
     r_tol_ve = [0.10] * len(Ktrans_ref)  # relative tolerance
     r_tol_Ktrans = [0.10] * len(Ktrans_ref)  # relative tolerance
-    r_tol_delay = [0.10] * len(Ktrans_ref)  # relative tolerance
+    r_tol_delay = [0] * len(Ktrans_ref)  # relative tolerance
 
     # convert to list of tuples (input for pytest.mark.parametrize)
     pars = list(
