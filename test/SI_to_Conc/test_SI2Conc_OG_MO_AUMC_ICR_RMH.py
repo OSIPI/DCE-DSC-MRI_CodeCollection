@@ -23,13 +23,16 @@ def test_OG_MO_AUMC_ICR_RMH_dce_to_r1eff(label, fa, tr, T1base, BLpts, r1, s_arr
     fa_rad=fa * np.pi/180.
     #This function uses a value for S0, which would be the mean of the s_array from 1 to BLpts.
     # It's from 1 rather than 0 because the code used to do the original conversion skips the first point of the SI curve
-    #This function expects a signal array of shape (x,1) rather than (x,) s0 add another dimension to the signal array to make it (150,1) rather than (150,)
+    s0=np.mean(s_array[1:BLpts])
+
+    #This function expects a signal array of shape (x,1) rather than (x,) s0 add another dimension to the signal array to make it (150,1) rather than (150,) 
     s_array=s_array[:,None].T
     
     # run test
     #The code uses two functions to get from SI to conc
-    r1_curve = dce_to_r1eff(s_array, 1/T1base, tr, fa_rad, baseline_time=BLpts)
+    r1_curve = dce_to_r1eff(s_array, [s0], 1/T1base, tr, fa_rad)
     conc_curve = r1eff_to_conc(r1_curve, 1/T1base, r1)
+
 
     np.testing.assert_allclose( conc_curve, [conc_array], rtol=r_tol, atol=a_tol )
 
