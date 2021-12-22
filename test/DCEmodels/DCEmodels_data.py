@@ -155,7 +155,7 @@ def dce_DRO_data_tofts(delay=False):
     a_tol_Ktrans = [0.005] * int(len(Ktrans_ref) / 5) + [0.02] * int(len(Ktrans_ref) / 5) + [0.015] * int(len(Ktrans_ref) / 5) + [0.01] * int(len(Ktrans_ref) / 5) + [0.005] * int(len(Ktrans_ref) / 5)# absolute tolerance
     a_tol_delay = [0.2] * len(Ktrans_ref)  # absolute tolerance
     r_tol_ve = [0.025] * int(len(Ktrans_ref) / 5) + [0.1] * int(len(Ktrans_ref) / 5) + [0.075] * int(len(Ktrans_ref) / 5) + [0.05] * int(len(Ktrans_ref) / 5) + [0.025] * int(len(Ktrans_ref) / 5)  # relative tolerance
-    r_tol_Ktrans = [0.025] * int(len(Ktrans_ref) / 5) + [0.1] * int(len(Ktrans_ref) / 5) + [0.075] * int(len(Ktrans_ref) / 5) + [0.05] * int(len(Ktrans_ref) / 5) + [0.025] * int(len(Ktrans_ref) / 5)  # relative tolerance
+    r_tol_Ktrans = [0.05] * int(len(Ktrans_ref) / 5) + [0.1] * int(len(Ktrans_ref) / 5) + [0.075] * int(len(Ktrans_ref) / 5) + [0.05] * int(len(Ktrans_ref) / 5) + [0.05] * int(len(Ktrans_ref) / 5)  # relative tolerance
     r_tol_delay = [0.1] * len(Ktrans_ref)  # relative tolerance
 
     # convert to list of tuples (input for pytest.mark.parametrize)
