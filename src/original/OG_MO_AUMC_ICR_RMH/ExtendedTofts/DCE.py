@@ -153,7 +153,7 @@ def dce_to_r1eff(S, R1, TR, flip, baselinescans=9):
 
     :return : The selected enhancing voxel indices
     """
-    S0 = np.mean(S[:,0:baselinescans],axis=1)*(1-np.exp(-R1*TR)*cos(flip)) / \
+    S0 = np.mean(S[:,1:baselinescans],axis=1)*(1-np.exp(-R1*TR)*cos(flip)) / \
          (sin(flip)*(1-np.exp(-TR*R1)))
     S0 = np.repeat(np.expand_dims(S0,axis=1),np.shape(S)[1],axis=1)
     return - log((S0*sin(flip) - S)/(S0*sin(flip)-S*cos(flip)))/TR
