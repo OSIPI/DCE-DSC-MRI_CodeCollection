@@ -9,14 +9,14 @@ This object can be used to either:
 - load an AIF from a text file (see module for required format) that will be linearly resampled
 '''
 #%%
-#%load_ext autoreload
-#%autoreload 2
+%load_ext autoreload
+%autoreload 2
 #%%
 import matplotlib.pyplot as plt
 import numpy as np
 
 #We need the tofts_model and dce_aif modules
-from ..QbiPy.dce_models import tofts_model, dce_aif
+from QbiPy.dce_models import tofts_model, dce_aif
 
 #%%
 #Create times, from 0 to 5 mins, 5s temp resolution
