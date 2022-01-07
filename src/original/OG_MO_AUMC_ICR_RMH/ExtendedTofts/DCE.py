@@ -120,7 +120,7 @@ def fit_tofts_model(Ct, t, aif, idxs=None, X0 = (0.6, 1, 0.03, 0.0025), bounds =
                 except RuntimeError:
                     popt = popt_default
             return popt
-        output = Parallel(n_jobs=jobs, verbose=50)(delayed(parfun)(i) for i in idxs)
+        output = Parallel(n_jobs=jobs, verbose=5)(delayed(parfun)(i) for i in idxs)
         return np.transpose(output)
 
 
@@ -305,5 +305,42 @@ def R1_two_fas(images, flip_angles, TR):
                 print(j)
     return (R1map)
 
+def R1_VFA(images, flip_angles, TR,jobs=4):
+    ''' Create T1 map from multiflip images '''
+    inshape = images.shape
+    nangles = inshape[-1]
+    assert(nangles == len(flip_angles))
+    try:
+        signal_scale = np.max(abs(images),axis=1) + 0.01
+        images = images / np.repeat(np.expand_dims(signal_scale,1),nangles,axis=1)
+    except:
+        signal_scale = np.max(abs(images), axis=0) + 0.01
+        images = images / signal_scale
+    fit_func = lambda alpha, M0, T1: R1_afo_FA(alpha,M0,T1,TR)
+    popt_default = [0, 0]
+    X0=[5,1]
+    idxs = range(inshape[0])
+    print('fitting ' + str(inshape[0]) + ' voxels')
+    if np.ndim(images) is 1:
+        output, pcov = curve_fit(fit_func, flip_angles, images, p0=X0)
+        return output[1]
+    else:
+        def parfun(idx, alpha=flip_angles):
+            if any(np.isnan(images[idx, :])):
+                popt = popt_default
+            else:
+                try:
+                    popt, pcov = curve_fit(fit_func, alpha, images[idx, :], p0=X0)
+                except RuntimeError:
+                    popt = popt_default
+            return popt
+        output = Parallel(n_jobs=jobs, verbose=5)(delayed(parfun)(i) for i in idxs)
+        return np.transpose(output)
+
+def R1_afo_FA(alpha,M0,T1,TR):
+    E1=exp(-TR/T1)
+    return M0 * (1-E1)*sin(alpha)/(1-cos(alpha)*E1)
+
 def r1eff_to_conc(R1eff, R1map, relaxivity):
     return (R1eff - R1map) / relaxivity
+
