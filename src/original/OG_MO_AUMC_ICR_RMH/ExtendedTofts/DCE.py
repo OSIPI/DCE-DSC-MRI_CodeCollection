@@ -305,7 +305,7 @@ def R1_two_fas(images, flip_angles, TR):
                 print(j)
     return (R1map)
 
-def R1_VFA(images, flip_angles, TR,jobs=4,bounds=((0,0),(Inf,10))):
+def R1_VFA(images, flip_angles, TR,jobs=4,bounds=((0,0),(np.Inf,10))):
     ''' Create T1 map from multiflip images '''
     inshape = images.shape
     nangles = inshape[-1]
@@ -335,12 +335,13 @@ def R1_VFA(images, flip_angles, TR,jobs=4,bounds=((0,0),(Inf,10))):
                     popt = popt_default
             return popt
         if jobs == 1:
-            output = np.zeros(len(idxs))
+            output = np.zeros((len(idxs),2))
             for idx in idxs:
                 try:
-                    output[idx] = curve_fit(fit_func, flip_angles, images[idx, :], p0=X0,bounds=bounds)
+                    popt, pcov = curve_fit(fit_func, flip_angles, images[idx, :], p0=X0,bounds=bounds)
+                    output[idx] = popt
                 except:
-                    popt = popt_default
+                    output[idx] = popt_default
         else:
             output = Parallel(n_jobs=jobs, verbose=5)(delayed(parfun)(i) for i in idxs)
         return np.transpose(output)
