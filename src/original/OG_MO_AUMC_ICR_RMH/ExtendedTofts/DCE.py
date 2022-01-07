@@ -305,7 +305,7 @@ def R1_two_fas(images, flip_angles, TR):
                 print(j)
     return (R1map)
 
-def R1_VFA(images, flip_angles, TR,jobs=4):
+def R1_VFA(images, flip_angles, TR,jobs=4,bounds=((0,0),(Inf,10))):
     ''' Create T1 map from multiflip images '''
     inshape = images.shape
     nangles = inshape[-1]
@@ -322,7 +322,7 @@ def R1_VFA(images, flip_angles, TR,jobs=4):
     idxs = range(inshape[0])
     print('fitting ' + str(inshape[0]) + ' voxels')
     if np.ndim(images) is 1:
-        output, pcov = curve_fit(fit_func, flip_angles, images, p0=X0)
+        output, pcov = curve_fit(fit_func, flip_angles, images, p0=X0,bounds=bounds)
         return output[1]
     else:
         def parfun(idx, alpha=flip_angles):
@@ -330,7 +330,7 @@ def R1_VFA(images, flip_angles, TR,jobs=4):
                 popt = popt_default
             else:
                 try:
-                    popt, pcov = curve_fit(fit_func, alpha, images[idx, :], p0=X0)
+                    popt, pcov = curve_fit(fit_func, alpha, images[idx, :], p0=X0,bounds=bounds)
                 except RuntimeError:
                     popt = popt_default
             return popt
