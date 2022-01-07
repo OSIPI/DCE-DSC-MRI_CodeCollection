@@ -13,7 +13,7 @@ Created on Wed Mar 14 12:03:20 2018
 # conc: measured concentration in voxel or ROI
 
 #Import libraries
-import Tools as tools
+import src.original.ST_USydAUS.Tools as tools
 
 ######################################
 # conc = vp x ca + ktrans x exp(-t(ktrans/ve))*ca
@@ -25,6 +25,18 @@ def ExtendedTofts(X, vp, ve, ktrans):
     
     # expconv calculates convolution of ca and (1/Tc)exp(-t/Tc)
     conc = vp*ca + ve*tools.expconv(Tc, t, ca)
+    return(conc)
+
+######################################
+# conc = ktrans x exp(-t(ktrans/ve))*ca
+def Tofts(X, ve, ktrans):
+    t = X[:,0]
+    ca = X[:,1]
+
+    Tc = ve/ktrans
+    
+    # expconv calculates convolution of ca and (1/Tc)exp(-t/Tc)
+    conc = ve*tools.expconv(Tc, t, ca)
     return(conc)
 
 ###################################### 
