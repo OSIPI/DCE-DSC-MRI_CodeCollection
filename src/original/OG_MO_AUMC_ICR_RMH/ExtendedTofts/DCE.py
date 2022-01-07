@@ -334,7 +334,15 @@ def R1_VFA(images, flip_angles, TR,jobs=4,bounds=((0,0),(Inf,10))):
                 except RuntimeError:
                     popt = popt_default
             return popt
-        output = Parallel(n_jobs=jobs, verbose=5)(delayed(parfun)(i) for i in idxs)
+        if jobs == 1:
+            output = np.zeros(len(idxs))
+            for idx in idxs:
+                try:
+                    output[idx] = curve_fit(fit_func, flip_angles, images[idx, :], p0=X0,bounds=bounds)
+                except:
+                    popt = popt_default
+        else:
+            output = Parallel(n_jobs=jobs, verbose=5)(delayed(parfun)(i) for i in idxs)
         return np.transpose(output)
 
 def R1_afo_FA(alpha,M0,T1,TR):
