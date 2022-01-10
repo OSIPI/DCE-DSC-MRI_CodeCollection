@@ -3,7 +3,7 @@ import numpy as np
 
 from ..helpers import osipi_parametrize
 from . import t1_data
-from src.original.OG_MO_AUMC_ICR_RMH.ExtendedTofts.DCE import R1_two_fas
+from src.original.OG_MO_AUMC_ICR_RMH.ExtendedTofts.DCE import R1_two_fas, R1_VFA
 
 
 # All tests will use the same arguments and same data...
@@ -33,3 +33,19 @@ def testOG_MO_AUMC_ICR_RMH_t1_VFA_2fa(label, fa_array, tr_array, s_array, r1_ref
     # run test (2 flip angle)
     r1_2fa_meas = R1_two_fas(s_array_trimmed,fa_array_rad,tr)[0]
     np.testing.assert_allclose( [r1_2fa_meas], [r1_ref], rtol=r_tol, atol=a_tol )
+
+
+@osipi_parametrize(arg_names, test_data, xf_labels=[])
+def testOG_MO_AUMC_ICR_RMH_t1_VFA(label, fa_array, tr_array, s_array, r1_ref, s0_ref, a_tol, r_tol):
+    # NOTES:
+    #   Code requires signal array with min 2 dimensions (including FA)
+    #   Expected fails: 1 low-SNR prostate voxel
+
+    # prepare input data
+    tr = tr_array[0]
+    # use first and last FA only
+    fa_array_rad = fa_array * np.pi / 180.  # use first and last FA only
+
+    # run test (2 flip angle)
+    r1_2fa_meas = 1/R1_VFA(s_array, fa_array_rad, tr)
+    np.testing.assert_allclose([r1_2fa_meas], [r1_ref], rtol=r_tol, atol=a_tol)
