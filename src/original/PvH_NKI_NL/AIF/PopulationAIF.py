@@ -10,6 +10,7 @@ options:
 @lab Van der Heide group (https://www.nki.nl/research/research-groups/uulke-van-der-heide/)
 @institute department of Radiation Oncology, the Netherlands Cancer Institute
 """
+import os
 
 import numpy
 import math
@@ -153,7 +154,10 @@ def GeorgiouAIF(time):
     """
 
     # import txt file
-    timeaif, aifdata = numpy.loadtxt("PopulationAIF_GeorgiouMRM2018.txt", delimiter='\t', unpack=True)
+
+    filename = os.path.join(os.path.dirname(__file__),'PopulationAIF_GeorgiouMRM2018.txt')  
+
+    timeaif, aifdata = numpy.loadtxt(filename, delimiter='\t', unpack=True)
     timeaif=timeaif*60  # convert time to seconds
 
     # interpolate to a given time series
