@@ -3,7 +3,7 @@ from . import io
 from . import DCE
 from . import math
 import base64
-import cv2
+#import cv2
 
 import matplotlib
 #matplotlib.use('TkAgg')
