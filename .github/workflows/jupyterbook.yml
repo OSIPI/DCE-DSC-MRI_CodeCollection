@@ -51,6 +51,6 @@ jobs:
         API_TOKEN_GITHUB: ${{ secrets.DEMO_TOKEN }}
       with:
         source-directory: 'out'
-        destination-github-username: 'notZaki'
-        destination-repository-name: 'osipidemo'
+        destination-github-username: 'OSIPI'
+        destination-repository-name: 'DCE-DSC-MRI_TestResults'
         user-email: zaki@live.ca
