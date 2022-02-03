@@ -41,6 +41,7 @@ def testOG_MO_AUMC_ICR_RMH_t1_VFA_2fa(label, fa_array, tr_array, s_array, r1_ref
     # run test (2 flip angle)
     r1_2fa_meas = R1_two_fas(s_array_trimmed,fa_array_rad,tr)[0]
     np.testing.assert_allclose( [r1_2fa_meas], [r1_ref], rtol=r_tol, atol=a_tol )
+    log_results(filename_prefix, '_test_OG_MO_AUMC_ICR_RHM_t1_VFA_2fa', [label, r1_ref, r1_2fa_meas])
 
 
 @osipi_parametrize(arg_names, test_data, xf_labels=[])
