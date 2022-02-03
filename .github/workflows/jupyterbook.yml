@@ -39,13 +39,19 @@ jobs:
         jupyter-book build notebooks/
         touch notebooks/_build/html/.nojekyll
 
+    - name: Re-organize files
+      run: |
+        mkdir out
+        mv notebooks/_build/html out/docs
+        mv test out/test
+
     # Deploy the book's HTML to another repo
     - name: publish:starters
       uses: cpina/github-action-push-to-another-repository@master
       env:
         API_TOKEN_GITHUB: ${{ secrets.DEMO_TOKEN }}
       with:
-        source-directory: 'notebooks/_build/html'
+        source-directory: 'out'
         destination-github-username: 'notZaki'
         destination-repository-name: 'osipidemo'
         user-email: zaki@live.ca
