@@ -3,8 +3,8 @@ import numpy as np
 
 from ..helpers import osipi_parametrize
 from . import SI2Conc_data
-from osipi.original.OG_MO_AUMC_ICR_RMH.ExtendedTofts.DCE import dce_to_r1eff
-from osipi.original.OG_MO_AUMC_ICR_RMH.ExtendedTofts.DCE import r1eff_to_conc
+from osipi_code_collection.original.OG_MO_AUMC_ICR_RMH.ExtendedTofts.DCE import dce_to_r1eff
+from osipi_code_collection.original.OG_MO_AUMC_ICR_RMH.ExtendedTofts.DCE import r1eff_to_conc
 
 
 

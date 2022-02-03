@@ -3,7 +3,7 @@ import numpy as np
 
 from ..helpers import osipi_parametrize, log_init, log_results
 from . import t1_data
-from osipi.original.McGill_Can.vfa import despot, novifast
+from osipi_code_collection.original.McGill_Can.vfa import despot, novifast
 
 
 # All tests will use the same arguments and same data...

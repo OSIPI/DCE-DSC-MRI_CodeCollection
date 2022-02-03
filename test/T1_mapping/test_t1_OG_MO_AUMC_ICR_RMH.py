@@ -3,7 +3,7 @@ import numpy as np
 
 from ..helpers import osipi_parametrize, log_init, log_results
 from . import t1_data
-from osipi.original.OG_MO_AUMC_ICR_RMH.ExtendedTofts.DCE import R1_two_fas, R1_VFA
+from osipi_code_collection.original.OG_MO_AUMC_ICR_RMH.ExtendedTofts.DCE import R1_two_fas, R1_VFA
 
 
 # All tests will use the same arguments and same data...

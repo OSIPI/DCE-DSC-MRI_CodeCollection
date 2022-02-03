@@ -7,7 +7,7 @@ setup(
         install_requires = ['dicom', 'imageio', 'joblib', 'lmfit', 
                 'mat73', 'matplotlib', 'numpy', 'opencv-python', 'openpyxl', 
                 'pandas', 'progressbar', 'pytest', 'scipy'],
-        package_dir={'osipi': 'src'},
-        packages=[f'osipi.{module}' for module in find_packages('src')],
+        package_dir={'osipi_code_collection': 'src'},
+        packages=[f'osipi_code_collection.{module}' for module in find_packages('src')],
         )
         
