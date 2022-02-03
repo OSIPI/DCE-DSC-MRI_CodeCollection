@@ -2,7 +2,7 @@ import numpy as np
 
 from ..helpers import osipi_parametrize
 from . import DCEmodels_data
-from src.original.OG_MO_AUMC_ICR_RMH.ExtendedTofts.DCE import fit_tofts_model, fit_aif
+from osipi_code_collection.original.OG_MO_AUMC_ICR_RMH.ExtendedTofts.DCE import fit_tofts_model, fit_aif
 
 # All tests will use the same arguments and same data...
 arg_names = 'label, t_array, C_array, ca_array, ta_array, ve_ref, vp_ref, Ktrans_ref, arterial_delay_ref,  a_tol_ve, ' \

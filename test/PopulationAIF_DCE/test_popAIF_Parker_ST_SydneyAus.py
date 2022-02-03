@@ -2,7 +2,7 @@ import os
 import pytest
 import numpy as np
 from test.helpers import osipi_parametrize
-from src.original.ST_USydAUS.InputFunctions import AIF, variableAIF, arr_shift
+from osipi_code_collection.original.ST_USydAUS.InputFunctions import AIF, variableAIF, arr_shift
 from . import popAIF_data
 
 

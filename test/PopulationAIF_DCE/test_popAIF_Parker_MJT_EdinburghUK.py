@@ -2,7 +2,7 @@ import os
 import pytest
 import numpy as np
 from test.helpers import osipi_parametrize
-import src.original.MJT_UoEdinburghUK.aifs as aifs
+import osipi_code_collection.original.MJT_UoEdinburghUK.aifs as aifs
 from . import popAIF_data
 
 

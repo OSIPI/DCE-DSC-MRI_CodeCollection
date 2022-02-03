@@ -3,7 +3,7 @@ from scipy.optimize import curve_fit
 
 from ..helpers import osipi_parametrize
 from . import DCEmodels_data
-from src.original.ST_USydAUS.ModelDictionary import ExtendedTofts
+from osipi_code_collection.original.ST_USydAUS.ModelDictionary import ExtendedTofts
 
 # All tests will use the same arguments and same data...
 arg_names = 'label, t_array, C_array, ca_array, ta_array, ve_ref, vp_ref, Ktrans_ref, arterial_delay_ref,  a_tol_ve, ' \

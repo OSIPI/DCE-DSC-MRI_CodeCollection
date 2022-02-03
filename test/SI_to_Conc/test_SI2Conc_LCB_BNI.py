@@ -3,7 +3,7 @@ import numpy as np
 
 from ..helpers import osipi_parametrize
 from . import SI2Conc_data
-from src.original.LCB_BNI.dce import signal_to_conc
+from osipi_code_collection.original.LCB_BNI.dce import signal_to_conc
 
 
 # All tests will use the same arguments and same data...

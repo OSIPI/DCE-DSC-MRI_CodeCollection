@@ -2,7 +2,7 @@ import os
 import pytest
 import numpy as np
 from test.helpers import osipi_parametrize
-from src.original.PvH_NKI_NL.AIF.PopulationAIF import ParkerAIF
+from osipi_code_collection.original.PvH_NKI_NL.AIF.PopulationAIF import ParkerAIF
 from . import popAIF_data
 
 

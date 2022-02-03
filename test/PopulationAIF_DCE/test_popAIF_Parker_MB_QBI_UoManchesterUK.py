@@ -2,7 +2,7 @@ import os
 import pytest
 import numpy as np
 from test.helpers import osipi_parametrize
-import src.original.MB_QBI_UoManchesterUK.QbiPy.dce_models.dce_aif as dce_aif
+import osipi_code_collection.original.MB_QBI_UoManchesterUK.QbiPy.dce_models.dce_aif as dce_aif
 from . import popAIF_data
 
 

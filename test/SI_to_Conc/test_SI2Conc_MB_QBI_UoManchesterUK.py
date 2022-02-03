@@ -3,7 +3,7 @@ import numpy as np
 
 from ..helpers import osipi_parametrize
 from . import SI2Conc_data
-from src.original.MB_QBI_UoManchesterUK.QbiPy.dce_models.tissue_concentration import signal_to_concentration
+from osipi_code_collection.original.MB_QBI_UoManchesterUK.QbiPy.dce_models.tissue_concentration import signal_to_concentration
 
 
 
