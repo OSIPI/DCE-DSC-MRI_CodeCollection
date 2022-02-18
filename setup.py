@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
         name='osipi_code_collection',
-        version = '0.0.1', 
+        version = '0.0.2',
         install_requires = ['dicom', 'imageio', 'joblib', 'lmfit', 
                 'mat73', 'matplotlib', 'numpy', 'opencv-python', 'openpyxl', 
                 'pandas', 'progressbar', 'pytest', 'scipy'],
