@@ -1,7 +1,7 @@
 import pytest
 import numpy as np
-
-from ..helpers import osipi_parametrize
+from time import perf_counter
+from ..helpers import osipi_parametrize, log_init, log_results
 from . import SI2Conc_data
 from osipi_code_collection.original.OG_MO_AUMC_ICR_RMH.ExtendedTofts.DCE import dce_to_r1eff
 from osipi_code_collection.original.OG_MO_AUMC_ICR_RMH.ExtendedTofts.DCE import r1eff_to_conc
@@ -11,6 +11,14 @@ from osipi_code_collection.original.OG_MO_AUMC_ICR_RMH.ExtendedTofts.DCE import 
 # All tests will use the same arguments and same data...
 arg_names = 'label', 'fa', 'tr', 'T1base', 'BLpts', 'r1', 's_array', 'conc_array', 'a_tol', 'r_tol'
 test_data = SI2Conc_data.SI2Conc_data()
+
+filename_prefix = ''
+
+def setup_module(module):
+    # initialize the logfiles
+    global filename_prefix # we want to change the global variable
+    filename_prefix = 'SI_to_Conc/TestResults_SI2Conc'
+    log_init(filename_prefix, '_OG_MO_AUMC_ICR_RMH_sig_to_conc', ['label', 'conc_curve', 'conc_array', 'time (us)'])
 
 
 # Use the test data to generate a parametrize decorator. This causes the following
@@ -30,9 +38,14 @@ def test_OG_MO_AUMC_ICR_RMH_dce_to_r1eff(label, fa, tr, T1base, BLpts, r1, s_arr
     
     # run test
     #The code uses two functions to get from SI to conc
+    tic = perf_counter()
     r1_curve = dce_to_r1eff(s_array, 1/T1base, tr, fa_rad, BLpts)
     conc_curve = r1eff_to_conc(r1_curve, 1/T1base, r1)
+    exc_time = 1e6 * (perf_counter() - tic)
 
+    length_data = len(conc_array)
+    conc_curve = conc_curve.reshape(length_data,)
+    log_results(filename_prefix, '_OG_MO_AUMC_ICR_RMH_sig_to_conc', [label, conc_array, conc_curve, f"{exc_time:.0f}"])
 
-    np.testing.assert_allclose( conc_curve, [conc_array], rtol=r_tol, atol=a_tol )
+    np.testing.assert_allclose( conc_curve, conc_array, rtol=r_tol, atol=a_tol )
 

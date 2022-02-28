@@ -1,7 +1,7 @@
 import pytest
 import numpy as np
-
-from ..helpers import osipi_parametrize
+from time import perf_counter
+from ..helpers import osipi_parametrize, log_init, log_results
 from . import SI2Conc_data
 from osipi_code_collection.original.ST_USydAUS.signals2conc import signals2conc
 
@@ -10,6 +10,13 @@ from osipi_code_collection.original.ST_USydAUS.signals2conc import signals2conc
 arg_names = 'label', 'fa', 'tr', 'T1base', 'BLpts', 'r1', 's_array', 'conc_array', 'a_tol', 'r_tol'
 test_data = SI2Conc_data.SI2Conc_data()
 
+filename_prefix = ''
+
+def setup_module(module):
+    # initialize the logfiles
+    global filename_prefix # we want to change the global variable
+    filename_prefix = 'SI_to_Conc/TestResults_SI2Conc'
+    log_init(filename_prefix, '_ST_USydAus_sig_to_conc', ['label', 'conc_curve', 'conc_array', 'time (us)'])
 
 
 # Use the test data to generate a parametrize decorator. This causes the following
@@ -25,6 +32,10 @@ def test_ST_USydAUS_signals2conc(label, fa, tr, T1base, BLpts, r1, s_array, conc
     time=np.zeros_like(s_array)
     
     # run test
+    tic = perf_counter()
     conc_curve = signals2conc(time, s_array, fa, tr, 1/T1base, r1, BLpts)
+    exc_time = 1e6 * (perf_counter() - tic)
+    log_results(filename_prefix, '_ST_USydAus_sig_to_conc', [label, conc_array, conc_curve, f"{exc_time:.0f}"])
+
     np.testing.assert_allclose( [conc_curve], [conc_array], rtol=r_tol, atol=a_tol )
 
