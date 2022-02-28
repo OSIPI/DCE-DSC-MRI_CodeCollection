@@ -3,7 +3,7 @@ import numpy as np
 from time import perf_counter
 from ..helpers import osipi_parametrize, log_init, log_results
 from . import t1_data
-from src.original.MJT_UoEdinburghUK.t1_fit import fit_vfa_linear, fit_vfa_nonlinear
+from osipi_code_collection.original.MJT_UoEdinburghUK.t1_fit import fit_vfa_linear, fit_vfa_nonlinear
 
 
 # All tests will use the same arguments and same data...
@@ -19,9 +19,9 @@ filename_prefix = ''
 def setup_module(module):
     # initialize the logfiles
     global filename_prefix # we want to change the global variable
-    filename_prefix = 'TestResults_T1mapping'
-    log_init(filename_prefix, '_test_MJT_EdinburghUK_t1_VFA_nonlin', ['label', 'r1_ref', 'r1_measured', 'time (us)'])
-    log_init(filename_prefix, '_test_MJT_EdinburghUK_t1_VFA_lin', ['label', 'r1_ref', 'r1_measured', 'time (us)'])
+    filename_prefix = 'T1_mapping/TestResults_T1mapping'
+    log_init(filename_prefix, '_MJT_EdinburghUK_t1_VFA_nonlin', ['label', 'r1_ref', 'r1_measured', 'time (us)'])
+    log_init(filename_prefix, '_MJT_EdinburghUK_t1_VFA_lin', ['label', 'r1_ref', 'r1_measured', 'time (us)'])
 
 
 # Use the test data to generate a parametrize decorator. This causes the following
@@ -38,7 +38,7 @@ def test_MJT_EdinburghUK_t1_VFA_nonlin(label, fa_array, tr_array, s_array, r1_re
     [s0_nonlin_meas, t1_nonlin_meas] = fit_vfa_nonlinear(s_array,fa_array,tr)
     exc_time = 1e6 * (perf_counter() - tic)
     r1_nonlin_meas = 1./t1_nonlin_meas
-    log_results(filename_prefix, '_test_MJT_EdinburghUK_t1_VFA_nonlin', [label, r1_ref, r1_nonlin_meas, f"{exc_time:.0f}"])
+    log_results(filename_prefix, '_MJT_EdinburghUK_t1_VFA_nonlin', [label, r1_ref, r1_nonlin_meas, f"{exc_time:.0f}"])
     np.testing.assert_allclose([r1_nonlin_meas], [r1_ref], rtol=r_tol, atol=a_tol)
 
 
@@ -57,5 +57,5 @@ def test_MJT_EdinburghUK_t1_VFA_lin(label, fa_array, tr_array, s_array, r1_ref, 
     [s0_lin_meas, t1_lin_meas] = fit_vfa_linear(s_array,fa_array,tr)
     exc_time = 1e6 * (perf_counter() - tic)
     r1_lin_meas = 1./t1_lin_meas
-    log_results(filename_prefix, '_test_MJT_EdinburghUK_t1_VFA_lin', [label, r1_ref, r1_lin_meas, f"{exc_time:.0f}"])
+    log_results(filename_prefix, '_MJT_EdinburghUK_t1_VFA_lin', [label, r1_ref, r1_lin_meas, f"{exc_time:.0f}"])
     np.testing.assert_allclose([r1_lin_meas], [r1_ref], rtol=r_tol, atol=a_tol)

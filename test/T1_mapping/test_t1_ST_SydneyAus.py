@@ -1,6 +1,6 @@
 import pytest
 import numpy as np
-
+from time import perf_counter
 from ..helpers import osipi_parametrize, log_init, log_results # helper for running tests on multiple cases
 from . import t1_data # module for providing all t1 test cases
 from osipi_code_collection.original.ST_USydAUS.VFAT1mapping import VFAT1mapping # functions to test
@@ -19,9 +19,9 @@ filename_prefix = ''
 def setup_module(module):
     # initialize the logfiles
     global filename_prefix # we want to change the global variable
-    filename_prefix = 'TestResults_T1mapping'
-    log_init(filename_prefix, '_test_ST_SydneyAus_t1_VFA_nonlin', ['label', 'r1_ref', 'r1_measured'])
-    log_init(filename_prefix, '_test_ST_SydneyAus_t1_VFA_lin', ['label', 'r1_ref', 'r1_measured'])
+    filename_prefix = 'T1_mapping/TestResults_T1mapping'
+    log_init(filename_prefix, '_ST_SydneyAus_t1_VFA_nonlin', ['label', 'r1_ref', 'r1_measured', 'time (us)'])
+    log_init(filename_prefix, '_ST_SydneyAus_t1_VFA_lin', ['label', 'r1_ref', 'r1_measured', 'time (us)'])
 
 # Use the test data to generate a parametrize decorator. This causes the following
 # test to be run for every test case listed in test_data...
@@ -33,10 +33,13 @@ def test_ST_SydneyAus_t1_VFA_nonlin(label, fa_array, tr_array, s_array, r1_ref, 
     tr = tr_array[0] * 1000. # convert s to ms
  
     # run test (non-linear)
+    tic = perf_counter()
     [s0_nonlin_meas, t1_nonlin_meas] = VFAT1mapping(fa_array, s_array, tr, method='nonlinear')
-    r1_nonlin_meas = 1000./t1_nonlin_meas # convert T1 (ms) to R1 (/s)   
+    exc_time = 1e6 * (perf_counter() - tic)
+    r1_nonlin_meas = 1000./t1_nonlin_meas # convert T1 (ms) to R1 (/s)
+    log_results(filename_prefix, '_ST_SydneyAus_t1_VFA_nonlin', [label, r1_ref, r1_nonlin_meas, f"{exc_time:.0f}"]) # log results to csv
     np.testing.assert_allclose([r1_nonlin_meas], [r1_ref], rtol=r_tol, atol=a_tol)
-    log_results(filename_prefix, '_test_ST_SydneyAus_t1_VFA_nonlin', [label, r1_ref, r1_nonlin_meas])
+
 
 
 # In the following test, we specify 1 case that is expected to fail...
@@ -53,8 +56,11 @@ def test_ST_SydneyAus_t1_VFA_lin(label, fa_array, tr_array, s_array, r1_ref, s0_
     s_array /= 1000 # scale down signal to prevent test failure
  
     # run test (linear)
+    tic = perf_counter()
     [s0_lin_meas, t1_lin_meas] = VFAT1mapping(fa_array, s_array, tr, method='linear')
+    exc_time = 1e6 * (perf_counter() - tic)
     r1_lin_meas = 1000./t1_lin_meas # convert T1 (ms) to R1 (/s)
+    log_results(filename_prefix, '_ST_SydneyAus_t1_VFA_lin', [label, r1_ref, r1_lin_meas, f"{exc_time:.0f}"]) # log results to csv
     np.testing.assert_allclose([r1_lin_meas], [r1_ref], rtol=r_tol, atol=a_tol)
-    log_results(filename_prefix, '_test_ST_SydneyAus_t1_VFA_lin', [label, r1_ref, r1_lin_meas])
+
 
