@@ -1,7 +1,8 @@
 import os
 import pytest
 import numpy as np
-from test.helpers import osipi_parametrize
+from time import perf_counter
+from ..helpers import osipi_parametrize, log_init, log_results
 import osipi_code_collection.original.MJT_UoEdinburghUK.aifs as aifs
 from . import popAIF_data
 
@@ -11,6 +12,14 @@ arg_names = 'label, time, cb_ref_values, delay, r_tol, a_tol'
 test_data = (
         popAIF_data.ParkerAIF_refdata() +
         popAIF_data.ParkerAIF_refdata_delay())
+
+filename_prefix = ''
+
+def setup_module(module):
+    # initialize the logfiles
+    global filename_prefix # we want to change the global variable
+    filename_prefix = 'PopulationAIF_DCE/TestResults_PopAIF'
+    log_init(filename_prefix, '_Parker_AIF_MJT_EdinburghUK', ['label', 'aif_ref', 'cb_measured', 'time (us)'])
 
 # Use the test data to generate a parametrize decorator. This causes the following
 # test to be run for every test case listed in test_data...
@@ -23,8 +32,12 @@ def test_Parker_AIF_MJT_EdinburghUK(label, time, cb_ref_values, delay, a_tol, r_
     tstart = delay  # start time of AIF in seconds
     hct = 0  # hematocrit correction ignored for now
 
+    tic = perf_counter()
     # Create the AIF object
     aif = aifs.parker(hct, tstart)
     # for corresponding time array
     c_ap = aif.c_ap(time)
+    exc_time = 1e6 * (perf_counter() - tic)  # measure execution time
+    log_results(filename_prefix, '_Parker_AIF_MJT_EdinburghUK', [label, cb_ref_values, c_ap, f"{exc_time:.0f}"])
+
     np.testing.assert_allclose([c_ap], [cb_ref_values], rtol=r_tol, atol=a_tol)
