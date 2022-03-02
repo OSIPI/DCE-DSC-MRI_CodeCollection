@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.optimize import curve_fit
-
-from ..helpers import osipi_parametrize
+from time import perf_counter
+from ..helpers import osipi_parametrize, log_init, log_results
 from . import DCEmodels_data
 from osipi_code_collection.original.LEK_UoEdinburghUK.PharmacokineticModelling.models import ExtKety
 
@@ -12,6 +12,15 @@ arg_names = 'label, t_array, C_array, ca_array, ta_array, ve_ref, vp_ref, Ktrans
 test_data = (
         DCEmodels_data.dce_DRO_data_extended_tofts_kety() +
         DCEmodels_data.dce_DRO_data_extended_tofts_kety(delay=True))
+
+filename_prefix = ''
+
+def setup_module(module):
+    # initialize the logfiles
+    global filename_prefix # we want to change the global variable
+    filename_prefix = 'DCEmodels/TestResults_models'
+    log_init(filename_prefix, '_LEK_UoEdinburghUK_extended_tofts_kety_model', ['label', 'time (us)', 'Ktrans_ref', 've_ref', 'vp_ref', 'delay_ref', 'Ktrans_meas', 've_meas', 'vp_meas', 'delay_meas'])
+
 
 # Use the test data to generate a parametrize decorator. This causes the following test to be run for every test case
 # listed in test_data...
@@ -26,11 +35,16 @@ def test_LEK_UoEdinburghUK_extended_tofts_kety_model(label, t_array, C_array, ca
     X0 = (0.02, 0.2, 0.6, 0)
     bounds = ((0.0, 0.0, 0.0, 0), (0.7, 1, 5.0, 1))
 
+    # run code
+    tic = perf_counter()
     output, pcov = curve_fit(lambda t, x, y, z, toff: ExtKety([x, y, z], t, ca_array, toff), t_array, C_array, p0=X0,
                              bounds=bounds)
-
+    exc_time = 1e6 * (perf_counter() - tic)  # measure execution time
     Ktrans_meas, ve_meas, vp_meas, arterial_delay_meas = output
 
+    log_results(filename_prefix, '_LEK_UoEdinburghUK_extended_tofts_kety_model', [[label, f"{exc_time:.0f}", Ktrans_ref, ve_ref, vp_ref, arterial_delay_ref, Ktrans_meas, ve_meas, vp_meas, arterial_delay_meas]])
+
+    # run test
     np.testing.assert_allclose([ve_meas], [ve_ref], rtol=r_tol_ve, atol=a_tol_ve)
     np.testing.assert_allclose([vp_meas], [vp_ref], rtol=r_tol_vp, atol=a_tol_vp)
     np.testing.assert_allclose([Ktrans_meas], [Ktrans_ref], rtol=r_tol_Ktrans, atol=a_tol_Ktrans)

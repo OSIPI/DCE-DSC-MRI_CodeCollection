@@ -20,7 +20,7 @@ def setup_module(module):
     # initialize the logfiles
     global filename_prefix # we want to change the global variable
     filename_prefix = 'SI_to_Conc/TestResults_SI2Conc'
-    log_init(filename_prefix, '_MJT_UoEdinburgh_sig_to_conc', ['label', 'conc_curve', 'conc_array', 'time (us)'])
+    log_init(filename_prefix, '_MJT_UoEdinburgh_sig_to_conc', ['label', 'time (us)', 'conc_curve', 'conc_array'])
 
 # Use the test data to generate a parametrize decorator. This causes the following
 # test to be run for every test case listed in test_data...
@@ -47,7 +47,12 @@ def test_MJT_UoEdinburghUK_sig_to_conc(label, fa, tr, T1base, BLpts, r1, s_array
     conc_curve = enh_to_conc(enh_curve, 1, 1/T1base, conc_to_r, sigmod)
     exc_time = 1e6 * (perf_counter() - tic)
 
-    log_results(filename_prefix, '_MJT_UoEdinburgh_sig_to_conc', [label, conc_array, conc_curve, f"{exc_time:.0f}"])
+    # log results
+    row_data = []
+    for ref, meas in zip(conc_array, conc_curve):
+        row_data.append([label, f"{exc_time:.0f}", ref, meas])
+    log_results(filename_prefix, '_MJT_UoEdinburgh_sig_to_conc', row_data)
 
+    # testing
     np.testing.assert_allclose( conc_curve, conc_array, rtol=r_tol, atol=a_tol )
 

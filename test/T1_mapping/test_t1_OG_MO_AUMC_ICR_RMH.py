@@ -20,8 +20,8 @@ def setup_module(module):
     # initialize the logfiles
     global filename_prefix # we want to change the global variable
     filename_prefix = 'T1_mapping/TestResults_T1mapping'
-    log_init(filename_prefix, '_OG_MO_AUMC_ICR_RHM_t1_VFA_2fa', ['label', 'r1_ref', 'r1_measured', 'time (us)'])
-    log_init(filename_prefix, '_OG_MO_AUMC_ICR_RHM_t1_VFA_nonlin', ['label', 'r1_ref', 'r1_measured', 'time (us)'])
+    log_init(filename_prefix, '_OG_MO_AUMC_ICR_RHM_t1_VFA_2fa', ['label', 'time (us)', 'r1_ref', 'r1_measured'])
+    log_init(filename_prefix, '_OG_MO_AUMC_ICR_RHM_t1_VFA_nonlin', ['label', 'time (us)', 'r1_ref', 'r1_measured'])
 
 
 # Use the test data to generate a parametrize decorator. This causes the following
@@ -43,7 +43,7 @@ def testOG_MO_AUMC_ICR_RMH_t1_VFA_2fa(label, fa_array, tr_array, s_array, r1_ref
     tic = perf_counter()
     r1_2fa_meas = R1_two_fas(s_array_trimmed,fa_array_rad,tr)[0]
     exc_time = 1e6 * (perf_counter() - tic)
-    log_results(filename_prefix, '_OG_MO_AUMC_ICR_RHM_t1_VFA_2fa', [label, r1_ref, r1_2fa_meas, f"{exc_time:.0f}"]) # log results to csv
+    log_results(filename_prefix, '_OG_MO_AUMC_ICR_RHM_t1_VFA_2fa', [[label, f"{exc_time:.0f}", r1_ref, r1_2fa_meas]]) # log results to csv
     np.testing.assert_allclose( [r1_2fa_meas], [r1_ref], rtol=r_tol, atol=a_tol )
 
 
@@ -62,5 +62,5 @@ def testOG_MO_AUMC_ICR_RMH_t1_VFA(label, fa_array, tr_array, s_array, r1_ref, s0
     tic = perf_counter()
     r1_meas = 1/R1_VFA(s_array, fa_array_rad, tr)
     exc_time = 1e6 * (perf_counter() - tic)
-    log_results(filename_prefix, '_OG_MO_AUMC_ICR_RHM_t1_VFA_nonlin', [label, r1_ref, r1_meas, f"{exc_time:.0f}"]) # log results to csv
+    log_results(filename_prefix, '_OG_MO_AUMC_ICR_RHM_t1_VFA_nonlin', [[label, f"{exc_time:.0f}", r1_ref, r1_meas]]) # log results to csv
     np.testing.assert_allclose([r1_meas], [r1_ref], rtol=r_tol, atol=a_tol)

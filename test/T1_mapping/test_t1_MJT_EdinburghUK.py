@@ -20,8 +20,8 @@ def setup_module(module):
     # initialize the logfiles
     global filename_prefix # we want to change the global variable
     filename_prefix = 'T1_mapping/TestResults_T1mapping'
-    log_init(filename_prefix, '_MJT_EdinburghUK_t1_VFA_nonlin', ['label', 'r1_ref', 'r1_measured', 'time (us)'])
-    log_init(filename_prefix, '_MJT_EdinburghUK_t1_VFA_lin', ['label', 'r1_ref', 'r1_measured', 'time (us)'])
+    log_init(filename_prefix, '_MJT_EdinburghUK_t1_VFA_nonlin', ['label', 'time (us)', 'r1_ref', 'r1_measured'])
+    log_init(filename_prefix, '_MJT_EdinburghUK_t1_VFA_lin', ['label', 'time (us)', 'r1_ref', 'r1_measured'])
 
 
 # Use the test data to generate a parametrize decorator. This causes the following
@@ -38,7 +38,7 @@ def test_MJT_EdinburghUK_t1_VFA_nonlin(label, fa_array, tr_array, s_array, r1_re
     [s0_nonlin_meas, t1_nonlin_meas] = fit_vfa_nonlinear(s_array,fa_array,tr)
     exc_time = 1e6 * (perf_counter() - tic)
     r1_nonlin_meas = 1./t1_nonlin_meas
-    log_results(filename_prefix, '_MJT_EdinburghUK_t1_VFA_nonlin', [label, r1_ref, r1_nonlin_meas, f"{exc_time:.0f}"])
+    log_results(filename_prefix, '_MJT_EdinburghUK_t1_VFA_nonlin', [[label, f"{exc_time:.0f}", r1_ref, r1_nonlin_meas]])  # log results
     np.testing.assert_allclose([r1_nonlin_meas], [r1_ref], rtol=r_tol, atol=a_tol)
 
 
@@ -57,5 +57,5 @@ def test_MJT_EdinburghUK_t1_VFA_lin(label, fa_array, tr_array, s_array, r1_ref, 
     [s0_lin_meas, t1_lin_meas] = fit_vfa_linear(s_array,fa_array,tr)
     exc_time = 1e6 * (perf_counter() - tic)
     r1_lin_meas = 1./t1_lin_meas
-    log_results(filename_prefix, '_MJT_EdinburghUK_t1_VFA_lin', [label, r1_ref, r1_lin_meas, f"{exc_time:.0f}"])
+    log_results(filename_prefix, '_MJT_EdinburghUK_t1_VFA_lin', [[label, f"{exc_time:.0f}", r1_ref, r1_lin_meas]])  # log results
     np.testing.assert_allclose([r1_lin_meas], [r1_ref], rtol=r_tol, atol=a_tol)

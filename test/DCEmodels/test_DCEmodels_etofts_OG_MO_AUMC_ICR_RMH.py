@@ -1,6 +1,6 @@
 import numpy as np
-
-from ..helpers import osipi_parametrize
+from time import perf_counter
+from ..helpers import osipi_parametrize, log_init, log_results
 from . import DCEmodels_data
 from osipi_code_collection.original.OG_MO_AUMC_ICR_RMH.ExtendedTofts.DCE import fit_tofts_model, fit_aif
 
@@ -10,6 +10,15 @@ arg_names = 'label, t_array, C_array, ca_array, ta_array, ve_ref, vp_ref, Ktrans
 test_data = (
         DCEmodels_data.dce_DRO_data_extended_tofts_kety() +
         DCEmodels_data.dce_DRO_data_extended_tofts_kety(delay=True))
+
+filename_prefix = ''
+
+def setup_module(module):
+    # initialize the logfiles
+    global filename_prefix # we want to change the global variable
+    filename_prefix = 'DCEmodels/TestResults_models'
+    log_init(filename_prefix, '_OG_MO_AUMC_ICR_RMH_extended_tofts_kety_model', ['label', 'time (us)', 'Ktrans_ref', 've_ref', 'vp_ref', 'delay_ref', 'Ktrans_meas', 've_meas', 'vp_meas', 'delay_meas'])
+
 
 # Use the test data to generate a parametrize decorator. This causes the following
 # test to be run for every test case listed in test_data...
@@ -30,7 +39,9 @@ def testOG_MO_AUMC_ICR_RMH_extended_tofts_kety_model(label, t_array, C_array, ca
     C_array = np.array(C_array)
     C_array = C_array[np.newaxis, ...]
 
-    # run test
+
+    # run code
+    tic = perf_counter()
     try:
         ke, arterial_delay_meas, ve_meas, vp_meas = fit_tofts_model(C_array, t_array, AIF, idxs=None,
                                                                     X0=(0.6, 0.2, 0.2, 0.02),
@@ -42,6 +53,12 @@ def testOG_MO_AUMC_ICR_RMH_extended_tofts_kety_model(label, t_array, C_array, ca
                                                                     bounds=((0.0, 0, 0.0, 0.0), (5.0, 1, 0.7, 0.7)),
                                                                     jobs=4, model='Cosine4')
     Ktrans_meas = ke * ve_meas
+    exc_time = 1e6 * (perf_counter() - tic)  # measure execution time
+
+    # log results
+    log_results(filename_prefix, '_OG_MO_AUMC_ICR_RMH_extended_tofts_kety_model', [[label, f"{exc_time:.0f}", Ktrans_ref, ve_ref, vp_ref, arterial_delay_ref, Ktrans_meas, ve_meas, vp_meas, arterial_delay_meas]])
+
+    # run test
     np.testing.assert_allclose([ve_meas], [ve_ref], rtol=r_tol_ve, atol=a_tol_ve)
     np.testing.assert_allclose([vp_meas], [vp_ref], rtol=r_tol_vp, atol=a_tol_vp)
     np.testing.assert_allclose([Ktrans_meas], [Ktrans_ref], rtol=r_tol_Ktrans, atol=a_tol_Ktrans)
