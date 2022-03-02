@@ -1,7 +1,7 @@
 import pytest
 import numpy as np
-
-from ..helpers import osipi_parametrize
+from time import perf_counter
+from ..helpers import osipi_parametrize, log_init, log_results
 from . import SI2Conc_data
 from osipi_code_collection.original.LEK_UoEdinburghUK.SignalToConcentration import SI2Conc
 
@@ -10,6 +10,13 @@ from osipi_code_collection.original.LEK_UoEdinburghUK.SignalToConcentration impo
 arg_names = 'label', 'fa', 'tr', 'T1base', 'BLpts', 'r1', 's_array', 'conc_array', 'a_tol', 'r_tol'
 test_data = SI2Conc_data.SI2Conc_data()
 
+filename_prefix = ''
+
+def setup_module(module):
+    # initialize the logfiles
+    global filename_prefix # we want to change the global variable
+    filename_prefix = 'SI_to_Conc/TestResults_SI2Conc'
+    log_init(filename_prefix, '_LEK_UoEdinburgh_SI2Conc', ['label', 'time (us)', 'conc_curve', 'conc_array'])
 
 # Use the test data to generate a parametrize decorator. This causes the following
 # test to be run for every test case listed in test_data...
@@ -20,7 +27,17 @@ def test_LEK_UoEdinburghUK_SI2Conc(label, fa, tr, T1base, BLpts, r1, s_array, co
     #Nothing to do for this function
     
     # run test
+    tic = perf_counter()
     conc_curve = SI2Conc.SI2Conc(s_array,tr,fa,T1base,BLpts,S0=None)
+    exc_time = 1e6 * (perf_counter() - tic)
+
+    # log results
+    row_data = []
+    for ref, meas in zip(conc_array, conc_curve/r1):
+        row_data.append([label, f"{exc_time:.0f}", ref, meas])
+    log_results(filename_prefix, '_LEK_UoEdinburgh_SI2Conc', row_data)
+
+    # testing
     conc_array=conc_array*r1 # This function doesn't include r1, so multiply it out before testing
     np.testing.assert_allclose( [conc_curve], [conc_array], rtol=r_tol, atol=a_tol)
 

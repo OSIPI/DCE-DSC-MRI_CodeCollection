@@ -1,6 +1,6 @@
 import pytest
 import numpy as np
-
+from time import perf_counter
 from ..helpers import osipi_parametrize, log_init, log_results
 from . import t1_data
 from osipi_code_collection.original.OG_MO_AUMC_ICR_RMH.ExtendedTofts.DCE import R1_two_fas, R1_VFA
@@ -19,8 +19,9 @@ filename_prefix = ''
 def setup_module(module):
     # initialize the logfiles
     global filename_prefix # we want to change the global variable
-    filename_prefix = 'TestResults_T1mapping'
-    log_init(filename_prefix, '_test_OG_MO_AUMC_ICR_RHM_t1_VFA_2fa', ['label', 'r1_ref', 'r1_measured'])
+    filename_prefix = 'T1_mapping/TestResults_T1mapping'
+    log_init(filename_prefix, '_OG_MO_AUMC_ICR_RHM_t1_VFA_2fa', ['label', 'time (us)', 'r1_ref', 'r1_measured'])
+    log_init(filename_prefix, '_OG_MO_AUMC_ICR_RHM_t1_VFA_nonlin', ['label', 'time (us)', 'r1_ref', 'r1_measured'])
 
 
 # Use the test data to generate a parametrize decorator. This causes the following
@@ -39,9 +40,12 @@ def testOG_MO_AUMC_ICR_RMH_t1_VFA_2fa(label, fa_array, tr_array, s_array, r1_ref
     fa_array_rad = fa_array[[0, -1]] * np.pi/180. # use first and last FA only
     
     # run test (2 flip angle)
+    tic = perf_counter()
     r1_2fa_meas = R1_two_fas(s_array_trimmed,fa_array_rad,tr)[0]
+    exc_time = 1e6 * (perf_counter() - tic)
+    log_results(filename_prefix, '_OG_MO_AUMC_ICR_RHM_t1_VFA_2fa', [[label, f"{exc_time:.0f}", r1_ref, r1_2fa_meas]]) # log results to csv
     np.testing.assert_allclose( [r1_2fa_meas], [r1_ref], rtol=r_tol, atol=a_tol )
-    log_results(filename_prefix, '_test_OG_MO_AUMC_ICR_RHM_t1_VFA_2fa', [label, r1_ref, r1_2fa_meas])
+
 
 
 @osipi_parametrize(arg_names, test_data, xf_labels=[])
@@ -52,9 +56,11 @@ def testOG_MO_AUMC_ICR_RMH_t1_VFA(label, fa_array, tr_array, s_array, r1_ref, s0
 
     # prepare input data
     tr = tr_array[0]
-    # use first and last FA only
-    fa_array_rad = fa_array * np.pi / 180.  # use first and last FA only
+    fa_array_rad = fa_array * np.pi / 180.
 
-    # run test (2 flip angle)
-    r1_2fa_meas = 1/R1_VFA(s_array, fa_array_rad, tr)
-    np.testing.assert_allclose([r1_2fa_meas], [r1_ref], rtol=r_tol, atol=a_tol)
+    # run test (VFA)
+    tic = perf_counter()
+    r1_meas = 1/R1_VFA(s_array, fa_array_rad, tr)
+    exc_time = 1e6 * (perf_counter() - tic)
+    log_results(filename_prefix, '_OG_MO_AUMC_ICR_RHM_t1_VFA_nonlin', [[label, f"{exc_time:.0f}", r1_ref, r1_meas]]) # log results to csv
+    np.testing.assert_allclose([r1_meas], [r1_ref], rtol=r_tol, atol=a_tol)

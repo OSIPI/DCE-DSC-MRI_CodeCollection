@@ -1,6 +1,7 @@
 import pytest
 import csv
 import pathlib
+import pandas as pd
 
 def osipi_parametrize(arg_names, test_data, xf_labels=None):
     """
@@ -81,6 +82,7 @@ def log_results(filename_prefix, filename_label, row_data):
 
     """
     filename = './test/results/' + filename_prefix + filename_label + '.csv'
-    with open(filename, 'a', newline='') as f:
-        writer = csv.writer(f)
-        writer.writerow(row_data)
+
+    # use pandas dataframe to save data. This is useful for data with time curves. Instead of saving it as a large array, each time point is a row in the csv file.
+    # as they have the same label, it can be grouped later when imported with pandas
+    pd.DataFrame(data=row_data).to_csv(filename, index=False, header=False, mode='a')
