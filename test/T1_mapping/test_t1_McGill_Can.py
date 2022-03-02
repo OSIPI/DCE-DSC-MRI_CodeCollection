@@ -1,4 +1,5 @@
 import pytest
+import os
 import numpy as np
 from time import perf_counter
 from ..helpers import osipi_parametrize, log_init, log_results
@@ -20,6 +21,7 @@ def setup_module(module):
     # initialize the logfiles
     global filename_prefix # we want to change the global variable
     filename_prefix = 'T1_mapping/TestResults_T1mapping'
+    os.makedirs('./results/T1_mapping', exist_ok=True)
     log_init(filename_prefix, '_mcgill_t1_novifast', ['label', 'time (us)', 'r1_ref', 'r1_measured'])
     log_init(filename_prefix, '_mcgill_t1_VFA_lin', ['label', 'time (us)', 'r1_ref', 'r1_measured'])
 

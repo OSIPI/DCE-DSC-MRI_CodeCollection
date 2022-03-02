@@ -18,6 +18,7 @@ filename_prefix = ''
 def setup_module(module):
     # initialize the logfiles
     global filename_prefix # we want to change the global variable
+    os.makedirs('./results/PopulationAIF_DCE', exist_ok=True)
     filename_prefix = 'PopulationAIF_DCE/TestResults_PopAIF'
     log_init(filename_prefix, '_Parker_AIF_MJT_EdinburghUK', ['label', 'time (us)', 'aif_ref', 'cb_measured'])
 

@@ -1,3 +1,4 @@
+import os
 import numpy as np
 from time import perf_counter
 from ..helpers import osipi_parametrize, log_init, log_results
@@ -16,6 +17,7 @@ filename_prefix = ''
 def setup_module(module):
     # initialize the logfiles
     global filename_prefix # we want to change the global variable
+    os.makedirs('./results/DCEmodels', exist_ok=True)
     filename_prefix = 'DCEmodels/TestResults_models'
     log_init(filename_prefix, '_OG_MO_AUMC_ICR_RMH_extended_tofts_kety_model', ['label', 'time (us)', 'Ktrans_ref', 've_ref', 'vp_ref', 'delay_ref', 'Ktrans_meas', 've_meas', 'vp_meas', 'delay_meas'])
 
