@@ -10,7 +10,7 @@ sections:
     - file: T1mapping.md
       sections:
         - file: VariableFlipAngle.ipynb
-    - file: Population.md
+    - file: PopulationAIF.md
       sections:
         - file: ParkerAIF.ipynb
         - file: GeorgiouAIF.ipynb
