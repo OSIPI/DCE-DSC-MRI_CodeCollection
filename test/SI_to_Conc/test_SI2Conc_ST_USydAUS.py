@@ -16,7 +16,7 @@ filename_prefix = ''
 def setup_module(module):
     # initialize the logfiles
     global filename_prefix # we want to change the global variable
-    os.makedirs('./results/SI_to_Conc', exist_ok=True)
+    os.makedirs('./test/results/SI_to_Conc', exist_ok=True)
     filename_prefix = 'SI_to_Conc/TestResults_SI2Conc'
     log_init(filename_prefix, '_ST_USydAus_sig_to_conc', ['label', 'time (us)', 'conc_curve', 'conc_array'])
 
