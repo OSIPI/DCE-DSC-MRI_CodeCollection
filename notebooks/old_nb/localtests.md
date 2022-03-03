@@ -55,7 +55,7 @@ It is important to note that the *test_* prefix convention use continues within 
 
 ### Executing a test
 The results of the test can then be obtained using `$ pytest` at the command line. If we perform this for Example 1, we see the following output:
-![Test Pass](images/ex1_testpass.png)
+![Test Pass](../images/ex1_testpass.png)
 Now, if example 1 were modified to
 	
 	#Example 1:test_OSIPItf.py
@@ -68,7 +68,7 @@ Now, if example 1 were modified to
 	    assert capital_case('osipi') == 'OSIPI'
 
 the output of `$ pytest` would result in a filed test as shown below.  
-![Test Fail](images/ex1_testfail.png)
+![Test Fail](../images/ex1_testfail.png)
 As indicated in the failure message, the test failed for the case where the output of `capital_case('osipi')` - the expected output *OSIPI* is different from the function output *Osipi*. 
 
 ## Useful links for unit testing with Python

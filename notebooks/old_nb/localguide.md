@@ -5,7 +5,7 @@
 
 ## Setup a local copy of the repository
 To create a local copy of the repository, navigate to the respository located at [OSIPI DCE/DSC Code Library](https://github.com/OSIPI/TF2.3-CodeLibrary), and use the repository url from the **CODE** drop down menu (shown in the figure below). 
-![clone repo](images/repo_urlcopy.png)
+![clone repo](../images/repo_urlcopy.png)
 
 On the local computer, open the terminal application and navigate to the folder where you would like the repository to be located. `git clone` is then used to clone a local copy of the repository..
  
@@ -17,7 +17,7 @@ Now you will have a local copy wherein any additions, modifications or deletions
 	
 The output will look something similar to 
  
-![Clone Repo Status](images/gitstatus_clonerepo.png)
+![Clone Repo Status](../images/gitstatus_clonerepo.png)
  
 ## Working with a specific branch of the repository
 The **master** branch of the repository is checked out initially by default. To switch to a specific branch - let's say the branch name is **OsipiTaskForce**, use `git checkout` as follows.
