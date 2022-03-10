@@ -14,7 +14,7 @@ sections:
       sections:
         - file: ParkerAIF.ipynb
         - file: GeorgiouAIF.ipynb
-        - file: preclinicalAIF.ipynb
+        - file: PreclinicalAIF.ipynb
     - file: SItoC.ipynb
     - file: DCEmodels.md
       sections:
