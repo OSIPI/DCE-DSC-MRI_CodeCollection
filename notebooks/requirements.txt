@@ -8,3 +8,4 @@ scipy
 lmfit
 pandas
 nilearn
+seaborn
