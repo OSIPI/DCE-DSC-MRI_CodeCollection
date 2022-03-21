@@ -20,7 +20,7 @@ def setup_module(module):
     global filename_prefix # we want to change the global variable
     os.makedirs('./test/results/PopulationAIF_DCE', exist_ok=True)
     filename_prefix = 'PopulationAIF_DCE/TestResults_PopAIF'
-    log_init(filename_prefix, '_Parker_AIF_ST_SydneyAus', ['label', 'time (us)', 'aif_ref', 'cb_measured'])
+    log_init(filename_prefix, '_Parker_AIF_ST_SydneyAus', ['label', 'time (us)', 'time_ref', 'aif_ref', 'cb_measured'])
 
 # Use the test data to generate a parametrize decorator. This causes the following
 # test to be run for every test case listed in test_data.
@@ -37,8 +37,8 @@ def test_Parker_AIF_ST_SydneyAus(label, time, cb_ref_values, delay, a_tol, r_tol
 
     # log results
     row_data = []
-    for ref, meas in zip(cb_ref_values, AIF_P):
-        row_data.append([label, f"{exc_time:.0f}", ref, meas])
+    for t, ref, meas in zip(time, cb_ref_values, AIF_P):
+        row_data.append([label, f"{exc_time:.0f}", t, ref, meas])
     log_results(filename_prefix, '_Parker_AIF_ST_SydneyAus', row_data)
 
     np.testing.assert_allclose([AIF_P], [cb_ref_values], rtol=r_tol, atol=a_tol)
