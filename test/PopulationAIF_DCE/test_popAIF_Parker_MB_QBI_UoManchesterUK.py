@@ -31,7 +31,6 @@ def test_Parker_AIF_MB_QBI_UoManchesterUK(label, time, cb_ref_values, delay, a_t
     # prepare input data
     # time array is expected in minutes, so no changes needed.
     hct = 0  # for now ignore hematocrit correction to obtain Cb values
-    #time = time*60  # put in seconds
     # Create the AIF object
     tic = perf_counter()
     aif = dce_aif.Aif(times=time, hct=hct, prebolus=1) # default setting for prebolus = 8;
@@ -42,7 +41,7 @@ def test_Parker_AIF_MB_QBI_UoManchesterUK(label, time, cb_ref_values, delay, a_t
     # log results
     row_data = []
     for t, ref, meas in zip(time, cb_ref_values, aif_delay[0,]):
-        row_data.append([label, f"{exc_time:.0f}", t, ref, meas])
+        row_data.append([label, f"{exc_time:.0f}", t*60, ref, meas])
     log_results(filename_prefix, '_Parker_AIF_MB_QBI_UoManchesterUK', row_data)
 
     np.testing.assert_allclose([aif_delay[0,]], [cb_ref_values], rtol=r_tol, atol=a_tol)
