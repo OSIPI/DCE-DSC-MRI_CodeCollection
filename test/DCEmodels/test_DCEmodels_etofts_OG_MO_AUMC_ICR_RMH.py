@@ -23,6 +23,8 @@ def testOG_MO_AUMC_ICR_RMH_extended_tofts_kety_model(label, t_array, C_array, ca
     ta_array = ta_array / 60
     t_array = t_array / 60
     arterial_delay_ref = arterial_delay_ref / 60
+    x0 = (0.6/0.2, 0.2, 0.2, 0.01)  # ke, delay, ve, vp
+    bounds = ((0.0, -10, 0.0, 0.0), (5.0/0.2, 10, 1, 1))
     try:
         AIF = fit_aif(ca_array, ta_array, model='Cosine8')
     except:

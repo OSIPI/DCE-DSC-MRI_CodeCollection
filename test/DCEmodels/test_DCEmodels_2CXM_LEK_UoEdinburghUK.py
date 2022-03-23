@@ -25,7 +25,7 @@ def test_LEK_UoEdinburghUK_2cxm_model(label, t_array, C_t_array,
     # prepare input data
     t_array -= t_array[0]  # make first time point = 0
     t_array /= 60  # convert to mins, so that Fp and PS are in /min
-    X0 = (0.1, 0.1, 20/100, 0.1)  # vp, ve, Fp, E starting values
+    X0 = (0.01, 0.2, 20/100, 0.1)  # vp, ve, Fp, E starting values
     bounds = ((0, 0, 0, 0), (1, 1, 200/100, 1))
 
     # run test

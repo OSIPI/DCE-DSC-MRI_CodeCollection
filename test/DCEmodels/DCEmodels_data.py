@@ -8,7 +8,8 @@ import pandas as pd
 # ve: a_tol=0.05, r_tol=0, start=0.2, bounds=(0,1)
 # PS/KTrans: a_tol=0.005, r_tol=0.01, start=0.6, bounds=(0,5), units /min
 # vp: a_tol=0.0025, r_tol=0, start=0.01, bounds=(0,1)
-# fp: a_tol=5, r_tol=0.01, start=, bounds= , units ml/100ml/min
+# fp: a_tol=5, r_tol=0.01, start=20, bounds=(0,200) , units ml/100ml/min
+# E: start=0.1, bounds=(0,1)
 # delay: a_tol=0.2, r_tol=0, start=0, bounds=(-10,10), units s
 
 

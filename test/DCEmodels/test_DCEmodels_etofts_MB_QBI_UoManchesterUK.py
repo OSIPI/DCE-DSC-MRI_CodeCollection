@@ -18,7 +18,7 @@ def test_MB_QBI_UoManchester_extended_tofts_kety_model(label, t_array, C_array, 
     # NOTES: delay fitting not implemented
 
     # prepare input data
-    t_array = t_array / 60  # - in seconds
+    t_array = t_array / 60  # convert to minutes
     aif = dce_aif.Aif(times=t_array, base_aif=ca_array, aif_type=dce_aif.AifType(3))
 
     # run test

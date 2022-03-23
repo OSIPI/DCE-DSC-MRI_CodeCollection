@@ -23,7 +23,7 @@ def test_MB_QBI_UoManchesterUK_2cxm_model(label, t_array,
     # NOTES:
 
     # prepare input data - create aif object
-    t_array /= 60  # - in seconds
+    t_array /= 60  #  convert to minutes
     aif = dce_aif.Aif(times=t_array, base_aif=cp_aif_array,
               aif_type=dce_aif.AifType(3))
 

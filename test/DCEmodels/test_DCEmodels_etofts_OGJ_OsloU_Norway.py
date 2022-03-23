@@ -18,7 +18,7 @@ def test_OGJ_OsloU_Norway_extended_tofts_kety_model(label, t_array, C_array, ca_
     # NOTES: delay fitting not implemented
 
     # prepare input data
-    t_array = t_array / 60
+    t_array = t_array / 60  # convert to minutes
 
     # run test
     output = fitToModel('ETM', C_array, t_array, ca_array, integrationMethod='trapezoidal', method='LLSQ',

@@ -20,7 +20,7 @@ def test_OGJ_OsloU_Norway_2cxm_model(label, t_array, C_t_array,
     # NOTES:
 
     # prepare input data - create aif object
-    t_array = t_array / 60
+    t_array = t_array / 60  # convert to minutes
 
     # run test
     output = fitToModel('2CXM', C_t_array, t_array, cp_aif_array,

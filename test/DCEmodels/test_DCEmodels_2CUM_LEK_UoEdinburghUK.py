@@ -24,7 +24,7 @@ def test_LEK_UoEdinburghUK_2cum_model(label, t_array, C_t_array,
     # prepare input data - create aif object
     t_array -= t_array[0]
     t_array /= 60  # convert to mins, so that ps is in /min
-    X0 = (0.1, 20/100, 0.1)  # vp, fp, E starting values
+    X0 = (0.01, 20/100, 0.1)  # vp, fp, E starting values
     bounds = ((0, 0, 0), (1, 200/100, 1))
 
     # run test
