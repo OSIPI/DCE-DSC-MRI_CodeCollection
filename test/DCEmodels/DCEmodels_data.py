@@ -3,6 +3,14 @@ import os
 import numpy as np
 import pandas as pd
 
+# Summary of tolerances, starting values and bounds (where fitting is implented
+# within the tests):
+# ve: a_tol=0.05, r_tol=0, start=0.2, bounds=(0,1)
+# PS/KTrans: a_tol=0.005, r_tol=0.01, start=0.6, bounds=(0,5), units /min
+# vp: a_tol=0.0025, r_tol=0, start=0.01, bounds=(0,1)
+# fp: a_tol=5, r_tol=0.01, start=, bounds= , units ml/100ml/min
+# delay: a_tol=0.2, r_tol=0, start=0, bounds=(-10,10), units s
+
 
 def dce_DRO_data_extended_tofts_kety(delay=False):
     """

@@ -19,9 +19,9 @@ def test_LEK_UoEdinburghUK_tofts_model(label, t_array, C_array, ca_array, ta_arr
     # NOTES:
 
     # prepare input data
-    t_array = t_array / 60
-    X0 = (0.2, 0.6, 0)
-    bounds = ((0.0, 0.0, 0), (1, 5.0, 1))
+    t_array = t_array / 60  # convert to minutes so that KTrans is in /min
+    X0 = (0.6, 0.2, 0)  # KTrans, ve, delay
+    bounds = ((0.0, 0.0, -10), (5, 1, 10))
 
     # run test
     output, pcov = curve_fit(lambda t, x, y, delay: Kety([x, y], t, ca_array, delay), t_array, C_array, p0=X0,

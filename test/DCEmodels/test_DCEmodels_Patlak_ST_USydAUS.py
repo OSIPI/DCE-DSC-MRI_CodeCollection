@@ -21,7 +21,7 @@ def test_ST_USydAUS_Patlak_model(label, t_array, C_t_array,
     # prepare input data
     t_array = t_array / 60  # convert to mins, so that ps is in /min
     data = np.column_stack((t_array, cp_aif_array))
-    X0 = (0.01, 0.1)  # vp, ps starting values
+    X0 = (0.01, 0.6)  # vp, ps starting values
     bounds = ((0.0, 0.0), (1.0, 5.0))
 
     # run test

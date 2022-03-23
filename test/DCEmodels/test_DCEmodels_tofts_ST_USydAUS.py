@@ -19,7 +19,7 @@ def testST_USydAUS_tofts_model(label, t_array, C_array, ca_array, ta_array, ve_r
     # prepare input data
     ta_array = ta_array / 60
     data = np.column_stack((ta_array, ca_array))
-    X0 = (0.2, 0.6)
+    X0 = (0.2, 0.6)  # ve, KTrans
     bounds = ((0.0, 0.0), (1, 5.0))
 
     # run test
