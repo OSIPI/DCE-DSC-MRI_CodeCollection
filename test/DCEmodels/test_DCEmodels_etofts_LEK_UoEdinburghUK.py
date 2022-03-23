@@ -24,7 +24,7 @@ def test_LEK_UoEdinburghUK_extended_tofts_kety_model(label, t_array, C_array, ca
     t_array = t_array / 60
     arterial_delay_ref = arterial_delay_ref / 60
     X0 = (0.02, 0.2, 0.6, 0)
-    bounds = ((0.0, 0.0, 0.0, 0), (0.7, 1, 5.0, 1))
+    bounds = ((0.0, 0.0, 0.0, 0), (0.7, 1, 1, 1))
 
     output, pcov = curve_fit(lambda t, x, y, z, toff: ExtKety([x, y, z], t, ca_array, toff), t_array, C_array, p0=X0,
                              bounds=bounds)
