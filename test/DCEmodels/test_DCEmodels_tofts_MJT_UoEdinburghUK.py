@@ -17,7 +17,6 @@ def test_MJT_UoEdinburghUK_tofts_model(label, t_array, C_array, ca_array, ta_arr
     # NOTES:
 
     # prepare input data - create aif object
-    t_array = t_array  # /60  - in seconds
     aif = aifs.patient_specific(t_array, ca_array)
     pk_model = pk_models.tofts(t_array, aif)
 

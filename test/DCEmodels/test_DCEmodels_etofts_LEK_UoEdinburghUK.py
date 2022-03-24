@@ -20,6 +20,8 @@ def test_LEK_UoEdinburghUK_extended_tofts_kety_model(label, t_array, C_array, ca
                                                      Ktrans_ref, arterial_delay_ref, a_tol_ve, r_tol_ve, a_tol_vp,
                                                      r_tol_vp, a_tol_Ktrans, r_tol_Ktrans, a_tol_delay, r_tol_delay):
     # NOTES:
+    # Fitting not implemented
+
     # prepare input data
     t_array = t_array / 60  # convert to minutes so that KTrans is in /min
     arterial_delay_ref = arterial_delay_ref / 60

@@ -9,7 +9,7 @@ import pandas as pd
 # PS/KTrans: a_tol=0.005, r_tol=0.01, start=0.6, bounds=(0,5), units /min
 # vp: a_tol=0.0025, r_tol=0, start=0.01, bounds=(0,1)
 # fp: a_tol=5, r_tol=0.01, start=20, bounds=(0,200) , units ml/100ml/min
-# E: start=0.1, bounds=(0,1)
+# E: start=0.15, bounds=(0,1)
 # delay: a_tol=0.2, r_tol=0, start=0, bounds=(-10,10), units s
 
 
@@ -299,7 +299,7 @@ def dce_DRO_data_2cxm():
     cp_aif_array = df['cp_aif'].tolist()  # mM
     vp_ref = df['vp'].tolist()
     ve_ref = df['ve'].tolist()
-    fp_ref = df['fp'].tolist() # 100ml/ml/min
+    fp_ref = df['fp'].tolist()  # ml/100ml/min
     ps_ref = df['ps'].tolist()  # /min
 
     # set the tolerance to use for this dataset

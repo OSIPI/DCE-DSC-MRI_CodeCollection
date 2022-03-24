@@ -17,6 +17,8 @@ def test_ST_USydAUS_Patlak_model(label, t_array, C_t_array,
                                         vp_ref, ps_ref, a_tol_vp, r_tol_vp,
                                         a_tol_ps, r_tol_ps):
     # NOTES:
+    # Fitting not implemented
+    # Delay not implemented
 
     # prepare input data
     t_array = t_array / 60  # convert to mins, so that ps is in /min

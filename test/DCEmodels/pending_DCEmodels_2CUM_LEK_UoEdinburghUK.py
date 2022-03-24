@@ -20,11 +20,12 @@ def test_LEK_UoEdinburghUK_2cum_model(label, t_array, C_t_array,
     # NOTES:
     # Source code assumes first time point is 0.
     # For testing, the time array is shifted to make this so.
+    # Fitting not implemented
 
     # prepare input data - create aif object
     t_array -= t_array[0]
     t_array /= 60  # convert to mins, so that ps is in /min
-    X0 = (0.01, 20/100, 0.1)  # vp, fp, E starting values
+    X0 = (0.01, 20/100, 0.15)  # vp, fp, E starting values
     bounds = ((0, 0, 0), (1, 200/100, 1))
 
     # run test

@@ -15,7 +15,8 @@ test_data = (DCEmodels_data.dce_DRO_data_Patlak())
 def test_LEK_UoEdinburghUK_Patlak_model(label, t_array, C_t_array, cp_aif_array,
                                         vp_ref, ps_ref, a_tol_vp, r_tol_vp,
                                         a_tol_ps, r_tol_ps):
-    # NOTES: Fitting not implemented
+    # NOTES:
+    # Fitting not implemented
 
     # prepare input data
     t_array = t_array / 60  # convert to mins, so that ps is in /min
