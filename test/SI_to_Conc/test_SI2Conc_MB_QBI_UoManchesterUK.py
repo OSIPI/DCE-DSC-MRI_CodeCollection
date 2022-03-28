@@ -20,7 +20,7 @@ def setup_module(module):
     global filename_prefix # we want to change the global variable
     os.makedirs('./test/results/SI_to_Conc', exist_ok=True)
     filename_prefix = 'SI_to_Conc/TestResults_SI2Conc'
-    log_init(filename_prefix, '_MB_UoManchester_sig_to_conc', ['label', 'time (us)', 'conc_curve', 'conc_array'])
+    log_init(filename_prefix, '_MB_UoManchester', ['label', 'time (us)', 'conc_curve', 'conc_array'])
 
 # Use the test data to generate a parametrize decorator. This causes the following
 # test to be run for every test case listed in test_data...
@@ -51,7 +51,7 @@ def test_MB_UoManchester_sig_to_conc(label, fa, tr, T1base, BLpts, r1, s_array, 
     row_data = []
     for ref, meas in zip(conc_array, conc_curve):
         row_data.append([label, f"{exc_time:.0f}", ref, meas])
-    log_results(filename_prefix, '_MB_UoManchester_sig_to_conc', row_data)
+    log_results(filename_prefix, '_MB_UoManchester', row_data)
 
     np.testing.assert_allclose( conc_curve, conc_array, rtol=r_tol, atol=a_tol )
 

@@ -18,7 +18,7 @@ def setup_module(module):
     global filename_prefix # we want to change the global variable
     os.makedirs('./test/results/SI_to_Conc', exist_ok=True)
     filename_prefix = 'SI_to_Conc/TestResults_SI2Conc'
-    log_init(filename_prefix, '_LEK_UoEdinburgh_SI2Conc', ['label', 'time (us)', 'conc_curve', 'conc_array'])
+    log_init(filename_prefix, '_LEK_UoEdinburgh', ['label', 'time (us)', 'conc_curve', 'conc_array'])
 
 # Use the test data to generate a parametrize decorator. This causes the following
 # test to be run for every test case listed in test_data...
@@ -37,7 +37,7 @@ def test_LEK_UoEdinburghUK_SI2Conc(label, fa, tr, T1base, BLpts, r1, s_array, co
     row_data = []
     for ref, meas in zip(conc_array, conc_curve/r1):
         row_data.append([label, f"{exc_time:.0f}", ref, meas])
-    log_results(filename_prefix, '_LEK_UoEdinburgh_SI2Conc', row_data)
+    log_results(filename_prefix, '_LEK_UoEdinburgh', row_data)
 
     # testing
     conc_array=conc_array*r1 # This function doesn't include r1, so multiply it out before testing
