@@ -51,5 +51,7 @@ def plot_bland_altman(ax, data, tolerances, tag, log_plot=False, xlim=None, ylim
         ax.set_ylabel(label_yaxis, fontsize=14)
     if fig_title != None:
         ax.set_title(fig_title, fontsize=16)
+    plt.xticks(fontsize=12)
+    plt.yticks(fontsize=12)
 
     #return g, ax
