@@ -20,7 +20,7 @@ def setup_module(module):
     global filename_prefix # we want to change the global variable
     os.makedirs('./test/results/SI_to_Conc', exist_ok=True)
     filename_prefix = 'SI_to_Conc/TestResults_SI2Conc'
-    log_init(filename_prefix, '_MB_UoManchester', ['label', 'time (us)', 'conc_curve', 'conc_array'])
+    log_init(filename_prefix, '_MB_UoManchester', ['label', 'time (us)', 'conc_ref', 'conc_meas'])
 
 # Use the test data to generate a parametrize decorator. This causes the following
 # test to be run for every test case listed in test_data...
