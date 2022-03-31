@@ -14,7 +14,8 @@ test_data = (DCEmodels_data.dce_DRO_data_tofts())
 @osipi_parametrize(arg_names, test_data, xf_labels=[])
 def test_LCB_BNI_tofts_model(label, t_array, C_array, ca_array, ta_array, ve_ref, Ktrans_ref, arterial_delay_ref,
                              a_tol_ve, r_tol_ve, a_tol_Ktrans, r_tol_Ktrans, a_tol_delay, r_tol_delay):
-    # NOTES: delay fitting not implemented
+    # NOTES:
+    # Artery-capillary delay not implemented
 
     # prepare input data
     t_array = t_array  # /60  - in seconds

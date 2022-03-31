@@ -20,11 +20,13 @@ def test_LEK_UoEdinburghUK_extended_tofts_kety_model(label, t_array, C_array, ca
                                                      Ktrans_ref, arterial_delay_ref, a_tol_ve, r_tol_ve, a_tol_vp,
                                                      r_tol_vp, a_tol_Ktrans, r_tol_Ktrans, a_tol_delay, r_tol_delay):
     # NOTES:
+    # Fitting not implemented
+
     # prepare input data
-    t_array = t_array / 60
+    t_array = t_array / 60  # convert to minutes so that KTrans is in /min
     arterial_delay_ref = arterial_delay_ref / 60
-    X0 = (0.02, 0.2, 0.6, 0)
-    bounds = ((0.0, 0.0, 0.0, 0), (0.7, 1, 5.0, 1))
+    X0 = (0.6, 0.2, 0.01, 0)  # KTrans, ve, vp, delay
+    bounds = ((0.0, 0.0, 0.0, -10/60), (5, 1, 1, 10/60))
 
     output, pcov = curve_fit(lambda t, x, y, z, toff: ExtKety([x, y, z], t, ca_array, toff), t_array, C_array, p0=X0,
                              bounds=bounds)

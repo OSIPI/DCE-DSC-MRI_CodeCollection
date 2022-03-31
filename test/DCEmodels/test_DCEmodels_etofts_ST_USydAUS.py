@@ -16,13 +16,15 @@ test_data = (DCEmodels_data.dce_DRO_data_extended_tofts_kety())
 def testST_USydAUS_extended_tofts_kety_model(label, t_array, C_array, ca_array, ta_array, ve_ref, vp_ref, Ktrans_ref,
                                              arterial_delay_ref, a_tol_ve, r_tol_ve, a_tol_vp, r_tol_vp, a_tol_Ktrans,
                                              r_tol_Ktrans, a_tol_delay, r_tol_delay):
-    # NOTES: delay fitting not implemented
+    # NOTES:
+    # Delay not implemented
+    # Artery-capillary delay fitting not implemented
 
     # prepare input data
-    ta_array = ta_array / 60
+    ta_array = ta_array / 60  # convert to minutes so that KTrans is in /min
     data = np.column_stack((ta_array, ca_array))
-    X0 = (0.6, 0.2, 0.02)
-    bounds = ((0.0, 0.0, 0.0), (5.0, 1, 0.7))
+    X0 = (0.01, 0.2, 0.6)  # vp, ve, KTrans
+    bounds = ((0.0, 0.0, 0.0), (1, 1, 5))
 
     # run test
     output, pcov = curve_fit(ExtendedTofts, data, C_array, p0=X0, bounds=bounds)

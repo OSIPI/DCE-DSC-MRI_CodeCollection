@@ -18,13 +18,12 @@ def test_MJT_UoEdinburghUK_extended_tofts_kety_model(label, t_array, C_array, ca
     # NOTES:
 
     # prepare input data - create aif object
-    t_array = t_array  # /60  - in seconds
+    t_array = t_array  # in seconds
     aif = aifs.patient_specific(t_array, ca_array)
     pk_model = pk_models.extended_tofts(t_array, aif)
-    pk_pars_0 = [{'vp': 0.6, 'ps': 0.02, 've': 0.2}]
 
     # run test
-    pk_pars, C_t_fit = dce_fit.conc_to_pkp(C_array, pk_model, pk_pars_0)
+    pk_pars, C_t_fit = dce_fit.conc_to_pkp(C_array, pk_model)
     Ktrans_meas = pk_pars['ps']
     ve_meas = pk_pars['ve']
     vp_meas = pk_pars['vp']

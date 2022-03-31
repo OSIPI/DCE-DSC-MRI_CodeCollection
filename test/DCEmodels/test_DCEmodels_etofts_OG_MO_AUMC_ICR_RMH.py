@@ -23,6 +23,8 @@ def testOG_MO_AUMC_ICR_RMH_extended_tofts_kety_model(label, t_array, C_array, ca
     ta_array = ta_array / 60
     t_array = t_array / 60
     arterial_delay_ref = arterial_delay_ref / 60
+    x0 = (0.6/0.2, 0.2, 0.2, 0.01)  # ke, delay, ve, vp
+    bounds = ((0.0, -10, 0.0, 0.0), (5.0/0.2, 10, 1, 1))
     try:
         AIF = fit_aif(ca_array, ta_array, model='Cosine8')
     except:
@@ -35,12 +37,12 @@ def testOG_MO_AUMC_ICR_RMH_extended_tofts_kety_model(label, t_array, C_array, ca
         ke, arterial_delay_meas, ve_meas, vp_meas = fit_tofts_model(C_array, t_array, AIF, idxs=None,
                                                                     X0=(0.6, 0.2, 0.2, 0.02),
                                                                     bounds=((0.0, 0, 0.0, 0.0), (5.0, 1, 0.7, 0.7)),
-                                                                    jobs=4, model='Cosine8')
+                                                                    jobs=1, model='Cosine8')
     except:
         ke, arterial_delay_meas, ve_meas, vp_meas = fit_tofts_model(C_array, t_array, AIF, idxs=None,
                                                                     X0=(0.6, 0.2, 0.2, 0.02),
                                                                     bounds=((0.0, 0, 0.0, 0.0), (5.0, 1, 0.7, 0.7)),
-                                                                    jobs=4, model='Cosine4')
+                                                                    jobs=1, model='Cosine4')
     Ktrans_meas = ke * ve_meas
     np.testing.assert_allclose([ve_meas], [ve_ref], rtol=r_tol_ve, atol=a_tol_ve)
     np.testing.assert_allclose([vp_meas], [vp_ref], rtol=r_tol_vp, atol=a_tol_vp)

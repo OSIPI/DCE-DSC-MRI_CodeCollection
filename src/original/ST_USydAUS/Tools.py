@@ -78,7 +78,7 @@ def deconvolve(C,ca,dt):
 def integrate(ca,t):
     
     f = np.zeros(len(ca))
-    dt = t[1]-[0]
+    dt = t[1]-t[0]
     f[0] = 0
     for n in np.arange(1,len(t)):
         f[n] = dt*ca[n]+f[n-1]
