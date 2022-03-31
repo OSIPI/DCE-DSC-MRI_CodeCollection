@@ -1,0 +1,50 @@
+[
+  {
+    "path": "../test/results/T1_mapping",
+    "filename": "TestResults_T1mapping_mcgill_t1_VFA_lin.csv",
+    "method": "linear",
+    "author": "ZA_McGill_Can"
+  },
+  {
+    "path": "../test/results/T1_mapping",
+    "filename": "TestResults_T1mapping_MJT_EdinburghUK_t1_VFA_lin.csv",
+    "method": "linear",
+    "author": "MJT_UoEdinburgh_UK"
+  },
+  {
+    "path": "../test/results/T1_mapping",
+    "filename": "TestResults_T1mapping_ST_SydneyAus_t1_VFA_lin.csv",
+    "method": "linear",
+    "author": "ST_Sydney_Aus"
+  },
+  {
+    "path": "../test/results/T1_mapping",
+    "filename": "TestResults_T1mapping_OG_MO_AUMC_ICR_RHM_t1_VFA_2fa.csv",
+    "method": "linear",
+    "author": "OG_MO_AUMC_NL_ICR_UK"
+  },
+  {
+    "path": "../test/results/T1_mapping",
+    "filename": "TestResults_T1mapping_mcgill_t1_novifast.csv",
+    "method": "nonlinear",
+    "author": "ZA_McGill_Can"
+  },
+  {
+    "path": "../test/results/T1_mapping",
+    "filename": "TestResults_T1mapping_MJT_EdinburghUK_t1_VFA_nonlin.csv",
+    "method": "nonlinear",
+    "author": "MJT_UoEdinburgh_UK"
+  },
+  {
+    "path": "../test/results/T1_mapping",
+    "filename": "TestResults_T1mapping_ST_SydneyAus_t1_VFA_nonlin.csv",
+    "method": "nonlinear",
+    "author": "ST_Sydney_Aus"
+  },
+  {
+    "path": "../test/results/T1_mapping",
+    "filename": "TestResults_T1mapping_OG_MO_AUMC_ICR_RHM_t1_VFA_nonlin.csv",
+    "method": "nonlinear",
+    "author": "OG_MO_AUMC_NL_ICR_UK"
+  }
+]
