@@ -17,8 +17,8 @@ Cp(t) = fa.Ca(t) + (1- fa).Cv(t) where fa is the arterial fraction (0 <= fa <= 1
 '''
 
 import numpy as np
-from QbiPy.dce_models import dce_aif
-from QbiPy import helpers
+from ...QbiPy.dce_models import dce_aif
+from ...QbiPy import helpers
 
 #
 #-------------------------------------------------------------------------------

@@ -25,12 +25,14 @@ def setup_module(module):
 @osipi_parametrize(arg_names, test_data, xf_labels=[])
 def testST_USydAUS_tofts_model(label, t_array, C_array, ca_array, ta_array, ve_ref, Ktrans_ref, arterial_delay_ref,
                                a_tol_ve, r_tol_ve, a_tol_Ktrans, r_tol_Ktrans, a_tol_delay, r_tol_delay):
-    # NOTES: delay fitting not implemented
+    # NOTES:
+    # Fitting not implemented
+    # Artery-capillary delay fitting not implemented
 
     # prepare input data
     ta_array = ta_array / 60
     data = np.column_stack((ta_array, ca_array))
-    X0 = (0.2, 0.6)
+    X0 = (0.2, 0.6)  # ve, KTrans
     bounds = ((0.0, 0.0), (1, 5.0))
 
     # run code
