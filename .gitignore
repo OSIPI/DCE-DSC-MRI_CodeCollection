@@ -147,7 +147,7 @@ cython_debug/
 .vscode/
 
 # test output
-test/results
+test/results-old
 
 # notebook data
 notebooks/data
