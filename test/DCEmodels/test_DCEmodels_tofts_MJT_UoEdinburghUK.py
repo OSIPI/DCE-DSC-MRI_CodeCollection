@@ -39,7 +39,7 @@ def test_MJT_UoEdinburghUK_tofts_model(label, t_array, C_array, ca_array, ta_arr
     exc_time = 1e6 * (perf_counter() - tic)  # measure execution time
 
     # log results
-    log_results(filename_prefix, '_MJT_UoEdinburgh_tofts', [
+    log_results(filename_prefix, '_MJT_UoEdinburghUK_tofts', [
         [label, f"{exc_time:.0f}", Ktrans_ref, ve_ref, Ktrans_meas, ve_meas]])
 
     # run test
