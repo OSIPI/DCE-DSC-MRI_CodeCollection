@@ -1,3 +1,5 @@
+# Guidelines
+
 More detailed information on the code collection can be found at the [wiki](https://github.com/OSIPI/DCE-DSC-MRI_CodeCollection/wiki) of the github repository.
 Some direct links:
 - structure of the repository: https://github.com/OSIPI/DCE-DSC-MRI_CodeCollection/wiki/Repository-structure
