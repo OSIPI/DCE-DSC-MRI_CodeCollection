@@ -24,5 +24,6 @@ sections:
         - file: 2cmpExchangeModel.ipynb
 - file: DSC.md
 - file: guidelines.md
+- file: Acknowledgements.ipynb
 
 

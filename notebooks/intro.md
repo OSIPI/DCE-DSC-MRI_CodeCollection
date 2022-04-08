@@ -4,7 +4,6 @@ OSIPI DCE-DSC code
 This website publishes the results of the test results of the code in [OSIPI Code Collection](https://github.com/OSIPI/DCE-DSC-MRI_CodeCollection).
 
 ### About OSIPI TF2.3 and the OSIPI code collection  
-COULD SIMPLY CALL THE REPO'S README.MD FILE HERE  
 
 The ISMRM Open-Source Initiative for Perfusion Imaging (OSIPI) aims to promote the sharing of perfusion imaging software in order to reduce duplication, improve reproducibility and speed up translation. 
 The DCE-DSC-MRI_CodeCollection code library is an ongoing project maintained by Taskforce 2.3 of OSIPI and aims to collect, test and share open-source code for the analysis of dynamic contrast-enhanced (DCE-) and dynamic susceptibility-enhanced (DSC-) MRI for use in research and software development. 
@@ -23,7 +22,7 @@ For each contribution a separate test file was created, but contributions
 implementing the same functionality are tested using the same test data and 
 tolerances.
 
-COULD LINK TO WIKI PAGE ON VIEWING TEST RESULTS
+for more information please check the [wiki](https://github.com/OSIPI/DCE-DSC-MRI_CodeCollection/wiki/Viewing-the-test-results)
 
 ### Purpose of this website
 Pytest generates binary pass-fail output dependent on the defined tolerances.
