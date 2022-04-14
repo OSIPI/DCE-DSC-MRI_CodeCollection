@@ -6,9 +6,9 @@ import pandas as pd
 # Summary of tolerances, starting values and bounds (where fitting is implented
 # within the tests):
 # ve: a_tol=0.05, r_tol=0, start=0.2, bounds=(0,1)
-# PS/KTrans: a_tol=0.005, r_tol=0.01, start=0.6, bounds=(0,5), units /min
-# vp: a_tol=0.0025, r_tol=0, start=0.01, bounds=(0,1)
-# fp: a_tol=5, r_tol=0.01, start=20, bounds=(0,200) , units ml/100ml/min
+# PS/KTrans: a_tol=0.005, r_tol=0.1, start=0.6, bounds=(0,5), units /min
+# vp: a_tol=0.025, r_tol=0, start=0.01, bounds=(0,1)
+# fp: a_tol=5, r_tol=0.1, start=20, bounds=(0,200) , units ml/100ml/min
 # E: start=0.15, bounds=(0,1)
 # delay: a_tol=0.2, r_tol=0, start=0, bounds=(-10,10), units s
 
@@ -87,13 +87,13 @@ def dce_DRO_data_extended_tofts_kety(delay=False):
             label[a] = label[a] + '_delayed'
 
     # set the tolerance to use for this dataset
+    a_tol_vp = [0.025] * len(Ktrans_ref)
     a_tol_ve = [0.05] * len(Ktrans_ref)
-    a_tol_vp = [0.0025] * len(Ktrans_ref)
     a_tol_Ktrans = [0.005] * len(Ktrans_ref)
     a_tol_delay = [0.2] * len(Ktrans_ref)
-    r_tol_ve = [0] * len(Ktrans_ref)
     r_tol_vp = [0] * len(Ktrans_ref)
-    r_tol_Ktrans = [0.01] * len(Ktrans_ref)
+    r_tol_ve = [0] * len(Ktrans_ref)
+    r_tol_Ktrans = [0.1] * len(Ktrans_ref)
     r_tol_delay = [0] * len(Ktrans_ref)
 
     # convert to list of tuples (input for pytest.mark.parametrize)
@@ -179,7 +179,7 @@ def dce_DRO_data_tofts(delay=False):
     a_tol_Ktrans = [0.005] * len(Ktrans_ref)
     a_tol_delay = [0.2] * len(Ktrans_ref)
     r_tol_ve = [0] * len(Ktrans_ref)
-    r_tol_Ktrans = [0.01] * len(Ktrans_ref)
+    r_tol_Ktrans = [0.1] * len(Ktrans_ref)
     r_tol_delay = [0] * len(Ktrans_ref)
 
     # convert to list of tuples (input for pytest.mark.parametrize)
@@ -238,10 +238,10 @@ def dce_DRO_data_Patlak():
     ps_ref = df['ps'].tolist()  # per min
 
     # set the tolerance to use for this dataset
-    a_tol_vp = [0.0025] * len(vp_ref)
+    a_tol_vp = [0.025] * len(vp_ref)
     a_tol_ps = [0.005] * len(vp_ref)
     r_tol_vp = [0] * len(vp_ref)
-    r_tol_ps = [0.01] * len(vp_ref)
+    r_tol_ps = [0.1] * len(vp_ref)
 
     # convert to list of tuples (input for pytest.mark.parametrize)
     pars = list(
@@ -263,8 +263,10 @@ def dce_DRO_data_2cxm():
         Temporal resolution: 0.5 s
         Acquisition time: 300 s
         AIF: Parker function, starting at t=10s
-        Noise: SD = 0.01 mM
+        Noise: SD = 0.001 mM
         Arterial delay: none
+        Since it is challenging to fit all parameters across a wide area of
+        parameter space, data is generated with high SNR.
     Reference values:
         Reference values are the parameters used to generate the data.
         All combinations of the following are included:
@@ -284,7 +286,7 @@ def dce_DRO_data_2cxm():
         Each tuple contains a set of parameters corresponding to 1 test case
     """
     filename = os.path.join(os.path.dirname(__file__), 'data',
-                            '2cxm_sd_0_delay_0.csv')
+                            '2cxm_sd_0.001_delay_0.csv')
 
     # read from CSV to pandas
     converters = {'t': lambda x: np.fromstring(x, dtype=float, sep=' '),
@@ -303,14 +305,14 @@ def dce_DRO_data_2cxm():
     ps_ref = df['ps'].tolist()  # /min
 
     # set the tolerance to use for this dataset
-    a_tol_vp = [0.0025] * len(vp_ref)
+    a_tol_vp = [0.025] * len(vp_ref)
     a_tol_ve = [0.05] * len(vp_ref)
     a_tol_fp = [5] * len(vp_ref)
     a_tol_ps = [0.005] * len(vp_ref)
     r_tol_vp = [0] * len(vp_ref)
     r_tol_ve = [0] * len(vp_ref)
-    r_tol_fp = [0.01] * len(vp_ref)
-    r_tol_ps = [0.01] * len(vp_ref)
+    r_tol_fp = [0.1] * len(vp_ref)
+    r_tol_ps = [0.1] * len(vp_ref)
 
     # convert to list of tuples (input for pytest.mark.parametrize)
     pars = list(
@@ -333,7 +335,7 @@ def dce_DRO_data_2cum():
         Temporal resolution: 0.5 s
         Acquisition time: 300 s
         AIF: Parker function, starting at t=10s
-        Noise: SD = 0.01 mM
+        Noise: SD = 0.02 mM
         Arterial delay: none
         Note: data are genearted using the 2CXM model with ve=100
     Reference values:
@@ -354,7 +356,7 @@ def dce_DRO_data_2cum():
         Each tuple contains a set of parameters corresponding to 1 test case
     """
     filename = os.path.join(os.path.dirname(__file__), 'data',
-                            '2cum_sd_0_delay_0.csv')
+                            '2cum_sd_0.02_delay_0.csv')
 
     # read from CSV to pandas
     converters = {'t': lambda x: np.fromstring(x, dtype=float, sep=' '),
@@ -368,94 +370,21 @@ def dce_DRO_data_2cum():
     C_t_array = df['C_t'].tolist()  # mM
     cp_aif_array = df['cp_aif'].tolist()  # mM
     vp_ref = df['vp'].tolist()
-    fp_ref = df['fp'].tolist() # 100ml/ml/min
+    fp_ref = df['fp'].tolist()  # 100ml/ml/min
     ps_ref = df['ps'].tolist()  # /min
 
     # set the tolerance to use for this dataset
-    a_tol_vp = [0.0025] * len(vp_ref)
+    a_tol_vp = [0.025] * len(vp_ref)
     a_tol_fp = [5] * len(vp_ref)
     a_tol_ps = [0.005] * len(vp_ref)
     r_tol_vp = [0] * len(vp_ref)
-    r_tol_fp = [0.01] * len(vp_ref)
-    r_tol_ps = [0.01] * len(vp_ref)
+    r_tol_fp = [0.1] * len(vp_ref)
+    r_tol_ps = [0.1] * len(vp_ref)
 
     # convert to list of tuples (input for pytest.mark.parametrize)
     pars = list(
         zip(label, t_array, C_t_array, cp_aif_array, vp_ref, fp_ref,
             ps_ref, a_tol_vp, r_tol_vp, a_tol_fp,
             r_tol_fp, a_tol_ps, r_tol_ps))
-
-    return pars
-
-
-def dce_DRO_data_tcxm_mitk():
-    """
-    Import dce concentration data for testing.
-
-    Data summary: simulated data for 2CXM model
-    Patient(s): n.a.
-    Source: DRO created for testing MITK software.
-    Detailed info:
-        Temporal resolution: 0.5 s
-        Acquisition time: 300 s
-        AIF: provided with DRO
-        Noise: SD = 0.01 mM
-        Arterial delay: none
-    Reference values:
-        Reference values are the parameters used to generate the data.
-        All combinations of the following parameters are used:
-            vp: [0.02 0.1 ]
-            ve: [0.1 0.2]
-            fp: [ 5 25 40] ml/100ml/min
-            ps: [0.05 0.15] /min
-    Citation:
-        Debus et al., BMC Bioinformatics volume 20, Article number: 31 (2019)
-        Article: https://doi.org/10.1186/s12859-018-2588-1
-        Readme: https://www.mitk.org/download/demos/MITK-ModelFit2018/ReadMe.pdf
-        Download: https://www.mitk.org/download/demos/MITK-ModelFit2018/dce_2CXM_ValidationDataSet.tar.gz
-
-    Returns
-    -------
-    pars : list of tuples
-        Input for pytest.mark.parametrize
-        Each tuple contains a set of parameters corresponding to 1 test case
-    """
-    filename = os.path.join(os.path.dirname(__file__), 'data',
-                            'tcxm_sd_0.01.csv')
-
-    # read from CSV to pandas
-    converters = {'t': lambda x: np.fromstring(x, dtype=float, sep=' '),
-                  'C_t': lambda x: np.fromstring(x, dtype=float, sep=' '),
-                  'cp_aif': lambda x: np.fromstring(x, dtype=float, sep=' '),
-                  }
-    df = pd.read_csv(filename, converters=converters)
-
-    # convert to lists
-    label = df['label'].tolist()  # label describing entry
-    t_array = df['t'].tolist()  # seconds
-    C_t_array = df['C_t'].tolist()  # mM
-    cp_aif_array = df['cp_aif'].tolist()  # mM
-    vp_ref = df['vp'].tolist()
-    ve_ref = df['ve'].tolist()
-    fp_ref = df['fp'].tolist()  # ml/100ml/min
-    ps_ref = df['ps'].tolist()  # per min
-
-    # set the tolerance to use for this dataset
-    a_tol_vp = [0.0025] * len(vp_ref)
-    a_tol_ve = [0.0025] * len(vp_ref)
-    a_tol_fp = [0.5] * len(vp_ref)
-    a_tol_ps = [0.005] * len(vp_ref)
-
-    r_tol_vp = [0] * len(vp_ref)
-    r_tol_ve = [0] * len(vp_ref)
-    r_tol_fp = [0.01] * len(vp_ref)
-    r_tol_ps = [0.01] * len(vp_ref)
-
-    # convert to list of tuples (input for pytest.mark.parametrize)
-    pars = list(
-        zip(label, t_array, C_t_array, cp_aif_array, vp_ref, ve_ref,
-            fp_ref, ps_ref,
-            a_tol_vp, r_tol_vp, a_tol_ve, r_tol_ve, a_tol_fp, r_tol_fp,
-            a_tol_ps, r_tol_ps))
 
     return pars
