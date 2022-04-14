@@ -337,7 +337,7 @@ def dce_DRO_data_2cum():
         AIF: Parker function, starting at t=10s
         Noise: SD = 0.02 mM
         Arterial delay: none
-        Note: data are genearted using the 2CXM model with ve=100
+        Note: data are generated using the 2CXM model with ve=100
     Reference values:
         Reference values are the parameters used to generate the data.
         All combinations of the following are included:
