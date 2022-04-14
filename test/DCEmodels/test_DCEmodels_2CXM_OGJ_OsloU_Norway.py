@@ -4,19 +4,22 @@ from ..helpers import osipi_parametrize
 from . import DCEmodels_data
 from src.original.OGJ_OsloU_Norway.MRImageAnalysis.DCE.Analyze import fitToModel
 
-arg_names = 'label, t_array, C_t_array, cp_aif_array, vp_ref, ve_ref, fp_ref,'\
-    'ps_ref, a_tol_vp, r_tol_vp, a_tol_ve, r_tol_ve, a_tol_fp, r_tol_fp,'\
-    'a_tol_ps, r_tol_ps'
+arg_names = 'label, t_array, C_t_array, cp_aif_array, vp_ref, ve_ref, fp_ref,' \
+            'ps_ref, delay_ref, a_tol_vp, r_tol_vp, a_tol_ve, r_tol_ve, ' \
+            'a_tol_fp, r_tol_fp, a_tol_ps, r_tol_ps, a_tol_delay, r_tol_delay'
 test_data = (DCEmodels_data.dce_DRO_data_2cxm())
 
-# Use the test data to generate a parametrize decorator. This causes the following
-# test to be run for every test case listed in test_data...
+
+# Use the test data to generate a parametrize decorator. This causes the
+# following test to be run for every test case listed in test_data...
 @osipi_parametrize(arg_names, test_data, xf_labels=[])
 def test_OGJ_OsloU_Norway_2cxm_model(label, t_array, C_t_array,
-                                      cp_aif_array, vp_ref, ve_ref, fp_ref,
-                                      ps_ref, a_tol_vp, r_tol_vp, a_tol_ve,
-                                      r_tol_ve, a_tol_fp, r_tol_fp, a_tol_ps,
-                                      r_tol_ps):
+                                     cp_aif_array, vp_ref, ve_ref,
+                                     fp_ref, ps_ref, delay_ref,
+                                     a_tol_vp, r_tol_vp, a_tol_ve,
+                                     r_tol_ve, a_tol_fp, r_tol_fp,
+                                     a_tol_ps, r_tol_ps, a_tol_delay,
+                                     r_tol_delay):
     # NOTES:
 
     # prepare input data - create aif object

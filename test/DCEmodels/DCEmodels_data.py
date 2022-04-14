@@ -251,7 +251,7 @@ def dce_DRO_data_Patlak():
     return pars
 
 
-def dce_DRO_data_2cxm():
+def dce_DRO_data_2cxm(delay=False):
     """
     Import dce concentration data for testing.
 
@@ -285,15 +285,18 @@ def dce_DRO_data_2cxm():
         Input for pytest.mark.parametrize
         Each tuple contains a set of parameters corresponding to 1 test case
     """
-    filename = os.path.join(os.path.dirname(__file__), 'data',
-                            '2cxm_sd_0.001_delay_0.csv')
+
+    filename = '2cxm_sd_0.001_delay_5.csv' if delay is True else  \
+        '2cxm_sd_0.001_delay_0.csv'
+    filepath = os.path.join(os.path.dirname(__file__), 'data',
+                            filename)
 
     # read from CSV to pandas
     converters = {'t': lambda x: np.fromstring(x, dtype=float, sep=' '),
                   'C_t': lambda x: np.fromstring(x, dtype=float, sep=' '),
                   'cp_aif': lambda x: np.fromstring(x, dtype=float, sep=' '),
                   }
-    df = pd.read_csv(filename, converters=converters)
+    df = pd.read_csv(filepath, converters=converters)
     # convert to lists
     label = df['label'].tolist()  # label describing entry
     t_array = df['t'].tolist()  # seconds
@@ -303,22 +306,25 @@ def dce_DRO_data_2cxm():
     ve_ref = df['ve'].tolist()
     fp_ref = df['fp'].tolist()  # ml/100ml/min
     ps_ref = df['ps'].tolist()  # /min
+    delay_ref = df['arterial_delay'].tolist()  # s
 
     # set the tolerance to use for this dataset
     a_tol_vp = [0.025] * len(vp_ref)
     a_tol_ve = [0.05] * len(vp_ref)
     a_tol_fp = [5] * len(vp_ref)
     a_tol_ps = [0.005] * len(vp_ref)
+    a_tol_delay = [0.2] * len(vp_ref)
     r_tol_vp = [0] * len(vp_ref)
     r_tol_ve = [0] * len(vp_ref)
     r_tol_fp = [0.1] * len(vp_ref)
     r_tol_ps = [0.1] * len(vp_ref)
+    r_tol_delay = [0] * len(vp_ref)
 
     # convert to list of tuples (input for pytest.mark.parametrize)
     pars = list(
         zip(label, t_array, C_t_array, cp_aif_array, vp_ref, ve_ref, fp_ref,
-            ps_ref, a_tol_vp, r_tol_vp, a_tol_ve, r_tol_ve, a_tol_fp,
-            r_tol_fp, a_tol_ps, r_tol_ps))
+            ps_ref, delay_ref, a_tol_vp, r_tol_vp, a_tol_ve, r_tol_ve, a_tol_fp,
+            r_tol_fp, a_tol_ps, r_tol_ps, a_tol_delay, r_tol_delay))
 
     return pars
 
