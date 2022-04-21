@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 import scipy.io as sio
 
-def dsc_DRO_data_vascular_model(delay=0):
+def dsc_DRO_data_vascular_model(delay=False):
     """
     Import dsc concentration data for testing.
 
