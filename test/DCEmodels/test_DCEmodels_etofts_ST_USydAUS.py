@@ -17,7 +17,6 @@ def testST_USydAUS_extended_tofts_kety_model(label, t_array, C_array, ca_array, 
                                              arterial_delay_ref, a_tol_ve, r_tol_ve, a_tol_vp, r_tol_vp, a_tol_Ktrans,
                                              r_tol_Ktrans, a_tol_delay, r_tol_delay):
     # NOTES:
-    # Delay not implemented
     # Artery-capillary delay fitting not implemented
 
     # prepare input data

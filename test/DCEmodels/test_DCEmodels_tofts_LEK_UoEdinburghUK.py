@@ -7,8 +7,8 @@ from src.original.LEK_UoEdinburghUK.PharmacokineticModelling.models import ExtKe
 
 arg_names = 'label, t_array, C_array, ca_array, ta_array, ve_ref, Ktrans_ref, arterial_delay_ref,  a_tol_ve, ' \
             'r_tol_ve, a_tol_Ktrans, r_tol_Ktrans, a_tol_delay, r_tol_delay'
-test_data = (DCEmodels_data.dce_DRO_data_tofts())
 
+test_data = (DCEmodels_data.dce_DRO_data_tofts())
 # Use the test data to generate a parametrize decorator. This causes the following test to be run for every test case
 # listed in test_data...
 @osipi_parametrize(arg_names, test_data, xf_labels=[])

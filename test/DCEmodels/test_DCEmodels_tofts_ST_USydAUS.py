@@ -19,7 +19,7 @@ def testST_USydAUS_tofts_model(label, t_array, C_array, ca_array, ta_array, ve_r
     # Artery-capillary delay fitting not implemented
 
     # prepare input data
-    ta_array = ta_array / 60
+    ta_array = ta_array / 60  # convert time to min so that KTrans is in /min
     data = np.column_stack((ta_array, ca_array))
     X0 = (0.2, 0.6)  # ve, KTrans
     bounds = ((0.0, 0.0), (1, 5.0))

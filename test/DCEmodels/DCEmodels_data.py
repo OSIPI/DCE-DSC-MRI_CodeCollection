@@ -10,7 +10,7 @@ import pandas as pd
 # vp: a_tol=0.025, r_tol=0, start=0.01, bounds=(0,1)
 # fp: a_tol=5, r_tol=0.1, start=20, bounds=(0,200) , units ml/100ml/min
 # E: start=0.15, bounds=(0,1)
-# delay: a_tol=0.2, r_tol=0, start=0, bounds=(-10,10), units s
+# delay: a_tol=0.5, r_tol=0, start=0, bounds=(-10,10), units s
 
 
 def dce_DRO_data_extended_tofts_kety(delay=False):
@@ -90,7 +90,7 @@ def dce_DRO_data_extended_tofts_kety(delay=False):
     a_tol_vp = [0.025] * len(Ktrans_ref)
     a_tol_ve = [0.05] * len(Ktrans_ref)
     a_tol_Ktrans = [0.005] * len(Ktrans_ref)
-    a_tol_delay = [0.2] * len(Ktrans_ref)
+    a_tol_delay = [0.5] * len(Ktrans_ref)
     r_tol_vp = [0] * len(Ktrans_ref)
     r_tol_ve = [0] * len(Ktrans_ref)
     r_tol_Ktrans = [0.1] * len(Ktrans_ref)
@@ -177,7 +177,7 @@ def dce_DRO_data_tofts(delay=False):
     # set the tolerance to use for this dataset
     a_tol_ve = [0.05] * len(Ktrans_ref)
     a_tol_Ktrans = [0.005] * len(Ktrans_ref)
-    a_tol_delay = [0.2] * len(Ktrans_ref)
+    a_tol_delay = [0.5] * len(Ktrans_ref)
     r_tol_ve = [0] * len(Ktrans_ref)
     r_tol_Ktrans = [0.1] * len(Ktrans_ref)
     r_tol_delay = [0] * len(Ktrans_ref)
@@ -190,7 +190,7 @@ def dce_DRO_data_tofts(delay=False):
     return pars
 
 
-def dce_DRO_data_Patlak():
+def dce_DRO_data_Patlak(delay=False):
     """
     Import dce concentration data for testing.
 
@@ -203,7 +203,7 @@ def dce_DRO_data_Patlak():
         Acquisition time: 300 s
         AIF: Parker function, starting at t=10s
         Noise: SD = 0.02 mM
-        Arterial delay: none
+        Arterial delay: none or 5s
     Reference values:
         Reference values are the parameters used to generate the data.
         All combinations of vp (0.1, 0.2, 0.5) and PS (0, 5, 15)*1e-2 per min
@@ -219,15 +219,17 @@ def dce_DRO_data_Patlak():
         Input for pytest.mark.parametrize
         Each tuple contains a set of parameters corresponding to 1 test case
     """
-    filename = os.path.join(os.path.dirname(__file__), 'data',
-                            'patlak_sd_0.02_delay_0.csv')
+    filename = 'patlak_sd_0.02_delay_5.csv' if delay is True else  \
+        'patlak_sd_0.02_delay_0.csv'
+    filepath = os.path.join(os.path.dirname(__file__), 'data',
+                            filename)
 
     # read from CSV to pandas
     converters = {'t': lambda x: np.fromstring(x, dtype=float, sep=' '),
                   'C_t': lambda x: np.fromstring(x, dtype=float, sep=' '),
                   'cp_aif': lambda x: np.fromstring(x, dtype=float, sep=' '),
                   }
-    df = pd.read_csv(filename, converters=converters)
+    df = pd.read_csv(filepath, converters=converters)
 
     # convert to lists
     label = df['label'].tolist()  # label describing entry
@@ -236,17 +238,21 @@ def dce_DRO_data_Patlak():
     cp_aif_array = df['cp_aif'].tolist()  # mM
     vp_ref = df['vp'].tolist()
     ps_ref = df['ps'].tolist()  # per min
+    delay_ref = df['arterial_delay'].tolist()  # s
 
     # set the tolerance to use for this dataset
     a_tol_vp = [0.025] * len(vp_ref)
     a_tol_ps = [0.005] * len(vp_ref)
+    a_tol_delay = [0.5] * len(vp_ref)
     r_tol_vp = [0] * len(vp_ref)
     r_tol_ps = [0.1] * len(vp_ref)
+    r_tol_delay = [0] * len(vp_ref)
 
     # convert to list of tuples (input for pytest.mark.parametrize)
     pars = list(
-        zip(label, t_array, C_t_array, cp_aif_array, vp_ref, ps_ref, a_tol_vp,
-            r_tol_vp, a_tol_ps, r_tol_ps))
+        zip(label, t_array, C_t_array, cp_aif_array, vp_ref, ps_ref,
+            delay_ref, a_tol_vp, r_tol_vp, a_tol_ps, r_tol_ps, a_tol_delay,
+            r_tol_delay))
 
     return pars
 
@@ -264,7 +270,7 @@ def dce_DRO_data_2cxm(delay=False):
         Acquisition time: 300 s
         AIF: Parker function, starting at t=10s
         Noise: SD = 0.001 mM
-        Arterial delay: none
+        Arterial delay: none or 5s
         Since it is challenging to fit all parameters across a wide area of
         parameter space, data is generated with high SNR.
     Reference values:
@@ -313,7 +319,7 @@ def dce_DRO_data_2cxm(delay=False):
     a_tol_ve = [0.05] * len(vp_ref)
     a_tol_fp = [5] * len(vp_ref)
     a_tol_ps = [0.005] * len(vp_ref)
-    a_tol_delay = [0.2] * len(vp_ref)
+    a_tol_delay = [0.5] * len(vp_ref)
     r_tol_vp = [0] * len(vp_ref)
     r_tol_ve = [0] * len(vp_ref)
     r_tol_fp = [0.1] * len(vp_ref)
@@ -329,7 +335,7 @@ def dce_DRO_data_2cxm(delay=False):
     return pars
 
 
-def dce_DRO_data_2cum():
+def dce_DRO_data_2cum(delay=False):
     """
     Import dce concentration data for testing.
 
@@ -341,9 +347,9 @@ def dce_DRO_data_2cum():
         Temporal resolution: 0.5 s
         Acquisition time: 300 s
         AIF: Parker function, starting at t=10s
-        Noise: SD = 0.02 mM
-        Arterial delay: none
-        Note: data are generated using the 2CXM model with ve=100
+        Noise: SD = 0.0025 mM
+        Arterial delay: none or 5s
+        Note: test data are generated using the 2CXM model with ve=100
     Reference values:
         Reference values are the parameters used to generate the data.
         All combinations of the following are included:
@@ -361,15 +367,17 @@ def dce_DRO_data_2cum():
         Input for pytest.mark.parametrize
         Each tuple contains a set of parameters corresponding to 1 test case
     """
-    filename = os.path.join(os.path.dirname(__file__), 'data',
-                            '2cum_sd_0.02_delay_0.csv')
+    filename = '2cum_sd_0.0025_delay_5.csv' if delay is True else  \
+        '2cum_sd_0.0025_delay_0.csv'
+    filepath = os.path.join(os.path.dirname(__file__), 'data',
+                            filename)
 
     # read from CSV to pandas
     converters = {'t': lambda x: np.fromstring(x, dtype=float, sep=' '),
                   'C_t': lambda x: np.fromstring(x, dtype=float, sep=' '),
                   'cp_aif': lambda x: np.fromstring(x, dtype=float, sep=' '),
                   }
-    df = pd.read_csv(filename, converters=converters)
+    df = pd.read_csv(filepath, converters=converters)
     # convert to lists
     label = df['label'].tolist()  # label describing entry
     t_array = df['t'].tolist()  # seconds
@@ -378,19 +386,22 @@ def dce_DRO_data_2cum():
     vp_ref = df['vp'].tolist()
     fp_ref = df['fp'].tolist()  # 100ml/ml/min
     ps_ref = df['ps'].tolist()  # /min
+    delay_ref = df['arterial_delay'].tolist()  # s
 
     # set the tolerance to use for this dataset
     a_tol_vp = [0.025] * len(vp_ref)
     a_tol_fp = [5] * len(vp_ref)
     a_tol_ps = [0.005] * len(vp_ref)
+    a_tol_delay = [0.5] * len(vp_ref)
     r_tol_vp = [0] * len(vp_ref)
     r_tol_fp = [0.1] * len(vp_ref)
     r_tol_ps = [0.1] * len(vp_ref)
+    r_tol_delay = [0] * len(vp_ref)
 
     # convert to list of tuples (input for pytest.mark.parametrize)
     pars = list(
-        zip(label, t_array, C_t_array, cp_aif_array, vp_ref, fp_ref,
+        zip(label, t_array, C_t_array, cp_aif_array, vp_ref, fp_ref, delay_ref,
             ps_ref, a_tol_vp, r_tol_vp, a_tol_fp,
-            r_tol_fp, a_tol_ps, r_tol_ps))
+            r_tol_fp, a_tol_ps, r_tol_ps, a_tol_delay, r_tol_delay))
 
     return pars

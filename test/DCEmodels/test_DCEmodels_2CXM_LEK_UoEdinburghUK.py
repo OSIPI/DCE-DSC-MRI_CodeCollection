@@ -10,10 +10,8 @@ from src.original.LEK_UoEdinburghUK.PharmacokineticModelling.models import \
 arg_names = 'label, t_array, C_t_array, cp_aif_array, vp_ref, ve_ref, fp_ref,' \
             'ps_ref, delay_ref, a_tol_vp, r_tol_vp, a_tol_ve, r_tol_ve, ' \
             'a_tol_fp, r_tol_fp, a_tol_ps, r_tol_ps, a_tol_delay, r_tol_delay'
+
 test_data = (DCEmodels_data.dce_DRO_data_2cxm())
-test_data_delay = (DCEmodels_data.dce_DRO_data_2cxm(delay=True))
-
-
 # Use the test data to generate a parametrize decorator. This causes the
 # following test to be run for every test case listed in test_data...
 @osipi_parametrize(arg_names, test_data, xf_labels=[])
@@ -64,8 +62,9 @@ def test_LEK_UoEdinburghUK_2cxm_model(label, t_array, C_t_array,
                                atol=a_tol_ps)
 
 
+test_data_delay = (DCEmodels_data.dce_DRO_data_2cxm(delay=True))
 @osipi_parametrize(arg_names, test_data_delay, xf_labels=[])
-def test_LEK_UoEdinburghUK_2cxm_delay_model(label, t_array, C_t_array,
+def test_LEK_UoEdinburghUK_2cxm_model_delay(label, t_array, C_t_array,
                                             cp_aif_array, vp_ref, ve_ref,
                                             fp_ref, ps_ref, delay_ref,
                                             a_tol_vp, r_tol_vp, a_tol_ve,
@@ -90,8 +89,8 @@ def test_LEK_UoEdinburghUK_2cxm_delay_model(label, t_array, C_t_array,
                         bounds_error=False, fill_value=(0, C_t_array[-1]))
     cp_aif_interp = c_ap_func(t_interp)
     C_t_interp = C_t_func(t_interp)
-    X0 = (0.01, 0.2, 20 / 100, 0.15, 0)  # vp, ve, Fp, E, delay starting values
-    bounds = ((0, 0, 0, 0, -10), (1, 1, 200 / 100, 1, 10))
+    X0 = (0.01, 0.2, 20/100, 0.15, 0)  # vp, ve, Fp, E, delay starting values
+    bounds = ((0, 0, 0, 0, -10/60), (1, 1, 200/100, 1, 10/60))
 
     # run test
     output, pcov = curve_fit(lambda t, vp, ve, fp, E, delay: TwoCXM([E, fp, ve,
