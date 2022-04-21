@@ -45,10 +45,10 @@ def dsc_DRO_data_vascular_model(delay=False):
 
     label = df['label'].tolist()  # label describing entry
     C_tis = df['C_tis'].tolist()
-    C_aif = df['C_aif'].tolist()
-    cbv = df['cbv'].tolist()  
-    cbf = df['cbf'].tolist()
-    tr = df['tr'].tolist()
+    C_aif = df['C_aif'].tolist() 
+    cbv = df['cbv'].tolist()  # ml/100ml
+    cbf = df['cbf'].tolist() # ml/100ml/min
+    tr = df['tr'].tolist() # seconds
 
     # set the tolerance to use for this dataset
     r_tol_cbv = [0.1] * len(tr)
