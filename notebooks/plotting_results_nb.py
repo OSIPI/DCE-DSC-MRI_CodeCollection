@@ -34,7 +34,7 @@ def plot_bland_altman(ax, data, tolerances, tag, log_plot=False, xlim=None, ylim
 
 
     g = sns.scatterplot(data=data, ax=ax, x=tag + '_ref', y='error_' + tag, hue='author',
-                        hue_order=data.author.sort_values().unique(), style='author', size='author')
+                        hue_order=data.author.sort_values().unique(), style='author', s=100)
 
     tol = tolerances[tag]
     if not log_plot:
