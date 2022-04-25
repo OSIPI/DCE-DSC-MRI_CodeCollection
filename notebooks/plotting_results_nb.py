@@ -67,10 +67,6 @@ def plot_bland_altman(ax, data, tolerances, tag, log_plot=False, xlim=None, ylim
         ax.set_title(fig_title, fontsize=18)
     ax.tick_params(axis='x', labelsize=14)
     ax.tick_params(axis='y', labelsize=14)
-    #plt.xticks(fontsize=12)
-    #plt.yticks(fontsize=12)
-
-    #return g, ax
 
 
 def bland_altman_statistics(data, par, grouptag):
@@ -95,10 +91,10 @@ def bland_altman_statistics(data, par, grouptag):
 
     # calculate std for lower limits of agreement
     std_error = subset_data.groupby(grouptag).std()
-    std_error.rename(columns={par: 'std_error'}, inplace=True)
+    std_error.rename(columns={par: 'stdev'}, inplace=True)
     resultsBA = bias.join(std_error)
 
-    resultsBA['LoA lower'] = resultsBA['bias'] - 1.96 * resultsBA['std_error']
-    resultsBA['LoA upper'] = resultsBA['bias'] + 1.96 * resultsBA['std_error']
+    resultsBA['LoA lower'] = resultsBA['bias'] - 1.96 * resultsBA['stdev']
+    resultsBA['LoA upper'] = resultsBA['bias'] + 1.96 * resultsBA['stdev']
 
     return resultsBA
