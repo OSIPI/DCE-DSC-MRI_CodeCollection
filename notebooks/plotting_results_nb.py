@@ -90,9 +90,9 @@ def bland_altman_statistics(data, par, grouptag):
     bias.rename(columns={par: 'bias'}, inplace=True)
 
     # calculate std for lower limits of agreement
-    std_error = subset_data.groupby(grouptag).std()
-    std_error.rename(columns={par: 'stdev'}, inplace=True)
-    resultsBA = bias.join(std_error)
+    stdev = subset_data.groupby(grouptag).std()
+    stdev.rename(columns={par: 'stdev'}, inplace=True)
+    resultsBA = bias.join(stdev)
 
     resultsBA['LoA lower'] = resultsBA['bias'] - 1.96 * resultsBA['stdev']
     resultsBA['LoA upper'] = resultsBA['bias'] + 1.96 * resultsBA['stdev']
