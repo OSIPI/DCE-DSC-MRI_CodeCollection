@@ -29,15 +29,13 @@ def test_MB_UoManchester_sig_to_conc(label, fa, tr, T1base, BLpts, r1, s_array, 
 
     ##Prepare input data
     
-    #The code eeds a baseline signal to calculate M0 from, so this will be the mean signal from 1 to BL points as used in the orginal data
+    #The code needs a baseline signal to calculate M0 from, so this will be the mean signal from 1 to BL points as used in the orginal data
     S0=np.mean(s_array[1:BLpts])
 
     #The code used to make the test data doesn't include the first point on the curve, so remove it here from s and conc and reduce BLpts by 1
     s_array=s_array[1:]
     conc_array=conc_array[1:]
     BLpts=BLpts-1
-
-    #The code also needs a baseline signal to calculate M0 from, so this will be the mean signal from 1 to BL points
 
     #Relaxivity units should be per ms rather than per s for this code, so multiply r1 by 1000
     r1=r1*1000
