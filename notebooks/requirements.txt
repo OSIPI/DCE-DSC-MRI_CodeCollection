@@ -1,0 +1,11 @@
+jupyter-book
+matplotlib
+numpy
+ghp-import
+nibabel
+mat73
+scipy
+lmfit
+pandas
+nilearn
+seaborn

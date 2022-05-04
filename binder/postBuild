@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Get dependencies
+python -m pip install --upgrade pip
+pip install wheel flake8 pytest codecov
+pip install ".[test]"
+
+# Get the test data from the website repo
+# [We could just run pytest here, but maybe it's better to use the same data as website?]
+git clone https://github.com/notZaki/osipidemo.git ./democlone
+rm -rf ./test
+mv ./democlone/test ./test
+rm -rf ./democlone
