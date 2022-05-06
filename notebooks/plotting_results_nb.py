@@ -32,9 +32,7 @@ def plot_bland_altman(ax, data, tolerances, tag, log_plot=False, xlim=None, ylim
     citation: Bland JM and Altman DG "Measuring agreement in method comparison studies" Statistical Methods in Medical Research 1999; 8: 135-160
     """
 
-
-    g = sns.scatterplot(data=data, ax=ax, x=tag + '_ref', y='error_' + tag, hue='author',
-                        hue_order=data.author.sort_values().unique(), style='author', s=150)
+    g = sns.scatterplot(data=data, ax=ax, x=tag + '_ref', y='error_' + tag, hue='author', hue_order=data.author.sort_values().unique(), style='author', s=100)
 
     tol = tolerances[tag]
     if not log_plot:
