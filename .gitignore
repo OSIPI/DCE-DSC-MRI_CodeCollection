@@ -143,6 +143,14 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
+# vscode
+.vscode/
+
+# test output
+test/results-old
+
+# notebook data
+notebooks/data
 
 # Pycharm
 .idea
