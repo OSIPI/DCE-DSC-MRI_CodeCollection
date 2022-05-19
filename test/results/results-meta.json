@@ -167,6 +167,20 @@
     "method": "tofts",
     "author": "LEK_UoEdinburgh_UK"
   },
+    {
+    "path": "../test/results/DCEmodels",
+    "filename": "TestResults_models_LEK_UoEdinburghUK_2CUM.csv",
+    "category": "DCEmodels",
+    "method": "2CUM",
+    "author": "LEK_UoEdinburgh_UK"
+  },
+    {
+    "path": "../test/results/DCEmodels",
+    "filename": "TestResults_models_LEK_UoEdinburghUK_2CXM.csv",
+    "category": "DCEmodels",
+    "method": "2CXM",
+    "author": "LEK_UoEdinburgh_UK"
+  },
   {
     "path": "../test/results/DCEmodels",
     "filename": "TestResults_models_MB_QBI_UoManchester_etofts.csv",
@@ -225,21 +239,35 @@
   },
   {
     "path": "../test/results/DCEmodels",
-    "filename": "TestResults_models_OGJ_OsloU_Norway_2CXM.csv",
+    "filename": "TestResults_models_OGJ_OsloU_Norway_2CXM_LLSQ.csv",
     "category": "DCEmodels",
     "method": "2CXM",
     "author": "OGJ_OsloU_Norway"
   },
   {
     "path": "../test/results/DCEmodels",
-    "filename": "TestResults_models_OGJ_OsloU_Norway_etofts.csv",
+    "filename": "TestResults_models_OGJ_OsloU_Norway_etofts_LLSQ.csv",
     "category": "DCEmodels",
     "method": "etofts",
     "author": "OGJ_OsloU_Norway"
   },
   {
     "path": "../test/results/DCEmodels",
-    "filename": "TestResults_models_OGJ_OsloU_Norway_tofts.csv",
+    "filename": "TestResults_models_OGJ_OsloU_Norway_etofts_NLLS.csv",
+    "category": "DCEmodels",
+    "method": "etofts",
+    "author": "OGJ_OsloU_Norway"
+  },
+  {
+    "path": "../test/results/DCEmodels",
+    "filename": "TestResults_models_OGJ_OsloU_Norway_tofts_LLSQ.csv",
+    "category": "DCEmodels",
+    "method": "tofts",
+    "author": "OGJ_OsloU_Norway"
+  },
+  {
+    "path": "../test/results/DCEmodels",
+    "filename": "TestResults_models_OGJ_OsloU_Norway_tofts_NLLS.csv",
     "category": "DCEmodels",
     "method": "tofts",
     "author": "OGJ_OsloU_Norway"
