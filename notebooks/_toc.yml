@@ -21,7 +21,8 @@ sections:
         - file: ToftsModel.ipynb
         - file: ExtendedToftsModel.ipynb
         - file: PatlakModel.ipynb
-        - file: 2cmpExchangeModel.ipynb
+        - file: 2CXM.ipynb
+        - file: 2CUM.ipynb
 - file: DSC.md
 - file: guidelines.md
 - file: Acknowledgements.ipynb

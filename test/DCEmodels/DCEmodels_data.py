@@ -3,7 +3,7 @@ import os
 import numpy as np
 import pandas as pd
 
-# Summary of tolerances, starting values and bounds (where fitting is implented
+# Summary of tolerances, starting values and bounds (where fitting is implemented
 # within the tests):
 # ve: a_tol=0.05, r_tol=0, start=0.2, bounds=(0,1)
 # PS/KTrans: a_tol=0.005, r_tol=0.1, start=0.6, bounds=(0,5), units /min
