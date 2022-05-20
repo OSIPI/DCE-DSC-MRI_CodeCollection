@@ -249,28 +249,28 @@
     "filename": "TestResults_models_OGJ_OsloU_Norway_etofts_LLSQ.csv",
     "category": "DCEmodels",
     "method": "etofts",
-    "author": "OGJ_OsloU_Norway"
+    "author": "OGJ_OsloU_Norway_LLSQ"
   },
   {
     "path": "../test/results/DCEmodels",
     "filename": "TestResults_models_OGJ_OsloU_Norway_etofts_NLLS.csv",
     "category": "DCEmodels",
     "method": "etofts",
-    "author": "OGJ_OsloU_Norway"
+    "author": "OGJ_OsloU_Norway_NLLS"
   },
   {
     "path": "../test/results/DCEmodels",
     "filename": "TestResults_models_OGJ_OsloU_Norway_tofts_LLSQ.csv",
     "category": "DCEmodels",
     "method": "tofts",
-    "author": "OGJ_OsloU_Norway"
+    "author": "OGJ_OsloU_Norway_LLSQ"
   },
   {
     "path": "../test/results/DCEmodels",
     "filename": "TestResults_models_OGJ_OsloU_Norway_tofts_NLLS.csv",
     "category": "DCEmodels",
     "method": "tofts",
-    "author": "OGJ_OsloU_Norway"
+    "author": "OGJ_OsloU_Norway_NLLS"
   },
   {
     "path": "../test/results/DCEmodels",
