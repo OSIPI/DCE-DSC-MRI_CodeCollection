@@ -7,7 +7,7 @@ import pandas as pd
 
 def SI2Conc_data():
     """
-    Import signal intensity data for testing converison to concentration
+    Import signal intensity data for testing conversion to concentration
     
     Data summary: Signal intensity curves derived from 1 patient 
     Patient(s): Randomly selected patient DCE-MRI of uterus 
