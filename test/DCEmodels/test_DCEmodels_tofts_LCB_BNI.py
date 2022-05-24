@@ -29,7 +29,6 @@ def test_LCB_BNI_tofts_model(label, t_array, C_array, ca_array, ta_array, ve_ref
     # Artery-capillary delay not implemented
 
     # prepare input data
-    t_array = t_array  # /60  - in seconds
 
     # run code
     tic = perf_counter()

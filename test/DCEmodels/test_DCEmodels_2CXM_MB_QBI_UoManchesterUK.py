@@ -6,11 +6,10 @@ from . import DCEmodels_data
 from src.original.MB_QBI_UoManchesterUK.QbiPy.dce_models import two_cxm_model, \
     dce_aif
 
+arg_names = 'label, t_array, C_t_array, cp_aif_array, vp_ref, ve_ref, fp_ref,' \
+            'ps_ref, delay_ref, a_tol_vp, r_tol_vp, a_tol_ve, r_tol_ve, ' \
+            'a_tol_fp, r_tol_fp, a_tol_ps, r_tol_ps, a_tol_delay, r_tol_delay'
 
-arg_names = 'label, t_array, C_t_array, cp_aif_array, vp_ref, ve_ref, fp_ref,'\
-    'ps_ref, a_tol_vp, r_tol_vp, a_tol_ve, r_tol_ve, a_tol_fp, r_tol_fp,'\
-    'a_tol_ps, r_tol_ps'
-test_data = (DCEmodels_data.dce_DRO_data_2cxm())
 
 filename_prefix = ''
 
@@ -22,22 +21,23 @@ def setup_module(module):
     filename_prefix = 'DCEmodels/TestResults_models'
     log_init(filename_prefix, '_MB_QBI_UoManchesterUK_2CXM', ['label', 'time (us)', 'vp_ref', 've_ref', 'fp_ref', 'ps_ref', 'vp_meas', 've_meas', 'fp_meas', 'ps_meas'])
 
-
+test_data = (DCEmodels_data.dce_DRO_data_2cxm())
 # Use the test data to generate a parametrize decorator. This causes the following
 # test to be run for every test case listed in test_data...
 @osipi_parametrize(arg_names, test_data, xf_labels=[])
-def test_MB_QBI_UoManchesterUK_2cxm_model(label, t_array,
-                                                       C_t_array,
-                                      cp_aif_array, vp_ref, ve_ref, fp_ref,
-                                      ps_ref, a_tol_vp, r_tol_vp, a_tol_ve,
-                                      r_tol_ve, a_tol_fp, r_tol_fp, a_tol_ps,
-                                      r_tol_ps):
+def test_MB_QBI_UoManchesterUK_2cxm_model(label, t_array, C_t_array,
+                                          cp_aif_array, vp_ref, ve_ref,
+                                          fp_ref, ps_ref, delay_ref,
+                                          a_tol_vp, r_tol_vp, a_tol_ve,
+                                          r_tol_ve, a_tol_fp, r_tol_fp,
+                                          a_tol_ps, r_tol_ps, a_tol_delay,
+                                          r_tol_delay):
     # NOTES:
 
     # prepare input data - create aif object
     t_array /= 60  # convert to minutes
     aif = dce_aif.Aif(times=t_array, base_aif=cp_aif_array,
-              aif_type=dce_aif.AifType(3))
+                      aif_type=dce_aif.AifType(3))
 
     # run code
     tic = perf_counter()

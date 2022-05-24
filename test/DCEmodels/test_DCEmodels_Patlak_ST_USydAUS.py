@@ -6,8 +6,9 @@ from ..helpers import osipi_parametrize, log_init, log_results
 from . import DCEmodels_data
 from src.original.ST_USydAUS.ModelDictionary import PatlakModel
 
-arg_names = 'label, t_array, C_t_array, cp_aif_array, vp_ref, ps_ref, a_tol_vp,\
-            r_tol_vp, a_tol_ps, r_tol_ps'
+arg_names = 'label, t_array, C_t_array, cp_aif_array, vp_ref, ps_ref, ' \
+            'delay_ref, a_tol_vp, r_tol_vp, a_tol_ps, r_tol_ps, a_tol_delay, ' \
+            'r_tol_delay'
 test_data = (DCEmodels_data.dce_DRO_data_Patlak())
 
 filename_prefix = ''
@@ -23,9 +24,10 @@ def setup_module(module):
 # test to be run for every test case listed in test_data...
 @osipi_parametrize(arg_names, test_data, xf_labels=[])
 def test_ST_USydAUS_Patlak_model(label, t_array, C_t_array,
-                                         cp_aif_array,
-                                        vp_ref, ps_ref, a_tol_vp, r_tol_vp,
-                                        a_tol_ps, r_tol_ps):
+                                              cp_aif_array, vp_ref, ps_ref,
+                                              delay_ref, a_tol_vp, r_tol_vp,
+                                              a_tol_ps, r_tol_ps,
+                                              a_tol_delay, r_tol_delay):
     # NOTES:
     # Fitting not implemented
     # Delay not implemented

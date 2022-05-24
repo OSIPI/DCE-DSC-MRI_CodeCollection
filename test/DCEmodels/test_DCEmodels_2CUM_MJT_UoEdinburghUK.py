@@ -5,9 +5,9 @@ from ..helpers import osipi_parametrize, log_init, log_results
 from . import DCEmodels_data
 from src.original.MJT_UoEdinburghUK import dce_fit, pk_models, aifs
 
-arg_names = 'label, t_array, C_t_array, cp_aif_array, vp_ref, fp_ref,'\
-    'ps_ref, a_tol_vp, r_tol_vp, a_tol_fp, r_tol_fp,'\
-    'a_tol_ps, r_tol_ps'
+arg_names = 'label, t_array, C_t_array, cp_aif_array, vp_ref, fp_ref, ' \
+            'delay_ref, ps_ref, a_tol_vp, r_tol_vp, a_tol_fp, r_tol_fp,'\
+            'a_tol_ps, r_tol_ps, a_tol_delay, r_tol_delay'
 test_data = (DCEmodels_data.dce_DRO_data_2cum())
 
 filename_prefix = ''
@@ -26,8 +26,9 @@ def setup_module(module):
 @osipi_parametrize(arg_names, test_data, xf_labels=[])
 def test_MJT_UoEdinburghUK_2cum_model(label, t_array, C_t_array,
                                       cp_aif_array, vp_ref, fp_ref,
-                                      ps_ref, a_tol_vp, r_tol_vp, a_tol_fp,
-                                      r_tol_fp, a_tol_ps, r_tol_ps):
+                                      ps_ref, delay_ref, a_tol_vp, r_tol_vp,
+                                      a_tol_fp, r_tol_fp, a_tol_ps, r_tol_ps,
+                                      a_tol_delay, r_tol_delay):
     # NOTES:
 
     # prepare input data - create aif object
