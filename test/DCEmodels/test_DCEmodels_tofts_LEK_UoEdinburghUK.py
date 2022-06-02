@@ -70,6 +70,7 @@ def test_LEK_UoEdinburghUK_tofts_model_delay(label, t_array, C_array, ca_array,
     output, pcov = curve_fit(lambda t, x, y, delay: Kety([x, y], t, ca_array, delay), t_array, C_array, p0=X0,
                              bounds=bounds)
     Ktrans_meas, ve_meas, arterial_delay_meas = output
+    arterial_delay_meas *= 60  # convert to s
     exc_time = 1e6 * (perf_counter() - tic)  # measure execution time
 
     # log results

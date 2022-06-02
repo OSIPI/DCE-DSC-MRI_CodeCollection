@@ -82,7 +82,6 @@ def testOG_MO_AUMC_ICR_RMH_extended_tofts_kety_model_delay(label, t_array,
     # prepare input data
     ta_array = ta_array / 60
     t_array = t_array / 60
-    arterial_delay_ref = arterial_delay_ref / 60
     x0 = (0.6/0.2, 0, 0.2, 0.01)  # ke, delay, ve, vp
     bounds = ((0.0, -10/60, 0.0, 0.0), (5.0/0.2, 10/60, 1, 1))
     try:
@@ -106,6 +105,7 @@ def testOG_MO_AUMC_ICR_RMH_extended_tofts_kety_model_delay(label, t_array,
                                                                     bounds=((0.0, 0, 0.0, 0.0), (5.0, 1, 0.7, 0.7)),
                                                                     jobs=1, model='Cosine4')
     Ktrans_meas = ke * ve_meas
+    arterial_delay_meas *= 60
     exc_time = 1e6 * (perf_counter() - tic)  # measure execution time
 
     # log results
