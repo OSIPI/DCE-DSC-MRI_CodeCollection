@@ -5,24 +5,20 @@ Created 28 September 2020
 @email: m.j.thrippleton@ed.ac.uk
 @institution: University of Edinburgh, UK
 
-Classes: c_to_r_model abstract class and derived subclasses:
-    c_to_r_linear
+Classes: CRModel abstract class and derived subclasses:
+    CRLinear
 """
 
 from abc import ABC, abstractmethod
 
 
-class c_to_r_model(ABC):
+class CRModel(ABC):
     """Abstract base class for relaxivity models.
 
     Subclasses correspond to specific relaxivity models (e.g. linear).
     The main purpose of these classes is to convert tracer concentration to
     relaxation rates.
 
-    Methods
-    -------
-    R1(R10, c):
-        get the R1 relaxation rate for a given tracer concentration
     """
 
     @abstractmethod
@@ -36,20 +32,19 @@ class c_to_r_model(ABC):
         pass
 
 
-class c_to_r_linear(c_to_r_model):
+class CRLinear(CRModel):
     """Linear relaxivity subclass.
 
     Linear relationship between R1/R2 and concentration.
-
-    Parameters
-    ----------
-        r1 : float
-            R1 relaxivity (s^-1 mM^-1)
-        r2 : float
-            R2 relaxivity (s^-1 mM^-1)
     """
 
     def __init__(self, r1, r2):
+        """
+
+        Args:
+        r1 (float): R1 relaxivity (s^-1 mM^-1)
+        r2 (float): R2 relaxivity (s^-1 mM^-1)
+        """
         self.r1 = r1
         self.r2 = r2
 

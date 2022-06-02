@@ -7,9 +7,10 @@ Created 6 October 2021
 
 Functions:
     minimize_global
+    least_squares_global
 """
 
-
+import nibabel as nib
 import numpy as np
 from scipy.optimize import minimize, least_squares
 
@@ -38,11 +39,12 @@ def minimize_global(cost, x_0_all, **minimizer_kwargs):
     cost = min(costs)
     idx = costs.index(cost)
     result = results[idx]
-    
+
     return result
 
+
 def least_squares_global(res, x_0_all, **least_squares_kwargs):
-    """Find global minimum by calling scipy.optimize.least_squares multiple times.
+    """Find global minimum using scipy.optimize.least_squares multiple times.
 
     Parameters
     ----------
