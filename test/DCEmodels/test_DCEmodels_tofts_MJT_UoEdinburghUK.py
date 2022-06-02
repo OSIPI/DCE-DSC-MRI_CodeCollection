@@ -28,14 +28,12 @@ def test_MJT_UoEdinburghUK_tofts_model(label, t_array, C_array, ca_array, ta_arr
     # NOTES:
 
     # prepare input data - create aif object
-    aif = aifs.patient_specific(t_array, ca_array)
-    pk_model = pk_models.tofts(t_array, aif)
+    aif = aifs.PatientSpecific(t_array, ca_array)
+    pk_model = pk_models.Tofts(t_array, aif, upsample_factor=3)
 
     # run code
     tic = perf_counter()
-    pk_pars, C_t_fit = dce_fit.conc_to_pkp(C_array, pk_model)
-    Ktrans_meas = pk_pars['ktrans']
-    ve_meas = pk_pars['ve']
+    Ktrans_meas, ve_meas, C_t_fit = dce_fit.ConcToPKP(pk_model).proc(C_array)
     exc_time = 1e6 * (perf_counter() - tic)  # measure execution time
 
     # log results

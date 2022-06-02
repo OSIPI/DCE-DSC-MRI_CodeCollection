@@ -4,7 +4,7 @@ setup(
     name='osipi_code_collection',
     version='0.0.2',
     install_requires=['dicom', 'imageio', 'joblib', 'lmfit',
-                      'mat73', 'matplotlib', 'numpy', 'opencv-python', 'openpyxl',
+                      'mat73', 'matplotlib', 'nibabel==3.2.2', 'numpy', 'opencv-python', 'openpyxl',
                       'pandas', 'progressbar', 'pytest', 'scipy'],
     include_package_data=True,
     package_dir={'osipi_code_collection': 'src'},

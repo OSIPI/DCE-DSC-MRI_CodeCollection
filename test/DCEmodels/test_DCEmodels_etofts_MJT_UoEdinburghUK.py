@@ -31,17 +31,15 @@ def test_MJT_UoEdinburghUK_extended_tofts_kety_model(label, t_array, C_array, ca
 
     # prepare input data - create aif object
     t_array = t_array  # in seconds
-    aif = aifs.patient_specific(t_array, ca_array)
-    pk_model = pk_models.extended_tofts(t_array, aif)
+    aif = aifs.PatientSpecific(t_array, ca_array)
+    pk_model = pk_models.ExtendedTofts(t_array, aif, upsample_factor=3)
 
     # run code
     tic = perf_counter()
 
     # run test
-    pk_pars, C_t_fit = dce_fit.conc_to_pkp(C_array, pk_model)
-    Ktrans_meas = pk_pars['ps']
-    ve_meas = pk_pars['ve']
-    vp_meas = pk_pars['vp']
+    vp_meas, ps_meas, ve_meas, C_t_fit = dce_fit.ConcToPKP(pk_model).proc(C_array)
+    Ktrans_meas = ps_meas
     exc_time = 1e6 * (perf_counter() - tic)  # measure execution time
 
     # log results

@@ -35,16 +35,12 @@ def test_MJT_UoEdinburghUK_2cxm_model(label, t_array, C_t_array,
     # NOTES:
 
     # prepare input data - create aif object
-    aif = aifs.patient_specific(t_array, cp_aif_array)
-    pk_model = pk_models.tcxm(t_array, aif)
+    aif = aifs.PatientSpecific(t_array, cp_aif_array)
+    pk_model = pk_models.TCXM(t_array, aif, upsample_factor=3)
 
     # run code
     tic = perf_counter()
-    pk_pars, C_t_fit = dce_fit.conc_to_pkp(C_t_array, pk_model)
-    vp_meas = pk_pars['vp']
-    ve_meas = pk_pars['ve']
-    fp_meas = pk_pars['fp']
-    ps_meas = pk_pars['ps']
+    vp_meas, ps_meas, ve_meas, fp_meas, C_t_fit = dce_fit.ConcToPKP(pk_model).proc(C_t_array)
     exc_time = 1e6 * (perf_counter() - tic)  # measure execution time
 
     # log results
