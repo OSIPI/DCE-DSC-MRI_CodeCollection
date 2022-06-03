@@ -1,76 +1,76 @@
-Technique,Category,Subcategory,Notes,Subfolder,Authors,Institution,Tester,Test status (empty/in-progress/complete),
-DCE,Bolus arrival time,piecewise linear quadratic function,Cheong et al (DOI: 10.1088/0031-9155/48/5/403),LEK_UoEdinburgh,Lucy Kershaw,"University of Edinburgh, UK",tbd,,
-DCE,Bolus arrival time,fitting Kety (Tofts) model to first third of the curve,,LEK_UoEdinburgh,Lucy Kershaw,"University of Edinburgh, UK",tbd,,
-DCE,Concentration to enhancement,,,MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK",tbd,in-progress,
-DCE,Concentration to R1,,,OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK",tbd,in-progress,
-DCE,Concentration to signal,SPGR,,LEK_UoEdinburgh,Lucy Kershaw,"University of Edinburgh, UK",tbd,,
-DCE,Concentration to signal,SPGR,,MB_QBI_UoManchesterUK,Michael Berks,"University of Manchester, UK",tbd,,
-DCE,Concentration to signal,SPGR,,OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK",tbd,,
-DCE,Input Functions,AIF parameterization,,OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK",tbd,,
-DCE,Input Functions,Georgiou AIF,Georgiou et al (DOI: 10.1002/mrm.27524),PvH_NKI,Petra van Houdt,"the Netherlands Cancer Institute, the Netherlands",JK/PvH,in-progress,
-DCE,Input Functions,Head-and-neck population AIF,Wong et al (DOI: https://doi.org/10.2967/jnumed.116.174433),OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK",JK/PvH,in-progress,
-DCE,Input Functions,load AIF,load from txt,MB_QBI_UoManchesterUK,Michael Berks,"University of Manchester, UK",tbd,,
-DCE,Input Functions,load AIF,"from txt, gamma-variate function",OGJ_OsloU_Norway,Ole Gunnar Johansen,"University of Oslo, Norway",tbd,,
-DCE,Input Functions,Parker AIF,,ST_USydAUS_DCE,Sirisha Tadimalla,"University of Sydney, Australia",JK/PvH,in-progress,
-DCE,Input Functions,Parker AIF,,OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK",JK/PvH,in-progress,
-DCE,Input Functions,Parker AIF,,PvH_NKI,Petra van Houdt,"the Netherlands Cancer Institute, the Netherlands",JK/PvH,in-progress,
-DCE,Input Functions,Parker AIF,"Parker AIF, Parker-like AIF",MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK",JK/PvH,in-progress,
-DCE,Input Functions,Parker AIF,,MB_QBI_UoManchesterUK,Michael Berks,"University of Manchester, UK",JK/PvH,in-progress,
-DCE,Input Functions,patient-specific AIF,measured AIF,MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK",tbd,,
-DCE,Input Functions,preclinical AIF,McGrath et al (DOI: 10.1002/mrm.21959),ST_USydAUS_DCE,Sirisha Tadimalla,"University of Sydney, Australia",JK/PvH,in-progress,
-DCE,Parameter derivation,iAUC,,MB_QBI_UoManchesterUK,Michael Berks,"University of Manchester, UK",tbd,,
-DCE,Pharmacokinetic models,1-cmp,forward model,ST_USydAUS_DCE,Sirisha Tadimalla,"University of Sydney, Australia",tbd,in-progress,
-DCE,Pharmacokinetic models,2-cmp exchange,forward model,LEK_UoEdinburgh,Lucy Kershaw,"University of Edinburgh, UK",tbd,in-progress,
-DCE,Pharmacokinetic models,2-cmp exchange,"forward model, NLLS and LLSQ fitting methods",OGJ_OsloU_Norway,Ole Gunnar Johansen,"University of Oslo, Norway",tbd,in-progress,
-DCE,Pharmacokinetic models,2-cmp exchange,"forward model, NLLS fitting (concentration), NLLS fitting (signal incl. water exchange)",MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK",tbd,in-progress,
-DCE,Pharmacokinetic models,2-cmp exchange,"forward model, LLSQ fitting methods",MB_QBI_UoManchesterUK,Michael Berks,"University of Manchester, UK",ST/OGC,in-progress,
-DCE,Pharmacokinetic models,2-cmp filtration,"forward model, LLSQ fitting methods",MB_QBI_UoManchesterUK,Michael Berks,"University of Manchester, UK",ST/OGC,in-progress,
-DCE,Pharmacokinetic models,2-cmp uptake,forward model,LEK_UoEdinburgh,Lucy Kershaw,"University of Edinburgh, UK",tbd,in-progress,
-DCE,Pharmacokinetic models,2-cmp uptake,"forward model, NLLS fitting (concentration), NLLS fitting (signal incl. water exchange)",MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK",tbd,in-progress,
-DCE,Pharmacokinetic models,AATH,forward model,LEK_UoEdinburgh,Lucy Kershaw,"University of Edinburgh, UK",tbd,in-progress,
-DCE,Pharmacokinetic models,active uptake and efflux (AUEM),"forward model, LLSQ fitting methods",MB_QBI_UoManchesterUK,Michael Berks,"University of Manchester, UK",ST/OGC,in-progress,
-DCE,Pharmacokinetic models,dual-inlet 1-cmp,forward model,ST_USydAUS_DCE,Sirisha Tadimalla,"University of Sydney, Australia",tbd,in-progress,
-DCE,Pharmacokinetic models,dual-inlet ext Tofts,forward model,ST_USydAUS_DCE,Sirisha Tadimalla,"University of Sydney, Australia",tbd,in-progress,
-DCE,Pharmacokinetic models,dual-inlet general model,"works with 2CXM, 2CFM, AUEM, LLSQ fitting methods",MB_QBI_UoManchesterUK,Michael Berks,"University of Manchester, UK",ST/OGC,in-progress,
-DCE,Pharmacokinetic models,dual-inlet high-flow 2-cmp Gadoxetate,forward model,ST_USydAUS_DCE,Sirisha Tadimalla,"University of Sydney, Australia",tbd,in-progress,
-DCE,Pharmacokinetic models,extended Tofts,forward model,LEK_UoEdinburgh,Lucy Kershaw,"University of Edinburgh, UK",ST/OGC,in-progress,
-DCE,Pharmacokinetic models,extended Tofts,forward model,ST_USydAUS_DCE,Sirisha Tadimalla,"University of Sydney, Australia",ST/OGC,in-progress,
-DCE,Pharmacokinetic models,extended Tofts,"forward model, NLLS fitting methods",OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK",ST/OGC,in-progress,
-DCE,Pharmacokinetic models,extended Tofts,"forward model, NLLS and LLSQ fitting methods",OGJ_OsloU_Norway,Ole Gunnar Johansen,"University of Oslo, Norway",ST/OGC,in-progress,
-DCE,Pharmacokinetic models,extended Tofts,"forward model, NLLS fitting (concentration), NLLS fitting (signal incl. water exchange)",MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK",ST/OGC,in-progress,
-DCE,Pharmacokinetic models,extended Tofts,"forward model, LLSQ fitting methods",MB_QBI_UoManchesterUK,Michael Berks,"University of Manchester, UK",ST/OGC,in-progress,
-DCE,Pharmacokinetic models,high flow 2-cmp Gadoxetate,forward model,ST_USydAUS_DCE,Sirisha Tadimalla,"University of Sydney, Australia",tbd,in-progress,
-DCE,Pharmacokinetic models,Patlak,forward model,LEK_UoEdinburgh,Lucy Kershaw,"University of Edinburgh, UK",tbd,in-progress,
-DCE,Pharmacokinetic models,Patlak,forward model,ST_USydAUS_DCE,Sirisha Tadimalla,"University of Sydney, Australia",tbd,in-progress,
-DCE,Pharmacokinetic models,Patlak,"forward model, NLLS fitting (concentration), NLLS fitting (signal incl. water exchange)",MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK",tbd,in-progress,
-DCE,Pharmacokinetic models,steady-state vp,"forward model, NLLS fitting (concentration), NLLS fitting (signal incl. water exchange)",MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK",tbd,in-progress,
-DCE,Pharmacokinetic models,Tofts,forward model,LEK_UoEdinburgh,Lucy Kershaw,"University of Edinburgh, UK",ST/OGC,in-progress,
-DCE,Pharmacokinetic models,Tofts,"forward model, NLLS and LLSQ fitting methods",OGJ_OsloU_Norway,Ole Gunnar Johansen,"University of Oslo, Norway",ST/OGC,in-progress,
-DCE,Pharmacokinetic models,Tofts,"forward model, NLLS fitting (concentration), NLLS fitting (signal incl. water exchange)",MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK",ST/OGC,in-progress,
-DCE,Pharmacokinetic models,Tofts,"forward model, NLLS fitting methods",LCB_BNI,Laura Bell,"Barrow Neurological Institute, USA",ST/OGC,in-progress,
-DCE,Preprocessing,enhancement detection,check for enhancement,OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK",tbd,,
-DCE,R1 to concentration,,,OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK",tbd,in-progress,
-DCE,R1 to signal,SPGR,,ST_USydAUS_DCE,Sirisha Tadimalla,"University of Sydney, Australia",tbd,,
-DCE,R1 to signal,SPGR,,OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK",tbd,,
-DCE,Signal to concentration,SPGR,,LEK_UoEdinburgh,Lucy Kershaw,"University of Edinburgh, UK",LK,completed,
-DCE,Signal to concentration,SPGR,,ST_USydAUS_DCE,Sirisha Tadimalla,"University of Sydney, Australia",LK,completed,
-DCE,Signal to concentration,SPGR,,MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK",LK,completed,
-DCE,Signal to concentration,SPGR,,MB_QBI_UoManchesterUK,Michael Berks,"University of Manchester, UK",LK,completed,
-DCE,Signal to concentration,SPGR or GE-EPI,,LCB_BNI,Laura Bell,"Barrow Neurological Institute, USA",LK,completed,
-DCE,Signal to enhancement,,,MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK",tbd,,
-DCE,Signal to R1,SPGR,,ST_USydAUS_DCE,Sirisha Tadimalla,"University of Sydney, Australia",tbd,,
-DCE,Signal to R1,SPGR,,OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK",tbd,,
-DCE,Signal to R1,SPGR or GE-EPI,,LCB_BNI,Laura Bell,"Barrow Neurological Institute, USA",tbd,,
-DCE,T1,DESPOT1-HIFI,Fit any combination of (IR-)SPGR scans to estimate T1,MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK",MJT,in-progress,
-DCE,T1,VFA,"linear, nonlinear",ST_SydneyAus_T1,Sirisha Tadimalla,"University of Sydney, Australia",MJT,complete,
-DCE,T1,VFA,"linear, nonlinear, two flip angles",MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK",MJT,complete,
-DCE,T1,VFA,two flip angles,OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK",MJT,in-progress,
-DCE,T1,VFA,"despot, novifast",McGill_VFA,Zaki Ahmed,"McGill University, Canada",MJT,complete,
-DCE/DSC,AIF deconvolution,,,SR_TBG_BNIPhoenixUSA,Sudarshan Ragunathan,"Barrow Neurological Institute, USA",tbd,,
-DSC,Input Functions,automatic AIF selection,"fully automatic, semi-automatic",JBJA_GUSahlgrenskaSWE,"Jesper Browall, Jonathan Arvidsson","Sahlgrenska University Hospital and Gothenburg University, Gothenburg, Sweden",tbd,,
-DSC,Leakage correction,BSW,,SR_TBG_BNIPhoenixUSA,Sudarshan Ragunathan,"Barrow Neurological Institute, USA",tbd,,
-DSC,Leakage correction,BSW,,LCB_BNI,Laura Bell,"Barrow Neurological Institute, USA",tbd,,
-DSC,Parameter derivation,"CBV,CBF,MTT",,LCB_BNI,Laura Bell,"Barrow Neurological Institute, USA",tbd,,
-DSC,Parameter derivation,"CBV,CBF,MTT",,SR_TBG_BNIPhoenixUSA,Sudarshan Ragunathan,"Barrow Neurological Institute, USA",tbd,,
-DSC,Signal to deltaR2*,"single echo, dual echo",,LCB_BNI,Laura Bell,"Barrow Neurological Institute, USA",tbd,,
-DSC,Signal to R2*,dual echo,,LCB_BNI,Laura Bell,"Barrow Neurological Institute, USA",tbd,,
+"Technique,Category,Subcategory,Notes,Subfolder,Authors,Institution,Tester,Test status (empty/in-progress/complete),"
+"DCE,Bolus arrival time,piecewise linear quadratic function,Cheong et al (DOI: 10.1088/0031-9155/48/5/403),LEK_UoEdinburgh,Lucy Kershaw,""University of Edinburgh, UK"",tbd,,"
+"DCE,Bolus arrival time,fitting Kety (Tofts) model to first third of the curve,,LEK_UoEdinburgh,Lucy Kershaw,""University of Edinburgh, UK"",tbd,,"
+"DCE,Concentration to enhancement,,,MJT_UoEdinburghUK,Michael Thrippleton,""University of Edinburgh, UK"",tbd,in-progress,"
+"DCE,Concentration to R1,,,OG_MO_AUMC_ICR_RMH,""Oliver Gurney-Champion, Matthew Orton"",""Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK"",tbd,in-progress,"
+"DCE,Concentration to signal,SPGR,,LEK_UoEdinburgh,Lucy Kershaw,""University of Edinburgh, UK"",tbd,,"
+"DCE,Concentration to signal,SPGR,,MB_QBI_UoManchesterUK,Michael Berks,""University of Manchester, UK"",tbd,,"
+"DCE,Concentration to signal,SPGR,,OG_MO_AUMC_ICR_RMH,""Oliver Gurney-Champion, Matthew Orton"",""Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK"",tbd,,"
+"DCE,Input Functions,AIF parameterization,,OG_MO_AUMC_ICR_RMH,""Oliver Gurney-Champion, Matthew Orton"",""Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK"",tbd,,"
+"DCE,Input Functions,Georgiou AIF,Georgiou et al (DOI: 10.1002/mrm.27524),PvH_NKI,Petra van Houdt,""the Netherlands Cancer Institute, the Netherlands"",JK/PvH,in-progress,"
+"DCE,Input Functions,Head-and-neck population AIF,Wong et al (DOI: https://doi.org/10.2967/jnumed.116.174433),OG_MO_AUMC_ICR_RMH,""Oliver Gurney-Champion, Matthew Orton"",""Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK"",JK/PvH,in-progress,"
+"DCE,Input Functions,load AIF,load from txt,MB_QBI_UoManchesterUK,Michael Berks,""University of Manchester, UK"",tbd,,"
+"DCE,Input Functions,load AIF,""from txt, gamma-variate function"",OGJ_OsloU_Norway,Ole Gunnar Johansen,""University of Oslo, Norway"",tbd,,"
+"DCE,Input Functions,Parker AIF,,ST_USydAUS_DCE,Sirisha Tadimalla,""University of Sydney, Australia"",JK/PvH,in-progress,"
+"DCE,Input Functions,Parker AIF,,OG_MO_AUMC_ICR_RMH,""Oliver Gurney-Champion, Matthew Orton"",""Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK"",JK/PvH,in-progress,"
+"DCE,Input Functions,Parker AIF,,PvH_NKI,Petra van Houdt,""the Netherlands Cancer Institute, the Netherlands"",JK/PvH,in-progress,"
+"DCE,Input Functions,Parker AIF,""Parker AIF, Parker-like AIF"",MJT_UoEdinburghUK,Michael Thrippleton,""University of Edinburgh, UK"",JK/PvH,in-progress,"
+"DCE,Input Functions,Parker AIF,,MB_QBI_UoManchesterUK,Michael Berks,""University of Manchester, UK"",JK/PvH,in-progress,"
+"DCE,Input Functions,patient-specific AIF,measured AIF,MJT_UoEdinburghUK,Michael Thrippleton,""University of Edinburgh, UK"",tbd,,"
+"DCE,Input Functions,preclinical AIF,McGrath et al (DOI: 10.1002/mrm.21959),ST_USydAUS_DCE,Sirisha Tadimalla,""University of Sydney, Australia"",JK/PvH,in-progress,"
+"DCE,Parameter derivation,iAUC,,MB_QBI_UoManchesterUK,Michael Berks,""University of Manchester, UK"",tbd,,"
+"DCE,Pharmacokinetic models,1-cmp,forward model,ST_USydAUS_DCE,Sirisha Tadimalla,""University of Sydney, Australia"",tbd,in-progress,"
+"DCE,Pharmacokinetic models,2-cmp exchange,forward model,LEK_UoEdinburgh,Lucy Kershaw,""University of Edinburgh, UK"",tbd,in-progress,"
+"DCE,Pharmacokinetic models,2-cmp exchange,""forward model, NLLS and LLSQ fitting methods"",OGJ_OsloU_Norway,Ole Gunnar Johansen,""University of Oslo, Norway"",tbd,in-progress,"
+"DCE,Pharmacokinetic models,2-cmp exchange,""forward model, NLLS fitting (concentration), NLLS fitting (signal incl. water exchange)"",MJT_UoEdinburghUK,Michael Thrippleton,""University of Edinburgh, UK"",tbd,in-progress,"
+"DCE,Pharmacokinetic models,2-cmp exchange,""forward model, LLSQ fitting methods"",MB_QBI_UoManchesterUK,Michael Berks,""University of Manchester, UK"",ST/OGC,in-progress,"
+"DCE,Pharmacokinetic models,2-cmp filtration,""forward model, LLSQ fitting methods"",MB_QBI_UoManchesterUK,Michael Berks,""University of Manchester, UK"",ST/OGC,in-progress,"
+"DCE,Pharmacokinetic models,2-cmp uptake,forward model,LEK_UoEdinburgh,Lucy Kershaw,""University of Edinburgh, UK"",tbd,in-progress,"
+"DCE,Pharmacokinetic models,2-cmp uptake,""forward model, NLLS fitting (concentration), NLLS fitting (signal incl. water exchange)"",MJT_UoEdinburghUK,Michael Thrippleton,""University of Edinburgh, UK"",tbd,in-progress,"
+"DCE,Pharmacokinetic models,AATH,forward model,LEK_UoEdinburgh,Lucy Kershaw,""University of Edinburgh, UK"",tbd,in-progress,"
+"DCE,Pharmacokinetic models,active uptake and efflux (AUEM),""forward model, LLSQ fitting methods"",MB_QBI_UoManchesterUK,Michael Berks,""University of Manchester, UK"",ST/OGC,in-progress,"
+"DCE,Pharmacokinetic models,dual-inlet 1-cmp,forward model,ST_USydAUS_DCE,Sirisha Tadimalla,""University of Sydney, Australia"",tbd,in-progress,"
+"DCE,Pharmacokinetic models,dual-inlet ext Tofts,forward model,ST_USydAUS_DCE,Sirisha Tadimalla,""University of Sydney, Australia"",tbd,in-progress,"
+"DCE,Pharmacokinetic models,dual-inlet general model,""works with 2CXM, 2CFM, AUEM, LLSQ fitting methods"",MB_QBI_UoManchesterUK,Michael Berks,""University of Manchester, UK"",ST/OGC,in-progress,"
+"DCE,Pharmacokinetic models,dual-inlet high-flow 2-cmp Gadoxetate,forward model,ST_USydAUS_DCE,Sirisha Tadimalla,""University of Sydney, Australia"",tbd,in-progress,"
+"DCE,Pharmacokinetic models,extended Tofts,forward model,LEK_UoEdinburgh,Lucy Kershaw,""University of Edinburgh, UK"",ST/OGC,in-progress,"
+"DCE,Pharmacokinetic models,extended Tofts,forward model,ST_USydAUS_DCE,Sirisha Tadimalla,""University of Sydney, Australia"",ST/OGC,in-progress,"
+"DCE,Pharmacokinetic models,extended Tofts,""forward model, NLLS fitting methods"",OG_MO_AUMC_ICR_RMH,""Oliver Gurney-Champion, Matthew Orton"",""Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK"",ST/OGC,in-progress,"
+"DCE,Pharmacokinetic models,extended Tofts,""forward model, NLLS and LLSQ fitting methods"",OGJ_OsloU_Norway,Ole Gunnar Johansen,""University of Oslo, Norway"",ST/OGC,in-progress,"
+"DCE,Pharmacokinetic models,extended Tofts,""forward model, NLLS fitting (concentration), NLLS fitting (signal incl. water exchange)"",MJT_UoEdinburghUK,Michael Thrippleton,""University of Edinburgh, UK"",ST/OGC,in-progress,"
+"DCE,Pharmacokinetic models,extended Tofts,""forward model, LLSQ fitting methods"",MB_QBI_UoManchesterUK,Michael Berks,""University of Manchester, UK"",ST/OGC,in-progress,"
+"DCE,Pharmacokinetic models,high flow 2-cmp Gadoxetate,forward model,ST_USydAUS_DCE,Sirisha Tadimalla,""University of Sydney, Australia"",tbd,in-progress,"
+"DCE,Pharmacokinetic models,Patlak,forward model,LEK_UoEdinburgh,Lucy Kershaw,""University of Edinburgh, UK"",tbd,in-progress,"
+"DCE,Pharmacokinetic models,Patlak,forward model,ST_USydAUS_DCE,Sirisha Tadimalla,""University of Sydney, Australia"",tbd,in-progress,"
+"DCE,Pharmacokinetic models,Patlak,""forward model, NLLS fitting (concentration), NLLS fitting (signal incl. water exchange)"",MJT_UoEdinburghUK,Michael Thrippleton,""University of Edinburgh, UK"",tbd,in-progress,"
+"DCE,Pharmacokinetic models,steady-state vp,""forward model, NLLS fitting (concentration), NLLS fitting (signal incl. water exchange)"",MJT_UoEdinburghUK,Michael Thrippleton,""University of Edinburgh, UK"",tbd,in-progress,"
+"DCE,Pharmacokinetic models,Tofts,forward model,LEK_UoEdinburgh,Lucy Kershaw,""University of Edinburgh, UK"",ST/OGC,in-progress,"
+"DCE,Pharmacokinetic models,Tofts,""forward model, NLLS and LLSQ fitting methods"",OGJ_OsloU_Norway,Ole Gunnar Johansen,""University of Oslo, Norway"",ST/OGC,in-progress,"
+"DCE,Pharmacokinetic models,Tofts,""forward model, NLLS fitting (concentration), NLLS fitting (signal incl. water exchange)"",MJT_UoEdinburghUK,Michael Thrippleton,""University of Edinburgh, UK"",ST/OGC,in-progress,"
+"DCE,Pharmacokinetic models,Tofts,""forward model, NLLS fitting methods"",LCB_BNI,Laura Bell,""Barrow Neurological Institute, USA"",ST/OGC,in-progress,"
+"DCE,Preprocessing,enhancement detection,check for enhancement,OG_MO_AUMC_ICR_RMH,""Oliver Gurney-Champion, Matthew Orton"",""Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK"",tbd,,"
+"DCE,R1 to concentration,,,OG_MO_AUMC_ICR_RMH,""Oliver Gurney-Champion, Matthew Orton"",""Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK"",tbd,in-progress,"
+"DCE,R1 to signal,SPGR,,ST_USydAUS_DCE,Sirisha Tadimalla,""University of Sydney, Australia"",tbd,,"
+"DCE,R1 to signal,SPGR,,OG_MO_AUMC_ICR_RMH,""Oliver Gurney-Champion, Matthew Orton"",""Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK"",tbd,,"
+"DCE,Signal to concentration,SPGR,,LEK_UoEdinburgh,Lucy Kershaw,""University of Edinburgh, UK"",LK,completed,"
+"DCE,Signal to concentration,SPGR,,ST_USydAUS_DCE,Sirisha Tadimalla,""University of Sydney, Australia"",LK,completed,"
+"DCE,Signal to concentration,SPGR,,MJT_UoEdinburghUK,Michael Thrippleton,""University of Edinburgh, UK"",LK,completed,"
+"DCE,Signal to concentration,SPGR,,MB_QBI_UoManchesterUK,Michael Berks,""University of Manchester, UK"",LK,completed,"
+"DCE,Signal to concentration,SPGR or GE-EPI,,LCB_BNI,Laura Bell,""Barrow Neurological Institute, USA"",LK,completed,"
+"DCE,Signal to enhancement,,,MJT_UoEdinburghUK,Michael Thrippleton,""University of Edinburgh, UK"",tbd,,"
+"DCE,Signal to R1,SPGR,,ST_USydAUS_DCE,Sirisha Tadimalla,""University of Sydney, Australia"",tbd,,"
+"DCE,Signal to R1,SPGR,,OG_MO_AUMC_ICR_RMH,""Oliver Gurney-Champion, Matthew Orton"",""Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK"",tbd,,"
+"DCE,Signal to R1,SPGR or GE-EPI,,LCB_BNI,Laura Bell,""Barrow Neurological Institute, USA"",tbd,,"
+"DCE,T1,DESPOT1-HIFI,Fit any combination of (IR-)SPGR scans to estimate T1,MJT_UoEdinburghUK,Michael Thrippleton,""University of Edinburgh, UK"",MJT,in-progress,"
+"DCE,T1,VFA,""linear, nonlinear"",ST_SydneyAus_T1,Sirisha Tadimalla,""University of Sydney, Australia"",MJT,complete,"
+"DCE,T1,VFA,""linear, nonlinear, two flip angles"",MJT_UoEdinburghUK,Michael Thrippleton,""University of Edinburgh, UK"",MJT,complete,"
+"DCE,T1,VFA,two flip angles,OG_MO_AUMC_ICR_RMH,""Oliver Gurney-Champion, Matthew Orton"",""Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK"",MJT,in-progress,"
+"DCE,T1,VFA,""despot, novifast"",McGill_VFA,Zaki Ahmed,""McGill University, Canada"",MJT,complete,"
+"DCE/DSC,AIF deconvolution,,,SR_TBG_BNIPhoenixUSA,Sudarshan Ragunathan,""Barrow Neurological Institute, USA"",tbd,,"
+"DSC,Input Functions,automatic AIF selection,""fully automatic, semi-automatic"",JBJA_GUSahlgrenskaSWE,""Jesper Browall, Jonathan Arvidsson"",""Sahlgrenska University Hospital and Gothenburg University, Gothenburg, Sweden"",tbd,,"
+"DSC,Leakage correction,BSW,,SR_TBG_BNIPhoenixUSA,Sudarshan Ragunathan,""Barrow Neurological Institute, USA"",tbd,,"
+"DSC,Leakage correction,BSW,,LCB_BNI,Laura Bell,""Barrow Neurological Institute, USA"",tbd,,"
+"DSC,Parameter derivation,""CBV,CBF,MTT"",,LCB_BNI,Laura Bell,""Barrow Neurological Institute, USA"",tbd,,"
+"DSC,Parameter derivation,""CBV,CBF,MTT"",,SR_TBG_BNIPhoenixUSA,Sudarshan Ragunathan,""Barrow Neurological Institute, USA"",tbd,,"
+"DSC,Signal to deltaR2*,""single echo, dual echo"",,LCB_BNI,Laura Bell,""Barrow Neurological Institute, USA"",tbd,,"
+"DSC,Signal to R2*,dual echo,,LCB_BNI,Laura Bell,""Barrow Neurological Institute, USA"",tbd,,"
