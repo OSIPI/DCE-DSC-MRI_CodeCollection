@@ -24,7 +24,7 @@
     "path": "../test/results/T1_mapping",
     "filename": "TestResults_T1mapping_OG_MO_AUMC_ICR_RHM_t1_VFA_2fa.csv",
     "category": "T1mapping",
-    "method": "linear",
+    "method": "2_fa",
     "author": "OG_MO_AUMC_NL_ICR_UK"
   },
   {
