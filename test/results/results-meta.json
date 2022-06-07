@@ -15,6 +15,13 @@
   },
   {
     "path": "../test/results/T1_mapping",
+    "filename": "TestResults_T1mapping_MJT_EdinburghUK_t1_VFA_2fa.csv",
+    "category": "T1mapping",
+    "method": "two-FA",
+    "author": "MJT_UoEdinburgh_UK"
+  },
+  {
+    "path": "../test/results/T1_mapping",
     "filename": "TestResults_T1mapping_ST_SydneyAus_t1_VFA_lin.csv",
     "category": "T1mapping",
     "method": "linear",
@@ -24,7 +31,7 @@
     "path": "../test/results/T1_mapping",
     "filename": "TestResults_T1mapping_OG_MO_AUMC_ICR_RHM_t1_VFA_2fa.csv",
     "category": "T1mapping",
-    "method": "linear",
+    "method": "two-FA",
     "author": "OG_MO_AUMC_NL_ICR_UK"
   },
   {
