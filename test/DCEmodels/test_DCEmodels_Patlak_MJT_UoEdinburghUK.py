@@ -17,7 +17,8 @@ def setup_module(module):
     global filename_prefix # we want to change the global variable
     os.makedirs('./test/results/DCEmodels', exist_ok=True)
     filename_prefix = 'DCEmodels/TestResults_models'
-    log_init(filename_prefix, '_MJT_UoEdinburghUK_patlak', ['label', 'time (us)', 'vp_ref', 'ps_ref', 'vp_meas', 'ps_meas'])
+    log_init(filename_prefix, '_MJT_UoEdinburghUK_patlak', ['label', 'time (us)', 'vp_ref', 'ps_ref', 'delay_ref', 'vp_meas', 'ps_meas', 'delay_meas'])
+    log_init(filename_prefix, '_MJT_UoEdinburghUK_patlak_llsq', ['label', 'time (us)', 'vp_ref', 'ps_ref', 'delay_ref', 'vp_meas', 'ps_meas', 'delay_meas'])
 
 # Use the test data to generate a parametrize decorator. This causes the following
 # test to be run for every test case listed in test_data...

@@ -225,6 +225,13 @@
   },
   {
     "path": "../test/results/DCEmodels",
+    "filename": "TestResults_models_MJT_UoEdinburghUK_patlak_llsq.csv",
+    "category": "DCEmodels",
+    "method": "patlak",
+    "author": "MJT_UoEdinburgh_UK_llsq"
+  },
+  {
+    "path": "../test/results/DCEmodels",
     "filename": "TestResults_models_MJT_UoEdinburghUK_tofts.csv",
     "category": "DCEmodels",
     "method": "tofts",
