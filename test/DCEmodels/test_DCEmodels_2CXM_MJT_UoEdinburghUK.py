@@ -19,7 +19,7 @@ def setup_module(module):
     os.makedirs('./test/results/DCEmodels', exist_ok=True)
     filename_prefix = 'DCEmodels/TestResults_models'
     log_init(filename_prefix, '_MJT_UoEdinburghUK_2CXM',
-             ['label', 'time (us)', 'vp_ref', 've_ref', 'fp_ref', 'ps_ref', 'vp_meas', 've_meas', 'fp_meas', 'ps_meas'])
+             ['label', 'time (us)', 'Ktrans_ref', 've_ref', 'vp_ref', 'delay_ref', 'Ktrans_meas', 've_meas', 'vp_meas', 'delay_meas'])
 
 test_data = (DCEmodels_data.dce_DRO_data_2cxm())
 # Use the test data to generate a parametrize decorator. This causes the following
