@@ -24,6 +24,8 @@ sections:
         - file: 2CXM.ipynb
         - file: 2CUM.ipynb
 - file: DSC.md
+  sections:
+    - file: DSC_pars.ipynb
 - file: guidelines.md
 - file: Acknowledgements.ipynb
 

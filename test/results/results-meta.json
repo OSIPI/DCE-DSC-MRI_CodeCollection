@@ -292,5 +292,12 @@
     "category": "DCEmodels",
     "method": "tofts",
     "author": "ST_USyd_Aus"
+  },
+    {
+    "path": "../test/results/DSCmodels",
+    "filename": "TestResults_ParamEstimation_SR_TBG_BNIPhoenix_USA.csv",
+    "category": "DSCmodels",
+    "method": "",
+    "author": "SR_LB_TBG_BNIPhoenix_USA_LCC SFTR"
   }
 ]

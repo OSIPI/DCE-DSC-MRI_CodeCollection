@@ -22,7 +22,7 @@ OUTPUTS;
 import numpy as np
 
 def DSCparameters(dR2s_tumor, dR2s_AIF, residualFunction, TR):
-    CBF = np.amax(residualFunction)/TR * 60 * 100 
+    CBF = np.amax(residualFunction) * 60 * 100
     CBV = np.trapz(dR2s_tumor) / np.trapz(dR2s_AIF) * 100 
     MTT = CBV / CBF * 60 
     return CBF, CBV, MTT    
