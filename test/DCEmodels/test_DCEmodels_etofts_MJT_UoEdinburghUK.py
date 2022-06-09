@@ -52,10 +52,10 @@ def test_MJT_UoEdinburghUK_extended_tofts_kety_model(label, t_array, C_array, ca
     np.testing.assert_allclose([Ktrans_meas], [Ktrans_ref], rtol=r_tol_Ktrans, atol=a_tol_Ktrans)
 
 
-test_data = (DCEmodels_data.dce_DRO_data_extended_tofts_kety(delay=True))
+test_data_delay = (DCEmodels_data.dce_DRO_data_extended_tofts_kety(delay=True))
 # Use the test data to generate a parametrize decorator. This causes the following
 # test to be run for every test case listed in test_data...
-@osipi_parametrize(arg_names, test_data, xf_labels=[])
+@osipi_parametrize(arg_names, test_data_delay, xf_labels=[])
 def test_MJT_UoEdinburghUK_extended_tofts_kety_model_delay(label, t_array, C_array, ca_array, ta_array, ve_ref, vp_ref,
                                                      Ktrans_ref, arterial_delay_ref, a_tol_ve, r_tol_ve, a_tol_vp,
                                                      r_tol_vp, a_tol_Ktrans, r_tol_Ktrans, a_tol_delay, r_tol_delay):

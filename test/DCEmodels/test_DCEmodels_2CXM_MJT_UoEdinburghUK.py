@@ -58,10 +58,10 @@ def test_MJT_UoEdinburghUK_2cxm_model(label, t_array, C_t_array,
                                atol=a_tol_ps)
 
 
-test_data = (DCEmodels_data.dce_DRO_data_2cxm(delay=True))
+test_data_delay = (DCEmodels_data.dce_DRO_data_2cxm(delay=True))
 # Use the test data to generate a parametrize decorator. This causes the following
 # test to be run for every test case listed in test_data...
-@osipi_parametrize(arg_names, test_data, xf_labels=[])
+@osipi_parametrize(arg_names, test_data_delay, xf_labels=[])
 def test_MJT_UoEdinburghUK_2cxm_model_delay(label, t_array, C_t_array,
                                       cp_aif_array, vp_ref, ve_ref,
                                       fp_ref, ps_ref, delay_ref,

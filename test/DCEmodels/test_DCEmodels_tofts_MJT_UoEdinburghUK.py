@@ -59,7 +59,6 @@ def test_MJT_UoEdinburghUK_tofts_model_delay(label, t_array, C_array, ca_array, 
     # run code
     tic = perf_counter()
     Ktrans_meas, ve_meas, delay_meas, C_t_fit = dce_fit.ConcToPKP(pk_model).proc(C_array)
-    delay_meas /= 60
     exc_time = 1e6 * (perf_counter() - tic)  # measure execution time
 
     # log results

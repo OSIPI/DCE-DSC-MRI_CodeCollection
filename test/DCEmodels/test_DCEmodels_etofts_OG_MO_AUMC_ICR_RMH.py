@@ -10,7 +10,6 @@ arg_names = 'label, t_array, C_array, ca_array, ta_array, ve_ref, vp_ref, Ktrans
             'r_tol_ve, a_tol_vp,r_tol_vp,a_tol_Ktrans,r_tol_Ktrans,a_tol_delay,r_tol_delay '
 
 
-test_data = (DCEmodels_data.dce_DRO_data_extended_tofts_kety())
 filename_prefix = ''
 
 
@@ -22,6 +21,7 @@ def setup_module(module):
     log_init(filename_prefix, '_OG_MO_AUMC_ICR_RMH_etofts', ['label', 'time (us)', 'Ktrans_ref', 've_ref', 'vp_ref', 'delay_ref', 'Ktrans_meas', 've_meas', 'vp_meas', 'delay_meas'])
 
 
+test_data = (DCEmodels_data.dce_DRO_data_extended_tofts_kety())
 # Use the test data to generate a parametrize decorator. This causes the following
 # test to be run for every test case listed in test_data...
 @osipi_parametrize(arg_names, test_data, xf_labels=[])
