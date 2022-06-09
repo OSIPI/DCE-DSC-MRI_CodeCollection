@@ -46,7 +46,7 @@ def test_MJT_UoEdinburghUK_tofts_model(label, t_array, C_array, ca_array, ta_arr
 
 
 test_data_delay = (DCEmodels_data.dce_DRO_data_tofts(delay=True))
-@osipi_parametrize(arg_names, test_data, xf_labels=[])
+@osipi_parametrize(arg_names, test_data_delay, xf_labels=[])
 def test_MJT_UoEdinburghUK_tofts_model_delay(label, t_array, C_array, ca_array, ta_array, ve_ref, Ktrans_ref,
                                        arterial_delay_ref, a_tol_ve, r_tol_ve, a_tol_Ktrans, r_tol_Ktrans, a_tol_delay,
                                        r_tol_delay):
