@@ -10,3 +10,4 @@ setup(
     package_dir={'osipi_code_collection': 'src'},
     packages=[f'osipi_code_collection.{module}' for module in find_packages('src')],
 )
+
