@@ -1,14 +1,12 @@
-import pytest
 import os
 import numpy as np
 from time import perf_counter
 from ..helpers import osipi_parametrize, log_init, log_results
 from . import SI2Conc_data
-from osipi_code_collection.original.MJT_UoEdinburghUK.signal_models import spgr
-from osipi_code_collection.original.MJT_UoEdinburghUK.relaxivity import c_to_r_linear
-from osipi_code_collection.original.MJT_UoEdinburghUK.dce_fit import sig_to_enh
-from osipi_code_collection.original.MJT_UoEdinburghUK.dce_fit import enh_to_conc
-
+from osipi_code_collection.original.MJT_UoEdinburghUK.signal_models import SPGR
+from osipi_code_collection.original.MJT_UoEdinburghUK.relaxivity import CRLinear
+from osipi_code_collection.original.MJT_UoEdinburghUK.dce_fit import SigToEnh
+from osipi_code_collection.original.MJT_UoEdinburghUK.dce_fit import EnhToConc
 
 
 # All tests will use the same arguments and same data...
@@ -30,23 +28,23 @@ def setup_module(module):
 def test_MJT_UoEdinburghUK_sig_to_conc(label, fa, tr, T1base, BLpts, r1, s_array, conc_array, a_tol, r_tol):
 
     ##Prepare input data
-    
+
     #We need an array of integers to tell the function which points are for the baseline.  This will be 1:BLpts
     BL_idx=np.arange(1,BLpts,1)
 
     #We need to set the signal model to be spgr which will require the tr, the flip angle and a dummy te (ignored by default)
-    sigmod=spgr(tr, fa, 1)
+    sigmod=SPGR(tr, fa, 1)
     #We also need to set the c_to_r_model to be linear, with relaxivity r1 and dummy r2 relaxivity
-    conc_to_r=c_to_r_linear(r1,0)
+    conc_to_r=CRLinear(r1,0)
 
-    
+
     # run test
     #The code uses two functions to get from SI to conc
     tic = perf_counter()
-    enh_curve=sig_to_enh(s_array, BL_idx)
+    enh_curve = SigToEnh(BL_idx).proc(s_array)
 
     #B1 correction factor k=1
-    conc_curve = enh_to_conc(enh_curve, 1, 1/T1base, conc_to_r, sigmod)
+    conc_curve = EnhToConc(conc_to_r, sigmod).proc(enh_curve, T1base)
     exc_time = 1e6 * (perf_counter() - tic)
 
     # log results

@@ -7,7 +7,6 @@ from osipi_code_collection.original.MJT_UoEdinburghUK import dce_fit, pk_models,
 
 arg_names = 'label, t_array, C_array, ca_array, ta_array, ve_ref, Ktrans_ref, arterial_delay_ref,  a_tol_ve, ' \
             'r_tol_ve, a_tol_Ktrans,r_tol_Ktrans,a_tol_delay,r_tol_delay '
-test_data = (DCEmodels_data.dce_DRO_data_tofts())
 
 filename_prefix = ''
 
@@ -16,9 +15,10 @@ def setup_module(module):
     global filename_prefix # we want to change the global variable
     os.makedirs('./test/results/DCEmodels', exist_ok=True)
     filename_prefix = 'DCEmodels/TestResults_models'
-    log_init(filename_prefix, '_MJT_UoEdinburghUK_tofts', ['label', 'time (us)', 'Ktrans_ref', 've_ref', 'Ktrans_meas', 've_meas'])
+    log_init(filename_prefix, '_MJT_UoEdinburghUK_tofts', ['label', 'time (us)', 'Ktrans_ref', 've_ref', 'delay_ref', 'Ktrans_meas', 've_meas', 'delay_meas'])
 
 
+test_data = (DCEmodels_data.dce_DRO_data_tofts())
 # Use the test data to generate a parametrize decorator. This causes the following
 # test to be run for every test case listed in test_data...
 @osipi_parametrize(arg_names, test_data, xf_labels=[])
@@ -28,20 +28,44 @@ def test_MJT_UoEdinburghUK_tofts_model(label, t_array, C_array, ca_array, ta_arr
     # NOTES:
 
     # prepare input data - create aif object
-    aif = aifs.patient_specific(t_array, ca_array)
-    pk_model = pk_models.tofts(t_array, aif)
+    aif = aifs.PatientSpecific(t_array, ca_array)
+    pk_model = pk_models.Tofts(t_array, aif, upsample_factor=3)
 
     # run code
     tic = perf_counter()
-    pk_pars, C_t_fit = dce_fit.conc_to_pkp(C_array, pk_model)
-    Ktrans_meas = pk_pars['ktrans']
-    ve_meas = pk_pars['ve']
+    Ktrans_meas, ve_meas, C_t_fit = dce_fit.ConcToPKP(pk_model).proc(C_array)
     exc_time = 1e6 * (perf_counter() - tic)  # measure execution time
 
     # log results
     log_results(filename_prefix, '_MJT_UoEdinburghUK_tofts', [
-        [label, f"{exc_time:.0f}", Ktrans_ref, ve_ref, Ktrans_meas, ve_meas]])
+        [label, f"{exc_time:.0f}", Ktrans_ref, ve_ref, arterial_delay_ref, Ktrans_meas, ve_meas, arterial_delay_ref]])
 
     # run test
     np.testing.assert_allclose([ve_meas], [ve_ref], rtol=r_tol_ve, atol=a_tol_ve)
     np.testing.assert_allclose([Ktrans_meas], [Ktrans_ref], rtol=r_tol_Ktrans, atol=a_tol_Ktrans)
+
+
+test_data_delay = (DCEmodels_data.dce_DRO_data_tofts(delay=True))
+@osipi_parametrize(arg_names, test_data_delay, xf_labels=[])
+def test_MJT_UoEdinburghUK_tofts_model_delay(label, t_array, C_array, ca_array, ta_array, ve_ref, Ktrans_ref,
+                                       arterial_delay_ref, a_tol_ve, r_tol_ve, a_tol_Ktrans, r_tol_Ktrans, a_tol_delay,
+                                       r_tol_delay):
+    # NOTES:
+
+    # prepare input data - create aif object
+    aif = aifs.PatientSpecific(t_array, ca_array)
+    pk_model = pk_models.Tofts(t_array, aif, upsample_factor=3, fixed_delay=None)
+
+    # run code
+    tic = perf_counter()
+    Ktrans_meas, ve_meas, delay_meas, C_t_fit = dce_fit.ConcToPKP(pk_model).proc(C_array)
+    exc_time = 1e6 * (perf_counter() - tic)  # measure execution time
+
+    # log results
+    log_results(filename_prefix, '_MJT_UoEdinburghUK_tofts', [
+        [label, f"{exc_time:.0f}", Ktrans_ref, ve_ref, arterial_delay_ref, Ktrans_meas, ve_meas, delay_meas]])
+
+    # run test
+    np.testing.assert_allclose([ve_meas], [ve_ref], rtol=r_tol_ve, atol=a_tol_ve)
+    np.testing.assert_allclose([Ktrans_meas], [Ktrans_ref], rtol=r_tol_Ktrans, atol=a_tol_Ktrans)
+    np.testing.assert_allclose([delay_meas], [arterial_delay_ref], rtol=r_tol_delay, atol=a_tol_delay)

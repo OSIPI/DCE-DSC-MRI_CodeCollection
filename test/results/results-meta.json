@@ -15,6 +15,13 @@
   },
   {
     "path": "../test/results/T1_mapping",
+    "filename": "TestResults_T1mapping_MJT_EdinburghUK_t1_VFA_2fa.csv",
+    "category": "T1mapping",
+    "method": "two-FA",
+    "author": "MJT_UoEdinburgh_UK"
+  },
+  {
+    "path": "../test/results/T1_mapping",
     "filename": "TestResults_T1mapping_ST_SydneyAus_t1_VFA_lin.csv",
     "category": "T1mapping",
     "method": "linear",
@@ -24,7 +31,8 @@
     "path": "../test/results/T1_mapping",
     "filename": "TestResults_T1mapping_OG_MO_AUMC_ICR_RHM_t1_VFA_2fa.csv",
     "category": "T1mapping",
-    "method": "linear",
+    "method": "two-FA",
+
     "author": "OG_MO_AUMC_NL_ICR_UK"
   },
   {
@@ -225,6 +233,13 @@
   },
   {
     "path": "../test/results/DCEmodels",
+    "filename": "TestResults_models_MJT_UoEdinburghUK_patlak_llsq.csv",
+    "category": "DCEmodels",
+    "method": "patlak",
+    "author": "MJT_UoEdinburgh_UK_llsq"
+  },
+  {
+    "path": "../test/results/DCEmodels",
     "filename": "TestResults_models_MJT_UoEdinburghUK_tofts.csv",
     "category": "DCEmodels",
     "method": "tofts",
@@ -292,5 +307,12 @@
     "category": "DCEmodels",
     "method": "tofts",
     "author": "ST_USyd_Aus"
+  },
+    {
+    "path": "../test/results/DSCmodels",
+    "filename": "TestResults_ParamEstimation_SR_TBG_BNIPhoenix_USA.csv",
+    "category": "DSCmodels",
+    "method": "",
+    "author": "SR_LB_TBG_BNIPhoenix_USA_LCC SFTR"
   }
 ]

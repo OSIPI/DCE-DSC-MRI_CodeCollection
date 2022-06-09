@@ -10,7 +10,6 @@ arg_names = 'label, t_array, C_array, ca_array, ta_array, ve_ref, vp_ref, Ktrans
             'r_tol_ve, a_tol_vp,r_tol_vp,a_tol_Ktrans,r_tol_Ktrans,a_tol_delay,r_tol_delay '
 
 
-test_data = (DCEmodels_data.dce_DRO_data_extended_tofts_kety())
 filename_prefix = ''
 
 
@@ -22,6 +21,7 @@ def setup_module(module):
     log_init(filename_prefix, '_OG_MO_AUMC_ICR_RMH_etofts', ['label', 'time (us)', 'Ktrans_ref', 've_ref', 'vp_ref', 'delay_ref', 'Ktrans_meas', 've_meas', 'vp_meas', 'delay_meas'])
 
 
+test_data = (DCEmodels_data.dce_DRO_data_extended_tofts_kety())
 # Use the test data to generate a parametrize decorator. This causes the following
 # test to be run for every test case listed in test_data...
 @osipi_parametrize(arg_names, test_data, xf_labels=[])
@@ -82,7 +82,6 @@ def testOG_MO_AUMC_ICR_RMH_extended_tofts_kety_model_delay(label, t_array,
     # prepare input data
     ta_array = ta_array / 60
     t_array = t_array / 60
-    arterial_delay_ref = arterial_delay_ref / 60
     x0 = (0.6/0.2, 0, 0.2, 0.01)  # ke, delay, ve, vp
     bounds = ((0.0, -10/60, 0.0, 0.0), (5.0/0.2, 10/60, 1, 1))
     try:
@@ -106,6 +105,7 @@ def testOG_MO_AUMC_ICR_RMH_extended_tofts_kety_model_delay(label, t_array,
                                                                     bounds=((0.0, 0, 0.0, 0.0), (5.0, 1, 0.7, 0.7)),
                                                                     jobs=1, model='Cosine4')
     Ktrans_meas = ke * ve_meas
+    arterial_delay_meas *= 60
     exc_time = 1e6 * (perf_counter() - tic)  # measure execution time
 
     # log results

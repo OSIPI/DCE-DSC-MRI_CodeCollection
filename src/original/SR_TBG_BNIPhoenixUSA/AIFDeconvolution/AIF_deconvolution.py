@@ -31,7 +31,7 @@ from numpy.linalg import svd
 
 def AIFdeconvolution(dR2s_AIF, dR2s_leakagecorrected, TR):
     # Discretize the AIF 
-    nx,ny,nz,nt = np.shape(dR2s_leakagecorrected)
+    nt = np.shape(dR2s_leakagecorrected)[0]
     A_mtx = np.zeros([nt,nt])
     for i in range(nt):
         for j in range(nt):
@@ -103,5 +103,9 @@ def AIFdeconvolution(dR2s_AIF, dR2s_leakagecorrected, TR):
         L_0 = L_minus1
         L_minus1 = L_curve[k-1]
         mu_opt = u[k-1]
-    return mu_opt, B, S
+
+    Bpi = np.multiply(B,np.divide(S,(np.power(S,2) + np.power(mu_opt,2))))
+    Rf = np.transpose(V) @ Bpi
+
+    return Rf, mu_opt, B, S
 

@@ -11,10 +11,8 @@ arg_names = 'label, t_array, C_array, ca_array, ta_array, ve_ref, vp_ref, Ktrans
             'r_tol_ve, a_tol_vp, r_tol_vp, a_tol_Ktrans, r_tol_Ktrans, a_tol_delay, r_tol_delay'
 
 
-test_data = (DCEmodels_data.dce_DRO_data_extended_tofts_kety())
 
 filename_prefix = ''
-
 
 def setup_module(module):
     # initialize the logfiles
@@ -24,6 +22,7 @@ def setup_module(module):
     log_init(filename_prefix, '_LEK_UoEdinburghUK_etofts', ['label', 'time (us)', 'Ktrans_ref', 've_ref', 'vp_ref', 'delay_ref', 'Ktrans_meas', 've_meas', 'vp_meas', 'delay_meas'])
 
 
+test_data = (DCEmodels_data.dce_DRO_data_extended_tofts_kety())
 # Use the test data to generate a parametrize decorator. This causes the following test to be run for every test case
 # listed in test_data...
 @osipi_parametrize(arg_names, test_data, xf_labels=[])
@@ -70,7 +69,6 @@ def test_LEK_UoEdinburghUK_extended_tofts_kety_model_delay(label, t_array,
 
     # prepare input data
     t_array = t_array / 60  # convert to minutes so that KTrans is in /min
-    arterial_delay_ref = arterial_delay_ref / 60
     X0 = (0.6, 0.2, 0.01, 0)  # KTrans, ve, vp, delay
     bounds = ((0.0, 0.0, 0.0, -10/60), (5, 1, 1, 10/60))
 
@@ -80,6 +78,7 @@ def test_LEK_UoEdinburghUK_extended_tofts_kety_model_delay(label, t_array,
                              bounds=bounds)
     exc_time = 1e6 * (perf_counter() - tic)  # measure execution time
     Ktrans_meas, ve_meas, vp_meas, arterial_delay_meas = output
+    arterial_delay_meas *= 60  # convert to s
 
     # log results
     log_results(filename_prefix, '_LEK_UoEdinburghUK_etofts', [[label, f"{exc_time:.0f}", Ktrans_ref, ve_ref, vp_ref, arterial_delay_ref, Ktrans_meas, ve_meas, vp_meas, arterial_delay_meas]])

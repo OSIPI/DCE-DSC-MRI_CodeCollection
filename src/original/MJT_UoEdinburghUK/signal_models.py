@@ -5,15 +5,15 @@ Created 28 September 2020
 @email: m.j.thrippleton@ed.ac.uk
 @institution: University of Edinburgh, UK
 
-Classes: signal_model and derived subclasses:
-    spgr
+Classes: SignalModel and derived subclasses:
+    SPGR
 """
 
 from abc import ABC, abstractmethod
 import numpy as np
 
 
-class signal_model(ABC):
+class SignalModel(ABC):
     """Abstract base class for signal models.
 
     Subclasses correspond to specific signal models (e.g. SPGR). The purpose of
@@ -23,13 +23,10 @@ class signal_model(ABC):
     The class attributes are the acquisition parameters and are determined by
     the subclass.
 
-    Methods
-    -------
-    R_to_s(s0, R1, R2, R2s, k): get the signal
     """
 
     @abstractmethod
-    def R_to_s(self, s0, R1, R2, R2s, k):
+    def R_to_s(self, s0, R1, R2, R2s, k_fa):
         """Convert relaxation parameters to signal.
 
         Parameters
@@ -42,7 +39,7 @@ class signal_model(ABC):
             R2 relaxation rate (s^-1).
         R2s : float
             R2* signal dephasing rate (s^-1).
-        k : float
+        k_fa : float
             B1 correction factor, equal to the actual/nominal flip angle.
 
         Returns
@@ -53,27 +50,26 @@ class signal_model(ABC):
         pass
 
 
-class spgr(signal_model):
+class SPGR(SignalModel):
     """Signal model subclass for spoiled gradient echo pulse sequence.
 
-    Attributes
-    ----------
-    tr : float
-        repetition time (s)
-    fa : float
-         flip angle (deg)
-    te : float
-        echo time (s)
     """
 
     def __init__(self, tr, fa, te):
+        """
+
+        Args:
+            tr (float): repetition time (s)
+            fa (float): flip angle (deg)
+            te (float): echo time (s)
+        """
         self.tr = tr
-        self.fa = fa
+        self.fa = fa * np.pi / 180
         self.te = te
 
-    def R_to_s(self, s0, R1, R2=None, R2s=0, k=1.):
+    def R_to_s(self, s0, R1, R2=None, R2s=0, k_fa=1):
         """Get signal for this model. Overrides superclass method."""
-        fa = k * self.fa * np.pi/180
+        fa = k_fa * self.fa
         s = s0 * (((1.0-np.exp(-self.tr*R1))*np.sin(fa)) /
                   (1.0-np.exp(-self.tr*R1)*np.cos(fa))
                   ) * np.exp(-self.te*R2s)

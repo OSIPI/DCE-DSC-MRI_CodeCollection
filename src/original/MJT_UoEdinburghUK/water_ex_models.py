@@ -5,16 +5,16 @@ Created 28 September 2020
 @email: m.j.thrippleton@ed.ac.uk
 @institution: University of Edinburgh, UK
 
-Classes: water_ex_model and derived subclasses:
-    fxl
-    nxl
-    ntexl
+Classes: WaterExModel and derived subclasses:
+    FXL
+    NXL
+    NTEXL
 """
 
 from abc import ABC, abstractmethod
 
 
-class water_ex_model(ABC):
+class WaterExModel(ABC):
     """Abstract base class for water exchange models.
 
     Subclasses correspond to specific models (e.g. fast-exchange limit). The
@@ -23,17 +23,11 @@ class water_ex_model(ABC):
     tissue compartment (blood, EES and intracellular). For example,
     in the fast-exchange limit model, the result is a single T1 component,
     while in the slow exchange limit, the result is 3 T1 components.
-
-    Methods
-    -------
-    R1_components(p, R1):
-        get the R1 relaxation rates and corresponding population fractions for
-        each exponential T1 component
     """
 
     @abstractmethod
     def R1_components(self, p, R1):
-        """Get exponential T1 components.
+        """get the R1 relaxation rates and populations for T1 components.
 
         Parameters
         ----------
@@ -57,7 +51,7 @@ class water_ex_model(ABC):
         pass
 
 
-class fxl(water_ex_model):
+class FXL(WaterExModel):
     """Fast water exchange model.
 
     Water exchange between all compartments is in the fast limit.
@@ -71,7 +65,7 @@ class fxl(water_ex_model):
         return R1_components, p_components
 
 
-class nxl(water_ex_model):
+class NXL(WaterExModel):
     """No-exchange limit water exchange model.
 
     Water exchange between all compartments is in the slow limit.
@@ -84,7 +78,7 @@ class nxl(water_ex_model):
         return R1_components, p_components
 
 
-class ntexl(water_ex_model):
+class NTEXL(WaterExModel):
     """No-transendothelial water exchange limit model.
 
     Water exchange between blood and EES compartments is in the slow limit.
