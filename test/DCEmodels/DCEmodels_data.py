@@ -10,7 +10,7 @@ import pandas as pd
 # vp: a_tol=0.025, r_tol=0, start=0.01, bounds=(0,1)
 # fp: a_tol=5, r_tol=0.1, start=20, bounds=(0,200) , units ml/100ml/min
 # E: start=0.15, bounds=(0,1)
-# delay: a_tol=0.5, r_tol=0, start=0, bounds=(-10,10), units s
+# delay: a_tol=1, r_tol=0, start=0, bounds=(-10,10), units s
 
 
 def dce_DRO_data_extended_tofts_kety(delay=False):
@@ -90,7 +90,7 @@ def dce_DRO_data_extended_tofts_kety(delay=False):
     a_tol_vp = [0.025] * len(Ktrans_ref)
     a_tol_ve = [0.05] * len(Ktrans_ref)
     a_tol_Ktrans = [0.005] * len(Ktrans_ref)
-    a_tol_delay = [0.5] * len(Ktrans_ref)
+    a_tol_delay = [1] * len(Ktrans_ref)
     r_tol_vp = [0] * len(Ktrans_ref)
     r_tol_ve = [0] * len(Ktrans_ref)
     r_tol_Ktrans = [0.1] * len(Ktrans_ref)
@@ -166,18 +166,18 @@ def dce_DRO_data_tofts(delay=False):
     ve_ref = df['ve'].tolist()
     Ktrans_ref = df['Ktrans'].tolist()
     arterial_delay_ref = df['arterialdelay'].tolist()
-    if delay:  # delay tissue curve by 5 time points
+    if delay:  # delay tissue curve by 10 time points
         C_array = np.array(C_array)
-        C_array = C_array[:, :-5]
-        C_array = np.concatenate((np.tile([0], [len(C_array), 5]), C_array), axis=1)
-        arterial_delay_ref = np.array(arterial_delay_ref) + t_array[0][5] / 60
+        C_array = C_array[:, :-10]
+        C_array = np.concatenate((np.tile([0], [len(C_array), 10]), C_array), axis=1)
+        arterial_delay_ref = np.array(arterial_delay_ref) + t_array[0][10]
         for a in range(len(label)):
             label[a] = label[a] + '_delayed'
 
     # set the tolerance to use for this dataset
     a_tol_ve = [0.05] * len(Ktrans_ref)
     a_tol_Ktrans = [0.005] * len(Ktrans_ref)
-    a_tol_delay = [0.5] * len(Ktrans_ref)
+    a_tol_delay = [1] * len(Ktrans_ref)
     r_tol_ve = [0] * len(Ktrans_ref)
     r_tol_Ktrans = [0.1] * len(Ktrans_ref)
     r_tol_delay = [0] * len(Ktrans_ref)
@@ -243,7 +243,7 @@ def dce_DRO_data_Patlak(delay=False):
     # set the tolerance to use for this dataset
     a_tol_vp = [0.025] * len(vp_ref)
     a_tol_ps = [0.005] * len(vp_ref)
-    a_tol_delay = [0.5] * len(vp_ref)
+    a_tol_delay = [1] * len(vp_ref)
     r_tol_vp = [0] * len(vp_ref)
     r_tol_ps = [0.1] * len(vp_ref)
     r_tol_delay = [0] * len(vp_ref)
@@ -319,7 +319,7 @@ def dce_DRO_data_2cxm(delay=False):
     a_tol_ve = [0.05] * len(vp_ref)
     a_tol_fp = [5] * len(vp_ref)
     a_tol_ps = [0.005] * len(vp_ref)
-    a_tol_delay = [0.5] * len(vp_ref)
+    a_tol_delay = [1] * len(vp_ref)
     r_tol_vp = [0] * len(vp_ref)
     r_tol_ve = [0] * len(vp_ref)
     r_tol_fp = [0.1] * len(vp_ref)
@@ -392,7 +392,7 @@ def dce_DRO_data_2cum(delay=False):
     a_tol_vp = [0.025] * len(vp_ref)
     a_tol_fp = [5] * len(vp_ref)
     a_tol_ps = [0.005] * len(vp_ref)
-    a_tol_delay = [0.5] * len(vp_ref)
+    a_tol_delay = [1] * len(vp_ref)
     r_tol_vp = [0] * len(vp_ref)
     r_tol_fp = [0.1] * len(vp_ref)
     r_tol_ps = [0.1] * len(vp_ref)

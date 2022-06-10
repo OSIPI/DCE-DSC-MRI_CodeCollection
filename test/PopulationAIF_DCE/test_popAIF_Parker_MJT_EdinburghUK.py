@@ -1,5 +1,4 @@
 import os
-import pytest
 import numpy as np
 from time import perf_counter
 from ..helpers import osipi_parametrize, log_init, log_results
@@ -35,7 +34,7 @@ def test_Parker_AIF_MJT_EdinburghUK(label, time, cb_ref_values, delay, a_tol, r_
 
     tic = perf_counter()
     # Create the AIF object
-    aif = aifs.parker(hct, tstart)
+    aif = aifs.Parker(hct, tstart)
     # for corresponding time array
     c_ap = aif.c_ap(time)
     exc_time = 1e6 * (perf_counter() - tic)  # measure execution time
