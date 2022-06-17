@@ -153,6 +153,9 @@ test/results-old
 notebooks/data
 notebooks/_build
 
+# test results (these are commited to separate repository)
+/results
+
 # Pycharm
 .idea
 /**/.idea
