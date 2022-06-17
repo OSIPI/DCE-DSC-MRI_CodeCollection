@@ -25,6 +25,9 @@ def setup_module(module):
 # test to be run for every test case listed in test_data...
 @osipi_parametrize(arg_names, test_data, xf_labels = [])
 def test_ST_USydAUS_signals2conc(label, fa, tr, T1base, BLpts, r1, s_array, conc_array, a_tol, r_tol):
+    # Note: the first signal value is not used for baseline estimation,
+    # and the first C value is not logged or assessed
+
     ##Prepare input data
     #The code used to make the test data doesn't include the first point on the curve, so remove it here from s and conc and reduce BLpts by 1
     s_array=s_array[1:]

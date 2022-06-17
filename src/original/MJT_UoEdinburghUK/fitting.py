@@ -154,7 +154,7 @@ class Fitter(ABC):
             for name, is1d in self.output_info():
                 n_values = n_points if is1d else 1
                 chunk_output[name] = np.empty((n_chunk_voxels, n_values),
-                                              dtype=np.float32)
+                                              dtype=np.float64)
                 chunk_output[name][:] = np.nan
             # process all voxels in the chunk
             for i_vox_chunk, i_vox in enumerate(np.arange(start_voxel,
