@@ -27,9 +27,15 @@ def setup_module(module):
 # test to be run for every test case listed in test_data...
 @osipi_parametrize(arg_names, test_data, xf_labels = [])
 def test_MJT_UoEdinburghUK_sig_to_conc_num(label, fa, tr, T1base, BLpts, r1, s_array, conc_array, a_tol, r_tol):
+    # Note: the first signal value is not used for baseline estimation,
+    # and the first C value is not logged or assessed
+
     # Tests code that converts Enh->Conc using a numerical approach
     # This method can be used for different pulse sequences and C->R1 relationships
     # Can account for R2* relaxivity
+
+    # Note: the first signal value is not used for baseline estimation,
+    # and the first C value is not logged or assessed
 
     ##Prepare input data
 
@@ -53,16 +59,19 @@ def test_MJT_UoEdinburghUK_sig_to_conc_num(label, fa, tr, T1base, BLpts, r1, s_a
 
     # log results
     row_data = []
-    for ref, meas in zip(conc_array, conc_curve):
+    for ref, meas in zip(conc_array[1:], conc_curve[1:]):
         row_data.append([label, f"{exc_time:.0f}", ref, meas])
     log_results(filename_prefix, '_MJT_UoEdinburgh_num', row_data)
 
     # testing
-    np.testing.assert_allclose( conc_curve, conc_array, rtol=r_tol, atol=a_tol)
+    np.testing.assert_allclose( conc_curve[1:], conc_array[1:], rtol=r_tol, atol=a_tol)
 
 
 @osipi_parametrize(arg_names, test_data, xf_labels = [])
 def test_MJT_UoEdinburghUK_sig_to_conc(label, fa, tr, T1base, BLpts, r1, s_array, conc_array, a_tol, r_tol):
+    # Note: the first signal value is not used for baseline estimation,
+    # and the first C value is not logged or assessed
+
     # Tests code that calculates Enh->Conc analytically for the SPGR sequence
     # Requires linear relaxivity relationship and assumes no R2* relaxation
 
@@ -81,9 +90,9 @@ def test_MJT_UoEdinburghUK_sig_to_conc(label, fa, tr, T1base, BLpts, r1, s_array
 
     # log results
     row_data = []
-    for ref, meas in zip(conc_array, conc_curve):
+    for ref, meas in zip(conc_array[1:], conc_curve[1:]):
         row_data.append([label, f"{exc_time:.0f}", ref, meas])
     log_results(filename_prefix, '_MJT_UoEdinburgh', row_data)
 
     # testing
-    np.testing.assert_allclose( conc_curve, conc_array, rtol=r_tol, atol=a_tol)
+    np.testing.assert_allclose( conc_curve[1:], conc_array[1:], rtol=r_tol, atol=a_tol)
