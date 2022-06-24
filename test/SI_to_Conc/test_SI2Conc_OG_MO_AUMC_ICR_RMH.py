@@ -27,6 +27,8 @@ def setup_module(module):
 # test to be run for every test case listed in test_data...
 @osipi_parametrize(arg_names, test_data, xf_labels = [])
 def test_OG_MO_AUMC_ICR_RMH_dce_to_r1eff(label, fa, tr, T1base, BLpts, r1, s_array, conc_array, a_tol, r_tol):
+    # Note: the first signal value is not used for baseline estimation,
+    # and the first C value is not logged or assessed
 
     ##Prepare input data
     #Convert fa to radians
@@ -50,9 +52,9 @@ def test_OG_MO_AUMC_ICR_RMH_dce_to_r1eff(label, fa, tr, T1base, BLpts, r1, s_arr
 
     # log results
     row_data = []
-    for ref, meas in zip(conc_array, conc_curve):
+    for ref, meas in zip(conc_array[1:], conc_curve[1:]):
         row_data.append([label, f"{exc_time:.0f}", ref, meas])
     log_results(filename_prefix, '_OG_MO_AUMC_ICR_RMH', row_data)
 
-    np.testing.assert_allclose( conc_curve, conc_array, rtol=r_tol, atol=a_tol )
+    np.testing.assert_allclose( conc_curve[1:], conc_array[1:], rtol=r_tol, atol=a_tol )
 
