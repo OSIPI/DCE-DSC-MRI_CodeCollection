@@ -31,8 +31,9 @@ def plot_bland_altman(ax, data, tolerances, tag, log_plot=False, xlim=None, ylim
 
     citation: Bland JM and Altman DG "Measuring agreement in method comparison studies" Statistical Methods in Medical Research 1999; 8: 135-160
     """
-
-    g = sns.scatterplot(data=data, ax=ax, x=tag + '_ref', y='error_' + tag, hue='author', hue_order=data.author.sort_values().unique(), style='author', s=100)
+    
+    
+    g = sns.scatterplot(data=data, ax=ax, x=tag + '_ref', y='error_' + tag, hue='author', hue_order=data.author.sort_values().unique(), style='author', s=120)
 
     tol = tolerances[tag]
     if not log_plot:
@@ -58,13 +59,13 @@ def plot_bland_altman(ax, data, tolerances, tag, log_plot=False, xlim=None, ylim
     if xlim != None:
         ax.set_xlim(xlim[0], xlim[1])
     if label_xaxis != None:
-        ax.set_xlabel(label_xaxis, fontsize=16)
+        ax.set_xlabel(label_xaxis)
     if label_yaxis != None:
-        ax.set_ylabel(label_yaxis, fontsize=16)
+        ax.set_ylabel(label_yaxis)
     if fig_title != None:
-        ax.set_title(fig_title, fontsize=18)
-    ax.tick_params(axis='x', labelsize=14)
-    ax.tick_params(axis='y', labelsize=14)
+        ax.set_title(fig_title)
+    ax.tick_params(axis='x')
+    ax.tick_params(axis='y')
 
 
 def bland_altman_statistics(data, par, grouptag):
