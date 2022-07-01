@@ -1,14 +1,12 @@
 OSIPI DCE-DSC code
 ====================
 
-This website publishes the results of the test results of the code in [osipi_dce_dsc_repo repository](https://github.
-com/OSIPI/osipi_dce_dsc_repo).
+This website publishes the results of the test results of the code in [OSIPI Code Collection](https://github.com/OSIPI/DCE-DSC-MRI_CodeCollection).
 
-### About OSIPI TF2.3 and the OSIPI code repository  
+### About OSIPI TF2.3 and the OSIPI code collection  
 
 The ISMRM Open-Source Initiative for Perfusion Imaging (OSIPI) aims to promote the sharing of perfusion imaging software in order to reduce duplication, improve reproducibility and speed up translation. 
-The *osipi_dce_dsc_repo* code repository is an ongoing project maintained by Taskforce 2.3 of OSIPI and aims to 
-collect, test and share open-source code for the analysis of dynamic contrast-enhanced (DCE-) and dynamic susceptibility-enhanced (DSC-) MRI for use in research and software development. 
+The DCE-DSC-MRI_CodeCollection code library is an ongoing project maintained by Taskforce 2.3 of OSIPI and aims to collect, test and share open-source code for the analysis of dynamic contrast-enhanced (DCE-) and dynamic susceptibility-enhanced (DSC-) MRI for use in research and software development. 
 Code contributions can include modules covering one or more steps within the image processing pipeline, for example T1 mapping, converting signal to concentration and pharmacokinetic modelling. 
 A further aim of OSIPI is to develop a fully tested and harmonised code library, drawing on the contributions within this repository.
 
@@ -24,7 +22,7 @@ For each contribution a separate test file was created, but contributions
 implementing the same functionality are tested using the same test data and 
 tolerances.
 
-for more information please check the [wiki](https://github.com/OSIPI/osipi_dce_dsc_repo/wiki/Viewing-the-test-results)
+for more information please check the [wiki](https://github.com/OSIPI/DCE-DSC-MRI_CodeCollection/wiki/Viewing-the-test-results)
 
 ### Purpose of this website
 Pytest generates binary pass-fail output dependent on the defined tolerances.
