@@ -2,7 +2,7 @@ import os
 import numpy as np
 from time import perf_counter
 from ..helpers import osipi_parametrize, log_init, log_results
-import osipi_dce_dsc_repo.original.MJT_UoEdinburghUK.aifs as aifs
+import osipi_code_collection.original.MJT_UoEdinburghUK.aifs as aifs
 from . import popAIF_data
 
 
