@@ -4,7 +4,7 @@ from scipy.optimize import curve_fit
 from time import perf_counter
 from ..helpers import osipi_parametrize, log_init, log_results
 from . import DCEmodels_data
-from osipi_code_collection.original.ST_USydAUS.ModelDictionary import ExtendedTofts
+from osipi_dce_dsc_repo.original.ST_USydAUS.ModelDictionary import ExtendedTofts
 
 # All tests will use the same arguments and same data...
 arg_names = 'label, t_array, C_array, ca_array, ta_array, ve_ref, vp_ref, Ktrans_ref, arterial_delay_ref,  a_tol_ve, ' \
