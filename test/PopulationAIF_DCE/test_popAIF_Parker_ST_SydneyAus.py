@@ -3,7 +3,7 @@ import pytest
 import numpy as np
 from time import perf_counter
 from ..helpers import osipi_parametrize, log_init, log_results
-from osipi_dce_dsc_repo.original.ST_USydAUS.InputFunctions import AIF, variableAIF, arr_shift
+from osipi_code_collection.original.ST_USydAUS.InputFunctions import AIF, variableAIF, arr_shift
 from . import popAIF_data
 
 

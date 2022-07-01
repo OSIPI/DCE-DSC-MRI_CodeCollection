@@ -4,7 +4,7 @@ import numpy as np
 from time import perf_counter
 from ..helpers import osipi_parametrize, log_init, log_results
 from . import SI2Conc_data
-from osipi_dce_dsc_repo.original.ST_USydAUS.signals2conc import signals2conc
+from osipi_code_collection.original.ST_USydAUS.signals2conc import signals2conc
 
 
 # All tests will use the same arguments and same data...
