@@ -7,7 +7,7 @@ logo: logo.png
 execute:
   timeout: 600
 repository:
-  url                       : https://github.com/OSIPI/DCE-DSC-MRI_CodeCollection 
+  url                       : https://github.com/OSIPI/osipi_dce_dsc_repo 
   path_to_book              : notebooks 
   branch                    : demo
 launch_buttons:
