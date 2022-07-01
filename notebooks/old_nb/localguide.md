@@ -9,7 +9,7 @@ To create a local copy of the repository, navigate to the respository located at
 
 On the local computer, open the terminal application and navigate to the folder where you would like the repository to be located. `git clone` is then used to clone a local copy of the repository..
  
-	$git clone https://github.com/OSIPI/osipi_dce_dsc_repo.git
+	$git clone https://github.com/OSIPI/DCE-DSC-MRI_CodeCollection.git
 
 Now you will have a local copy wherein any additions, modifications or deletions made would remain local to your computer and not immediately affect the repository housed on GitHub. To obtain information about the repository enter
 
