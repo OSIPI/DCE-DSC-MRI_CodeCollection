@@ -4,7 +4,7 @@ import numpy as np
 from time import perf_counter
 from ..helpers import osipi_parametrize, log_init, log_results # helper for running tests on multiple cases
 from . import t1_data # module for providing all t1 test cases
-from osipi_code_collection.original.ST_USydAUS.VFAT1mapping import VFAT1mapping # functions to test
+from osipi_dce_dsc_repo.original.ST_USydAUS.VFAT1mapping import VFAT1mapping # functions to test
 
 
 # All tests will use the same arguments and same data...
