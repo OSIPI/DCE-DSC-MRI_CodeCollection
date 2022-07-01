@@ -22,9 +22,8 @@ OSIPI/DCE-DSC-MRI_CodeCollection
 │   └── DSCmodels
 │       └── data
 │   └── ...
-│   └── results                        # output values of the tests stored as csv files
-│       └── results-meta.json          # stores meta-information about csv files
-├── notebooks                          # Jupyter notebooks and markdown files to build the website
+│   └── results-meta.json              # stores meta-information about csv-results files, used by notebooks
+├── notebooks                          # Jupyter notebooks and markdown files to build the test-results website
 ├── LICENCE                            # Apache version 2.0 licence
 ├── README.md
 ├── setup.py
