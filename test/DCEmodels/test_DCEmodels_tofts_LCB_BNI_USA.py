@@ -23,7 +23,8 @@ def setup_module(module):
 # Use the test data to generate a parametrize decorator. This causes the following test to be run for every test case
 # listed in test_data...
 @osipi_parametrize(arg_names, test_data, xf_labels=[])
-def test_LCB_BNI_tofts_model(label, t_array, C_array, ca_array, ta_array, ve_ref, Ktrans_ref, arterial_delay_ref,
+def test_LCB_BNI_USA_tofts_model(label, t_array, C_array, ca_array, ta_array,
+                              ve_ref, Ktrans_ref, arterial_delay_ref,
                              a_tol_ve, r_tol_ve, a_tol_Ktrans, r_tol_Ktrans, a_tol_delay, r_tol_delay):
     # NOTES:
     # Artery-capillary delay not implemented

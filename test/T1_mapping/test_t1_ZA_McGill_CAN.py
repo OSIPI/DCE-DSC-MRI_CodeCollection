@@ -28,7 +28,8 @@ def setup_module(module):
 # Use the test data to generate a parametrize decorator. This causes the following
 # test to be run for every test case listed in test_data...
 @osipi_parametrize(arg_names, test_data, xf_labels = [])
-def test_mcgill_t1_novifast(label, fa_array, tr_array, s_array, r1_ref, s0_ref, a_tol, r_tol):
+def test_ZA_McGill_CAN_t1_novifast(label, fa_array, tr_array, s_array, r1_ref,
+                             s0_ref, a_tol, r_tol):
     # NOTES:
         
     # prepare input data
@@ -48,7 +49,8 @@ def test_mcgill_t1_novifast(label, fa_array, tr_array, s_array, r1_ref, s0_ref, 
 
 # In the following test, we specify 1 case that is expected to fail...
 @osipi_parametrize(arg_names, test_data, xf_labels = ['Pat5_voxel5_prostaat'])
-def test_mcgill_t1_VFA_lin(label, fa_array, tr_array, s_array, r1_ref, s0_ref, a_tol, r_tol):
+def test_ZA_McGill_CAN_t1_VFA_lin(label, fa_array, tr_array, s_array,
+                                     r1_ref, s0_ref, a_tol, r_tol):
     # NOTES:
     #   Expected fails: 1 low-SNR prostate voxel
     

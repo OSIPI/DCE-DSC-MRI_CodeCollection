@@ -26,7 +26,8 @@ def setup_module(module):
 # test to be run for every test case listed in test_data.
 # some test data fails as this code uses a shift of the original AIF in time and doesn't recalculate the values based on the new time array
 @osipi_parametrize(arg_names, test_data, xf_labels=['delay_5.0s','delay_10.0s','delay_31.0s','delay_2.0s'])
-def test_Parker_AIF_ST_SydneyAus(label, time, cb_ref_values, delay, a_tol, r_tol):
+def test_Parker_AIF_ST_SydneyAUS(label, time, cb_ref_values, delay, a_tol,
+                                r_tol):
 
     # prepare input data
     time = time*60 # time array is expected in seconds

@@ -24,7 +24,8 @@ def setup_module(module):
 # Use the test data to generate a parametrize decorator. This causes the following test to be run for every test case
 # listed in test_data...
 @osipi_parametrize(arg_names, test_data, xf_labels=[])
-def test_OGJ_OsloU_Norway_tofts_model_llsq(label, t_array, C_array, ca_array, ta_array, ve_ref, Ktrans_ref,
+def test_OGJ_OsloU_NOR_tofts_model_llsq(label, t_array, C_array, ca_array,
+                                       ta_array, ve_ref, Ktrans_ref,
                                       arterial_delay_ref, a_tol_ve, r_tol_ve, a_tol_Ktrans, r_tol_Ktrans, a_tol_delay,
                                       r_tol_delay):
     # NOTES:
@@ -50,7 +51,8 @@ def test_OGJ_OsloU_Norway_tofts_model_llsq(label, t_array, C_array, ca_array, ta
 
 
 @osipi_parametrize(arg_names, test_data, xf_labels=[])
-def test_OGJ_OsloU_Norway_tofts_model_nlls(label, t_array, C_array, ca_array, ta_array, ve_ref, Ktrans_ref,
+def test_OGJ_OsloU_NOR_tofts_model_nlls(label, t_array, C_array, ca_array,
+                                       ta_array, ve_ref, Ktrans_ref,
                                       arterial_delay_ref, a_tol_ve, r_tol_ve, a_tol_Ktrans, r_tol_Ktrans, a_tol_delay,
                                       r_tol_delay):
     # NOTES:

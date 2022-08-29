@@ -3,7 +3,7 @@ import numpy as np
 from time import perf_counter
 from ..helpers import osipi_parametrize, log_init, log_results
 from . import DCEmodels_data
-from src.original.OGJ_OsloU_Norway.MRImageAnalysis.DCE.Analyze import fitToModel
+from src.original.OGJ_OsloU_NOR.MRImageAnalysis.DCE.Analyze import fitToModel
 
 arg_names = 'label, t_array, C_t_array, cp_aif_array, vp_ref, ve_ref, fp_ref,' \
             'ps_ref, delay_ref, a_tol_vp, r_tol_vp, a_tol_ve, r_tol_ve, ' \
@@ -25,7 +25,7 @@ def setup_module(module):
 # Use the test data to generate a parametrize decorator. This causes the following
 # test to be run for every test case listed in test_data...
 @osipi_parametrize(arg_names, test_data, xf_labels=[])
-def test_OGJ_OsloU_Norway_2cxm_model_llsq(label, t_array, C_t_array,
+def test_OGJ_OsloU_NOR_2cxm_model_llsq(label, t_array, C_t_array,
                                      cp_aif_array, vp_ref, ve_ref,
                                      fp_ref, ps_ref, delay_ref,
                                      a_tol_vp, r_tol_vp, a_tol_ve,

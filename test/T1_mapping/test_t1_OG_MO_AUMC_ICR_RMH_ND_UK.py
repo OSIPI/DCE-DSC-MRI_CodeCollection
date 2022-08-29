@@ -30,7 +30,8 @@ def setup_module(module):
 # test to be run for every test case listed in test_data...
 # In the following test, we specify 1 case that is expected to fail...
 @osipi_parametrize(arg_names, test_data, xf_labels = ['Pat5_voxel5_prostaat'])
-def testOG_MO_AUMC_ICR_RMH_t1_VFA_2fa(label, fa_array, tr_array, s_array, r1_ref, s0_ref, a_tol, r_tol):
+def test_OG_MO_AUMC_ICR_RMH_ND_UK_t1_VFA_2fa(label, fa_array, tr_array,
+                                             s_array, r1_ref, s0_ref, a_tol, r_tol):
     # NOTES:
     #   Code requires signal array with min 2 dimensions (including FA)
     #   Expected fails: 1 low-SNR prostate voxel
@@ -51,7 +52,8 @@ def testOG_MO_AUMC_ICR_RMH_t1_VFA_2fa(label, fa_array, tr_array, s_array, r1_ref
 
 
 @osipi_parametrize(arg_names, test_data, xf_labels=[])
-def testOG_MO_AUMC_ICR_RMH_t1_VFA(label, fa_array, tr_array, s_array, r1_ref, s0_ref, a_tol, r_tol):
+def test_OG_MO_AUMC_ICR_RMH_ND_UK_t1_VFA(label, fa_array, tr_array, s_array,
+                                   r1_ref, s0_ref, a_tol, r_tol):
     # NOTES:
     #   Code requires signal array with min 2 dimensions (including FA)
     #   Expected fails: 1 low-SNR prostate voxel

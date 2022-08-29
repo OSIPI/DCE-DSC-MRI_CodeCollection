@@ -25,7 +25,8 @@ def setup_module(module):
 # Use the test data to generate a parametrize decorator. This causes the following
 # test to be run for every test case listed in test_data...
 @osipi_parametrize(arg_names, test_data, xf_labels=[])
-def test_preclinical_AIF_ST_SydneyAus(label, time, cb_ref_values, delay, a_tol, r_tol):
+def test_preclinical_AIF_ST_SydneyAUS(label, time, cb_ref_values, delay,
+                                     a_tol, r_tol):
 
     # prepare input data
     t0 = delay + time[1] # precontrast signal; t0 is expected to be in seconds; if no precontrast signal is expected, the value should be equal to the temp resolution

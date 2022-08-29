@@ -28,7 +28,8 @@ def setup_module(module):
 # Use the test data to generate a parametrize decorator. This causes the following
 # test to be run for every test case listed in test_data...
 @osipi_parametrize(arg_names, test_data, xf_labels = [])
-def test_ST_SydneyAus_t1_VFA_nonlin(label, fa_array, tr_array, s_array, r1_ref, s0_ref, a_tol, r_tol):
+def test_ST_SydneyAUS_t1_VFA_nonlin(label, fa_array, tr_array, s_array,
+                                   r1_ref, s0_ref, a_tol, r_tol):
     # NOTES:
 
     # prepare input data
@@ -46,7 +47,8 @@ def test_ST_SydneyAus_t1_VFA_nonlin(label, fa_array, tr_array, s_array, r1_ref, 
 
 # In the following test, we specify 1 case that is expected to fail...
 @osipi_parametrize(arg_names, test_data, xf_labels = ['Pat5_voxel5_prostaat'])
-def test_ST_SydneyAus_t1_VFA_lin(label, fa_array, tr_array, s_array, r1_ref, s0_ref, a_tol, r_tol):
+def test_ST_SydneyAUS_t1_VFA_lin(label, fa_array, tr_array, s_array, r1_ref,
+                                s0_ref, a_tol, r_tol):
     # NOTES:
     #   Signal is scaled to prevent multiple test failures for prostate test cases.
     #   Linear mode uses linear model but not linear regression(?)
@@ -64,5 +66,3 @@ def test_ST_SydneyAus_t1_VFA_lin(label, fa_array, tr_array, s_array, r1_ref, s0_
     r1_lin_meas = 1000./t1_lin_meas # convert T1 (ms) to R1 (/s)
     log_results(filename_prefix, '_ST_SydneyAus_t1_VFA_lin', [[label, f"{exc_time:.0f}", r1_ref, r1_lin_meas]]) # log results to csv
     np.testing.assert_allclose([r1_lin_meas], [r1_ref], rtol=r_tol, atol=a_tol)
-
-
