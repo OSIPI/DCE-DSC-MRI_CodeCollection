@@ -10,8 +10,8 @@ DCE,Input Functions,Heye AIF,Heye et al (https://doi.org/10.1016/j.neuroimage.20
 DCE,Input Functions,AIF parameterization,,OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK","Cosine4AIF, Cosine8AIF",https://doi.org/10.1088/0031-9155/53/5/005; https://doi.org/10.1007/s00330-015-4012-9,tbd,
 DCE,Input Functions,Head-and-neck population AIF,Wong et al (DOI: https://doi.org/10.2967/jnumed.116.174433),OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK",aifPopHN,,tbd,
 DCE,Input Functions,Parker AIF,,OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK",aifPopPMB,,tbd,
-DCE,Input Functions,load AIF,from txt,OGJ_OsloU_Norway,Ole Gunnar Johansen,"University of Oslo, Norway",loadStandard,,tbd,
-DCE,Input Functions,AIF parameterization,fit gamma-variate function,OGJ_OsloU_Norway,Ole Gunnar Johansen,"University of Oslo, Norway",gammaVariateFit,,tbd,
+DCE,Input Functions,load AIF,from txt,OGJ_OsloU_NOR,Ole Gunnar Johansen,"University of Oslo, Norway",loadStandard,,tbd,
+DCE,Input Functions,AIF parameterization,fit gamma-variate function,OGJ_OsloU_NOR,Ole Gunnar Johansen,"University of Oslo, Norway",gammaVariateFit,,tbd,
 DCE,Input Functions,Georgiou AIF,Georgiou et al (DOI: 10.1002/mrm.27524),PvH_NKI,Petra van Houdt,"the Netherlands Cancer Institute, the Netherlands",GeorgiouAIF,,JK/PvH,completed
 DCE,Input Functions,Parker AIF,,PvH_NKI,Petra van Houdt,"the Netherlands Cancer Institute, the Netherlands",ParkerAIF,,JK/PvH,completed
 DCE,Input Functions,Parker AIF,,ST_USydAUS_DCE,Sirisha Tadimalla,"University of Sydney, Australia","AIF, variableAIF",,JK/PvH,completed
@@ -46,11 +46,11 @@ DCE,Pharmacokinetic models,steady-state vp,NLLS fitting to signal incl. water ex
 DCE,Pharmacokinetic models,Tofts,NLLS fitting to concentration values (incl forward model),MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK","Tofts, EnhToPKP, ConcToPKP",,ST/OGC,completed
 DCE,Pharmacokinetic models,Tofts,NLLS fitting to signal incl. water exchange (incl forward model),MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK","Tofts,EnhToPKP, ConcToPKP",,ST/OGC,completed
 DCE,Pharmacokinetic models,extended Tofts,NLLS fitting (+forward model),OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK",fit_tofts_model,,ST/OGC,completed
-DCE,Pharmacokinetic models,2-cmp exchange,LLSQ fitting (+ forward model),OGJ_OsloU_Norway,Ole Gunnar Johansen,"University of Oslo, Norway","twoCXM, fitToModelLLSQ",,MJT,completed
-DCE,Pharmacokinetic models,extended Tofts,NLLS fitting (+ forward model),OGJ_OsloU_Norway,Ole Gunnar Johansen,"University of Oslo, Norway","ETM,  fitToModelNLLS, fitToModelNLLS_parallel",,ST/OGC,completed
-DCE,Pharmacokinetic models,extended Tofts,LLSQ fitting (+ forward model),OGJ_OsloU_Norway,Ole Gunnar Johansen,"University of Oslo, Norway","ETM, fitToModelLLSQ",,ST/OGC,completed
-DCE,Pharmacokinetic models,Tofts,NLLS fitting (+ forward model),OGJ_OsloU_Norway,Ole Gunnar Johansen,"University of Oslo, Norway","TM,  fitToModelNLLS, fitToModelNLLS_parallel",,ST/OGC,completed
-DCE,Pharmacokinetic models,Tofts,LLSQ fitting (+ forward model),OGJ_OsloU_Norway,Ole Gunnar Johansen,"University of Oslo, Norway","TM, fitToModelLLSQ",,ST/OGC,completed
+DCE,Pharmacokinetic models,2-cmp exchange,LLSQ fitting (+ forward model),OGJ_OsloU_NOR,Ole Gunnar Johansen,"University of Oslo, Norway","twoCXM, fitToModelLLSQ",,MJT,completed
+DCE,Pharmacokinetic models,extended Tofts,NLLS fitting (+ forward model),OGJ_OsloU_NOR,Ole Gunnar Johansen,"University of Oslo, Norway","ETM,  fitToModelNLLS, fitToModelNLLS_parallel",,ST/OGC,completed
+DCE,Pharmacokinetic models,extended Tofts,LLSQ fitting (+ forward model),OGJ_OsloU_NOR,Ole Gunnar Johansen,"University of Oslo, Norway","ETM, fitToModelLLSQ",,ST/OGC,completed
+DCE,Pharmacokinetic models,Tofts,NLLS fitting (+ forward model),OGJ_OsloU_NOR,Ole Gunnar Johansen,"University of Oslo, Norway","TM,  fitToModelNLLS, fitToModelNLLS_parallel",,ST/OGC,completed
+DCE,Pharmacokinetic models,Tofts,LLSQ fitting (+ forward model),OGJ_OsloU_NOR,Ole Gunnar Johansen,"University of Oslo, NOR","TM, fitToModelLLSQ",,ST/OGC,completed
 DCE,Pharmacokinetic models,1-cmp,forward model,ST_USydAUS_DCE,Sirisha Tadimalla,"University of Sydney, Australia",OneCompartment,,tbd,
 DCE,Pharmacokinetic models,dual-inlet 1-cmp,forward model,ST_USydAUS_DCE,Sirisha Tadimalla,"University of Sydney, Australia",DualInletOneCompartment,,tbd,
 DCE,Pharmacokinetic models,dual-inlet ext Tofts,forward model,ST_USydAUS_DCE,Sirisha Tadimalla,"University of Sydney, Australia",DualInletExtendedTofts,,tbd,
