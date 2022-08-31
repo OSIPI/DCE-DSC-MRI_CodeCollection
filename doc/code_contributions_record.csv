@@ -77,12 +77,12 @@ DCE,T1,VFA,two flip angles (linear),OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, 
 DCE,T1,VFA,nonlinear,OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK",R1_VFA,,MJT,competed
 DCE,T1,VFA,linear,ST_SydneyAus_T1,Sirisha Tadimalla,"University of Sydney, Australia",VFAT1mapping,,MJT,completed
 DCE,T1,VFA,nonlinear,ST_SydneyAus_T1,Sirisha Tadimalla,"University of Sydney, Australia",VFAT1mapping,,MJT,completed
-DCE/DSC,AIF deconvolution,,,SR_TBG_BNI_USAPhoenixUSA,"Sudarshan Ragunathan, Laura Bell","Barrow Neurological Institute, USA",AIFdeconvolution,,JA,completed
+DCE/DSC,AIF deconvolution,,,SR_TBG_BNI_PhoenixUSA,"Sudarshan Ragunathan, Laura Bell","Barrow Neurological Institute, USA",AIFdeconvolution,,JA,completed
 DCE/DSC,Miscellaneous,calculate SNR,,DS_BW_VanderBiltUMC_USA,"David Smith, Brian Welch","VanderBilt University Medical Center, USA",signal_to_noise_ratio,,tbd,
 DCE/DSC,Miscellaneous,calculate enhancement ratio,,DS_BW_VanderBiltUMC_USA,"David Smith, Brian Welch","VanderBilt University Medical Center, USA",signal_enhancement_ratio,,tbd,
 DSC,Input Functions,automatic AIF selection,"fully automatic, semi-automatic",JBJA_GUSahlgrenskaSWE,"Jesper Browall, Jonathan Arvidsson","Sahlgrenska University Hospital and Gothenburg University, Gothenburg, Sweden",AIF_selection_automatic.py,DOI: 10.1002/mrm.20759,tbd,
-DSC,Leakage correction,BSW,,SR_TBG_BNI_USAPhoenixUSA,"Sudarshan Ragunathan, Laura Bell","Barrow Neurological Institute, USA",BSWleakagecorr,,SR,in-progress
-DSC,Parameter derivation,"CBV,CBF,MTT",,SR_TBG_BNI_USAPhoenixUSA,"Sudarshan Ragunathan, Laura Bell","Barrow Neurological Institute, USA",DSCparameters,,tbd,
+DSC,Leakage correction,BSW,,SR_TBG_BNI_PhoenixUSA,"Sudarshan Ragunathan, Laura Bell","Barrow Neurological Institute, USA",BSWleakagecorr,,SR,in-progress
+DSC,Parameter derivation,"CBV,CBF,MTT",,SR_TBG_BNI_PhoenixUSA,"Sudarshan Ragunathan, Laura Bell","Barrow Neurological Institute, USA",DSCparameters,,tbd,
 DSC,Signal to deltaR2*,single echo,,LCB_BNI_USA,Laura Bell,"Barrow Neurological Institute, USA",,estimate_delta_R2s,tbd,
 DSC,Signal to deltaR2*,dual echo,,LCB_BNI_USA,Laura Bell,"Barrow Neurological Institute, USA",,"estimate_delta_R2s, estimate_delta_R2s_dual_echo",tbd,
 DSC,Signal to R2*,dual echo,,LCB_BNI_USA,Laura Bell,"Barrow Neurological Institute, USA",,estimate_R2s,tbd,

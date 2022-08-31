@@ -3,8 +3,8 @@ import numpy as np
 from time import perf_counter
 from ..helpers import osipi_parametrize, log_init, log_results
 from . import DSCmodels_data
-from src.original.SR_TBG_BNI_USAPhoenixUSA.AIFDeconvolution.AIF_deconvolution import AIFdeconvolution
-from src.original.SR_TBG_BNI_USAPhoenixUSA.DSCparameters.DSC_parameters import DSCparameters
+from src.original.SR_TBG_BNIPhoenixUSA.AIFDeconvolution.AIF_deconvolution import AIFdeconvolution
+from src.original.SR_TBG_BNIPhoenixUSA.DSCparameters.DSC_parameters import DSCparameters
 
 # All tests will use the same arguments and same data...
 arg_names = 'label, C_tis, C_aif, tr, cbv_ref, cbf_ref,' \
@@ -25,7 +25,7 @@ def setup_module(module):
 # Use the test data to generate a parametrize decorator. This causes the following test to be run for every test case
 # listed in test_data...
 @osipi_parametrize(arg_names, test_data, xf_labels=[])
-def test_SR_TBG_BNI_USAPhoenixUSA_LcurveReg(label, C_tis, C_aif, tr, cbv_ref, cbf_ref,
+def test_SR_TBG_BNI_PhoenixUSA_LcurveReg(label, C_tis, C_aif, tr, cbv_ref, cbf_ref,
                                         r_tol_cbv, r_tol_cbf, a_tol_cbv, a_tol_cbf):
 
     # run code

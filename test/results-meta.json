@@ -4,7 +4,7 @@
     "filename": "TestResults_T1mapping_mcgill_t1_VFA_lin.csv",
     "category": "T1mapping",
     "method": "linear",
-    "author": "ZA_McGill_Can"
+    "author": "ZA_McGill_CAN"
   },
   {
     "path": "../test/results/T1_mapping",
@@ -40,7 +40,7 @@
     "filename": "TestResults_T1mapping_mcgill_t1_novifast.csv",
     "category": "T1mapping",
     "method": "nonlinear",
-    "author": "ZA_McGill_Can"
+    "author": "ZA_McGill_CAN"
   },
   {
     "path": "../test/results/T1_mapping",
