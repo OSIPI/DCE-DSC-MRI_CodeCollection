@@ -20,7 +20,7 @@ DCE,Miscellaneous,enhancement detection,check for enhancement,OG_MO_AUMC_ICR_RMH
 DCE,Parameter derivation,iAUC,,MB_QBI_UoManchesterUK,Michael Berks,"University of Manchester, UK",compute_IAUC,https://doi.org/10.21105/joss.03523,tbd,
 DCE,Pharmacokinetic models,Tofts,NLLS fitting (+forward model),DS_BW_VanderBiltUMC_USA,"David Smith, Brian Welch","VanderBilt University Medical Center, USA","tofts_integral, fit_tofts_model",,tdd,
 DCE,Pharmacokinetic models,extended Tofts,NLLS fitting (+forward model),DS_BW_VanderBiltUMC_USA,"David Smith, Brian Welch","VanderBilt University Medical Center, USA","ext_tofts_integral, fit_tofts_model",,tbd,
-DCE,Pharmacokinetic models,Tofts,NLLS fitting (+ forward model),LCB_BNI,Laura Bell,"Barrow Neurological Institute, USA","tofts_model, fit_tofts",,ST/OGC,completed
+DCE,Pharmacokinetic models,Tofts,NLLS fitting (+ forward model),LCB_BNI_USA,Laura Bell,"Barrow Neurological Institute, USA","tofts_model, fit_tofts",,ST/OGC,completed
 DCE,Pharmacokinetic models,2-cmp exchange,forward model,LEK_UoEdinburgh,Lucy Kershaw,"University of Edinburgh, UK",TwoCXM,,MJT,completed
 DCE,Pharmacokinetic models,2-cmp uptake,forward model,LEK_UoEdinburgh,Lucy Kershaw,"University of Edinburgh, UK",TwoCUM,,MJT,completed
 DCE,Pharmacokinetic models,AATH,forward model,LEK_UoEdinburgh,Lucy Kershaw,"University of Edinburgh, UK",AATH,,tbd,
@@ -60,7 +60,7 @@ DCE,Pharmacokinetic models,Tofts,forward model,ST_USydAUS_DCE,Sirisha Tadimalla,
 DCE,Pharmacokinetic models,high flow 2-cmp Gadoxetate,forward model,ST_USydAUS_DCE,Sirisha Tadimalla,"University of Sydney, Australia",,,tbd,
 DCE,Pharmacokinetic models,Patlak,forward model,ST_USydAUS_DCE,Sirisha Tadimalla,"University of Sydney, Australia",PatlakModel,,MJT,completed
 DCE,Signal to Concentration,SPGR,"two-steps: S->R1, R1->C",DS_BW_VanderBiltUMC_USA,"David Smith, Brian Welch","VanderBilt University Medical Center, USA","r1eff_to_conc, dce_to_r1eff",,tbd,
-DCE,Signal to Concentration,SPGR or GE-EPI,,LCB_BNI,Laura Bell,"Barrow Neurological Institute, USA","signal_to_conc, estimate_delta_R1",,LK,completed
+DCE,Signal to Concentration,SPGR or GE-EPI,,LCB_BNI_USA,Laura Bell,"Barrow Neurological Institute, USA","signal_to_conc, estimate_delta_R1",,LK,completed
 DCE,Signal to concentration,SPGR,"reverse C->S also available",LEK_UoEdinburgh,Lucy Kershaw,"University of Edinburgh, UK",SI2Conc,,LK,completed
 DCE,Signal to concentration,SPGR,"reverse C->S also available",MB_QBI_UoManchesterUK,Michael Berks,"University of Manchester, UK",signal_to_concentration,https://doi.org/10.21105/joss.03523,LK,completed
 DCE,Signal to concentration,SPGR,"two steps: S-> enhancement, enhancement -> C; reverse C->S also available",MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK","sign_to_enh, enh_to_conc",,LK,completed
@@ -77,12 +77,12 @@ DCE,T1,VFA,two flip angles (linear),OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, 
 DCE,T1,VFA,nonlinear,OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK",R1_VFA,,MJT,competed
 DCE,T1,VFA,linear,ST_SydneyAus_T1,Sirisha Tadimalla,"University of Sydney, Australia",VFAT1mapping,,MJT,completed
 DCE,T1,VFA,nonlinear,ST_SydneyAus_T1,Sirisha Tadimalla,"University of Sydney, Australia",VFAT1mapping,,MJT,completed
-DCE/DSC,AIF deconvolution,,,SR_TBG_BNIPhoenixUSA,"Sudarshan Ragunathan, Laura Bell","Barrow Neurological Institute, USA",AIFdeconvolution,,JA,completed
+DCE/DSC,AIF deconvolution,,,SR_TBG_BNI_USAPhoenixUSA,"Sudarshan Ragunathan, Laura Bell","Barrow Neurological Institute, USA",AIFdeconvolution,,JA,completed
 DCE/DSC,Miscellaneous,calculate SNR,,DS_BW_VanderBiltUMC_USA,"David Smith, Brian Welch","VanderBilt University Medical Center, USA",signal_to_noise_ratio,,tbd,
 DCE/DSC,Miscellaneous,calculate enhancement ratio,,DS_BW_VanderBiltUMC_USA,"David Smith, Brian Welch","VanderBilt University Medical Center, USA",signal_enhancement_ratio,,tbd,
 DSC,Input Functions,automatic AIF selection,"fully automatic, semi-automatic",JBJA_GUSahlgrenskaSWE,"Jesper Browall, Jonathan Arvidsson","Sahlgrenska University Hospital and Gothenburg University, Gothenburg, Sweden",AIF_selection_automatic.py,DOI: 10.1002/mrm.20759,tbd,
-DSC,Leakage correction,BSW,,SR_TBG_BNIPhoenixUSA,"Sudarshan Ragunathan, Laura Bell","Barrow Neurological Institute, USA",BSWleakagecorr,,SR,in-progress
-DSC,Parameter derivation,"CBV,CBF,MTT",,SR_TBG_BNIPhoenixUSA,"Sudarshan Ragunathan, Laura Bell","Barrow Neurological Institute, USA",DSCparameters,,tbd,
-DSC,Signal to deltaR2*,single echo,,LCB_BNI,Laura Bell,"Barrow Neurological Institute, USA",,estimate_delta_R2s,tbd,
-DSC,Signal to deltaR2*,dual echo,,LCB_BNI,Laura Bell,"Barrow Neurological Institute, USA",,"estimate_delta_R2s, estimate_delta_R2s_dual_echo",tbd,
-DSC,Signal to R2*,dual echo,,LCB_BNI,Laura Bell,"Barrow Neurological Institute, USA",,estimate_R2s,tbd,
+DSC,Leakage correction,BSW,,SR_TBG_BNI_USAPhoenixUSA,"Sudarshan Ragunathan, Laura Bell","Barrow Neurological Institute, USA",BSWleakagecorr,,SR,in-progress
+DSC,Parameter derivation,"CBV,CBF,MTT",,SR_TBG_BNI_USAPhoenixUSA,"Sudarshan Ragunathan, Laura Bell","Barrow Neurological Institute, USA",DSCparameters,,tbd,
+DSC,Signal to deltaR2*,single echo,,LCB_BNI_USA,Laura Bell,"Barrow Neurological Institute, USA",,estimate_delta_R2s,tbd,
+DSC,Signal to deltaR2*,dual echo,,LCB_BNI_USA,Laura Bell,"Barrow Neurological Institute, USA",,"estimate_delta_R2s, estimate_delta_R2s_dual_echo",tbd,
+DSC,Signal to R2*,dual echo,,LCB_BNI_USA,Laura Bell,"Barrow Neurological Institute, USA",,estimate_R2s,tbd,

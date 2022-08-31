@@ -3,7 +3,7 @@ import numpy as np
 from time import perf_counter
 from ..helpers import osipi_parametrize, log_init, log_results
 from . import DCEmodels_data
-from osipi_code_collection.original.LCB_BNI.dce import fit_tofts
+from osipi_code_collection.original.LCB_BNI_USA.dce import fit_tofts
 
 arg_names = 'label, t_array, C_array, ca_array, ta_array, ve_ref, Ktrans_ref, arterial_delay_ref, a_tol_ve, r_tol_ve, ' \
             'a_tol_Ktrans, r_tol_Ktrans, a_tol_delay, r_tol_delay '
@@ -17,7 +17,7 @@ def setup_module(module):
     global filename_prefix # we want to change the global variable
     os.makedirs('./test/results/DCEmodels', exist_ok=True)
     filename_prefix = 'DCEmodels/TestResults_models'
-    log_init(filename_prefix, '_LCB_BNI_tofts', ['label', 'time (us)', 'Ktrans_ref', 've_ref', 'Ktrans_meas', 've_meas'])
+    log_init(filename_prefix, '_LCB_BNI_USA_tofts', ['label', 'time (us)', 'Ktrans_ref', 've_ref', 'Ktrans_meas', 've_meas'])
 
 
 # Use the test data to generate a parametrize decorator. This causes the following test to be run for every test case
@@ -37,7 +37,7 @@ def test_LCB_BNI_USA_tofts_model(label, t_array, C_array, ca_array, ta_array,
     exc_time = 1e6 * (perf_counter() - tic)  # measure execution time
 
     # log results
-    log_results(filename_prefix, '_LCB_BNI_tofts', [
+    log_results(filename_prefix, '_LCB_BNI_USA_tofts', [
         [label, f"{exc_time:.0f}", Ktrans_ref, ve_ref, Ktrans_meas, ve_meas]])
 
     # run test

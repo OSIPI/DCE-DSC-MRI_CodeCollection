@@ -4,7 +4,7 @@ import numpy as np
 from time import perf_counter
 from ..helpers import osipi_parametrize, log_init, log_results
 from . import SI2Conc_data
-from osipi_code_collection.original.LCB_BNI.dce import signal_to_conc
+from osipi_code_collection.original.LCB_BNI_USA.dce import signal_to_conc
 
 
 # All tests will use the same arguments and same data...
@@ -18,7 +18,7 @@ def setup_module(module):
     global filename_prefix # we want to change the global variable
     os.makedirs('./test/results/SI_to_Conc', exist_ok=True)
     filename_prefix = 'SI_to_Conc/TestResults_SI2Conc'
-    log_init(filename_prefix, '_LCB_BNI', ['label', 'time (us)', 'conc_ref', 'conc_meas'])
+    log_init(filename_prefix, '_LCB_BNI_USA', ['label', 'time (us)', 'conc_ref', 'conc_meas'])
 
 
 # Use the test data to generate a parametrize decorator. This causes the following
@@ -39,7 +39,7 @@ def test_LCB_BNI_USA_SI2Conc(label, fa, tr, T1base, BLpts, r1,
     row_data = []
     for ref, meas in zip(conc_array[1:], conc_curve[1:]):
         row_data.append([label, f"{exc_time:.0f}", ref, meas])
-    log_results(filename_prefix, '_LCB_BNI', row_data)
+    log_results(filename_prefix, '_LCB_BNI_USA', row_data)
 
     # testing
     np.testing.assert_allclose(conc_curve[1:], conc_array[1:], rtol=r_tol,
