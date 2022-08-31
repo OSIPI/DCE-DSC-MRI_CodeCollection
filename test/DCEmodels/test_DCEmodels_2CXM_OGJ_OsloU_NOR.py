@@ -50,7 +50,7 @@ def test_OGJ_OsloU_NOR_2cxm_model_llsq(label, t_array, C_t_array,
     exc_time = 1e6 * (perf_counter() - tic)  # measure execution time
 
     # log results
-    log_results(filename_prefix, '_OGJ_OsloU_Norway_2CXM_LLSQ', [
+    log_results(filename_prefix, '_OGJ_OsloU_NOR_2CXM_LLSQ', [
         [label, f"{exc_time:.0f}", vp_ref, ve_ref, fp_ref, ps_ref, vp_meas, ve_meas, fp_meas, ps_meas]])
 
     # run test

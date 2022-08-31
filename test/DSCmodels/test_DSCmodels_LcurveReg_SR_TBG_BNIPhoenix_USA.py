@@ -3,8 +3,8 @@ import numpy as np
 from time import perf_counter
 from ..helpers import osipi_parametrize, log_init, log_results
 from . import DSCmodels_data
-from src.original.SR_TBG_BNIPhoenixUSA.AIFDeconvolution.AIF_deconvolution import AIFdeconvolution
-from src.original.SR_TBG_BNIPhoenixUSA.DSCparameters.DSC_parameters import DSCparameters
+from src.original.SR_TBG_BNIPhoenix_USA.AIFDeconvolution.AIF_deconvolution import AIFdeconvolution
+from src.original.SR_TBG_BNIPhoenix_USA.DSCparameters.DSC_parameters import DSCparameters
 
 # All tests will use the same arguments and same data...
 arg_names = 'label, C_tis, C_aif, tr, cbv_ref, cbf_ref,' \

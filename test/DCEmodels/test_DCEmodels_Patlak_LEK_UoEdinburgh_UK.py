@@ -4,7 +4,7 @@ from scipy.optimize import curve_fit
 from time import perf_counter
 from ..helpers import osipi_parametrize, log_init, log_results
 from . import DCEmodels_data
-from src.original.LEK_UoEdinburghUK.PharmacokineticModelling.models import \
+from src.original.LEK_UoEdinburgh_UK.PharmacokineticModelling.models import \
     Patlak
 
 arg_names = 'label, t_array, C_t_array, cp_aif_array, vp_ref, ps_ref, ' \
@@ -20,14 +20,14 @@ def setup_module(module):
     global filename_prefix # we want to change the global variable
     os.makedirs('./test/results/DCEmodels', exist_ok=True)
     filename_prefix = 'DCEmodels/TestResults_models'
-    log_init(filename_prefix, '_LEK_UoEdinburghUK_patlak', ['label', 'time (us)', 'vp_ref', 'ps_ref', 'delay_ref', 'vp_meas', 'ps_meas', 'delay_meas'])
+    log_init(filename_prefix, '_LEK_UoEdinburgh_UK_patlak', ['label', 'time (us)', 'vp_ref', 'ps_ref', 'delay_ref', 'vp_meas', 'ps_meas', 'delay_meas'])
 
 
 # Use the test data to generate a parametrize decorator. This causes the following
 # test to be run for every test case listed in test_data...
 test_data = (DCEmodels_data.dce_DRO_data_Patlak())
 @osipi_parametrize(arg_names, test_data, xf_labels=[])
-def test_LEK_UoEdinburghUK_Patlak_model(label, t_array, C_t_array, cp_aif_array,
+def test_LEK_UoEdinburgh_UK_Patlak_model(label, t_array, C_t_array, cp_aif_array,
                                         vp_ref, ps_ref, delay_ref, a_tol_vp,
                                         r_tol_vp, a_tol_ps, r_tol_ps,
                                         a_tol_delay, r_tol_delay):
@@ -49,7 +49,7 @@ def test_LEK_UoEdinburghUK_Patlak_model(label, t_array, C_t_array, cp_aif_array,
     exc_time = 1e6 * (perf_counter() - tic)  # measure execution time
 
     # log results
-    log_results(filename_prefix, '_LEK_UoEdinburghUK_patlak', [
+    log_results(filename_prefix, '_LEK_UoEdinburgh_UK_patlak', [
         [label, f"{exc_time:.0f}", vp_ref, ps_ref, delay_ref, vp_meas, ps_meas, delay_ref]]) # in this case delay_ref is used as delay_meas was 0
 
     # run test
@@ -63,7 +63,7 @@ test_data_delay = (DCEmodels_data.dce_DRO_data_Patlak(delay=True))
 # Use the test data to generate a parametrize decorator. This causes the
 # following test to be run for every test case listed in test_data...
 @osipi_parametrize(arg_names, test_data_delay, xf_labels=[])
-def test_LEK_UoEdinburghUK_Patlak_model_delay(label, t_array, C_t_array,
+def test_LEK_UoEdinburgh_UK_Patlak_model_delay(label, t_array, C_t_array,
                                               cp_aif_array, vp_ref, ps_ref,
                                               delay_ref, a_tol_vp, r_tol_vp,
                                               a_tol_ps, r_tol_ps,
@@ -88,7 +88,7 @@ def test_LEK_UoEdinburghUK_Patlak_model_delay(label, t_array, C_t_array,
     exc_time = 1e6 * (perf_counter() - tic)  # measure execution time
 
     # log results
-    log_results(filename_prefix, '_LEK_UoEdinburghUK_patlak', [
+    log_results(filename_prefix, '_LEK_UoEdinburgh_UK_patlak', [
         [label, f"{exc_time:.0f}", vp_ref, ps_ref, delay_ref, vp_meas, ps_meas, delay_meas]])
 
     # run test

@@ -20,7 +20,8 @@ def setup_module(module):
     global filename_prefix # we want to change the global variable
     os.makedirs('./test/results/DCEmodels', exist_ok=True)
     filename_prefix = 'DCEmodels/TestResults_models'
-    log_init(filename_prefix, '_OG_MO_AUMC_ICR_RMH_etofts', ['label', 'time (us)', 'Ktrans_ref', 've_ref', 'vp_ref', 'delay_ref', 'Ktrans_meas', 've_meas', 'vp_meas', 'delay_meas'])
+    log_init(filename_prefix, '_OG_MO_AUMC_ICR_RMH_NL_UK_etofts', ['label',
+                                                              'time (us)', 'Ktrans_ref', 've_ref', 'vp_ref', 'delay_ref', 'Ktrans_meas', 've_meas', 'vp_meas', 'delay_meas'])
 
 
 test_data = (DCEmodels_data.dce_DRO_data_extended_tofts_kety())
@@ -64,7 +65,8 @@ def test_OG_MO_AUMC_ICR_RMH_NL_UK_extended_tofts_kety_model(label, t_array,
     exc_time = 1e6 * (perf_counter() - tic)  # measure execution time
 
     # log results
-    log_results(filename_prefix, '_OG_MO_AUMC_ICR_RMH_etofts', [[label, f"{exc_time:.0f}", Ktrans_ref, ve_ref, vp_ref, arterial_delay_ref, Ktrans_meas, ve_meas, vp_meas, arterial_delay_meas]])
+    log_results(filename_prefix, '_OG_MO_AUMC_ICR_RMH_NL_UK_etofts', [[label,
+                                                                  f"{exc_time:.0f}", Ktrans_ref, ve_ref, vp_ref, arterial_delay_ref, Ktrans_meas, ve_meas, vp_meas, arterial_delay_meas]])
 
     # run test
     np.testing.assert_allclose([ve_meas], [ve_ref], rtol=r_tol_ve, atol=a_tol_ve)
@@ -112,7 +114,8 @@ def testOG_MO_AUMC_ICR_RMH_NL_UK_extended_tofts_kety_model_delay(label, t_array,
     exc_time = 1e6 * (perf_counter() - tic)  # measure execution time
 
     # log results
-    log_results(filename_prefix, '_OG_MO_AUMC_ICR_RMH_etofts', [[label, f"{exc_time:.0f}", Ktrans_ref, ve_ref, vp_ref, arterial_delay_ref, Ktrans_meas, ve_meas, vp_meas, arterial_delay_meas]])
+    log_results(filename_prefix, '_OG_MO_AUMC_ICR_RMH_NL_UK_etofts', [[label,
+                                                                  f"{exc_time:.0f}", Ktrans_ref, ve_ref, vp_ref, arterial_delay_ref, Ktrans_meas, ve_meas, vp_meas, arterial_delay_meas]])
 
     # run test
     np.testing.assert_allclose([ve_meas], [ve_ref], rtol=r_tol_ve, atol=a_tol_ve)

@@ -3,7 +3,7 @@ import pytest
 import numpy as np
 from time import perf_counter
 from ..helpers import osipi_parametrize, log_init, log_results
-import osipi_code_collection.original.MB_QBI_UoManchesterUK.QbiPy.dce_models.dce_aif as dce_aif
+import osipi_code_collection.original.MB_QBI_UoManchester_UK.QbiPy.dce_models.dce_aif as dce_aif
 from . import popAIF_data
 
 
@@ -20,13 +20,13 @@ def setup_module(module):
     global filename_prefix # we want to change the global variable
     os.makedirs('./test/results/PopulationAIF_DCE', exist_ok=True)
     filename_prefix = 'PopulationAIF_DCE/TestResults_PopAIF'
-    log_init(filename_prefix, '_Parker_AIF_MB_QBI_UoManchesterUK', ['label', 'time (us)', 'time_ref', 'aif_ref', 'cb_measured'])
+    log_init(filename_prefix, '_Parker_AIF_MB_QBI_UoManchester_UK', ['label', 'time (us)', 'time_ref', 'aif_ref', 'cb_measured'])
 
 # Use the test data to generate a parametrize decorator. This causes the following
 # test to be run for every test case listed in test_data...
 # In the following test, we specify 5 cases that are expected to fail as this function expects the delay to be specified according to the temp resolution
 @osipi_parametrize(arg_names, test_data, xf_labels=[])
-def test_Parker_AIF_MB_QBI_UoManchesterUK(label, time, cb_ref_values, delay, a_tol, r_tol):
+def test_Parker_AIF_MB_QBI_UoManchester_UK(label, time, cb_ref_values, delay, a_tol, r_tol):
 
     # prepare input data
     # time array is expected in minutes, so no changes needed.
@@ -42,6 +42,6 @@ def test_Parker_AIF_MB_QBI_UoManchesterUK(label, time, cb_ref_values, delay, a_t
     row_data = []
     for t, ref, meas in zip(time, cb_ref_values, aif_delay[0,]):
         row_data.append([label, f"{exc_time:.0f}", t*60, ref, meas])
-    log_results(filename_prefix, '_Parker_AIF_MB_QBI_UoManchesterUK', row_data)
+    log_results(filename_prefix, '_Parker_AIF_MB_QBI_UoManchester_UK', row_data)
 
     np.testing.assert_allclose([aif_delay[0,]], [cb_ref_values], rtol=r_tol, atol=a_tol)

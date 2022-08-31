@@ -20,7 +20,8 @@ def setup_module(module):
     global filename_prefix # we want to change the global variable
     os.makedirs('./test/results/SI_to_Conc', exist_ok=True)
     filename_prefix = 'SI_to_Conc/TestResults_SI2Conc'
-    log_init(filename_prefix, '_OG_MO_AUMC_ICR_RMH',['label', 'time (us)', 'conc_ref', 'conc_meas'])
+    log_init(filename_prefix, '_OG_MO_AUMC_ICR_RMH_NL_UK',['label', 'time ('
+                                                                    'us)', 'conc_ref', 'conc_meas'])
 
 
 # Use the test data to generate a parametrize decorator. This causes the following
@@ -55,7 +56,7 @@ def test_OG_MO_AUMC_ICR_RMH_NL_UK_SI2Conc(label, fa, tr, T1base,
     row_data = []
     for ref, meas in zip(conc_array[1:], conc_curve[1:]):
         row_data.append([label, f"{exc_time:.0f}", ref, meas])
-    log_results(filename_prefix, '_OG_MO_AUMC_ICR_RMH', row_data)
+    log_results(filename_prefix, '_OG_MO_AUMC_ICR_RMH_NL_UK', row_data)
 
     np.testing.assert_allclose( conc_curve[1:], conc_array[1:], rtol=r_tol, atol=a_tol )
 

@@ -4,7 +4,7 @@ import numpy as np
 from time import perf_counter
 from ..helpers import osipi_parametrize, log_init, log_results
 from . import SI2Conc_data
-from osipi_code_collection.original.ST_USydAUS.signals2conc import signals2conc
+from osipi_code_collection.original.LEK_UoEdinburgh_UK.SignalToConcentration import SI2Conc
 
 
 # All tests will use the same arguments and same data...
@@ -18,34 +18,30 @@ def setup_module(module):
     global filename_prefix # we want to change the global variable
     os.makedirs('./test/results/SI_to_Conc', exist_ok=True)
     filename_prefix = 'SI_to_Conc/TestResults_SI2Conc'
-    log_init(filename_prefix, '_ST_USydAus', ['label', 'time (us)', 'conc_ref', 'conc_meas'])
-
+    log_init(filename_prefix, '_LEK_UoEdinburgh', ['label', 'time (us)', 'conc_ref', 'conc_meas'])
 
 # Use the test data to generate a parametrize decorator. This causes the following
 # test to be run for every test case listed in test_data...
 @osipi_parametrize(arg_names, test_data, xf_labels = [])
-def test_ST_USydAUS_signals2conc(label, fa, tr, T1base, BLpts, r1, s_array, conc_array, a_tol, r_tol):
+def test_LEK_UoEdinburgh_UK_SI2Conc(label, fa, tr, T1base, BLpts, r1, s_array, conc_array, a_tol, r_tol):
     # Note: the first signal value is not used for baseline estimation,
     # and the first C value is not logged or assessed
 
-    ##Prepare input data
-    #The code used to make the test data doesn't include the first point on the curve, so remove it here from s and conc and reduce BLpts by 1
-    s_array=s_array[1:]
-    conc_array=conc_array[1:]
-    BLpts=BLpts-1
-    # This function takes time as an argument but only uses its length, so construct a dummy array
-    time=np.zeros_like(s_array)
+    #Prepare input data
+    #Nothing to do for this function
     
     # run test
     tic = perf_counter()
-    conc_curve = signals2conc(time, s_array, fa, tr, 1/T1base, r1, BLpts)
+    conc_curve = SI2Conc.SI2Conc(s_array,tr,fa,T1base,BLpts,S0=None)
     exc_time = 1e6 * (perf_counter() - tic)
 
     # log results
     row_data = []
-    for ref, meas in zip(conc_array, conc_curve):
+    for ref, meas in zip(conc_array[1:], conc_curve[1:]/r1):
         row_data.append([label, f"{exc_time:.0f}", ref, meas])
-    log_results(filename_prefix, '_ST_USydAus', row_data)
+    log_results(filename_prefix, '_LEK_UoEdinburgh', row_data)
 
-    np.testing.assert_allclose( [conc_curve], [conc_array], rtol=r_tol, atol=a_tol )
+    # testing
+    conc_array=conc_array*r1 # This function doesn't include r1, so multiply it out before testing
+    np.testing.assert_allclose( [conc_curve[1:]], [conc_array[1:]], rtol=r_tol, atol=a_tol)
 

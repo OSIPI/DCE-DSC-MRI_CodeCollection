@@ -4,7 +4,7 @@ import numpy as np
 from time import perf_counter
 from ..helpers import osipi_parametrize, log_init, log_results
 from . import SI2Conc_data
-from osipi_code_collection.original.MB_QBI_UoManchesterUK.QbiPy.dce_models.tissue_concentration import signal_to_concentration
+from osipi_code_collection.original.MB_QBI_UoManchester_UK.QbiPy.dce_models.tissue_concentration import signal_to_concentration
 
 
 

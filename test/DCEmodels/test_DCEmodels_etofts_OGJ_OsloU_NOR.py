@@ -18,8 +18,10 @@ def setup_module(module):
     global filename_prefix # we want to change the global variable
     os.makedirs('./test/results/DCEmodels', exist_ok=True)
     filename_prefix = 'DCEmodels/TestResults_models'
-    log_init(filename_prefix, '_OGJ_OsloU_Norway_etofts_LLSQ', ['label', 'time (us)', 'Ktrans_ref', 've_ref', 'vp_ref', 'Ktrans_meas', 've_meas', 'vp_meas'])
-    log_init(filename_prefix, '_OGJ_OsloU_Norway_etofts_NLLS', ['label', 'time (us)', 'Ktrans_ref', 've_ref', 'vp_ref', 'Ktrans_meas', 've_meas', 'vp_meas'])
+    log_init(filename_prefix, '_OGJ_OsloU_NOR_etofts_LLSQ', ['label', 'time ('
+                                                                    'us)', 'Ktrans_ref', 've_ref', 'vp_ref', 'Ktrans_meas', 've_meas', 'vp_meas'])
+    log_init(filename_prefix, '_OGJ_OsloU_NOR_etofts_NLLS', ['label', 'time ('
+                                                                     'us)', 'Ktrans_ref', 've_ref', 'vp_ref', 'Ktrans_meas', 've_meas', 'vp_meas'])
 
 
 # Use the test data to generate a parametrize decorator. This causes the following test to be run for every test case
@@ -45,7 +47,7 @@ def test_OGJ_OsloU_NOR_extended_tofts_kety_model_llsq(label, t_array, C_array,
     exc_time = 1e6 * (perf_counter() - tic)  # measure execution time
 
     # log results
-    log_results(filename_prefix, '_OGJ_OsloU_Norway_etofts_LLSQ', [
+    log_results(filename_prefix, '_OGJ_OsloU_NOR_etofts_LLSQ', [
         [label, f"{exc_time:.0f}", Ktrans_ref, ve_ref, vp_ref, Ktrans_meas, ve_meas, vp_meas]])
 
     # run test
@@ -75,7 +77,7 @@ def test_OGJ_OsloU_NOR_extended_tofts_kety_model_nlls(label, t_array, C_array,
     exc_time = 1e6 * (perf_counter() - tic)  # measure execution time
 
     # log results
-    log_results(filename_prefix, '_OGJ_OsloU_Norway_etofts_NLLS', [
+    log_results(filename_prefix, '_OGJ_OsloU_NOR_etofts_NLLS', [
         [label, f"{exc_time:.0f}", Ktrans_ref, ve_ref, vp_ref, Ktrans_meas, ve_meas, vp_meas]])
 
     # run test

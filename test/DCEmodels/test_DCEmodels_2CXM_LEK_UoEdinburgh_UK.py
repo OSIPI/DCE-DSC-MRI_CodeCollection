@@ -5,7 +5,7 @@ from scipy.optimize import curve_fit
 from time import perf_counter
 from ..helpers import osipi_parametrize, log_init, log_results
 from . import DCEmodels_data
-from src.original.LEK_UoEdinburghUK.PharmacokineticModelling.models import \
+from src.original.LEK_UoEdinburgh_UK.PharmacokineticModelling.models import \
     TwoCXM
 
 arg_names = 'label, t_array, C_t_array, cp_aif_array, vp_ref, ve_ref, fp_ref,' \
@@ -20,7 +20,7 @@ def setup_module(module):
     global filename_prefix # we want to change the global variable
     os.makedirs('./test/results/DCEmodels', exist_ok=True)
     filename_prefix = 'DCEmodels/TestResults_models'
-    log_init(filename_prefix, '_LEK_UoEdinburghUK_2CXM', ['label', 'time (us)', 'vp_ref', 've_ref', 'fp_ref', 'ps_ref','delay_ref', 'vp_meas', 've_meas', 'fp_meas', 'ps_meas','delay_meas'])
+    log_init(filename_prefix, '_LEK_UoEdinburgh_UK_2CXM', ['label', 'time (us)', 'vp_ref', 've_ref', 'fp_ref', 'ps_ref','delay_ref', 'vp_meas', 've_meas', 'fp_meas', 'ps_meas','delay_meas'])
 
 
 
@@ -28,7 +28,7 @@ test_data = (DCEmodels_data.dce_DRO_data_2cxm())
 # Use the test data to generate a parametrize decorator. This causes the
 # following test to be run for every test case listed in test_data...
 @osipi_parametrize(arg_names, test_data, xf_labels=[])
-def test_LEK_UoEdinburghUK_2cxm_model(label, t_array, C_t_array,
+def test_LEK_UoEdinburgh_UK_2cxm_model(label, t_array, C_t_array,
                                       cp_aif_array, vp_ref, ve_ref,
                                       fp_ref, ps_ref, delay_ref,
                                       a_tol_vp, r_tol_vp, a_tol_ve,
@@ -68,7 +68,7 @@ def test_LEK_UoEdinburghUK_2cxm_model(label, t_array, C_t_array,
     exc_time = 1e6 * (perf_counter() - tic)  # measure execution time
 
     # log results
-    log_results(filename_prefix, '_LEK_UoEdinburghUK_2CXM', [
+    log_results(filename_prefix, '_LEK_UoEdinburgh_UK_2CXM', [
         [label, f"{exc_time:.0f}", vp_ref, ve_ref, fp_ref, ps_ref, delay_ref, vp_meas, ve_meas, fp_meas, ps_meas,
          delay_ref]])
 
@@ -85,7 +85,7 @@ def test_LEK_UoEdinburghUK_2cxm_model(label, t_array, C_t_array,
 
 test_data_delay = (DCEmodels_data.dce_DRO_data_2cxm(delay=True))
 @osipi_parametrize(arg_names, test_data_delay, xf_labels=[])
-def test_LEK_UoEdinburghUK_2cxm_model_delay(label, t_array, C_t_array,
+def test_LEK_UoEdinburgh_UK_2cxm_model_delay(label, t_array, C_t_array,
                                             cp_aif_array, vp_ref, ve_ref,
                                             fp_ref, ps_ref, delay_ref,
                                             a_tol_vp, r_tol_vp, a_tol_ve,
@@ -128,7 +128,7 @@ def test_LEK_UoEdinburghUK_2cxm_model_delay(label, t_array, C_t_array,
     exc_time = 1e6 * (perf_counter() - tic)  # measure execution time
 
     # log results
-    log_results(filename_prefix, '_LEK_UoEdinburghUK_2CXM', [
+    log_results(filename_prefix, '_LEK_UoEdinburgh_UK_2CXM', [
         [label, f"{exc_time:.0f}", vp_ref, ve_ref, fp_ref, ps_ref, delay_ref, vp_meas, ve_meas, fp_meas, ps_meas, delay_meas]])
 
     # run tests

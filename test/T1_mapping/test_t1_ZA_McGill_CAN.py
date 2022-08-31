@@ -22,8 +22,9 @@ def setup_module(module):
     global filename_prefix # we want to change the global variable
     filename_prefix = 'T1_mapping/TestResults_T1mapping'
     os.makedirs('./test/results/T1_mapping', exist_ok=True)
-    log_init(filename_prefix, '_mcgill_t1_novifast', ['label', 'time (us)', 'r1_ref', 'r1_measured'])
-    log_init(filename_prefix, '_mcgill_t1_VFA_lin', ['label', 'time (us)', 'r1_ref', 'r1_measured'])
+    log_init(filename_prefix, '_ZA_McGill_CAN_t1_novifast', ['label',
+                                                                'time (us)', 'r1_ref', 'r1_measured'])
+    log_init(filename_prefix, '_ZA_McGill_CAN_t1_VFA_lin', ['label', 'time (us)', 'r1_ref', 'r1_measured'])
 
 # Use the test data to generate a parametrize decorator. This causes the following
 # test to be run for every test case listed in test_data...
@@ -64,7 +65,7 @@ def test_ZA_McGill_CAN_t1_VFA_lin(label, fa_array, tr_array, s_array,
     exc_time = 1e6 * (perf_counter() - tic)
     r1_lin_meas = 1./t1_lin_meas
 
-    log_results(filename_prefix, '_mcgill_t1_VFA_lin', [[label, f"{exc_time:.0f}", r1_ref, r1_lin_meas]]) # log results
+    log_results(filename_prefix, '_ZA_McGill_CAN_t1_VFA_lin', [[label, f"{exc_time:.0f}", r1_ref, r1_lin_meas]]) # log results
 
     np.testing.assert_allclose( [r1_lin_meas], [r1_ref], rtol=r_tol, atol=a_tol ) # testing
 
