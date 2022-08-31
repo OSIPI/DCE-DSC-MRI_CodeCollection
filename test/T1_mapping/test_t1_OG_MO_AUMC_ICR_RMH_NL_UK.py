@@ -4,7 +4,7 @@ import numpy as np
 from time import perf_counter
 from ..helpers import osipi_parametrize, log_init, log_results
 from . import t1_data
-from osipi_code_collection.original.OG_MO_AUMC_ICR_RMH_ND_UK.ExtendedTofts.DCE import R1_two_fas, R1_VFA
+from osipi_code_collection.original.OG_MO_AUMC_ICR_RMH_NL_UK.ExtendedTofts.DCE import R1_two_fas, R1_VFA
 
 
 # All tests will use the same arguments and same data...
@@ -30,7 +30,7 @@ def setup_module(module):
 # test to be run for every test case listed in test_data...
 # In the following test, we specify 1 case that is expected to fail...
 @osipi_parametrize(arg_names, test_data, xf_labels = ['Pat5_voxel5_prostaat'])
-def test_OG_MO_AUMC_ICR_RMH_ND_UK_t1_VFA_2fa(label, fa_array, tr_array,
+def test_OG_MO_AUMC_ICR_RMH_NL_UK_t1_VFA_2fa(label, fa_array, tr_array,
                                              s_array, r1_ref, s0_ref, a_tol, r_tol):
     # NOTES:
     #   Code requires signal array with min 2 dimensions (including FA)
@@ -52,7 +52,7 @@ def test_OG_MO_AUMC_ICR_RMH_ND_UK_t1_VFA_2fa(label, fa_array, tr_array,
 
 
 @osipi_parametrize(arg_names, test_data, xf_labels=[])
-def test_OG_MO_AUMC_ICR_RMH_ND_UK_t1_VFA(label, fa_array, tr_array, s_array,
+def test_OG_MO_AUMC_ICR_RMH_NL_UK_t1_VFA(label, fa_array, tr_array, s_array,
                                    r1_ref, s0_ref, a_tol, r_tol):
     # NOTES:
     #   Code requires signal array with min 2 dimensions (including FA)

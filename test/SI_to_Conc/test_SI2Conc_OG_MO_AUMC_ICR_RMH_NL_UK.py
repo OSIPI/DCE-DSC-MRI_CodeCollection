@@ -4,8 +4,8 @@ import numpy as np
 from time import perf_counter
 from ..helpers import osipi_parametrize, log_init, log_results
 from . import SI2Conc_data
-from osipi_code_collection.original.OG_MO_AUMC_ICR_RMH_ND_UK.ExtendedTofts.DCE import dce_to_r1eff
-from osipi_code_collection.original.OG_MO_AUMC_ICR_RMH_ND_UK.ExtendedTofts.DCE import r1eff_to_conc
+from osipi_code_collection.original.OG_MO_AUMC_ICR_RMH_NL_UK.ExtendedTofts.DCE import dce_to_r1eff
+from osipi_code_collection.original.OG_MO_AUMC_ICR_RMH_NL_UK.ExtendedTofts.DCE import r1eff_to_conc
 
 
 
@@ -26,7 +26,7 @@ def setup_module(module):
 # Use the test data to generate a parametrize decorator. This causes the following
 # test to be run for every test case listed in test_data...
 @osipi_parametrize(arg_names, test_data, xf_labels = [])
-def test_OG_MO_AUMC_ICR_RMH_ND_UK_SI2Conc(label, fa, tr, T1base,
+def test_OG_MO_AUMC_ICR_RMH_NL_UK_SI2Conc(label, fa, tr, T1base,
                                                    BLpts, r1, s_array, conc_array, a_tol, r_tol):
     # Note: the first signal value is not used for baseline estimation,
     # and the first C value is not logged or assessed
