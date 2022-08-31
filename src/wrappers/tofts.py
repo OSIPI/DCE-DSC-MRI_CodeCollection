@@ -14,7 +14,7 @@ import osipi_code_collection.original.OGJ_OsloU_Norway.MRImageAnalysis.DCE.Analy
 import osipi_code_collection.original.ST_USydAUS.ModelDictionary as sydney
 from osipi_code_collection.original.MB_QBI_UoManchesterUK.QbiPy.dce_models import dce_aif as manchester_aif
 from osipi_code_collection.original.MB_QBI_UoManchesterUK.QbiPy.dce_models import tofts_model as manchester_tofts
-import osipi_code_collection.original.OG_MO_AUMC_ICR_RMH.ExtendedTofts.DCE as amsterdam
+import osipi_code_collection.original.OG_MO_AUMC_ICR_RMH_ND_UK.ExtendedTofts.DCE as amsterdam
 
 def tofts_fit(author, ct = None, ca = None, t = None, fittype = "linear", mask = None, data = None):
   # Author can be: edinburgh1, edinburgh2, sydney, amsterdam, oslo, manchester
