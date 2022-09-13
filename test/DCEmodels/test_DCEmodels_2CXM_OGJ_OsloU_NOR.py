@@ -18,7 +18,7 @@ def setup_module(module):
     global filename_prefix  # we want to change the global variable
     os.makedirs('./test/results/DCEmodels', exist_ok=True)
     filename_prefix = 'DCEmodels/TestResults_models'
-    log_init(filename_prefix, '_OGJ_OsloU_Norway_2CXM_LLSQ',
+    log_init(filename_prefix, '_OGJ_OsloU_NOR_2CXM_LLSQ',
              ['label', 'time (us)', 'vp_ref', 've_ref', 'fp_ref', 'ps_ref', 'vp_meas', 've_meas', 'fp_meas', 'ps_meas'])
 
 

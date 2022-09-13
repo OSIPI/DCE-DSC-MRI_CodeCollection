@@ -18,7 +18,7 @@ def setup_module(module):
     global filename_prefix # we want to change the global variable
     os.makedirs('./test/results/SI_to_Conc', exist_ok=True)
     filename_prefix = 'SI_to_Conc/TestResults_SI2Conc'
-    log_init(filename_prefix, '_ST_USydAUS', ['label', 'time (us)',
+    log_init(filename_prefix, '_ST_USyd_AUS', ['label', 'time (us)',
                                              'conc_ref', 'conc_meas'])
 
 
@@ -46,7 +46,7 @@ def test_ST_USydAUS_signals2conc(label, fa, tr, T1base, BLpts, r1, s_array, conc
     row_data = []
     for ref, meas in zip(conc_array, conc_curve):
         row_data.append([label, f"{exc_time:.0f}", ref, meas])
-    log_results(filename_prefix, '_ST_USydAUS', row_data)
+    log_results(filename_prefix, '_ST_USyd_AUS', row_data)
 
     np.testing.assert_allclose( [conc_curve], [conc_array], rtol=r_tol, atol=a_tol )
 
