@@ -4,7 +4,7 @@ from scipy.optimize import curve_fit
 from time import perf_counter
 from ..helpers import osipi_parametrize, log_init, log_results
 from . import DCEmodels_data
-from osipi_code_collection.original.ST_USydAUS.ModelDictionary import Tofts
+from osipi_code_collection.original.ST_USyd_AUS.ModelDictionary import Tofts
 
 arg_names = 'label, t_array, C_array, ca_array, ta_array, ve_ref, Ktrans_ref, arterial_delay_ref,  a_tol_ve, ' \
             'r_tol_ve, a_tol_Ktrans,r_tol_Ktrans,a_tol_delay,r_tol_delay '
