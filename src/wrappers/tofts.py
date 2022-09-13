@@ -6,15 +6,15 @@ from scipy.optimize import curve_fit
 # osipi utilities
 from osipi_code_collection.utils.nb import percenterror
 # osipi implementations
-import osipi_code_collection.original.LEK_UoEdinburghUK.PharmacokineticModelling.models as edinburgh1
-import osipi_code_collection.original.MJT_UoEdinburghUK.aifs as edinburgh2_aifs
-import osipi_code_collection.original.MJT_UoEdinburghUK.pk_models as edinburgh2_models
-import osipi_code_collection.original.MJT_UoEdinburghUK.dce_fit as edinburgh2_fit
-import osipi_code_collection.original.OGJ_OsloU_Norway.MRImageAnalysis.DCE.Analyze as oslo
+import osipi_code_collection.original.LEK_UoEdinburgh_UK.PharmacokineticModelling.models as edinburgh1
+import osipi_code_collection.original.MJT_UoEdinburgh_UK.aifs as edinburgh2_aifs
+import osipi_code_collection.original.MJT_UoEdinburgh_UK.pk_models as edinburgh2_models
+import osipi_code_collection.original.MJT_UoEdinburgh_UK.dce_fit as edinburgh2_fit
+import osipi_code_collection.original.OGJ_OsloU_NOR.MRImageAnalysis.DCE.Analyze as oslo
 import osipi_code_collection.original.ST_USydAUS.ModelDictionary as sydney
-from osipi_code_collection.original.MB_QBI_UoManchesterUK.QbiPy.dce_models import dce_aif as manchester_aif
-from osipi_code_collection.original.MB_QBI_UoManchesterUK.QbiPy.dce_models import tofts_model as manchester_tofts
-import osipi_code_collection.original.OG_MO_AUMC_ICR_RMH.ExtendedTofts.DCE as amsterdam
+from osipi_code_collection.original.MB_QBI_UoManchester_UK.QbiPy.dce_models import dce_aif as manchester_aif
+from osipi_code_collection.original.MB_QBI_UoManchester_UK.QbiPy.dce_models import tofts_model as manchester_tofts
+import osipi_code_collection.original.OG_MO_AUMC_ICR_RMH_NL_UK.ExtendedTofts.DCE as amsterdam
 
 def tofts_fit(author, ct = None, ca = None, t = None, fittype = "linear", mask = None, data = None):
   # Author can be: edinburgh1, edinburgh2, sydney, amsterdam, oslo, manchester

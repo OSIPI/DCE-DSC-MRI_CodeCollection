@@ -4,25 +4,25 @@
     "filename": "TestResults_T1mapping_mcgill_t1_VFA_lin.csv",
     "category": "T1mapping",
     "method": "linear",
-    "author": "ZA_McGill_Can"
+    "author": "ZA_McGill_CAN"
   },
   {
     "path": "../test/results/T1_mapping",
-    "filename": "TestResults_T1mapping_MJT_EdinburghUK_t1_VFA_lin.csv",
+    "filename": "TestResults_T1mapping_MJT_Edinburgh_UK_t1_VFA_lin.csv",
     "category": "T1mapping",
     "method": "linear",
     "author": "MJT_UoEdinburgh_UK"
   },
   {
     "path": "../test/results/T1_mapping",
-    "filename": "TestResults_T1mapping_MJT_EdinburghUK_t1_VFA_2fa.csv",
+    "filename": "TestResults_T1mapping_MJT_Edinburgh_UK_t1_VFA_2fa.csv",
     "category": "T1mapping",
     "method": "two-FA",
     "author": "MJT_UoEdinburgh_UK"
   },
   {
     "path": "../test/results/T1_mapping",
-    "filename": "TestResults_T1mapping_ST_SydneyAus_t1_VFA_lin.csv",
+    "filename": "TestResults_T1mapping_ST_Sydney_AUS_t1_VFA_lin.csv",
     "category": "T1mapping",
     "method": "linear",
     "author": "ST_USyd_Aus"
@@ -40,18 +40,18 @@
     "filename": "TestResults_T1mapping_mcgill_t1_novifast.csv",
     "category": "T1mapping",
     "method": "nonlinear",
-    "author": "ZA_McGill_Can"
+    "author": "ZA_McGill_CAN"
   },
   {
     "path": "../test/results/T1_mapping",
-    "filename": "TestResults_T1mapping_MJT_EdinburghUK_t1_VFA_nonlin.csv",
+    "filename": "TestResults_T1mapping_MJT_Edinburgh_UK_t1_VFA_nonlin.csv",
     "category": "T1mapping",
     "method": "nonlinear",
     "author": "MJT_UoEdinburgh_UK"
   },
   {
     "path": "../test/results/T1_mapping",
-    "filename": "TestResults_T1mapping_ST_SydneyAus_t1_VFA_nonlin.csv",
+    "filename": "TestResults_T1mapping_ST_Sydney_AUS_t1_VFA_nonlin.csv",
     "category": "T1mapping",
     "method": "nonlinear",
     "author": "ST_USyd_Aus"
@@ -65,7 +65,7 @@
   },
   {
     "path": "../test/results/SI_to_Conc",
-    "filename": "TestResults_SI2Conc_LCB_BNI.csv",
+    "filename": "TestResults_SI2Conc_LCB_BNI_USA.csv",
     "category": "SI_to_Conc",
     "method": "",
     "author": "LCB_BNI_USA"
@@ -114,17 +114,17 @@
   },
   {
     "path": "../test/results/PopulationAIF_DCE",
-    "filename": "TestResults_PopAIF_Parker_AIF_MJT_EdinburghUK.csv",
+    "filename": "TestResults_PopAIF_Parker_AIF_MJT_Edinburgh_UK.csv",
     "category": "PopulationAIF",
     "method": "Parker",
     "author": "MJT_UoEdinburgh_UK"
   },
   {
     "path": "../test/results/PopulationAIF_DCE",
-    "filename": "TestResults_PopAIF_Parker_AIF_MB_QBI_UoManchesterUK.csv",
+    "filename": "TestResults_PopAIF_Parker_AIF_MB_QBI_UoManchester_UK.csv",
     "category": "PopulationAIF",
     "method": "Parker",
-    "author": "MB_QBI_UoManchesterUK"
+    "author": "MB_QBI_UoManchester_UK"
   },
   {
     "path": "../test/results/PopulationAIF_DCE",
@@ -135,7 +135,7 @@
   },
   {
     "path": "../test/results/PopulationAIF_DCE",
-    "filename": "TestResults_PopAIF_Parker_AIF_ST_SydneyAus.csv",
+    "filename": "TestResults_PopAIF_Parker_AIF_ST_Sydney_AUS.csv",
     "category": "PopulationAIF",
     "method": "Parker",
     "author": "ST_USyd_Aus"
@@ -149,49 +149,49 @@
   },
   {
     "path": "../test/results/PopulationAIF_DCE",
-    "filename": "TestResults_PopAIF_preclinical_AIF_ST_SydneyAus.csv",
+    "filename": "TestResults_PopAIF_preclinical_AIF_ST_Sydney_AUS.csv",
     "category": "PopulationAIF",
     "method": "preclinical",
     "author": "ST_USyd_Aus"
   },
   {
     "path": "../test/results/DCEmodels",
-    "filename": "TestResults_models_LCB_BNI_tofts.csv",
+    "filename": "TestResults_models_LCB_BNI_USA_tofts.csv",
     "category": "DCEmodels",
     "method": "tofts",
     "author": "LCB_BNI_USA"
   },
   {
     "path": "../test/results/DCEmodels",
-    "filename": "TestResults_models_LEK_UoEdinburghUK_etofts.csv",
+    "filename": "TestResults_models_LEK_UoEdinburgh_UK_etofts.csv",
     "category": "DCEmodels",
     "method": "etofts",
     "author": "LEK_UoEdinburgh_UK"
   },
   {
     "path": "../test/results/DCEmodels",
-    "filename": "TestResults_models_LEK_UoEdinburghUK_patlak.csv",
+    "filename": "TestResults_models_LEK_UoEdinburgh_UK_patlak.csv",
     "category": "DCEmodels",
     "method": "patlak",
     "author": "LEK_UoEdinburgh_UK"
   },
   {
     "path": "../test/results/DCEmodels",
-    "filename": "TestResults_models_LEK_UoEdinburghUK_tofts.csv",
+    "filename": "TestResults_models_LEK_UoEdinburgh_UK_tofts.csv",
     "category": "DCEmodels",
     "method": "tofts",
     "author": "LEK_UoEdinburgh_UK"
   },
     {
     "path": "../test/results/DCEmodels",
-    "filename": "TestResults_models_LEK_UoEdinburghUK_2CUM.csv",
+    "filename": "TestResults_models_LEK_UoEdinburgh_UK_2CUM.csv",
     "category": "DCEmodels",
     "method": "2CUM",
     "author": "LEK_UoEdinburgh_UK"
   },
     {
     "path": "../test/results/DCEmodels",
-    "filename": "TestResults_models_LEK_UoEdinburghUK_2CXM.csv",
+    "filename": "TestResults_models_LEK_UoEdinburgh_UK_2CXM.csv",
     "category": "DCEmodels",
     "method": "2CXM",
     "author": "LEK_UoEdinburgh_UK"
@@ -205,49 +205,49 @@
   },
   {
     "path": "../test/results/DCEmodels",
-    "filename": "TestResults_models_MB_QBI_UoManchesterUK_2CXM.csv",
+    "filename": "TestResults_models_MB_QBI_UoManchester_UK_2CXM.csv",
     "category": "DCEmodels",
     "method": "2CXM",
     "author": "MB_QBI_UoManchester"
   },
   {
     "path": "../test/results/DCEmodels",
-    "filename": "TestResults_models_MJT_UoEdinburghUK_2CUM.csv",
+    "filename": "TestResults_models_MJT_UoEdinburgh_UK_2CUM.csv",
     "category": "DCEmodels",
     "method": "2CUM",
     "author": "MJT_UoEdinburgh_UK"
   },
   {
     "path": "../test/results/DCEmodels",
-    "filename": "TestResults_models_MJT_UoEdinburghUK_2CXM.csv",
+    "filename": "TestResults_models_MJT_UoEdinburgh_UK_2CXM.csv",
     "category": "DCEmodels",
     "method": "2CXM",
     "author": "MJT_UoEdinburgh_UK"
   },
   {
     "path": "../test/results/DCEmodels",
-    "filename": "TestResults_models_MJT_UoEdinburghUK_etofts.csv",
+    "filename": "TestResults_models_MJT_UoEdinburgh_UK_etofts.csv",
     "category": "DCEmodels",
     "method": "etofts",
     "author": "MJT_UoEdinburgh_UK"
   },
   {
     "path": "../test/results/DCEmodels",
-    "filename": "TestResults_models_MJT_UoEdinburghUK_patlak.csv",
+    "filename": "TestResults_models_MJT_UoEdinburgh_UK_patlak.csv",
     "category": "DCEmodels",
     "method": "patlak",
     "author": "MJT_UoEdinburgh_UK"
   },
   {
     "path": "../test/results/DCEmodels",
-    "filename": "TestResults_models_MJT_UoEdinburghUK_patlak_llsq.csv",
+    "filename": "TestResults_models_MJT_UoEdinburgh_UK_patlak_llsq.csv",
     "category": "DCEmodels",
     "method": "patlak",
     "author": "MJT_UoEdinburgh_UK_llsq"
   },
   {
     "path": "../test/results/DCEmodels",
-    "filename": "TestResults_models_MJT_UoEdinburghUK_tofts.csv",
+    "filename": "TestResults_models_MJT_UoEdinburgh_UK_tofts.csv",
     "category": "DCEmodels",
     "method": "tofts",
     "author": "MJT_UoEdinburgh_UK"
@@ -317,9 +317,9 @@
   },
     {
     "path": "../test/results/DSCmodels",
-    "filename": "TestResults_ParamEstimation_SR_TBG_BNIPhoenix_USA.csv",
+    "filename": "TestResults_ParamEstimation_SR_TBG_BNI_USAPhoenix_USA.csv",
     "category": "DSCmodels",
     "method": "",
-    "author": "SR_LB_TBG_BNIPhoenix_USA_LCC SFTR"
+    "author": "SR_LB_TBG_BNI_USAPhoenix_USA_LCC SFTR"
   }
 ]

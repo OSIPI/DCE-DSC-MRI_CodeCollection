@@ -1,56 +1,56 @@
 Technique,Category,Subcategory,Notes,Subfolder,Authors,Institution,function/module name,doi,Tester,Test status (empty/in-progress/complete)
 DCE,Bolus arrival time,piecewise linear quadratic function,Cheong et al (DOI: 10.1088/0031-9155/48/5/403),LEK_UoEdinburgh,Lucy Kershaw,"University of Edinburgh, UK",BAT_linquad,,tbd,
 DCE,Bolus arrival time,fitting Kety (Tofts) model to first third of the curve,,LEK_UoEdinburgh,Lucy Kershaw,"University of Edinburgh, UK",BAT_kety,,tbd,
-DCE,Input Functions,load AIF,load from txt,MB_QBI_UoManchesterUK,Michael Berks,"University of Manchester, UK",read_AIF,https://doi.org/10.21105/joss.03523,tbd,
-DCE,Input Functions,Parker AIF,,MB_QBI_UoManchesterUK,Michael Berks,"University of Manchester, UK",compute_population_AIF,https://doi.org/10.21105/joss.03523,JK/PvH,completed
-DCE,Input Functions,patient-specific AIF,constructed from time-concentration data,MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK",patientSpecific,,tbd,
-DCE,Input Functions,Parker AIF,"Parker AIF, Parker-like AIF",MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK",Parker,,JK/PvH,completed
-DCE,Input Functions,Manning AIF,Manning et al (https://doi.org/10.1002/mrm.28833),MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK","ManningFast, ManningSlow",,tbd,completed
-DCE,Input Functions,Heye AIF,Heye et al (https://doi.org/10.1016/j.neuroimage.2015.10.018),MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK",Heye,,tbd,completed
+DCE,Input Functions,load AIF,load from txt,MB_QBI_UoManchester_UK,Michael Berks,"University of Manchester, UK",read_AIF,https://doi.org/10.21105/joss.03523,tbd,
+DCE,Input Functions,Parker AIF,,MB_QBI_UoManchester_UK,Michael Berks,"University of Manchester, UK",compute_population_AIF,https://doi.org/10.21105/joss.03523,JK/PvH,completed
+DCE,Input Functions,patient-specific AIF,constructed from time-concentration data,MJT_UoEdinburgh_UK,Michael Thrippleton,"University of Edinburgh, UK",patientSpecific,,tbd,
+DCE,Input Functions,Parker AIF,"Parker AIF, Parker-like AIF",MJT_UoEdinburgh_UK,Michael Thrippleton,"University of Edinburgh, UK",Parker,,JK/PvH,completed
+DCE,Input Functions,Manning AIF,Manning et al (https://doi.org/10.1002/mrm.28833),MJT_UoEdinburgh_UK,Michael Thrippleton,"University of Edinburgh, UK","ManningFast, ManningSlow",,tbd,completed
+DCE,Input Functions,Heye AIF,Heye et al (https://doi.org/10.1016/j.neuroimage.2015.10.018),MJT_UoEdinburgh_UK,Michael Thrippleton,"University of Edinburgh, UK",Heye,,tbd,completed
 DCE,Input Functions,AIF parameterization,,OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK","Cosine4AIF, Cosine8AIF",https://doi.org/10.1088/0031-9155/53/5/005; https://doi.org/10.1007/s00330-015-4012-9,tbd,
 DCE,Input Functions,Head-and-neck population AIF,Wong et al (DOI: https://doi.org/10.2967/jnumed.116.174433),OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK",aifPopHN,,tbd,
 DCE,Input Functions,Parker AIF,,OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK",aifPopPMB,,tbd,
-DCE,Input Functions,load AIF,from txt,OGJ_OsloU_Norway,Ole Gunnar Johansen,"University of Oslo, Norway",loadStandard,,tbd,
-DCE,Input Functions,AIF parameterization,fit gamma-variate function,OGJ_OsloU_Norway,Ole Gunnar Johansen,"University of Oslo, Norway",gammaVariateFit,,tbd,
+DCE,Input Functions,load AIF,from txt,OGJ_OsloU_NOR,Ole Gunnar Johansen,"University of Oslo, Norway",loadStandard,,tbd,
+DCE,Input Functions,AIF parameterization,fit gamma-variate function,OGJ_OsloU_NOR,Ole Gunnar Johansen,"University of Oslo, Norway",gammaVariateFit,,tbd,
 DCE,Input Functions,Georgiou AIF,Georgiou et al (DOI: 10.1002/mrm.27524),PvH_NKI,Petra van Houdt,"the Netherlands Cancer Institute, the Netherlands",GeorgiouAIF,,JK/PvH,completed
 DCE,Input Functions,Parker AIF,,PvH_NKI,Petra van Houdt,"the Netherlands Cancer Institute, the Netherlands",ParkerAIF,,JK/PvH,completed
 DCE,Input Functions,Parker AIF,,ST_USydAUS_DCE,Sirisha Tadimalla,"University of Sydney, Australia","AIF, variableAIF",,JK/PvH,completed
 DCE,Input Functions,preclinical AIF,McGrath et al (DOI: 10.1002/mrm.21959),ST_USydAUS_DCE,Sirisha Tadimalla,"University of Sydney, Australia",preclinicalAIF,,JK/PvH,completed
 DCE,Miscellaneous,enhancement detection,check for enhancement,OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK",enhance,,tbd,
-DCE,Parameter derivation,iAUC,,MB_QBI_UoManchesterUK,Michael Berks,"University of Manchester, UK",compute_IAUC,https://doi.org/10.21105/joss.03523,tbd,
+DCE,Parameter derivation,iAUC,,MB_QBI_UoManchester_UK,Michael Berks,"University of Manchester, UK",compute_IAUC,https://doi.org/10.21105/joss.03523,tbd,
 DCE,Pharmacokinetic models,Tofts,NLLS fitting (+forward model),DS_BW_VanderBiltUMC_USA,"David Smith, Brian Welch","VanderBilt University Medical Center, USA","tofts_integral, fit_tofts_model",,tdd,
 DCE,Pharmacokinetic models,extended Tofts,NLLS fitting (+forward model),DS_BW_VanderBiltUMC_USA,"David Smith, Brian Welch","VanderBilt University Medical Center, USA","ext_tofts_integral, fit_tofts_model",,tbd,
-DCE,Pharmacokinetic models,Tofts,NLLS fitting (+ forward model),LCB_BNI,Laura Bell,"Barrow Neurological Institute, USA","tofts_model, fit_tofts",,ST/OGC,completed
+DCE,Pharmacokinetic models,Tofts,NLLS fitting (+ forward model),LCB_BNI_USA,Laura Bell,"Barrow Neurological Institute, USA","tofts_model, fit_tofts",,ST/OGC,completed
 DCE,Pharmacokinetic models,2-cmp exchange,forward model,LEK_UoEdinburgh,Lucy Kershaw,"University of Edinburgh, UK",TwoCXM,,MJT,completed
 DCE,Pharmacokinetic models,2-cmp uptake,forward model,LEK_UoEdinburgh,Lucy Kershaw,"University of Edinburgh, UK",TwoCUM,,MJT,completed
 DCE,Pharmacokinetic models,AATH,forward model,LEK_UoEdinburgh,Lucy Kershaw,"University of Edinburgh, UK",AATH,,tbd,
 DCE,Pharmacokinetic models,extended Tofts,forward model,LEK_UoEdinburgh,Lucy Kershaw,"University of Edinburgh, UK",ExtKety,,ST/OGC,completed
 DCE,Pharmacokinetic models,Patlak,forward model,LEK_UoEdinburgh,Lucy Kershaw,"University of Edinburgh, UK",Patlak,,MJT,completed
 DCE,Pharmacokinetic models,Tofts,forward model,LEK_UoEdinburgh,Lucy Kershaw,"University of Edinburgh, UK",Kety,,ST/OGC,completed
-DCE,Pharmacokinetic models,2-cmp exchange,LLSQ fitting (+forward model),MB_QBI_UoManchesterUK,Michael Berks,"University of Manchester, UK",two_cxm_model,https://doi.org/10.21105/joss.03523,MJT,completed
-DCE,Pharmacokinetic models,2-cmp filtration,LLSQ fitting (+forward model),MB_QBI_UoManchesterUK,Michael Berks,"University of Manchester, UK",two_cfm_model,https://doi.org/10.21105/joss.03523,tbd,
-DCE,Pharmacokinetic models,active uptake and efflux (AUEM),LLSQ fitting (+forward model),MB_QBI_UoManchesterUK,Michael Berks,"University of Manchester, UK",active_uptake_model,https://doi.org/10.21105/joss.03523,tbd,
-DCE,Pharmacokinetic models,dual-inlet general model,LLSQ fitting (+forward model),MB_QBI_UoManchesterUK,Michael Berks,"University of Manchester, UK",dibem,https://doi.org/10.21105/joss.03523,tbd,
-DCE,Pharmacokinetic models,extended Tofts,LLSQ fitting (+forward model),MB_QBI_UoManchesterUK,Michael Berks,"University of Manchester, UK",tofts_model,https://doi.org/10.21105/joss.03523,ST/OGC,completed
-DCE,Pharmacokinetic models,2-cmp exchange,NLLS fitting to concentration values (incl forward model),MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK","TCXM, EnhToPKP, ConcToPKP",,MJT,completed
-DCE,Pharmacokinetic models,2-cmp exchange,NLLS fitting to signal incl. water exchange (incl forward model),MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK","TCXM, EnhToPKP, ConcToPKP",,MJT,completed
-DCE,Pharmacokinetic models,2-cmp uptake,NLLS fitting to concentration values (incl forward model),MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK","TCUM, EnhToPKP, ConcToPKP",,MJT,completed
-DCE,Pharmacokinetic models,2-cmp uptake,NLLS fitting to signal incl. water exchange (incl forward model),MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK","TCUM, EnhToPKP, ConcToPKP",,MJT,completed
-DCE,Pharmacokinetic models,extended Tofts,NLLS fitting to concentration values (incl forward model),MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK","ExtendedTofts, EnhToPKP, ConcToPKP",,ST/OGC,completed
-DCE,Pharmacokinetic models,extended Tofts,NLLS fitting to signal incl. water exchange (incl forward model),MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK","ExtendedTofts, EnhToPKP, ConcToPKP",,ST/OGC,completed
-DCE,Pharmacokinetic models,Patlak,NLLS fitting to concentration values (incl forward model),MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK","Patlak, EnhToPKP, ConcToPKP",,MJT,completed
-DCE,Pharmacokinetic models,Patlak,NLLS fitting to signal incl. water exchange (incl forward model),MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK","Patlak, EnhToPKP, ConcToPKP",,MJT,completed
-DCE,Pharmacokinetic models,Patlak,LLSQ fitting,MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK",PatlakLinear,,MJT,completed
-DCE,Pharmacokinetic models,steady-state vp,NLLS fitting to concentration values (incl forward model),MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK","SteadyStateVp, EnhToPKP, ConcToPKP",,tbd,
-DCE,Pharmacokinetic models,steady-state vp,NLLS fitting to signal incl. water exchange (incl forward model),MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK","SteadyStateVp, EnhToPKP, ConcToPKP",,tbd,
-DCE,Pharmacokinetic models,Tofts,NLLS fitting to concentration values (incl forward model),MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK","Tofts, EnhToPKP, ConcToPKP",,ST/OGC,completed
-DCE,Pharmacokinetic models,Tofts,NLLS fitting to signal incl. water exchange (incl forward model),MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK","Tofts,EnhToPKP, ConcToPKP",,ST/OGC,completed
+DCE,Pharmacokinetic models,2-cmp exchange,LLSQ fitting (+forward model),MB_QBI_UoManchester_UK,Michael Berks,"University of Manchester, UK",two_cxm_model,https://doi.org/10.21105/joss.03523,MJT,completed
+DCE,Pharmacokinetic models,2-cmp filtration,LLSQ fitting (+forward model),MB_QBI_UoManchester_UK,Michael Berks,"University of Manchester, UK",two_cfm_model,https://doi.org/10.21105/joss.03523,tbd,
+DCE,Pharmacokinetic models,active uptake and efflux (AUEM),LLSQ fitting (+forward model),MB_QBI_UoManchester_UK,Michael Berks,"University of Manchester, UK",active_uptake_model,https://doi.org/10.21105/joss.03523,tbd,
+DCE,Pharmacokinetic models,dual-inlet general model,LLSQ fitting (+forward model),MB_QBI_UoManchester_UK,Michael Berks,"University of Manchester, UK",dibem,https://doi.org/10.21105/joss.03523,tbd,
+DCE,Pharmacokinetic models,extended Tofts,LLSQ fitting (+forward model),MB_QBI_UoManchester_UK,Michael Berks,"University of Manchester, UK",tofts_model,https://doi.org/10.21105/joss.03523,ST/OGC,completed
+DCE,Pharmacokinetic models,2-cmp exchange,NLLS fitting to concentration values (incl forward model),MJT_UoEdinburgh_UK,Michael Thrippleton,"University of Edinburgh, UK","TCXM, EnhToPKP, ConcToPKP",,MJT,completed
+DCE,Pharmacokinetic models,2-cmp exchange,NLLS fitting to signal incl. water exchange (incl forward model),MJT_UoEdinburgh_UK,Michael Thrippleton,"University of Edinburgh, UK","TCXM, EnhToPKP, ConcToPKP",,MJT,completed
+DCE,Pharmacokinetic models,2-cmp uptake,NLLS fitting to concentration values (incl forward model),MJT_UoEdinburgh_UK,Michael Thrippleton,"University of Edinburgh, UK","TCUM, EnhToPKP, ConcToPKP",,MJT,completed
+DCE,Pharmacokinetic models,2-cmp uptake,NLLS fitting to signal incl. water exchange (incl forward model),MJT_UoEdinburgh_UK,Michael Thrippleton,"University of Edinburgh, UK","TCUM, EnhToPKP, ConcToPKP",,MJT,completed
+DCE,Pharmacokinetic models,extended Tofts,NLLS fitting to concentration values (incl forward model),MJT_UoEdinburgh_UK,Michael Thrippleton,"University of Edinburgh, UK","ExtendedTofts, EnhToPKP, ConcToPKP",,ST/OGC,completed
+DCE,Pharmacokinetic models,extended Tofts,NLLS fitting to signal incl. water exchange (incl forward model),MJT_UoEdinburgh_UK,Michael Thrippleton,"University of Edinburgh, UK","ExtendedTofts, EnhToPKP, ConcToPKP",,ST/OGC,completed
+DCE,Pharmacokinetic models,Patlak,NLLS fitting to concentration values (incl forward model),MJT_UoEdinburgh_UK,Michael Thrippleton,"University of Edinburgh, UK","Patlak, EnhToPKP, ConcToPKP",,MJT,completed
+DCE,Pharmacokinetic models,Patlak,NLLS fitting to signal incl. water exchange (incl forward model),MJT_UoEdinburgh_UK,Michael Thrippleton,"University of Edinburgh, UK","Patlak, EnhToPKP, ConcToPKP",,MJT,completed
+DCE,Pharmacokinetic models,Patlak,LLSQ fitting,MJT_UoEdinburgh_UK,Michael Thrippleton,"University of Edinburgh, UK",PatlakLinear,,MJT,completed
+DCE,Pharmacokinetic models,steady-state vp,NLLS fitting to concentration values (incl forward model),MJT_UoEdinburgh_UK,Michael Thrippleton,"University of Edinburgh, UK","SteadyStateVp, EnhToPKP, ConcToPKP",,tbd,
+DCE,Pharmacokinetic models,steady-state vp,NLLS fitting to signal incl. water exchange (incl forward model),MJT_UoEdinburgh_UK,Michael Thrippleton,"University of Edinburgh, UK","SteadyStateVp, EnhToPKP, ConcToPKP",,tbd,
+DCE,Pharmacokinetic models,Tofts,NLLS fitting to concentration values (incl forward model),MJT_UoEdinburgh_UK,Michael Thrippleton,"University of Edinburgh, UK","Tofts, EnhToPKP, ConcToPKP",,ST/OGC,completed
+DCE,Pharmacokinetic models,Tofts,NLLS fitting to signal incl. water exchange (incl forward model),MJT_UoEdinburgh_UK,Michael Thrippleton,"University of Edinburgh, UK","Tofts,EnhToPKP, ConcToPKP",,ST/OGC,completed
 DCE,Pharmacokinetic models,extended Tofts,NLLS fitting (+forward model),OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK",fit_tofts_model,,ST/OGC,completed
-DCE,Pharmacokinetic models,2-cmp exchange,LLSQ fitting (+ forward model),OGJ_OsloU_Norway,Ole Gunnar Johansen,"University of Oslo, Norway","twoCXM, fitToModelLLSQ",,MJT,completed
-DCE,Pharmacokinetic models,extended Tofts,NLLS fitting (+ forward model),OGJ_OsloU_Norway,Ole Gunnar Johansen,"University of Oslo, Norway","ETM,  fitToModelNLLS, fitToModelNLLS_parallel",,ST/OGC,completed
-DCE,Pharmacokinetic models,extended Tofts,LLSQ fitting (+ forward model),OGJ_OsloU_Norway,Ole Gunnar Johansen,"University of Oslo, Norway","ETM, fitToModelLLSQ",,ST/OGC,completed
-DCE,Pharmacokinetic models,Tofts,NLLS fitting (+ forward model),OGJ_OsloU_Norway,Ole Gunnar Johansen,"University of Oslo, Norway","TM,  fitToModelNLLS, fitToModelNLLS_parallel",,ST/OGC,completed
-DCE,Pharmacokinetic models,Tofts,LLSQ fitting (+ forward model),OGJ_OsloU_Norway,Ole Gunnar Johansen,"University of Oslo, Norway","TM, fitToModelLLSQ",,ST/OGC,completed
+DCE,Pharmacokinetic models,2-cmp exchange,LLSQ fitting (+ forward model),OGJ_OsloU_NOR,Ole Gunnar Johansen,"University of Oslo, Norway","twoCXM, fitToModelLLSQ",,MJT,completed
+DCE,Pharmacokinetic models,extended Tofts,NLLS fitting (+ forward model),OGJ_OsloU_NOR,Ole Gunnar Johansen,"University of Oslo, Norway","ETM,  fitToModelNLLS, fitToModelNLLS_parallel",,ST/OGC,completed
+DCE,Pharmacokinetic models,extended Tofts,LLSQ fitting (+ forward model),OGJ_OsloU_NOR,Ole Gunnar Johansen,"University of Oslo, Norway","ETM, fitToModelLLSQ",,ST/OGC,completed
+DCE,Pharmacokinetic models,Tofts,NLLS fitting (+ forward model),OGJ_OsloU_NOR,Ole Gunnar Johansen,"University of Oslo, Norway","TM,  fitToModelNLLS, fitToModelNLLS_parallel",,ST/OGC,completed
+DCE,Pharmacokinetic models,Tofts,LLSQ fitting (+ forward model),OGJ_OsloU_NOR,Ole Gunnar Johansen,"University of Oslo, NOR","TM, fitToModelLLSQ",,ST/OGC,completed
 DCE,Pharmacokinetic models,1-cmp,forward model,ST_USydAUS_DCE,Sirisha Tadimalla,"University of Sydney, Australia",OneCompartment,,tbd,
 DCE,Pharmacokinetic models,dual-inlet 1-cmp,forward model,ST_USydAUS_DCE,Sirisha Tadimalla,"University of Sydney, Australia",DualInletOneCompartment,,tbd,
 DCE,Pharmacokinetic models,dual-inlet ext Tofts,forward model,ST_USydAUS_DCE,Sirisha Tadimalla,"University of Sydney, Australia",DualInletExtendedTofts,,tbd,
@@ -60,29 +60,29 @@ DCE,Pharmacokinetic models,Tofts,forward model,ST_USydAUS_DCE,Sirisha Tadimalla,
 DCE,Pharmacokinetic models,high flow 2-cmp Gadoxetate,forward model,ST_USydAUS_DCE,Sirisha Tadimalla,"University of Sydney, Australia",,,tbd,
 DCE,Pharmacokinetic models,Patlak,forward model,ST_USydAUS_DCE,Sirisha Tadimalla,"University of Sydney, Australia",PatlakModel,,MJT,completed
 DCE,Signal to Concentration,SPGR,"two-steps: S->R1, R1->C",DS_BW_VanderBiltUMC_USA,"David Smith, Brian Welch","VanderBilt University Medical Center, USA","r1eff_to_conc, dce_to_r1eff",,tbd,
-DCE,Signal to Concentration,SPGR or GE-EPI,,LCB_BNI,Laura Bell,"Barrow Neurological Institute, USA","signal_to_conc, estimate_delta_R1",,LK,completed
+DCE,Signal to Concentration,SPGR or GE-EPI,,LCB_BNI_USA,Laura Bell,"Barrow Neurological Institute, USA","signal_to_conc, estimate_delta_R1",,LK,completed
 DCE,Signal to concentration,SPGR,"reverse C->S also available",LEK_UoEdinburgh,Lucy Kershaw,"University of Edinburgh, UK",SI2Conc,,LK,completed
-DCE,Signal to concentration,SPGR,"reverse C->S also available",MB_QBI_UoManchesterUK,Michael Berks,"University of Manchester, UK",signal_to_concentration,https://doi.org/10.21105/joss.03523,LK,completed
-DCE,Signal to concentration,SPGR,"two steps: S-> enhancement, enhancement -> C; reverse C->S also available",MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK","sign_to_enh, enh_to_conc",,LK,completed
+DCE,Signal to concentration,SPGR,"reverse C->S also available",MB_QBI_UoManchester_UK,Michael Berks,"University of Manchester, UK",signal_to_concentration,https://doi.org/10.21105/joss.03523,LK,completed
+DCE,Signal to concentration,SPGR,"two steps: S-> enhancement, enhancement -> C; reverse C->S also available",MJT_UoEdinburgh_UK,Michael Thrippleton,"University of Edinburgh, UK","sign_to_enh, enh_to_conc",,LK,completed
 DCE,Signal to concentration,SPGR,"two steps: S->R1, R1 -> C; reverse C->S also available",OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK","dce_to_r1eff, r1eff_to_conc",,LK,completed
 DCE,Signal to concentration,SPGR,"reverse R1->C also available",ST_USydAUS_DCE,Sirisha Tadimalla,"University of Sydney, Australia",signals2conc,,LK,completed
 DCE,T1,VFA,nonlinear,DS_BW_VanderBiltUMC_USA,"David Smith, Brian Welch","VanderBilt University Medical Center, USA",fit_R1,,tbd,
 DCE,T1,VFA,despot,McGill_VFA,Zaki Ahmed,"McGill University, Canada",despot,,MJT,completed
 DCE,T1,VFA,novifast,McGill_VFA,Zaki Ahmed,"McGill University, Canada",novifast,,MJT,completed
-DCE,T1,DESPOT1-HIFI,Fit any combination of (IR-)SPGR scans to estimate T1,MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK",HIFI,,MJT,in-progress
-DCE,T1,VFA,linear,MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK",VFALinear,,MJT,complete
-DCE,T1,VFA,nonlinear,MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK",VFANonlinear,,MJT,complete
-DCE,T1,VFA,two flip angles,MJT_UoEdinburghUK,Michael Thrippleton,"University of Edinburgh, UK",VFA2Points,,tbd,
+DCE,T1,DESPOT1-HIFI,Fit any combination of (IR-)SPGR scans to estimate T1,MJT_UoEdinburgh_UK,Michael Thrippleton,"University of Edinburgh, UK",HIFI,,MJT,in-progress
+DCE,T1,VFA,linear,MJT_UoEdinburgh_UK,Michael Thrippleton,"University of Edinburgh, UK",VFALinear,,MJT,complete
+DCE,T1,VFA,nonlinear,MJT_UoEdinburgh_UK,Michael Thrippleton,"University of Edinburgh, UK",VFANonlinear,,MJT,complete
+DCE,T1,VFA,two flip angles,MJT_UoEdinburgh_UK,Michael Thrippleton,"University of Edinburgh, UK",VFA2Points,,tbd,
 DCE,T1,VFA,two flip angles (linear),OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK",R1_two_fas,,MJT,competed
 DCE,T1,VFA,nonlinear,OG_MO_AUMC_ICR_RMH,"Oliver Gurney-Champion, Matthew Orton","Amsterdam University Medical Center, the Netherlands, Institute of Cancer Research, UK",R1_VFA,,MJT,competed
-DCE,T1,VFA,linear,ST_SydneyAus_T1,Sirisha Tadimalla,"University of Sydney, Australia",VFAT1mapping,,MJT,completed
-DCE,T1,VFA,nonlinear,ST_SydneyAus_T1,Sirisha Tadimalla,"University of Sydney, Australia",VFAT1mapping,,MJT,completed
-DCE/DSC,AIF deconvolution,,,SR_TBG_BNIPhoenixUSA,"Sudarshan Ragunathan, Laura Bell","Barrow Neurological Institute, USA",AIFdeconvolution,,JA,completed
+DCE,T1,VFA,linear,ST_Sydney_AUS_T1,Sirisha Tadimalla,"University of Sydney, Australia",VFAT1mapping,,MJT,completed
+DCE,T1,VFA,nonlinear,ST_Sydney_AUS_T1,Sirisha Tadimalla,"University of Sydney, Australia",VFAT1mapping,,MJT,completed
+DCE/DSC,AIF deconvolution,,,SR_TBG_BNI_PhoenixUSA,"Sudarshan Ragunathan, Laura Bell","Barrow Neurological Institute, USA",AIFdeconvolution,,JA,completed
 DCE/DSC,Miscellaneous,calculate SNR,,DS_BW_VanderBiltUMC_USA,"David Smith, Brian Welch","VanderBilt University Medical Center, USA",signal_to_noise_ratio,,tbd,
 DCE/DSC,Miscellaneous,calculate enhancement ratio,,DS_BW_VanderBiltUMC_USA,"David Smith, Brian Welch","VanderBilt University Medical Center, USA",signal_enhancement_ratio,,tbd,
 DSC,Input Functions,automatic AIF selection,"fully automatic, semi-automatic",JBJA_GUSahlgrenskaSWE,"Jesper Browall, Jonathan Arvidsson","Sahlgrenska University Hospital and Gothenburg University, Gothenburg, Sweden",AIF_selection_automatic.py,DOI: 10.1002/mrm.20759,tbd,
-DSC,Leakage correction,BSW,,SR_TBG_BNIPhoenixUSA,"Sudarshan Ragunathan, Laura Bell","Barrow Neurological Institute, USA",BSWleakagecorr,,SR,in-progress
-DSC,Parameter derivation,"CBV,CBF,MTT",,SR_TBG_BNIPhoenixUSA,"Sudarshan Ragunathan, Laura Bell","Barrow Neurological Institute, USA",DSCparameters,,tbd,
-DSC,Signal to deltaR2*,single echo,,LCB_BNI,Laura Bell,"Barrow Neurological Institute, USA",,estimate_delta_R2s,tbd,
-DSC,Signal to deltaR2*,dual echo,,LCB_BNI,Laura Bell,"Barrow Neurological Institute, USA",,"estimate_delta_R2s, estimate_delta_R2s_dual_echo",tbd,
-DSC,Signal to R2*,dual echo,,LCB_BNI,Laura Bell,"Barrow Neurological Institute, USA",,estimate_R2s,tbd,
+DSC,Leakage correction,BSW,,SR_TBG_BNI_PhoenixUSA,"Sudarshan Ragunathan, Laura Bell","Barrow Neurological Institute, USA",BSWleakagecorr,,SR,in-progress
+DSC,Parameter derivation,"CBV,CBF,MTT",,SR_TBG_BNI_PhoenixUSA,"Sudarshan Ragunathan, Laura Bell","Barrow Neurological Institute, USA",DSCparameters,,tbd,
+DSC,Signal to deltaR2*,single echo,,LCB_BNI_USA,Laura Bell,"Barrow Neurological Institute, USA",,estimate_delta_R2s,tbd,
+DSC,Signal to deltaR2*,dual echo,,LCB_BNI_USA,Laura Bell,"Barrow Neurological Institute, USA",,"estimate_delta_R2s, estimate_delta_R2s_dual_echo",tbd,
+DSC,Signal to R2*,dual echo,,LCB_BNI_USA,Laura Bell,"Barrow Neurological Institute, USA",,estimate_R2s,tbd,
