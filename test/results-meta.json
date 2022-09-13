@@ -106,7 +106,7 @@
   },
   {
     "path": "../test/results/SI_to_Conc",
-    "filename": "TestResults_SI2Conc__ST_USyd_AUS.csv",
+    "filename": "TestResults_SI2Conc_ST_USyd_AUS.csv",
     "category": "SI_to_Conc",
     "method": "",
     "author": "ST_USyd_Aus"
