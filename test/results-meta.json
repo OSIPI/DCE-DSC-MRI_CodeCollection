@@ -1,7 +1,7 @@
 [
   {
     "path": "../test/results/T1_mapping",
-    "filename": "TestResults_T1mapping_mcgill_t1_VFA_lin.csv",
+    "filename": "TestResults_T1mapping__ZA_McGill_CAN_t1_VFA_lin.csv",
     "category": "T1mapping",
     "method": "linear",
     "author": "ZA_McGill_CAN"
@@ -22,22 +22,21 @@
   },
   {
     "path": "../test/results/T1_mapping",
-    "filename": "TestResults_T1mapping_ST_Sydney_AUS_t1_VFA_lin.csv",
+    "filename": "TestResults_T1mapping_ST_USyd_AUS_t1_VFA_lin.csv",
     "category": "T1mapping",
     "method": "linear",
     "author": "ST_USyd_Aus"
   },
   {
     "path": "../test/results/T1_mapping",
-    "filename": "TestResults_T1mapping_OG_MO_AUMC_ICR_RHM_t1_VFA_2fa.csv",
+    "filename": "TestResults_T1mapping_OG_MO_AUMC_ICR_RHM_NL_UK_t1_VFA_2fa.csv",
     "category": "T1mapping",
     "method": "two-FA",
-
     "author": "OG_MO_AUMC_NL_ICR_UK"
   },
   {
     "path": "../test/results/T1_mapping",
-    "filename": "TestResults_T1mapping_mcgill_t1_novifast.csv",
+    "filename": "TestResults_T1mapping_ZA_McGill_CAN_t1_novifast.csv",
     "category": "T1mapping",
     "method": "nonlinear",
     "author": "ZA_McGill_CAN"
@@ -51,14 +50,14 @@
   },
   {
     "path": "../test/results/T1_mapping",
-    "filename": "TestResults_T1mapping_ST_Sydney_AUS_t1_VFA_nonlin.csv",
+    "filename": "TestResults_T1mapping_ST_USyd_AUS_t1_VFA_nonlin.csv",
     "category": "T1mapping",
     "method": "nonlinear",
     "author": "ST_USyd_Aus"
   },
   {
     "path": "../test/results/T1_mapping",
-    "filename": "TestResults_T1mapping_OG_MO_AUMC_ICR_RHM_t1_VFA_nonlin.csv",
+    "filename": "TestResults_T1mapping_OG_MO_AUMC_ICR_RHM_NL_UK_t1_VFA_nonlin.csv",
     "category": "T1mapping",
     "method": "nonlinear",
     "author": "OG_MO_AUMC_NL_ICR_UK"
@@ -72,42 +71,42 @@
   },
   {
     "path": "../test/results/SI_to_Conc",
-    "filename": "TestResults_SI2Conc_LEK_UoEdinburgh.csv",
+    "filename": "TestResults_SI2Conc_LEK_UoEdinburgh_UK.csv",
     "category": "SI_to_Conc",
     "method": "",
     "author": "LEK_UoEdinburgh_UK"
   },
   {
     "path": "../test/results/SI_to_Conc",
-    "filename": "TestResults_SI2Conc_MB_UoManchester.csv",
+    "filename": "TestResults_SI2Conc_MB_UoManchester_UK.csv",
     "category": "SI_to_Conc",
     "method": "",
     "author": "MB_UoManchester_UK"
   },
   {
     "path": "../test/results/SI_to_Conc",
-    "filename": "TestResults_SI2Conc_MJT_UoEdinburgh.csv",
+    "filename": "TestResults_SI2Conc_MJT_UoEdinburgh_UK.csv",
     "category": "SI_to_Conc",
     "method": "",
     "author": "MJT_UoEdinburgh_UK"
   },
   {
     "path": "../test/results/SI_to_Conc",
-    "filename": "TestResults_SI2Conc_MJT_UoEdinburgh_num.csv",
+    "filename": "TestResults_SI2Conc_MJT_UoEdinburgh_UK_num.csv",
     "category": "SI_to_Conc",
     "method": "",
     "author": "MJT_UoEdinburgh_UK_num"
   },
   {
     "path": "../test/results/SI_to_Conc",
-    "filename": "TestResults_SI2Conc_OG_MO_AUMC_ICR_RMH.csv",
+    "filename": "TestResults_SI2Conc_OG_MO_AUMC_ICR_RMH_NL_UK.csv",
     "category": "SI_to_Conc",
     "method": "",
     "author": "OG_MO_AUMC_NL_ICR_RMH_UK"
   },
   {
     "path": "../test/results/SI_to_Conc",
-    "filename": "TestResults_SI2Conc_ST_USydAus.csv",
+    "filename": "TestResults_SI2Conc_ST_USyd_Aus.csv",
     "category": "SI_to_Conc",
     "method": "",
     "author": "ST_USyd_Aus"
@@ -135,7 +134,7 @@
   },
   {
     "path": "../test/results/PopulationAIF_DCE",
-    "filename": "TestResults_PopAIF_Parker_AIF_ST_Sydney_AUS.csv",
+    "filename": "TestResults_PopAIF_Parker_AIF_ST_USyd_AUS.csv",
     "category": "PopulationAIF",
     "method": "Parker",
     "author": "ST_USyd_Aus"
@@ -149,7 +148,7 @@
   },
   {
     "path": "../test/results/PopulationAIF_DCE",
-    "filename": "TestResults_PopAIF_preclinical_AIF_ST_Sydney_AUS.csv",
+    "filename": "TestResults_PopAIF_preclinical_AIF_ST_USyd_AUS.csv",
     "category": "PopulationAIF",
     "method": "preclinical",
     "author": "ST_USyd_Aus"
@@ -198,7 +197,7 @@
   },
   {
     "path": "../test/results/DCEmodels",
-    "filename": "TestResults_models_MB_QBI_UoManchester_etofts.csv",
+    "filename": "TestResults_models_MB_QBI_UoManchester_UK_etofts.csv",
     "category": "DCEmodels",
     "method": "etofts",
     "author": "MB_QBI_UoManchester"
@@ -254,63 +253,63 @@
   },
   {
     "path": "../test/results/DCEmodels",
-    "filename": "TestResults_models_OG_MO_AUMC_ICR_RMH_etofts.csv",
+    "filename": "TestResults_models_OG_MO_AUMC_ICR_RMH_NL_UK_etofts.csv",
     "category": "DCEmodels",
     "method": "etofts",
     "author": "OG_MO_AUMC_NL_ICR_RMH_UK"
   },
   {
     "path": "../test/results/DCEmodels",
-    "filename": "TestResults_models_OGJ_OsloU_Norway_2CXM_LLSQ.csv",
+    "filename": "TestResults_models_OGJ_OsloU_NOR_2CXM_LLSQ.csv",
     "category": "DCEmodels",
     "method": "2CXM",
     "author": "OGJ_OsloU_Norway"
   },
   {
     "path": "../test/results/DCEmodels",
-    "filename": "TestResults_models_OGJ_OsloU_Norway_etofts_LLSQ.csv",
+    "filename": "TestResults_models_OGJ_OsloU_NOR_etofts_LLSQ.csv",
     "category": "DCEmodels",
     "method": "etofts",
     "author": "OGJ_OsloU_Norway_LLSQ"
   },
   {
     "path": "../test/results/DCEmodels",
-    "filename": "TestResults_models_OGJ_OsloU_Norway_etofts_NLLS.csv",
+    "filename": "TestResults_models_OGJ_OsloU_NOR_etofts_NLLS.csv",
     "category": "DCEmodels",
     "method": "etofts",
     "author": "OGJ_OsloU_Norway_NLLS"
   },
   {
     "path": "../test/results/DCEmodels",
-    "filename": "TestResults_models_OGJ_OsloU_Norway_tofts_LLSQ.csv",
+    "filename": "TestResults_models_OGJ_OsloU_NOR_tofts_LLSQ.csv",
     "category": "DCEmodels",
     "method": "tofts",
     "author": "OGJ_OsloU_Norway_LLSQ"
   },
   {
     "path": "../test/results/DCEmodels",
-    "filename": "TestResults_models_OGJ_OsloU_Norway_tofts_NLLS.csv",
+    "filename": "TestResults_models_OGJ_OsloU_NOR_tofts_NLLS.csv",
     "category": "DCEmodels",
     "method": "tofts",
     "author": "OGJ_OsloU_Norway_NLLS"
   },
   {
     "path": "../test/results/DCEmodels",
-    "filename": "TestResults_models_ST_USydAus_etofts.csv",
+    "filename": "TestResults_models_ST_USyd_Aus_etofts.csv",
     "category": "DCEmodels",
     "method": "etofts",
     "author": "ST_USyd_Aus"
   },
   {
     "path": "../test/results/DCEmodels",
-    "filename": "TestResults_models_ST_USydAus_patlak.csv",
+    "filename": "TestResults_models_ST_USyd_Aus_patlak.csv",
     "category": "DCEmodels",
     "method": "patlak",
     "author": "ST_USyd_Aus"
   },
   {
     "path": "../test/results/DCEmodels",
-    "filename": "TestResults_models_ST_USydAus_tofts.csv",
+    "filename": "TestResults_models_ST_USyd_Aus_tofts.csv",
     "category": "DCEmodels",
     "method": "tofts",
     "author": "ST_USyd_Aus"

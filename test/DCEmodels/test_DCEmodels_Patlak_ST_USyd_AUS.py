@@ -18,7 +18,7 @@ def setup_module(module):
     global filename_prefix # we want to change the global variable
     os.makedirs('./test/results/DCEmodels', exist_ok=True)
     filename_prefix = 'DCEmodels/TestResults_models'
-    log_init(filename_prefix, '_ST_USydAUS_patlak', ['label', 'time (us)',
+    log_init(filename_prefix, '_ST_USyd_AUS_patlak', ['label', 'time (us)',
                                                     'vp_ref', 'ps_ref', 'vp_meas', 'ps_meas'])
 
 # Use the test data to generate a parametrize decorator. This causes the following
@@ -46,7 +46,7 @@ def test_ST_USydAUS_Patlak_model(label, t_array, C_t_array,
     exc_time = 1e6 * (perf_counter() - tic)  # measure execution time
 
     # log results
-    log_results(filename_prefix, '_ST_USydAUS_patlak', [
+    log_results(filename_prefix, '_ST_USyd_AUS_patlak', [
         [label, f"{exc_time:.0f}", vp_ref, ps_ref, vp_meas, ps_meas]])
 
     # run test
