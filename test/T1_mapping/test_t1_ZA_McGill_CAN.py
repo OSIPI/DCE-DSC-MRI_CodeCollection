@@ -43,7 +43,7 @@ def test_ZA_McGill_CAN_t1_novifast(label, fa_array, tr_array, s_array, r1_ref,
     exc_time = 1e6 * (perf_counter() - tic)
     r1_nonlin_meas = 1./t1_nonlin_meas[0]
 
-    log_results(filename_prefix, '_mcgill_t1_novifast', [[label, f"{exc_time:.0f}", r1_ref, r1_nonlin_meas]]) # log results
+    log_results(filename_prefix, '_ZA_McGill_CAN_t1_novifast', [[label, f"{exc_time:.0f}", r1_ref, r1_nonlin_meas]]) # log results
     np.testing.assert_allclose( [r1_nonlin_meas], [r1_ref], rtol=r_tol, atol=a_tol)    # testing
 
 
