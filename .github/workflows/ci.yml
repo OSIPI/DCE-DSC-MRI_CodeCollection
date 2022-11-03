@@ -31,7 +31,7 @@ jobs:
         python doc/convert_to_md.py
     - name: Commit md file
       run: |
-        git add doc/convert_to_md.py
+        git add doc/code_contributions_record.md
         git config --global user.name 'OSIPI'
         git config --global user.email 'OSIPI@users.noreply.github.com'
         git commit -am "commit code_contributions_record.md"
