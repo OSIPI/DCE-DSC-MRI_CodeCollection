@@ -31,7 +31,7 @@ OSIPI/DCE-DSC-MRI_CodeCollection
 Wiki                                   # Information and guidelines 
 ```
 
-Click [here](https://github.com/OSIPI/DCE-DSC-MRI_CodeCollection/blob/develop/doc/code_contributions_record.md) for 
+Click [here](doc/code_contributions_record.md) for 
 database of code available and testing status 
 
 The results of the validated code are published on the [test-results website](http://osipi.org/DCE-DSC-MRI_TestResults), which is hosted via a separate [repository](https://github.com/OSIPI/DCE-DSC-MRI_TestResults).
