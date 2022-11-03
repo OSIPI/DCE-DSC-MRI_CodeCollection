@@ -1,5 +1,5 @@
 Technique,Category,Subcategory,Notes,Subfolder,Authors,Institution,function/module name,doi,Tester,Test status (empty/in-progress/complete)
-DCE,Bolus arrival time,piecewise linear quadratic function,Cheong et al (DOI: 10.1088/0031-9155/48/5/403),LEK_UoEdinburgh,Lucy Kershaw,"University of Edinburgh, UK",BAT_linquad,,tbd,
+DCE,Bolus arrival time,[piecewise linear quadratic function](../src/original/LEK_UoEdinburgh_UK/PharmacokineticModelling/BAT_estimation.py),Cheong et al (DOI: 10.1088/0031-9155/48/5/403),LEK_UoEdinburgh,Lucy Kershaw,"University of Edinburgh, UK",BAT_linquad,,tbd,
 DCE,Bolus arrival time,fitting Kety (Tofts) model to first third of the curve,,LEK_UoEdinburgh,Lucy Kershaw,"University of Edinburgh, UK",BAT_kety,,tbd,
 DCE,Input Functions,load AIF,load from txt,MB_QBI_UoManchester_UK,Michael Berks,"University of Manchester, UK",read_AIF,https://doi.org/10.21105/joss.03523,tbd,
 DCE,Input Functions,Parker AIF,,MB_QBI_UoManchester_UK,Michael Berks,"University of Manchester, UK",compute_population_AIF,https://doi.org/10.21105/joss.03523,JK/PvH,completed
