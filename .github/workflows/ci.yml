@@ -9,7 +9,7 @@ on:
 
 jobs:
 
-  convert csv to md:
+  convert_csv_to_md:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
