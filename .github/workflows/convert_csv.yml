@@ -1,36 +1,37 @@
 # This workflow will install Python dependencies, run tests and lint with a variety of Python versions 
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
 
-name: ci
+name: convert_csv
 
 on:
   - push
-  - pull_request
 
 jobs:
 
-  build:
-
+  convert_csv_to_md:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [ubuntu-latest]
         python-version: [3.8]
 
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v1
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        pip install wheel flake8 pytest codecov
-        pip install ".[test]"
-    - name: Test with pytest
+        pip install wheel pandas
+        pip install wheel tabulate
+    - name: Run script to convert table
       run: |
-        coverage run -m pytest
-    - name: Upload coverage to codecov
+        python doc/convert_to_md.py
+    - name: Commit md file
       run: |
-        codecov
+        git add doc/code_contributions_record.md
+        git config --global user.name 'OSIPI'
+        git config --global user.email 'OSIPI@users.noreply.github.com'
+        git diff --exit-code || git commit -am "commit code_contributions_record.md"
+        git push
