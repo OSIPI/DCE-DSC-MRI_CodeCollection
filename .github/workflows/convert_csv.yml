@@ -28,10 +28,13 @@ jobs:
     - name: Run script to convert table
       run: |
         python doc/convert_to_md.py
-    - name: Commit md file
-      run: |
-        git add doc/code_contributions_record.md
-        git config --global user.name 'OSIPI'
-        git config --global user.email 'OSIPI@users.noreply.github.com'
-        git diff --exit-code || git commit -am "commit doc/code_contributions_record.md"
-        git push
+#     - name: Commit md file
+#       run: |
+#         git add doc/code_contributions_record.md
+#         git config --global user.name 'OSIPI'
+#         git config --global user.email 'OSIPI@users.noreply.github.com'
+#         git diff --exit-code || git commit -am "commit doc/code_contributions_record.md"
+#         git push
+    - uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: commit doc/code_contributions_record.md
