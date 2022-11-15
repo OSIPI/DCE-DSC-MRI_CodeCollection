@@ -33,5 +33,5 @@ jobs:
         git add doc/code_contributions_record.md
         git config --global user.name 'OSIPI'
         git config --global user.email 'OSIPI@users.noreply.github.com'
-        git diff --exit-code || git commit -am "commit code_contributions_record.md"
+        git diff --exit-code || git commit -am "doc/commit code_contributions_record.md"
         git push
