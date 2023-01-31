@@ -4,7 +4,7 @@
 format: jb-article
 root: intro.md
 sections:
-- file: contributors.ipynb
+- file: contributors.md
 - file: DCE.md
   sections:
     - file: T1mapping.md

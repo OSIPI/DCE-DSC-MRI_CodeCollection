@@ -7,5 +7,6 @@ mat73
 scipy
 lmfit
 pandas
+tabulate
 nilearn
 seaborn
