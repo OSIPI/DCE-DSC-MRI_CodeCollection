@@ -4,7 +4,7 @@
 format: jb-article
 root: intro.md
 sections:
-- file: contributors.md
+- file: overview_of_code_collection.md
 - file: DCE.md
   sections:
     - file: T1mapping.md
