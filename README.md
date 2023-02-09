@@ -15,7 +15,7 @@ A summary of the repository structure is shown below. More detailed information 
 ```
 OSIPI/DCE-DSC-MRI_CodeCollection
 ├── doc
-│    └── code_contributions_record.md  # Overview of code contributions
+│    └── code_contributions_record.csv  # Overview of code contributions
 ├── src
 │   └── original                       # Original contributed code organized per contribution
 │       └── DS_BW_VanderBiltUMC_USA
@@ -36,7 +36,7 @@ OSIPI/DCE-DSC-MRI_CodeCollection
 Wiki                                   # Information and guidelines 
 ```
 
-Click [here](doc/code_contributions_record.md) for 
+Click [here](https://osipi.org/DCE-DSC-MRI_TestResults/overview_of_code_collection.html) for 
 database of code available with links to code. 
 
 The results of the validated code are published on the [test-results website](http://osipi.org/DCE-DSC-MRI_TestResults), which is hosted via a separate [repository](https://github.com/OSIPI/DCE-DSC-MRI_TestResults).
