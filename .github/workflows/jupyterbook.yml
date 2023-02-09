@@ -27,17 +27,17 @@ jobs:
         pip install wheel pytest
         pip install -r notebooks/requirements.txt
         pip install .
-
     - name: Test with pytest
       run: |
         pytest .
-
     # Build the book
+    - name: Convert contributors csv to md
+      run: |
+        python doc/convert_to_md.py
     - name: Build the book
       run: |
         jupyter-book build notebooks/
         touch notebooks/_build/html/.nojekyll
-
     - name: Re-organize files
       run: |
         mkdir out

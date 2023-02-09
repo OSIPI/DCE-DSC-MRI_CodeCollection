@@ -1,5 +1,7 @@
 import pandas as pd
 
 df = pd.read_csv('doc/code_contributions_record.csv')
-with open('doc/code_contributions_record.md', 'w') as md:
-    df.to_markdown(buf=md, index=False)
+md = df.to_markdown(index=False).replace("(../", "(https://github.com/OSIPI/DCE-DSC-MRI_CodeCollection/tree/develop/")
+with open('notebooks/overview_of_code_collection.md', 'w') as f:
+    f.write("# Overview of code collection\n\n")
+    f.write(md)
