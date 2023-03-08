@@ -11,8 +11,8 @@ note: this could probably be merged with the nb.py function?
 # import statements
 import numpy
 from matplotlib import pyplot as plt
+from matplotlib.ticker import AutoMinorLocator
 import seaborn as sns
-
 
 
 def plot_bland_altman(ax, data, tolerances, tag, log_plot=False, xlim=None, ylim=None, label_xaxis=None, label_yaxis=None,
@@ -97,3 +97,19 @@ def bland_altman_statistics(data, par, grouptag):
     resultsBA['LoA upper'] = resultsBA['bias'] + 1.96 * resultsBA['stdev']
 
     return resultsBA
+
+def make_catplot(x, y, data, ylabel, **plotopts):
+    g = sns.catplot(x=x, y=y, data=data, **plotopts)
+    g.set_titles(col_template = "{col_name}")
+    g.set(xlabel=None)
+    g.set_ylabels(ylabel, clear_inner=False);
+    g.set_xticklabels(rotation=45, fontsize=16, ha='right', rotation_mode='anchor')
+    g._legend.set_title('ContributionID')
+    # Add vertical add midpoints between each major tick
+    for ax in g.axes.flatten():
+        ax.xaxis.set_minor_locator(AutoMinorLocator(2))
+        ax.grid(which="minor", axis='x', linestyle=":")
+        # Hide the minor ticks (distracting) by making it white
+        ax.tick_params(axis='x', which='minor', colors='white')
+    plt.show() # Could also do `return g` for more flexibility
+    

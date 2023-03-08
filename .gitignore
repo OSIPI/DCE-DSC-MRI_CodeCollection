@@ -155,6 +155,7 @@ notebooks/_build
 
 # test results (these are commited to separate repository)
 /results
+test/results
 
 # Pycharm
 .idea
