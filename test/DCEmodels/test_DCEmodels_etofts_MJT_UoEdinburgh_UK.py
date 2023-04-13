@@ -3,7 +3,7 @@ import os
 from time import perf_counter
 from ..helpers import osipi_parametrize, log_init, log_results
 from . import DCEmodels_data
-from src.original.MJT_UoEdinburgh_UK import dce_fit, pk_models, aifs
+from osipi.original.MJT_UoEdinburgh_UK import dce_fit, pk_models, aifs
 
 # All tests will use the same arguments and same data...
 arg_names = (

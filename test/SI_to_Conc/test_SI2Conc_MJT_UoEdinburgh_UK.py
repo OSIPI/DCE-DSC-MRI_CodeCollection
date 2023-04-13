@@ -3,10 +3,10 @@ import numpy as np
 from time import perf_counter
 from ..helpers import osipi_parametrize, log_init, log_results
 from . import SI2Conc_data
-from src.original.MJT_UoEdinburgh_UK.signal_models import SPGR
-from src.original.MJT_UoEdinburgh_UK.relaxivity import CRLinear
-from src.original.MJT_UoEdinburgh_UK.dce_fit import SigToEnh
-from src.original.MJT_UoEdinburgh_UK.dce_fit import EnhToConc, EnhToConcSPGR
+from osipi.original.MJT_UoEdinburgh_UK.signal_models import SPGR
+from osipi.original.MJT_UoEdinburgh_UK.relaxivity import CRLinear
+from osipi.original.MJT_UoEdinburgh_UK.dce_fit import SigToEnh
+from osipi.original.MJT_UoEdinburgh_UK.dce_fit import EnhToConc, EnhToConcSPGR
 
 
 # All tests will use the same arguments and same data...

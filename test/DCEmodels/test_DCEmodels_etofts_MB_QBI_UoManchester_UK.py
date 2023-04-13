@@ -3,7 +3,7 @@ import numpy as np
 from time import perf_counter
 from ..helpers import osipi_parametrize, log_init, log_results
 from . import DCEmodels_data
-from src.original.MB_QBI_UoManchester_UK.QbiPy.dce_models import tofts_model, dce_aif
+from osipi.original.MB_QBI_UoManchester_UK.QbiPy.dce_models import tofts_model, dce_aif
 
 # All tests will use the same arguments and same data...
 arg_names = (

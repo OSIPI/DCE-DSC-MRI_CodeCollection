@@ -3,7 +3,7 @@ import pytest
 import numpy as np
 from time import perf_counter
 from ..helpers import osipi_parametrize, log_init, log_results
-from src.original.PvH_NKI_NL.AIF.PopulationAIF import GeorgiouAIF
+from osipi.original.PvH_NKI_NL.AIF.PopulationAIF import GeorgiouAIF
 from . import popAIF_data
 
 

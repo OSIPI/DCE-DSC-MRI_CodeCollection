@@ -4,7 +4,7 @@ from scipy.optimize import curve_fit
 from time import perf_counter
 from ..helpers import osipi_parametrize, log_init, log_results
 from . import DCEmodels_data
-from src.original.LEK_UoEdinburgh_UK.PharmacokineticModelling.models import Patlak
+from osipi.original.LEK_UoEdinburgh_UK.PharmacokineticModelling.models import Patlak
 
 arg_names = (
     "label, t_array, C_t_array, cp_aif_array, vp_ref, ps_ref, "

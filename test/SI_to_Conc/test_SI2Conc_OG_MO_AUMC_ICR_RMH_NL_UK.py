@@ -4,8 +4,8 @@ import numpy as np
 from time import perf_counter
 from ..helpers import osipi_parametrize, log_init, log_results
 from . import SI2Conc_data
-from src.original.OG_MO_AUMC_ICR_RMH_NL_UK.ExtendedTofts.DCE import dce_to_r1eff
-from src.original.OG_MO_AUMC_ICR_RMH_NL_UK.ExtendedTofts.DCE import r1eff_to_conc
+from osipi.original.OG_MO_AUMC_ICR_RMH_NL_UK.ExtendedTofts.DCE import dce_to_r1eff
+from osipi.original.OG_MO_AUMC_ICR_RMH_NL_UK.ExtendedTofts.DCE import r1eff_to_conc
 
 
 # All tests will use the same arguments and same data...

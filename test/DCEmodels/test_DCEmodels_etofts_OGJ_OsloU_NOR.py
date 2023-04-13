@@ -3,7 +3,7 @@ import numpy as np
 from time import perf_counter
 from ..helpers import osipi_parametrize, log_init, log_results
 from . import DCEmodels_data
-from src.original.OGJ_OsloU_NOR.MRImageAnalysis.DCE.Analyze import fitToModel
+from osipi.original.OGJ_OsloU_NOR.MRImageAnalysis.DCE.Analyze import fitToModel
 
 # All tests will use the same arguments and same data...
 arg_names = (

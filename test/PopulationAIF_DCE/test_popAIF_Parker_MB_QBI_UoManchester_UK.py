@@ -3,7 +3,7 @@ import pytest
 import numpy as np
 from time import perf_counter
 from ..helpers import osipi_parametrize, log_init, log_results
-import src.original.MB_QBI_UoManchester_UK.QbiPy.dce_models.dce_aif as dce_aif
+import osipi.original.MB_QBI_UoManchester_UK.QbiPy.dce_models.dce_aif as dce_aif
 from . import popAIF_data
 
 

@@ -4,7 +4,7 @@ import numpy as np
 from time import perf_counter
 from ..helpers import osipi_parametrize, log_init, log_results
 from . import t1_data
-from src.original.ZA_McGill_CAN.vfa import despot, novifast
+from osipi.original.ZA_McGill_CAN.vfa import despot, novifast
 
 
 # All tests will use the same arguments and same data...

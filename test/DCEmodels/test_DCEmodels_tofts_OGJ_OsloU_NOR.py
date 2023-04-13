@@ -3,14 +3,13 @@ import numpy as np
 from time import perf_counter
 from ..helpers import osipi_parametrize, log_init, log_results
 from . import DCEmodels_data
-from src.original.OGJ_OsloU_NOR.MRImageAnalysis.DCE.Analyze import fitToModel
+from osipi.original.OGJ_OsloU_NOR.MRImageAnalysis.DCE.Analyze import fitToModel
 
 # All tests will use the same arguments and same data...
 arg_names = (
     "label, t_array, C_array, ca_array, ta_array, ve_ref, Ktrans_ref, arterial_delay_ref,  a_tol_ve, "
     "r_tol_ve, a_tol_Ktrans,r_tol_Ktrans,a_tol_delay,r_tol_delay "
 )
-test_data = DCEmodels_data.dce_DRO_data_tofts()
 
 filename_prefix = ""
 
@@ -32,10 +31,13 @@ def setup_module(module):
     )
 
 
+test_data = DCEmodels_data.dce_DRO_data_tofts()
+
+
 # Use the test data to generate a parametrize decorator. This causes the following test to be run for every test case
 # listed in test_data...
 @osipi_parametrize(arg_names, test_data, xf_labels=[])
-def test_OGJ_OsloU_NOR_tofts_model_llsq(
+def test_OGJ_OsloU_NOR_tofts_llsq_model(
     label,
     t_array,
     C_array,
@@ -87,7 +89,7 @@ def test_OGJ_OsloU_NOR_tofts_model_llsq(
 
 
 @osipi_parametrize(arg_names, test_data, xf_labels=[])
-def test_OGJ_OsloU_NOR_tofts_model_nlls(
+def test_OGJ_OsloU_NOR_tofts_nlls_model(
     label,
     t_array,
     C_array,

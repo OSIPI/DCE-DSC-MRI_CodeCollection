@@ -3,10 +3,10 @@ import numpy as np
 from time import perf_counter
 from ..helpers import osipi_parametrize, log_init, log_results
 from . import DSCmodels_data
-from src.original.SR_TBG_BNIPhoenix_USA.AIFDeconvolution.AIF_deconvolution import (
+from osipi.original.SR_TBG_BNIPhoenix_USA.AIFDeconvolution.AIF_deconvolution import (
     AIFdeconvolution,
 )
-from src.original.SR_TBG_BNIPhoenix_USA.DSCparameters.DSC_parameters import (
+from osipi.original.SR_TBG_BNIPhoenix_USA.DSCparameters.DSC_parameters import (
     DSCparameters,
 )
 

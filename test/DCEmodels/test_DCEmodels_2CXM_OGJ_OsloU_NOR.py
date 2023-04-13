@@ -3,7 +3,7 @@ import numpy as np
 from time import perf_counter
 from ..helpers import osipi_parametrize, log_init, log_results
 from . import DCEmodels_data
-from src.original.OGJ_OsloU_NOR.MRImageAnalysis.DCE.Analyze import fitToModel
+from osipi.original.OGJ_OsloU_NOR.MRImageAnalysis.DCE.Analyze import fitToModel
 
 arg_names = (
     "label, t_array, C_t_array, cp_aif_array, vp_ref, ve_ref, fp_ref,"

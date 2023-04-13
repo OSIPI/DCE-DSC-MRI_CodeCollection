@@ -1,7 +1,7 @@
-import osipi_code_collection.original.MJT_UoEdinburgh_UK.t1_fit as edinburgh
-import osipi_code_collection.original.ST_USydAUS.VFAT1mapping as sydney
-import osipi_code_collection.original.McGill_CAN.vfa as mcgill
-from osipi_code_collection.utils.nb import percenterror
+import osipi.original.MJT_UoEdinburgh_UK.t1_fit as edinburgh
+import osipi.original.ST_USydAUS.VFAT1mapping as sydney
+import osipi.original.McGill_CAN.vfa as mcgill
+from osipi.utils.nb import percenterror
 import matplotlib.pyplot as plt
 import numpy as np
 
