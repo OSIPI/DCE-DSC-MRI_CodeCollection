@@ -1,1 +1,1 @@
-This folder will contain all the test files for T1 mapping. 
+This folder will contain all the test files for T1 mapping.

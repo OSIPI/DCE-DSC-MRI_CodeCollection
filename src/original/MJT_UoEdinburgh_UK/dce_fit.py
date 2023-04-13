@@ -44,9 +44,8 @@ class SigToEnh(Fitter):
         self.base_idx = base_idx
 
     def output_info(self):
-        """Get output info. Overrides superclass method.
-        """
-        return ('enh', True),
+        """Get output info. Overrides superclass method."""
+        return (("enh", True),)
 
     def proc(self, s):
         """Calculate enhancement time series. Overrides superclass method.
@@ -59,12 +58,13 @@ class SigToEnh(Fitter):
         """
         if any(np.isnan(s)):
             raise ValueError(
-                f'Unable to calculate enhancements: nan arguments received.')
+                f"Unable to calculate enhancements: nan arguments received."
+            )
         s_pre = np.mean(s[self.base_idx])
         if s_pre <= 0:
-            raise ArithmeticError('Baseline signal is zero or negative.')
+            raise ArithmeticError("Baseline signal is zero or negative.")
         enh = np.empty(s.shape, dtype=np.float64)
-        enh[:] = 100. * ((s - s_pre) / s_pre) if s_pre > 0 else np.nan
+        enh[:] = 100.0 * ((s - s_pre) / s_pre) if s_pre > 0 else np.nan
         return enh
 
 
@@ -76,8 +76,9 @@ class EnhToConc(Fitter):
     enhancement values. It assumes the fast water exchange limit.
     """
 
-    def __init__(self, c_to_r_model, signal_model, C_min=-0.5, C_max=30,
-                 n_samples=1000):
+    def __init__(
+        self, c_to_r_model, signal_model, C_min=-0.5, C_max=30, n_samples=1000
+    ):
         """
 
         Args:
@@ -96,9 +97,8 @@ class EnhToConc(Fitter):
         self.C_samples = np.linspace(C_min, C_max, n_samples)
 
     def output_info(self):
-        """Get output info. Overrides superclass method.
-        """
-        return ('C_t', True),
+        """Get output info. Overrides superclass method."""
+        return (("C_t", True),)
 
     def proc(self, enh, t10, k_fa=1):
         """Calculate concentration time series. Overrides superclass method.
@@ -114,20 +114,25 @@ class EnhToConc(Fitter):
         """
         if any(np.isnan(enh)) or np.isnan(t10) or np.isnan(k_fa):
             raise ValueError(
-                f'Unable to calculate concentration: nan arguments received.')
-        e_samples = conc_to_enh(self.C_samples, t10, k_fa, self.c_to_r_model,
-                                self.signal_model)
-        C_st = self.C_samples[np.concatenate((argrelextrema(e_samples,
-                                                            np.greater)[0],
-                                              argrelextrema(e_samples, np.less)[
-                                                  0]))]
+                f"Unable to calculate concentration: nan arguments received."
+            )
+        e_samples = conc_to_enh(
+            self.C_samples, t10, k_fa, self.c_to_r_model, self.signal_model
+        )
+        C_st = self.C_samples[
+            np.concatenate(
+                (
+                    argrelextrema(e_samples, np.greater)[0],
+                    argrelextrema(e_samples, np.less)[0],
+                )
+            )
+        ]
         C_lb = self.C_min if C_st[C_st <= 0].size == 0 else max(C_st[C_st <= 0])
         C_ub = self.C_max if C_st[C_st > 0].size == 0 else min(C_st[C_st > 0])
         points_allowed = (C_lb <= self.C_samples) & (self.C_samples <= C_ub)
         C_allowed = self.C_samples[points_allowed]
         e_allowed = e_samples[points_allowed]
-        C_func = interp1d(e_allowed, C_allowed, kind='quadratic',
-                          bounds_error=True)
+        C_func = interp1d(e_allowed, C_allowed, kind="quadratic", bounds_error=True)
         return C_func(enh)
 
 
@@ -148,13 +153,12 @@ class EnhToConcSPGR(Fitter):
             r1 (float): R1 relaxivity (s^-1 mM^-1)
         """
         self.tr = tr
-        self.fa = fa * np.pi/180
+        self.fa = fa * np.pi / 180
         self.r1 = r1
 
     def output_info(self):
-        """Get output info. Overrides superclass method.
-        """
-        return ('C_t', True),
+        """Get output info. Overrides superclass method."""
+        return (("C_t", True),)
 
     def proc(self, enh, t10, k_fa=1):
         """Calculate concentration time series. Overrides superclass method.
@@ -170,13 +174,19 @@ class EnhToConcSPGR(Fitter):
         """
         if any(np.isnan(enh)) or np.isnan(t10) or np.isnan(k_fa):
             raise ValueError(
-                f'Unable to calculate concentration: nan arguments received.')
+                f"Unable to calculate concentration: nan arguments received."
+            )
         cos_fa_true = np.cos(k_fa * self.fa)
-        exp_r10_tr = np.exp(self.tr/t10)
-        C_t = -np.log((exp_r10_tr * (enh-100*cos_fa_true-enh*exp_r10_tr+100)) /
-                      (100 * exp_r10_tr + enh * cos_fa_true - 100 * exp_r10_tr *
-                       cos_fa_true - enh * exp_r10_tr * cos_fa_true)
-                      ) / (self.tr * self.r1)
+        exp_r10_tr = np.exp(self.tr / t10)
+        C_t = -np.log(
+            (exp_r10_tr * (enh - 100 * cos_fa_true - enh * exp_r10_tr + 100))
+            / (
+                100 * exp_r10_tr
+                + enh * cos_fa_true
+                - 100 * exp_r10_tr * cos_fa_true
+                - enh * exp_r10_tr * cos_fa_true
+            )
+        ) / (self.tr * self.r1)
         return C_t
 
 
@@ -185,6 +195,7 @@ class ConcToPKP(Fitter):
 
     Subclass of Fitter.
     """
+
     def __init__(self, pk_model, pk_pars_0=None, weights=None):
         """
         Args:
@@ -214,11 +225,11 @@ class ConcToPKP(Fitter):
         self.x_0_all = [pk_model.pkp_array(pars) for pars in self.pk_pars_0]
 
     def output_info(self):
-        """Get output info. Overrides superclass method.
-        """
+        """Get output info. Overrides superclass method."""
         # outputs are pharmacokinetic parameters + fitted concentration
-        return tuple([(name, False) for name in
-                      self.pk_model.parameter_names]) + (('Ct_fit', True),)
+        return tuple([(name, False) for name in self.pk_model.parameter_names]) + (
+            ("Ct_fit", True),
+        )
 
     def proc(self, C_t):
         """Fit tissue concentration time series. Overrides superclass method.
@@ -234,15 +245,19 @@ class ConcToPKP(Fitter):
             Ct_fit (ndarray): best-fit tissue concentration (mM).
         """
         if any(np.isnan(C_t)):
-            raise ValueError(f'Unable to fit model: nan arguments received.')
-        result = least_squares_global(self.__residuals, self.x_0_all,
-                                      args=(C_t,), method='trf',
-                                      bounds=self.pk_model.bounds,
-                                      x_scale=self.pk_model.typical_vals)
+            raise ValueError(f"Unable to fit model: nan arguments received.")
+        result = least_squares_global(
+            self.__residuals,
+            self.x_0_all,
+            args=(C_t,),
+            method="trf",
+            bounds=self.pk_model.bounds,
+            x_scale=self.pk_model.typical_vals,
+        )
         if result.success is False:
             raise ArithmeticError(
-                f'Unable to calculate pharmacokinetic parameters'
-                f': {result.message}')
+                f"Unable to calculate pharmacokinetic parameters" f": {result.message}"
+            )
         pk_pars_opt = self.pk_model.pkp_dict(result.x)
         check_ve_vp_sum(pk_pars_opt)
         Ct_fit, _C_cp, _C_e = self.pk_model.conc(*result.x)
@@ -268,8 +283,18 @@ class EnhToPKP(Fitter):
         SignalModel estimates MRI signal
     R2 and R2* effects neglected.
     """
-    def __init__(self, hct, pk_model, t10_blood, c_to_r_model, water_ex_model,
-                 signal_model, pk_pars_0=None, weights=None):
+
+    def __init__(
+        self,
+        hct,
+        pk_model,
+        t10_blood,
+        c_to_r_model,
+        water_ex_model,
+        signal_model,
+        pk_pars_0=None,
+        weights=None,
+    ):
         """
         Args:
             hct (float): Capillary haematocrit
@@ -314,53 +339,72 @@ class EnhToPKP(Fitter):
         self.x_0_all = [pk_model.pkp_array(pars) for pars in self.pk_pars_0]
 
     def output_info(self):
-        """Get output info. Overrides superclass method.
-        """
+        """Get output info. Overrides superclass method."""
         # outputs are pharmacokinetic parameters + fitted enhancement
-        return tuple([(name, False) for name in
-                      self.pk_model.parameter_names]) + (('enh_fit', True),)
+        return tuple([(name, False) for name in self.pk_model.parameter_names]) + (
+            ("enh_fit", True),
+        )
 
     def proc(self, enh, k_fa, t10_tissue):
         """Fit enhancement time series. Overrides superclass method.
 
-    Args:
-        enh (ndarray): 1D float array of enhancement time series (%)
-        k_fa (float): B1 correction factor (actual/nominal flip angle)
-        t10_tissue(float): Pre-contrast T1 relaxation rate for tissue (s)
+        Args:
+            enh (ndarray): 1D float array of enhancement time series (%)
+            k_fa (float): B1 correction factor (actual/nominal flip angle)
+            t10_tissue(float): Pre-contrast T1 relaxation rate for tissue (s)
 
-    Returns
-    -------
-    tuple (pk_pars_opt, Ct_fit)
-        pk_pars_opt : dict of optimal pharmacokinetic parameters,
-            Example: {'vp': 0.1, 'ps': 1e-3, 've': 0.5}
-        enh_fit : 1D ndarray of floats containing best-fit tissue
-            enhancement-time series (%).
+        Returns
+        -------
+        tuple (pk_pars_opt, Ct_fit)
+            pk_pars_opt : dict of optimal pharmacokinetic parameters,
+                Example: {'vp': 0.1, 'ps': 1e-3, 've': 0.5}
+            enh_fit : 1D ndarray of floats containing best-fit tissue
+                enhancement-time series (%).
 
-    """
+        """
         if any(np.isnan(enh)) or np.isnan(t10_tissue) or np.isnan(k_fa):
-            raise ValueError(f'Unable to fit model: nan arguments received.')
-        result = least_squares_global(self.__residuals, self.x_0_all,
-                                      args=(k_fa, t10_tissue, enh),
-                                      method='trf',
-                                      bounds=self.pk_model.bounds,
-                                      x_scale=self.pk_model.typical_vals)
+            raise ValueError(f"Unable to fit model: nan arguments received.")
+        result = least_squares_global(
+            self.__residuals,
+            self.x_0_all,
+            args=(k_fa, t10_tissue, enh),
+            method="trf",
+            bounds=self.pk_model.bounds,
+            x_scale=self.pk_model.typical_vals,
+        )
         if result.success is False:
             raise ArithmeticError(
-                f'Unable to calculate pharmacokinetic parameters'
-                f': {result.message}')
+                f"Unable to calculate pharmacokinetic parameters" f": {result.message}"
+            )
         pk_pars_opt = self.pk_model.pkp_dict(result.x)
         check_ve_vp_sum(pk_pars_opt)
-        enh_fit = pkp_to_enh(pk_pars_opt, self.hct, k_fa, t10_tissue,
-                             self.t10_blood, self.pk_model, self.c_to_r_model,
-                             self.water_ex_model, self.signal_model)
+        enh_fit = pkp_to_enh(
+            pk_pars_opt,
+            self.hct,
+            k_fa,
+            t10_tissue,
+            self.t10_blood,
+            self.pk_model,
+            self.c_to_r_model,
+            self.water_ex_model,
+            self.signal_model,
+        )
         enh_fit[self.weights == 0] = np.nan
         return tuple(result.x) + (enh_fit,)
 
     def __residuals(self, x, k_fa, t10_tissue, enh):
         pk_pars_try = self.pk_model.pkp_dict(x)
-        enh_try = pkp_to_enh(pk_pars_try, self.hct, k_fa, t10_tissue,
-                             self.t10_blood, self.pk_model, self.c_to_r_model,
-                             self.water_ex_model, self.signal_model)
+        enh_try = pkp_to_enh(
+            pk_pars_try,
+            self.hct,
+            k_fa,
+            t10_tissue,
+            self.t10_blood,
+            self.pk_model,
+            self.c_to_r_model,
+            self.water_ex_model,
+            self.signal_model,
+        )
         return self.weights * (enh_try - enh)
 
 
@@ -371,6 +415,7 @@ class PatlakLinear(Fitter):
     Uses multiple linear regression fitting. This is faster than non-linear
     fitting but more reliable than the traditional "graphical Patlak" method.
     """
+
     def __init__(self, t, aif, upsample_factor=1, include=None):
         """
         Args:
@@ -398,16 +443,13 @@ class PatlakLinear(Fitter):
         # concentration when vp=1 and ps=1, i.e. the AIF and its integral.
         _, reg_vp, reg_ps = Patlak(t, aif, upsample_factor).conc(vp=1, ps=1)
         # combine regressors into a matrix
-        self.regs = np.stack([reg_vp, reg_ps],
-                             axis=1)
-        self.regs_incl = np.stack([reg_vp[self.include], reg_ps[self.include]],
-                             axis=1)
+        self.regs = np.stack([reg_vp, reg_ps], axis=1)
+        self.regs_incl = np.stack([reg_vp[self.include], reg_ps[self.include]], axis=1)
 
     def output_info(self):
-        """Get output info. Overrides superclass method.
-        """
+        """Get output info. Overrides superclass method."""
         # outputs are pharmacokinetic parameters + fitted concentration
-        return ('vp', False), ('ps', False), ('Ct_fit', True)
+        return ("vp", False), ("ps", False), ("Ct_fit", True)
 
     def proc(self, C_t):
         """Fit tissue concentration time series. Overrides superclass method.
@@ -424,15 +466,13 @@ class PatlakLinear(Fitter):
                     concentrations (mM)
         """
         if any(np.isnan(C_t[self.include])):
-            raise ValueError(f'Unable to fit model: nan arguments received.')
+            raise ValueError(f"Unable to fit model: nan arguments received.")
 
         # do ML regression
         try:
-            coeffs = np.linalg.lstsq(
-                self.regs_incl, C_t[self.include], rcond=None)[0]
+            coeffs = np.linalg.lstsq(self.regs_incl, C_t[self.include], rcond=None)[0]
         except LinAlgError:
-            raise ArithmeticError(
-                f'Unable to calculate pharmacokinetic parameters')
+            raise ArithmeticError(f"Unable to calculate pharmacokinetic parameters")
         vp, ps = coeffs
         Ct_fit = self.regs @ coeffs
         Ct_fit[~self.include] = np.nan
@@ -470,14 +510,23 @@ def conc_to_enh(C_t, t10, k, c_to_r_model, signal_model):
     R10 = 1 / t10
     R1 = c_to_r_model.R1(R10, C_t)
     R2 = c_to_r_model.R2(0, C_t)  # can assume R20=0 for existing signal models
-    s_pre = signal_model.R_to_s(s0=1., R1=R10, R2=0, R2s=0, k_fa=k)
-    s_post = signal_model.R_to_s(s0=1., R1=R1, R2=R2, R2s=R2, k_fa=k)
-    enh = 100. * ((s_post - s_pre) / s_pre)
+    s_pre = signal_model.R_to_s(s0=1.0, R1=R10, R2=0, R2s=0, k_fa=k)
+    s_post = signal_model.R_to_s(s0=1.0, R1=R1, R2=R2, R2s=R2, k_fa=k)
+    enh = 100.0 * ((s_post - s_pre) / s_pre)
     return enh
 
 
-def pkp_to_enh(pk_pars, hct, k_fa, t10_tissue, t10_blood, pk_model,
-               c_to_r_model, water_ex_model, signal_model):
+def pkp_to_enh(
+    pk_pars,
+    hct,
+    k_fa,
+    t10_tissue,
+    t10_blood,
+    pk_model,
+    c_to_r_model,
+    water_ex_model,
+    signal_model,
+):
     """Forward model to generate enhancement from pharmacokinetic parameters.
 
     Any combination of signal, pharmacokinetic, relaxivity and water exchange
@@ -527,32 +576,46 @@ def pkp_to_enh(pk_pars, hct, k_fa, t10_tissue, t10_blood, pk_model,
     p = v
 
     # calculate pre-contrast R10 in each compartment
-    R10_blood, R10_tissue = 1/t10_blood, 1/t10_tissue
-    R10_extravasc = (R10_tissue - p['b'] * R10_blood) / (1 - p['b'])
-    R10 = {'b': R10_blood, 'e': R10_extravasc, 'i': R10_extravasc}
+    R10_blood, R10_tissue = 1 / t10_blood, 1 / t10_tissue
+    R10_extravasc = (R10_tissue - p["b"] * R10_blood) / (1 - p["b"])
+    R10 = {"b": R10_blood, "e": R10_extravasc, "i": R10_extravasc}
     # calculate R10 exponential components
     R10_components, p0_components = water_ex_model.R1_components(p, R10)
 
     # calculate Gd concentration in each tissue compartment
     C_t, C_cp, C_e = pk_model.conc(**pk_pars)
-    c = {'b': C_cp / v['b'], 'e': C_e / v['e'], 'i': np.zeros(C_e.shape), }
+    c = {
+        "b": C_cp / v["b"],
+        "e": C_e / v["e"],
+        "i": np.zeros(C_e.shape),
+    }
 
     # calculate R1 in each tissue compartment
-    R1 = {'b': c_to_r_model.R1(R10['b'], c['b']),
-          'e': c_to_r_model.R1(R10['e'], c['e']),
-          'i': c_to_r_model.R1(R10['i'], c['i'])}
+    R1 = {
+        "b": c_to_r_model.R1(R10["b"], c["b"]),
+        "e": c_to_r_model.R1(R10["e"], c["e"]),
+        "i": c_to_r_model.R1(R10["i"], c["i"]),
+    }
 
     # calculate R1 exponential components
     R1_components, p_components = water_ex_model.R1_components(p, R1)
 
     # calculate pre- and post-Gd signal, summed over relaxation components
     s_pre = np.sum(
-        [p0_c * signal_model.R_to_s(1, R10_components[i], k_fa=k_fa) for i, p0_c in
-         enumerate(p0_components)], 0)
+        [
+            p0_c * signal_model.R_to_s(1, R10_components[i], k_fa=k_fa)
+            for i, p0_c in enumerate(p0_components)
+        ],
+        0,
+    )
     s_post = np.sum(
-        [p_c * signal_model.R_to_s(1, R1_components[i], k_fa=k_fa) for i, p_c in
-         enumerate(p_components)], 0)
-    enh = 100. * (s_post - s_pre) / s_pre
+        [
+            p_c * signal_model.R_to_s(1, R1_components[i], k_fa=k_fa)
+            for i, p_c in enumerate(p_components)
+        ],
+        0,
+    )
+    enh = 100.0 * (s_post - s_pre) / s_pre
     return enh
 
 
@@ -589,20 +652,20 @@ def volume_fractions(pk_pars, hct):
 
     """
     # if vp exists, calculate vb, otherwise assume vb = 0
-    if 'vp' in pk_pars:
-        vb = pk_pars['vp'] / (1 - hct)
+    if "vp" in pk_pars:
+        vb = pk_pars["vp"] / (1 - hct)
     else:
         vb = 0
 
     # if ve exists define vi as remaining volume, otherwise assume vi = 0
-    if 've' in pk_pars:
-        ve = pk_pars['ve']
+    if "ve" in pk_pars:
+        ve = pk_pars["ve"]
         vi = 1 - vb - ve
     else:
         ve = 1 - vb
         vi = 0
 
-    v = {'b': vb, 'e': ve, 'i': vi}
+    v = {"b": vb, "e": ve, "i": vi}
     return v
 
 
@@ -619,7 +682,8 @@ def check_ve_vp_sum(pk_pars):
         ValueError: if pk_pars inculdes vp and ve, and their sum is > 1
     """
     # check vp + ve <= 1
-    if (('vp' in pk_pars) and ('ve' in pk_pars)) and (
-            pk_pars['vp'] + pk_pars['ve'] > 1):
-        v_tot = pk_pars['vp'] + pk_pars['ve']
-        raise ArithmeticError(f'vp + ve = {v_tot}!')
+    if (("vp" in pk_pars) and ("ve" in pk_pars)) and (
+        pk_pars["vp"] + pk_pars["ve"] > 1
+    ):
+        v_tot = pk_pars["vp"] + pk_pars["ve"]
+        raise ArithmeticError(f"vp + ve = {v_tot}!")

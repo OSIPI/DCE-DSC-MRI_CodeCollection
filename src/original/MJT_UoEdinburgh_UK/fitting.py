@@ -62,9 +62,19 @@ class Fitter(ABC):
         """
         pass
 
-    def proc_image(self, input_images, arg_images=None, mask=None,
-                   threshold=-np.inf, dir=".", prefix="", suffix="",
-                   filters=None, template=None, n_procs=1):
+    def proc_image(
+        self,
+        input_images,
+        arg_images=None,
+        mask=None,
+        threshold=-np.inf,
+        dir=".",
+        prefix="",
+        suffix="",
+        filters=None,
+        template=None,
+        n_procs=1,
+    ):
         """Process image voxel-by-voxel using subclass proc method.
 
         Args:
@@ -118,9 +128,14 @@ class Fitter(ABC):
             args_1d = [()] * n_voxels
         else:
             # get list of N-D arrays for each argument
-            arg_arrays, _hdrs = zip(*[
-                read_images(a) if type(a) is not float else
-                (np.tile(a, data_shape[:-1]), None) for a in arg_images])
+            arg_arrays, _hdrs = zip(
+                *[
+                    read_images(a)
+                    if type(a) is not float
+                    else (np.tile(a, data_shape[:-1]), None)
+                    for a in arg_images
+                ]
+            )
             # convert to N-D arrays to list of (list of arguments) per voxel
             args_1d = list(zip(*[a.reshape(-1) for a in arg_arrays]))
             del arg_arrays
@@ -134,31 +149,31 @@ class Fitter(ABC):
             mask_nd, _ = read_images(mask)
             mask_1d = mask_nd.reshape(-1)
             if any((mask_1d != 0) & (mask_1d != 1)):
-                raise ValueError('Mask contains elements that are not 0 or 1.')
+                raise ValueError("Mask contains elements that are not 0 or 1.")
             mask_1d = mask_1d.astype(bool)
 
         # divide data into 1+ "chunks" of voxels for parallel processing
         n_chunks = min(5 * n_procs, n_voxels)
-        chunks_start_idx = np.int32(
-            n_voxels * (np.array(range(n_chunks)) / n_chunks))
+        chunks_start_idx = np.int32(n_voxels * (np.array(range(n_chunks)) / n_chunks))
 
         # function to process a single chunk of voxels (to be called by joblib)
         def _proc_chunk(i_chunk):
             # work out voxel indices corresponding to the chunk
             start_voxel = chunks_start_idx[i_chunk]
-            stop_voxel = chunks_start_idx[i_chunk + 1] if (
-                    i_chunk != n_chunks - 1) else n_voxels
+            stop_voxel = (
+                chunks_start_idx[i_chunk + 1] if (i_chunk != n_chunks - 1) else n_voxels
+            )
             n_chunk_voxels = stop_voxel - start_voxel
             # preallocate output arrays
             chunk_output = {}
             for name, is1d in self.output_info():
                 n_values = n_points if is1d else 1
-                chunk_output[name] = np.empty((n_chunk_voxels, n_values),
-                                              dtype=np.float64)
+                chunk_output[name] = np.empty(
+                    (n_chunk_voxels, n_values), dtype=np.float64
+                )
                 chunk_output[name][:] = np.nan
             # process all voxels in the chunk
-            for i_vox_chunk, i_vox in enumerate(np.arange(start_voxel,
-                                                          stop_voxel, 1)):
+            for i_vox_chunk, i_vox in enumerate(np.arange(start_voxel, stop_voxel, 1)):
                 voxel_data = data_2d[i_vox, :]
                 if max(voxel_data) >= threshold and mask_1d[i_vox]:
                     try:
@@ -173,27 +188,29 @@ class Fitter(ABC):
 
         # run the processing using joblib
         chunk_outputs = Parallel(n_jobs=n_procs)(
-            delayed(_proc_chunk)(i_chunk) for i_chunk in range(n_chunks))
+            delayed(_proc_chunk)(i_chunk) for i_chunk in range(n_chunks)
+        )
         del data, data_2d, args_1d, mask_1d
 
         # Combine chunks into single output dict
-        outputs = {name: np.concatenate(
-            [co[name] for co in chunk_outputs], axis=0
-        )
-            for name, is1d_ in self.output_info()}
+        outputs = {
+            name: np.concatenate([co[name] for co in chunk_outputs], axis=0)
+            for name, is1d_ in self.output_info()
+        }
         del chunk_outputs
 
         # filter outputs
         if filters is not None:
             for name, limits in filters.items():
                 outputs[name][
-                    ~((limits[0] <= outputs[name]) &
-                      (outputs[name] <= limits[1]))] = np.nan
+                    ~((limits[0] <= outputs[name]) & (outputs[name] <= limits[1]))
+                ] = np.nan
 
         # reshape output arrays to match image shape
         for name, values in outputs.items():
-            outputs[name] = np.squeeze(outputs[name].reshape(
-                (*data_shape[:-1], values.shape[-1])))
+            outputs[name] = np.squeeze(
+                outputs[name].reshape((*data_shape[:-1], values.shape[-1]))
+            )
 
         # write outputs as images if required
         if dir is not None:
@@ -204,14 +221,18 @@ class Fitter(ABC):
             elif input_header is not None:
                 hdr = input_header
             else:
-                raise ValueError("Need input nifti files or template nifti "
-                                 "file to write output images.")
+                raise ValueError(
+                    "Need input nifti files or template nifti "
+                    "file to write output images."
+                )
             hdr.set_data_dtype(np.float32)
             for name, values in outputs.items():
-                write_image(outputs[name],
-                            os.path.join(dir, f"{prefix}{name}{suffix}.nii"),
-                            hdr)
+                write_image(
+                    outputs[name], os.path.join(dir, f"{prefix}{name}{suffix}.nii"), hdr
+                )
 
-        return outputs[names[0]] if len(names) == 1 else tuple(outputs[name]
-                                                               for name in
-                                                               names)
+        return (
+            outputs[names[0]]
+            if len(names) == 1
+            else tuple(outputs[name] for name in names)
+        )

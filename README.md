@@ -33,11 +33,11 @@ OSIPI/DCE-DSC-MRI_CodeCollection
 ├── README.md
 ├── setup.py
 
-Wiki                                   # Information and guidelines 
+Wiki                                   # Information and guidelines
 ```
 
-Click [here](https://osipi.org/DCE-DSC-MRI_TestResults/overview_of_code_collection.html) for 
-database of code available with links to code. 
+Click [here](https://osipi.org/DCE-DSC-MRI_TestResults/overview_of_code_collection.html) for
+database of code available with links to code.
 
 The results of the validated code are published on the [test-results website](http://osipi.org/DCE-DSC-MRI_TestResults), which is hosted via a separate [repository](https://github.com/OSIPI/DCE-DSC-MRI_TestResults).
 

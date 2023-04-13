@@ -44,16 +44,17 @@ def estimate_delta_R1(s, basepts_range, t10, tr, fa):
     """
     fa_rad = np.deg2rad(fa)
     R10 = 1 / t10
-    s_base = np.mean(s[basepts_range[0]:basepts_range[1]+1])
-    s0 = (((np.exp(-R10*tr)*np.cos(fa_rad)*s_base) - s_base)/np.sin(fa_rad)) / (
-        np.exp(-R10*tr) - 1.)
-    sin_fa_s0 = np.sin(fa_rad)*s0
+    s_base = np.mean(s[basepts_range[0] : basepts_range[1] + 1])
+    s0 = (((np.exp(-R10 * tr) * np.cos(fa_rad) * s_base) - s_base) / np.sin(fa_rad)) / (
+        np.exp(-R10 * tr) - 1.0
+    )
+    sin_fa_s0 = np.sin(fa_rad) * s0
     a = sin_fa_s0 - s
-    b = sin_fa_s0 - np.cos(fa_rad)*s
-    c = sin_fa_s0 - np.cos(fa_rad)*s_base
+    b = sin_fa_s0 - np.cos(fa_rad) * s
+    c = sin_fa_s0 - np.cos(fa_rad) * s_base
     d = sin_fa_s0 - s_base
 
-    dR1 = -1/tr * np.log((a / b) * (c / d))
+    dR1 = -1 / tr * np.log((a / b) * (c / d))
     return s0, dR1
 
 
@@ -108,10 +109,10 @@ def tofts_model(time, cp, ktrans, ve):
 
     """
     Ct = np.zeros_like(time)
-    ktrans_per_s = ktrans/60
+    ktrans_per_s = ktrans / 60
     for tau in range(time.size):
-        t = time[0:tau+1]
-        cp_t = cp[0:tau+1]
+        t = time[0 : tau + 1]
+        cp_t = cp[0 : tau + 1]
         cp_t_exp = cp_t * np.exp((-ktrans_per_s / ve) * (t[-1] - t))
         if tau == 0:
             Ct[tau] = ktrans_per_s * 0
@@ -120,8 +121,15 @@ def tofts_model(time, cp, ktrans, ve):
     return Ct
 
 
-def fit_tofts(time, Ct, cp, ktrans_0=120e-4, ve_0=0.2,
-              ktrans_bounds=(60e-7, 120), ve_bounds=(0.01, 1)):
+def fit_tofts(
+    time,
+    Ct,
+    cp,
+    ktrans_0=120e-4,
+    ve_0=0.2,
+    ktrans_bounds=(60e-7, 120),
+    ve_bounds=(0.01, 1),
+):
     """Fit Tofts model to concentration data.
 
     Parameters
@@ -151,11 +159,17 @@ def fit_tofts(time, Ct, cp, ktrans_0=120e-4, ve_0=0.2,
         1D array of tissue concentrations corresponding to model fit (mM).
 
     """
-    bounds = ((ktrans_bounds[0]/60, ve_bounds[0]),
-              (ktrans_bounds[1]/60, ve_bounds[1]))
+    bounds = (
+        (ktrans_bounds[0] / 60, ve_bounds[0]),
+        (ktrans_bounds[1] / 60, ve_bounds[1]),
+    )
     pval, pcov = curve_fit(
-        lambda t, ktrans_per_s, ve: tofts_model(t, cp, ktrans_per_s*60, ve),
-        time, Ct, p0=[ktrans_0/60, ve_0], bounds=bounds)
+        lambda t, ktrans_per_s, ve: tofts_model(t, cp, ktrans_per_s * 60, ve),
+        time,
+        Ct,
+        p0=[ktrans_0 / 60, ve_0],
+        bounds=bounds,
+    )
     ktrans_opt = pval[0] * 60
     ve_opt = pval[1]
     Ct_fit = tofts_model(time, cp, ktrans_opt, ve_opt)

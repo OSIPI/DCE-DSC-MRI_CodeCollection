@@ -51,9 +51,7 @@ class SignalModel(ABC):
 
 
 class SPGR(SignalModel):
-    """Signal model subclass for spoiled gradient echo pulse sequence.
-
-    """
+    """Signal model subclass for spoiled gradient echo pulse sequence."""
 
     def __init__(self, tr, fa, te):
         """
@@ -70,7 +68,12 @@ class SPGR(SignalModel):
     def R_to_s(self, s0, R1, R2=None, R2s=0, k_fa=1):
         """Get signal for this model. Overrides superclass method."""
         fa = k_fa * self.fa
-        s = s0 * (((1.0-np.exp(-self.tr*R1))*np.sin(fa)) /
-                  (1.0-np.exp(-self.tr*R1)*np.cos(fa))
-                  ) * np.exp(-self.te*R2s)
+        s = (
+            s0
+            * (
+                ((1.0 - np.exp(-self.tr * R1)) * np.sin(fa))
+                / (1.0 - np.exp(-self.tr * R1) * np.cos(fa))
+            )
+            * np.exp(-self.te * R2s)
+        )
         return s

@@ -31,13 +31,19 @@ def GeorgiouAIF_refdata():
     r_tol = 0.01
 
     # load csv file
-    filename = os.path.join(os.path.dirname(__file__), 'data', 'GeorgiouAIF_ref.csv')
+    filename = os.path.join(os.path.dirname(__file__), "data", "GeorgiouAIF_ref.csv")
     df = pd.read_csv(filename)
-    df_label = df.groupby('label')
+    df_label = df.groupby("label")
     pars = []
     # convert to list as input for pytest.mark.parametrize
     for current_label, values in df_label:
-        new_list = (current_label, values.time.to_numpy(), values.Cb.to_numpy(), a_tol, r_tol)
+        new_list = (
+            current_label,
+            values.time.to_numpy(),
+            values.Cb.to_numpy(),
+            a_tol,
+            r_tol,
+        )
         pars.append(new_list)
 
     return pars
@@ -70,13 +76,20 @@ def ParkerAIF_refdata():
     r_tol = 0.01
 
     # load csv file
-    filename = os.path.join(os.path.dirname(__file__), 'data', 'ParkerAIF_ref.csv')
+    filename = os.path.join(os.path.dirname(__file__), "data", "ParkerAIF_ref.csv")
     df = pd.read_csv(filename)
-    df_label = df.groupby('label')
+    df_label = df.groupby("label")
     pars = []
     # convert to list as input for pytest.mark.parametrize
     for current_label, values in df_label:
-        new_list = (current_label, values.time.to_numpy(), values.Cb.to_numpy(), values.delay.to_numpy()[0], a_tol, r_tol)
+        new_list = (
+            current_label,
+            values.time.to_numpy(),
+            values.Cb.to_numpy(),
+            values.delay.to_numpy()[0],
+            a_tol,
+            r_tol,
+        )
         pars.append(new_list)
 
     return pars
@@ -102,16 +115,26 @@ def ParkerAIF_refdata_delay():
     r_tol = 0.1
 
     # load csv file
-    filename = os.path.join(os.path.dirname(__file__), 'data', 'ParkerAIF_ref_with_delay.csv')
+    filename = os.path.join(
+        os.path.dirname(__file__), "data", "ParkerAIF_ref_with_delay.csv"
+    )
     df = pd.read_csv(filename)
-    df_label = df.groupby('label')
+    df_label = df.groupby("label")
     pars = []
     # convert to list as input for pytest.mark.parametrize
     for current_label, values in df_label:
-        new_list = (current_label, values.time.to_numpy(), values.Cb.to_numpy(), values.delay.to_numpy()[0], a_tol, r_tol)
+        new_list = (
+            current_label,
+            values.time.to_numpy(),
+            values.Cb.to_numpy(),
+            values.delay.to_numpy()[0],
+            a_tol,
+            r_tol,
+        )
         pars.append(new_list)
 
     return pars
+
 
 def preclinical_refdata():
     """
@@ -140,16 +163,24 @@ def preclinical_refdata():
     r_tol = 0.01
 
     # load csv file
-    filename = os.path.join(os.path.dirname(__file__), 'data', 'preclinicalAIF_ref.csv')
+    filename = os.path.join(os.path.dirname(__file__), "data", "preclinicalAIF_ref.csv")
     df = pd.read_csv(filename)
-    df_label = df.groupby('label')
+    df_label = df.groupby("label")
     pars = []
     # convert to list as input for pytest.mark.parametrize
     for current_label, values in df_label:
-        new_list = (current_label, values.time.to_numpy(), values.Cb.to_numpy(), values.delay.to_numpy()[0], a_tol, r_tol)
+        new_list = (
+            current_label,
+            values.time.to_numpy(),
+            values.Cb.to_numpy(),
+            values.delay.to_numpy()[0],
+            a_tol,
+            r_tol,
+        )
         pars.append(new_list)
 
     return pars
+
 
 def preclinical_refdata_delay():
     """
@@ -172,13 +203,22 @@ def preclinical_refdata_delay():
     r_tol = 0.01
 
     # load csv file
-    filename = os.path.join(os.path.dirname(__file__), 'data', 'preclinicalAIF_ref_delay.csv')
+    filename = os.path.join(
+        os.path.dirname(__file__), "data", "preclinicalAIF_ref_delay.csv"
+    )
     df = pd.read_csv(filename)
-    df_label = df.groupby('label')
+    df_label = df.groupby("label")
     pars = []
     # convert to list as input for pytest.mark.parametrize
     for current_label, values in df_label:
-        new_list = (current_label, values.time.to_numpy(), values.Cb.to_numpy(), values.delay.to_numpy()[0], a_tol, r_tol)
+        new_list = (
+            current_label,
+            values.time.to_numpy(),
+            values.Cb.to_numpy(),
+            values.delay.to_numpy()[0],
+            a_tol,
+            r_tol,
+        )
         pars.append(new_list)
 
     return pars

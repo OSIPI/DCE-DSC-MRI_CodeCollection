@@ -1,14 +1,14 @@
 # South Edinburgh Perfusion Analysis Library (SEPAL)
 
-**Please note: The most up-to-date version of this library is hosted at 
-[here](https://github.com/mjt320/SEPAL), including demonstration Jupyter 
+**Please note: The most up-to-date version of this library is hosted at
+[here](https://github.com/mjt320/SEPAL), including demonstration Jupyter
 notebooks.**
 
 Python library for simulating and fitting DCE-MRI data. It permits arbitrary combinations of pulse sequence, pharmacokinetic model, water exchange model, etc. The code is a work-in-progress, has not been extensively tested and is not recommended or approved for clinical use.
 
-Created 28 September 2020  
-@authors: Michael Thrippleton  
-@email: m.j.thrippleton@ed.ac.uk  
+Created 28 September 2020
+@authors: Michael Thrippleton
+@email: m.j.thrippleton@ed.ac.uk
 @institution: University of Edinburgh, UK
 
 ### Functionality:

@@ -16,17 +16,17 @@ import matplotlib.pyplot as pyplot
 from PopulationAIF import *
 
 try:
-    dt = 1 #temp resolution in s
-    endt = 280 # end time in s
-    notimepoints = endt/dt
+    dt = 1  # temp resolution in s
+    endt = 280  # end time in s
+    notimepoints = endt / dt
 
-    time = numpy.arange(0,endt+dt, dt)
+    time = numpy.arange(0, endt + dt, dt)
 
     # Parker AIF
     Cb_Parker = ParkerAIF(time)
     pyplot.figure(1)
     pyplot.plot(time.tolist(), Cb_Parker.tolist())
-    #should look similar to Fig. 3 of Parker et al MRM 2006
+    # should look similar to Fig. 3 of Parker et al MRM 2006
 
     # Georgiou AIF
     Cb_Georgiou = GeorgiouAIF(time)
@@ -34,7 +34,6 @@ try:
     pyplot.plot(time.tolist(), Cb_Georgiou.tolist())
     pyplot.show()
     # should look similar to Fig.2a of Georgiou et al. MRM 2018
-
 
 
 except Exception as e:

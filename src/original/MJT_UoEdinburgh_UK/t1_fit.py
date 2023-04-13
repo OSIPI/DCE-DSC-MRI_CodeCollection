@@ -39,9 +39,8 @@ class VFA2Points(Fitter):
         self.fa_rad = np.pi * self.fa / 180
 
     def output_info(self):
-        """Get output info. Overrides superclass method.
-        """
-        return ('s0', False), ('t1', False)
+        """Get output info. Overrides superclass method."""
+        return ("s0", False), ("t1", False)
 
     def proc(self, s, k_fa=1):
         """Estimate T1. Overrides superclass method.
@@ -57,20 +56,24 @@ class VFA2Points(Fitter):
 
         """
         if any(np.isnan(s)):
-            raise ValueError(
-                f'Unable to calculate T1: nan signal values received.')
-        with np.errstate(divide='ignore', invalid='ignore'):
+            raise ValueError(f"Unable to calculate T1: nan signal values received.")
+        with np.errstate(divide="ignore", invalid="ignore"):
             fa_true = k_fa * self.fa_rad
             sr = s[0] / s[1]
             t1 = self.tr / np.log(
-                (sr * np.sin(fa_true[1]) * np.cos(fa_true[0]) -
-                 np.sin(fa_true[0]) * np.cos(fa_true[1])) /
-                (sr * np.sin(fa_true[1]) - np.sin(fa_true[0])))
-            s0 = s[0] * ((1 - np.exp(-self.tr / t1) * np.cos(fa_true[0])) /
-                         ((1 - np.exp(-self.tr / t1)) * np.sin(fa_true[0])))
+                (
+                    sr * np.sin(fa_true[1]) * np.cos(fa_true[0])
+                    - np.sin(fa_true[0]) * np.cos(fa_true[1])
+                )
+                / (sr * np.sin(fa_true[1]) - np.sin(fa_true[0]))
+            )
+            s0 = s[0] * (
+                (1 - np.exp(-self.tr / t1) * np.cos(fa_true[0]))
+                / ((1 - np.exp(-self.tr / t1)) * np.sin(fa_true[0]))
+            )
 
         if ~np.isreal(t1) | (t1 <= 0) | np.isinf(t1) | (s0 <= 0) | np.isinf(s0):
-            raise ArithmeticError('T1 estimation failed.')
+            raise ArithmeticError("T1 estimation failed.")
 
         return s0, t1
 
@@ -93,9 +96,8 @@ class VFALinear(Fitter):
         self.fa_rad = np.pi * self.fa / 180
 
     def output_info(self):
-        """Get output info. Overrides superclass method.
-        """
-        return ('s0', False), ('t1', False)
+        """Get output info. Overrides superclass method."""
+        return ("s0", False), ("t1", False)
 
     def proc(self, s, k_fa=1):
         """Estimate T1. Overrides superclass method.
@@ -112,15 +114,16 @@ class VFALinear(Fitter):
         """
         if any(np.isnan(s)) or np.isnan(k_fa):
             raise ArithmeticError(
-                f'Unable to calculate T1: nan signal or k_fa values received.')
+                f"Unable to calculate T1: nan signal or k_fa values received."
+            )
         fa_true = k_fa * self.fa_rad
         y = s / np.sin(fa_true)
         x = s / np.tan(fa_true)
         A = np.stack([x, np.ones(x.shape)], axis=1)
         slope, intercept = np.linalg.lstsq(A, y, rcond=None)[0]
 
-        if (intercept < 0) or ~(0. < slope < 1.):
-            raise ArithmeticError('T1 estimation failed.')
+        if (intercept < 0) or ~(0.0 < slope < 1.0):
+            raise ArithmeticError("T1 estimation failed.")
 
         t1, s0 = -self.tr / np.log(slope), intercept / (1 - slope)
 
@@ -146,9 +149,8 @@ class VFANonLinear(Fitter):
         self.linear_fitter = VFALinear(fa, tr)
 
     def output_info(self):
-        """Get output info. Overrides superclass method.
-        """
-        return ('s0', False), ('t1', False)
+        """Get output info. Overrides superclass method."""
+        return ("s0", False), ("t1", False)
 
     def proc(self, s, k_fa=1):
         """Estimate T1. Overrides superclass method.
@@ -165,19 +167,26 @@ class VFANonLinear(Fitter):
         """
         if any(np.isnan(s)) or np.isnan(k_fa):
             raise ValueError(
-                f'Unable to calculate T1: nan signal or k_fa values received.')
+                f"Unable to calculate T1: nan signal or k_fa values received."
+            )
         # use linear fit to obtain initial guess, otherwise start with T1=1
         try:
             x0 = np.array(self.linear_fitter.proc(s, k_fa=k_fa))
         except ArithmeticError:
-            x0 = np.array([s[0] / spgr_signal(1., 1., self.tr, k_fa * self.fa[
-                0]), 1.])
+            x0 = np.array(
+                [s[0] / spgr_signal(1.0, 1.0, self.tr, k_fa * self.fa[0]), 1.0]
+            )
 
-        result = least_squares(self.__residuals, x0, args=(s, k_fa), bounds=(
-            (1e-8, 1e-8), (np.inf, np.inf)), method='trf', x_scale=x0)
+        result = least_squares(
+            self.__residuals,
+            x0,
+            args=(s, k_fa),
+            bounds=((1e-8, 1e-8), (np.inf, np.inf)),
+            method="trf",
+            x_scale=x0,
+        )
         if result.success is False:
-            raise ArithmeticError(f'Unable to fit VFA data:'
-                                  f' {result.message}')
+            raise ArithmeticError(f"Unable to fit VFA data:" f" {result.message}")
 
         s0, t1 = result.x
         return s0, t1
@@ -231,17 +240,15 @@ class HIFI(Fitter):
         self.idx_spgr = np.where(self.is_spgr)[0]
         self.n_spgr = self.idx_spgr.size
         self.get_linear_estimate = self.n_spgr > 1 and np.all(
-            np.isclose(esp[self.idx_spgr], esp[self.idx_spgr[0]]))
+            np.isclose(esp[self.idx_spgr], esp[self.idx_spgr[0]])
+        )
         if self.get_linear_estimate:
-            self.linear_fitter = VFALinear(b[self.is_spgr],
-                                           esp[self.idx_spgr[0]])
-        self.max_k_fa = 90 / max(self.b[self.is_ir]) if any(self.is_ir) else \
-            np.inf
+            self.linear_fitter = VFALinear(b[self.is_spgr], esp[self.idx_spgr[0]])
+        self.max_k_fa = 90 / max(self.b[self.is_ir]) if any(self.is_ir) else np.inf
 
     def output_info(self):
-        """Get output info. Overrides superclass method.
-        """
-        return ('s0', False), ('t1', False), ('k_fa', False), ('s_opt', True)
+        """Get output info. Overrides superclass method."""
+        return ("s0", False), ("t1", False), ("k_fa", False), ("s_opt", True)
 
     def proc(self, s, k_fa_fixed=None):
         """Estimate T1 and k_fa. Overrides superclass method.
@@ -275,23 +282,34 @@ class HIFI(Fitter):
         # If 0 SPGR scans, assume T1=1 and estimate s0 based on 1st scan
         else:
             t1_init = 1
-            s0_init = s[0] / irspgr_signal(1, t1_init, self.esp[0], self.ti[0],
-                                           self.n[0], self.b[0], self.td[0],
-                                           self.centre[0])
+            s0_init = s[0] / irspgr_signal(
+                1,
+                t1_init,
+                self.esp[0],
+                self.ti[0],
+                self.n[0],
+                self.b[0],
+                self.td[0],
+                self.centre[0],
+            )
         # Now do a non-linear fit using all scans
         if k_fa_fixed is None:
             k_init = 1
             bounds = ([0, 0, 0], [np.inf, np.inf, self.max_k_fa])
         else:
             k_init = k_fa_fixed
-            bounds = ([0, 0, k_fa_fixed-1e-8], [np.inf, np.inf, k_fa_fixed])
+            bounds = ([0, 0, k_fa_fixed - 1e-8], [np.inf, np.inf, k_fa_fixed])
         x_0 = np.array([t1_init, s0_init, k_init])
-        result = least_squares(self.__residuals, x_0, args=(s,), bounds=bounds,
-                               method='trf',
-                               x_scale=(t1_init, s0_init, k_init)
-                               )
+        result = least_squares(
+            self.__residuals,
+            x_0,
+            args=(s,),
+            bounds=bounds,
+            method="trf",
+            x_scale=(t1_init, s0_init, k_init),
+        )
         if not result.success:
-            raise ArithmeticError(f'Unable to fit HIFI data: {result.message}')
+            raise ArithmeticError(f"Unable to fit HIFI data: {result.message}")
         t1, s0, k_fa = result.x
         s_opt = self.__signal(result.x)
         return s0, t1, k_fa, s_opt
@@ -303,13 +321,19 @@ class HIFI(Fitter):
         # calculate signal for all of the (IR-)SPGR scans
         t1, s0, k_fa = x
         s = np.zeros(self.n_scans)
-        s[self.is_ir] = irspgr_signal(s0, t1, self.esp[self.is_ir],
-                                      self.ti[self.is_ir], self.n[self.is_ir],
-                                      k_fa * self.b[self.is_ir],
-                                      self.td[self.is_ir],
-                                      self.centre[self.is_ir])
-        s[self.is_spgr] = spgr_signal(s0, t1, self.esp[self.is_spgr],
-                                      k_fa * self.b[self.is_spgr])
+        s[self.is_ir] = irspgr_signal(
+            s0,
+            t1,
+            self.esp[self.is_ir],
+            self.ti[self.is_ir],
+            self.n[self.is_ir],
+            k_fa * self.b[self.is_ir],
+            self.td[self.is_ir],
+            self.centre[self.is_ir],
+        )
+        s[self.is_spgr] = spgr_signal(
+            s0, t1, self.esp[self.is_spgr], k_fa * self.b[self.is_spgr]
+        )
         return s
 
 

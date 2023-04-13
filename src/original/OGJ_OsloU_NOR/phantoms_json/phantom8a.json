@@ -1,9 +1,9 @@
 {
 	"dt"                  : 1,
-	"AIF"                 : "standard", 
-	"firstParamaterRange" : [0.000167, 0.00167], 
+	"AIF"                 : "standard",
+	"firstParamaterRange" : [0.000167, 0.00167],
 	"secondParamaterRange": [0.01, 0.04],
-	"axisParamaterNames"  : {     
+	"axisParamaterNames"  : {
 		"first" : "K_trans",
 		"second": "v_p"
 	},
@@ -11,7 +11,7 @@
 	"v_e"           : 0.1,
 	"noRows"        : 40,
 	"noCols"        : 40,
-	"sectionHeight" : 1, 
+	"sectionHeight" : 1,
 	"sectionWidth"  : 1,
 	"sectionSpacing": 0,
 	"showAIFSection": false,

@@ -60,31 +60,35 @@ def dce_DRO_data_extended_tofts_kety(delay=False):
         Each tuple contains a set of parameters corresponding to 1 test case
 
     """
-    filename = os.path.join(os.path.dirname(__file__), 'data', 'dce_DRO_data_extended_tofts.csv')
+    filename = os.path.join(
+        os.path.dirname(__file__), "data", "dce_DRO_data_extended_tofts.csv"
+    )
     # read from CSV to pandas
-    converters = {'C': lambda x: np.fromstring(x, dtype=float, sep=' '),
-                  't': lambda x: np.fromstring(x, dtype=float, sep=' '),
-                  'ca': lambda x: np.fromstring(x, dtype=float, sep=' '),
-                  'ta': lambda x: np.fromstring(x, dtype=float, sep=' '), }
+    converters = {
+        "C": lambda x: np.fromstring(x, dtype=float, sep=" "),
+        "t": lambda x: np.fromstring(x, dtype=float, sep=" "),
+        "ca": lambda x: np.fromstring(x, dtype=float, sep=" "),
+        "ta": lambda x: np.fromstring(x, dtype=float, sep=" "),
+    }
     df = pd.read_csv(filename, converters=converters)
 
     # convert to lists
-    label = df['label'].tolist()  # label describing entry
-    t_array = df['t'].tolist()  # seconds
-    C_array = df['C'].tolist()  # mM
-    ca_array = df['ca'].tolist()  # mM
-    ta_array = df['ta'].tolist()  # seconds
-    ve_ref = df['ve'].tolist()
-    vp_ref = df['vp'].tolist()
-    Ktrans_ref = df['Ktrans'].tolist()
-    arterial_delay_ref = df['arterialdelay'].tolist()
+    label = df["label"].tolist()  # label describing entry
+    t_array = df["t"].tolist()  # seconds
+    C_array = df["C"].tolist()  # mM
+    ca_array = df["ca"].tolist()  # mM
+    ta_array = df["ta"].tolist()  # seconds
+    ve_ref = df["ve"].tolist()
+    vp_ref = df["vp"].tolist()
+    Ktrans_ref = df["Ktrans"].tolist()
+    arterial_delay_ref = df["arterialdelay"].tolist()
     if delay:  # delay tissue curve by 5 time points
         C_array = np.array(C_array)
         C_array = C_array[:, :-5]
         C_array = np.concatenate((np.tile([0], [len(C_array), 5]), C_array), axis=1)
         arterial_delay_ref = np.array(arterial_delay_ref) + t_array[0][5]
         for a in range(len(label)):
-            label[a] = label[a] + '_delayed'
+            label[a] = label[a] + "_delayed"
 
     # set the tolerance to use for this dataset
     a_tol_vp = [0.025] * len(Ktrans_ref)
@@ -98,8 +102,26 @@ def dce_DRO_data_extended_tofts_kety(delay=False):
 
     # convert to list of tuples (input for pytest.mark.parametrize)
     pars = list(
-        zip(label, t_array, C_array, ca_array, ta_array, ve_ref, vp_ref, Ktrans_ref, arterial_delay_ref, a_tol_ve,
-            r_tol_ve, a_tol_vp, r_tol_vp, a_tol_Ktrans, r_tol_Ktrans, a_tol_delay, r_tol_delay))
+        zip(
+            label,
+            t_array,
+            C_array,
+            ca_array,
+            ta_array,
+            ve_ref,
+            vp_ref,
+            Ktrans_ref,
+            arterial_delay_ref,
+            a_tol_ve,
+            r_tol_ve,
+            a_tol_vp,
+            r_tol_vp,
+            a_tol_Ktrans,
+            r_tol_Ktrans,
+            a_tol_delay,
+            r_tol_delay,
+        )
+    )
 
     return pars
 
@@ -149,30 +171,32 @@ def dce_DRO_data_tofts(delay=False):
         Input for pytest.mark.parametrize
         Each tuple contains a set of parameters corresponding to 1 test case
     """
-    filename = os.path.join(os.path.dirname(__file__), 'data', 'dce_DRO_data_tofts.csv')
+    filename = os.path.join(os.path.dirname(__file__), "data", "dce_DRO_data_tofts.csv")
     # read from CSV to pandas
-    converters = {'C': lambda x: np.fromstring(x, dtype=float, sep=' '),
-                  't': lambda x: np.fromstring(x, dtype=float, sep=' '),
-                  'ca': lambda x: np.fromstring(x, dtype=float, sep=' '),
-                  'ta': lambda x: np.fromstring(x, dtype=float, sep=' '), }
+    converters = {
+        "C": lambda x: np.fromstring(x, dtype=float, sep=" "),
+        "t": lambda x: np.fromstring(x, dtype=float, sep=" "),
+        "ca": lambda x: np.fromstring(x, dtype=float, sep=" "),
+        "ta": lambda x: np.fromstring(x, dtype=float, sep=" "),
+    }
     df = pd.read_csv(filename, converters=converters)
 
     # convert to lists
-    label = df['label'].tolist()  # label describing entry
-    t_array = df['t'].tolist()  # seconds
-    C_array = df['C'].tolist()  # mM
-    ca_array = df['ca'].tolist()  # mM
-    ta_array = df['ta'].tolist()  # seconds
-    ve_ref = df['ve'].tolist()
-    Ktrans_ref = df['Ktrans'].tolist()
-    arterial_delay_ref = df['arterialdelay'].tolist()
+    label = df["label"].tolist()  # label describing entry
+    t_array = df["t"].tolist()  # seconds
+    C_array = df["C"].tolist()  # mM
+    ca_array = df["ca"].tolist()  # mM
+    ta_array = df["ta"].tolist()  # seconds
+    ve_ref = df["ve"].tolist()
+    Ktrans_ref = df["Ktrans"].tolist()
+    arterial_delay_ref = df["arterialdelay"].tolist()
     if delay:  # delay tissue curve by 10 time points
         C_array = np.array(C_array)
         C_array = C_array[:, :-10]
         C_array = np.concatenate((np.tile([0], [len(C_array), 10]), C_array), axis=1)
         arterial_delay_ref = np.array(arterial_delay_ref) + t_array[0][10]
         for a in range(len(label)):
-            label[a] = label[a] + '_delayed'
+            label[a] = label[a] + "_delayed"
 
     # set the tolerance to use for this dataset
     a_tol_ve = [0.05] * len(Ktrans_ref)
@@ -184,8 +208,23 @@ def dce_DRO_data_tofts(delay=False):
 
     # convert to list of tuples (input for pytest.mark.parametrize)
     pars = list(
-        zip(label, t_array, C_array, ca_array, ta_array, ve_ref, Ktrans_ref, arterial_delay_ref, a_tol_ve, r_tol_ve,
-            a_tol_Ktrans, r_tol_Ktrans, a_tol_delay, r_tol_delay))
+        zip(
+            label,
+            t_array,
+            C_array,
+            ca_array,
+            ta_array,
+            ve_ref,
+            Ktrans_ref,
+            arterial_delay_ref,
+            a_tol_ve,
+            r_tol_ve,
+            a_tol_Ktrans,
+            r_tol_Ktrans,
+            a_tol_delay,
+            r_tol_delay,
+        )
+    )
 
     return pars
 
@@ -219,26 +258,27 @@ def dce_DRO_data_Patlak(delay=False):
         Input for pytest.mark.parametrize
         Each tuple contains a set of parameters corresponding to 1 test case
     """
-    filename = 'patlak_sd_0.02_delay_5.csv' if delay is True else  \
-        'patlak_sd_0.02_delay_0.csv'
-    filepath = os.path.join(os.path.dirname(__file__), 'data',
-                            filename)
+    filename = (
+        "patlak_sd_0.02_delay_5.csv" if delay is True else "patlak_sd_0.02_delay_0.csv"
+    )
+    filepath = os.path.join(os.path.dirname(__file__), "data", filename)
 
     # read from CSV to pandas
-    converters = {'t': lambda x: np.fromstring(x, dtype=float, sep=' '),
-                  'C_t': lambda x: np.fromstring(x, dtype=float, sep=' '),
-                  'cp_aif': lambda x: np.fromstring(x, dtype=float, sep=' '),
-                  }
+    converters = {
+        "t": lambda x: np.fromstring(x, dtype=float, sep=" "),
+        "C_t": lambda x: np.fromstring(x, dtype=float, sep=" "),
+        "cp_aif": lambda x: np.fromstring(x, dtype=float, sep=" "),
+    }
     df = pd.read_csv(filepath, converters=converters)
 
     # convert to lists
-    label = df['label'].tolist()  # label describing entry
-    t_array = df['t'].tolist()  # seconds
-    C_t_array = df['C_t'].tolist()  # mM
-    cp_aif_array = df['cp_aif'].tolist()  # mM
-    vp_ref = df['vp'].tolist()
-    ps_ref = df['ps'].tolist()  # per min
-    delay_ref = df['arterial_delay'].tolist()  # s
+    label = df["label"].tolist()  # label describing entry
+    t_array = df["t"].tolist()  # seconds
+    C_t_array = df["C_t"].tolist()  # mM
+    cp_aif_array = df["cp_aif"].tolist()  # mM
+    vp_ref = df["vp"].tolist()
+    ps_ref = df["ps"].tolist()  # per min
+    delay_ref = df["arterial_delay"].tolist()  # s
 
     # set the tolerance to use for this dataset
     a_tol_vp = [0.025] * len(vp_ref)
@@ -250,9 +290,22 @@ def dce_DRO_data_Patlak(delay=False):
 
     # convert to list of tuples (input for pytest.mark.parametrize)
     pars = list(
-        zip(label, t_array, C_t_array, cp_aif_array, vp_ref, ps_ref,
-            delay_ref, a_tol_vp, r_tol_vp, a_tol_ps, r_tol_ps, a_tol_delay,
-            r_tol_delay))
+        zip(
+            label,
+            t_array,
+            C_t_array,
+            cp_aif_array,
+            vp_ref,
+            ps_ref,
+            delay_ref,
+            a_tol_vp,
+            r_tol_vp,
+            a_tol_ps,
+            r_tol_ps,
+            a_tol_delay,
+            r_tol_delay,
+        )
+    )
 
     return pars
 
@@ -292,27 +345,28 @@ def dce_DRO_data_2cxm(delay=False):
         Each tuple contains a set of parameters corresponding to 1 test case
     """
 
-    filename = '2cxm_sd_0.001_delay_5.csv' if delay is True else  \
-        '2cxm_sd_0.001_delay_0.csv'
-    filepath = os.path.join(os.path.dirname(__file__), 'data',
-                            filename)
+    filename = (
+        "2cxm_sd_0.001_delay_5.csv" if delay is True else "2cxm_sd_0.001_delay_0.csv"
+    )
+    filepath = os.path.join(os.path.dirname(__file__), "data", filename)
 
     # read from CSV to pandas
-    converters = {'t': lambda x: np.fromstring(x, dtype=float, sep=' '),
-                  'C_t': lambda x: np.fromstring(x, dtype=float, sep=' '),
-                  'cp_aif': lambda x: np.fromstring(x, dtype=float, sep=' '),
-                  }
+    converters = {
+        "t": lambda x: np.fromstring(x, dtype=float, sep=" "),
+        "C_t": lambda x: np.fromstring(x, dtype=float, sep=" "),
+        "cp_aif": lambda x: np.fromstring(x, dtype=float, sep=" "),
+    }
     df = pd.read_csv(filepath, converters=converters)
     # convert to lists
-    label = df['label'].tolist()  # label describing entry
-    t_array = df['t'].tolist()  # seconds
-    C_t_array = df['C_t'].tolist()  # mM
-    cp_aif_array = df['cp_aif'].tolist()  # mM
-    vp_ref = df['vp'].tolist()
-    ve_ref = df['ve'].tolist()
-    fp_ref = df['fp'].tolist()  # ml/100ml/min
-    ps_ref = df['ps'].tolist()  # /min
-    delay_ref = df['arterial_delay'].tolist()  # s
+    label = df["label"].tolist()  # label describing entry
+    t_array = df["t"].tolist()  # seconds
+    C_t_array = df["C_t"].tolist()  # mM
+    cp_aif_array = df["cp_aif"].tolist()  # mM
+    vp_ref = df["vp"].tolist()
+    ve_ref = df["ve"].tolist()
+    fp_ref = df["fp"].tolist()  # ml/100ml/min
+    ps_ref = df["ps"].tolist()  # /min
+    delay_ref = df["arterial_delay"].tolist()  # s
 
     # set the tolerance to use for this dataset
     a_tol_vp = [0.025] * len(vp_ref)
@@ -328,9 +382,28 @@ def dce_DRO_data_2cxm(delay=False):
 
     # convert to list of tuples (input for pytest.mark.parametrize)
     pars = list(
-        zip(label, t_array, C_t_array, cp_aif_array, vp_ref, ve_ref, fp_ref,
-            ps_ref, delay_ref, a_tol_vp, r_tol_vp, a_tol_ve, r_tol_ve, a_tol_fp,
-            r_tol_fp, a_tol_ps, r_tol_ps, a_tol_delay, r_tol_delay))
+        zip(
+            label,
+            t_array,
+            C_t_array,
+            cp_aif_array,
+            vp_ref,
+            ve_ref,
+            fp_ref,
+            ps_ref,
+            delay_ref,
+            a_tol_vp,
+            r_tol_vp,
+            a_tol_ve,
+            r_tol_ve,
+            a_tol_fp,
+            r_tol_fp,
+            a_tol_ps,
+            r_tol_ps,
+            a_tol_delay,
+            r_tol_delay,
+        )
+    )
 
     return pars
 
@@ -367,26 +440,27 @@ def dce_DRO_data_2cum(delay=False):
         Input for pytest.mark.parametrize
         Each tuple contains a set of parameters corresponding to 1 test case
     """
-    filename = '2cum_sd_0.0025_delay_5.csv' if delay is True else  \
-        '2cum_sd_0.0025_delay_0.csv'
-    filepath = os.path.join(os.path.dirname(__file__), 'data',
-                            filename)
+    filename = (
+        "2cum_sd_0.0025_delay_5.csv" if delay is True else "2cum_sd_0.0025_delay_0.csv"
+    )
+    filepath = os.path.join(os.path.dirname(__file__), "data", filename)
 
     # read from CSV to pandas
-    converters = {'t': lambda x: np.fromstring(x, dtype=float, sep=' '),
-                  'C_t': lambda x: np.fromstring(x, dtype=float, sep=' '),
-                  'cp_aif': lambda x: np.fromstring(x, dtype=float, sep=' '),
-                  }
+    converters = {
+        "t": lambda x: np.fromstring(x, dtype=float, sep=" "),
+        "C_t": lambda x: np.fromstring(x, dtype=float, sep=" "),
+        "cp_aif": lambda x: np.fromstring(x, dtype=float, sep=" "),
+    }
     df = pd.read_csv(filepath, converters=converters)
     # convert to lists
-    label = df['label'].tolist()  # label describing entry
-    t_array = df['t'].tolist()  # seconds
-    C_t_array = df['C_t'].tolist()  # mM
-    cp_aif_array = df['cp_aif'].tolist()  # mM
-    vp_ref = df['vp'].tolist()
-    fp_ref = df['fp'].tolist()  # 100ml/ml/min
-    ps_ref = df['ps'].tolist()  # /min
-    delay_ref = df['arterial_delay'].tolist()  # s
+    label = df["label"].tolist()  # label describing entry
+    t_array = df["t"].tolist()  # seconds
+    C_t_array = df["C_t"].tolist()  # mM
+    cp_aif_array = df["cp_aif"].tolist()  # mM
+    vp_ref = df["vp"].tolist()
+    fp_ref = df["fp"].tolist()  # 100ml/ml/min
+    ps_ref = df["ps"].tolist()  # /min
+    delay_ref = df["arterial_delay"].tolist()  # s
 
     # set the tolerance to use for this dataset
     a_tol_vp = [0.025] * len(vp_ref)
@@ -400,8 +474,24 @@ def dce_DRO_data_2cum(delay=False):
 
     # convert to list of tuples (input for pytest.mark.parametrize)
     pars = list(
-        zip(label, t_array, C_t_array, cp_aif_array, vp_ref, fp_ref, delay_ref,
-            ps_ref, a_tol_vp, r_tol_vp, a_tol_fp,
-            r_tol_fp, a_tol_ps, r_tol_ps, a_tol_delay, r_tol_delay))
+        zip(
+            label,
+            t_array,
+            C_t_array,
+            cp_aif_array,
+            vp_ref,
+            fp_ref,
+            delay_ref,
+            ps_ref,
+            a_tol_vp,
+            r_tol_vp,
+            a_tol_fp,
+            r_tol_fp,
+            a_tol_ps,
+            r_tol_ps,
+            a_tol_delay,
+            r_tol_delay,
+        )
+    )
 
     return pars

@@ -41,8 +41,9 @@ def read_images(images):
         data = np.stack(images, axis=-1)
         header = None
     else:
-        raise TypeError('Argument images should contain all strings or all'
-                        ' ndarrays.')
+        raise TypeError(
+            "Argument images should contain all strings or all" " ndarrays."
+        )
     if data.shape[-1] == 1:
         data = data.squeeze(axis=-1)
     return data, header
@@ -87,7 +88,7 @@ def roi_measure(image, mask_image):
     if mask.ndim == data.ndim:
         data = np.expand_dims(data, axis=-1)
     if not np.all((mask[:] == 0) | (mask[:] == 1)):
-        raise ValueError('Mask contains values that are not 0 or 1.')
+        raise ValueError("Mask contains values that are not 0 or 1.")
 
     # flatten spatial dimensions
     data_2d = data.reshape(-1, data.shape[-1])  # 2D [location, time] format
@@ -95,9 +96,14 @@ def roi_measure(image, mask_image):
 
     # measure statistics for masked voxels
     masked_voxels = data_2d[mask_1d == 1, :]
-    stats = [(np.nanmean(m_d), np.nanmedian(m_d), np.nanstd(m_d))
-             for m_d in masked_voxels.transpose()]
+    stats = [
+        (np.nanmean(m_d), np.nanmedian(m_d), np.nanstd(m_d))
+        for m_d in masked_voxels.transpose()
+    ]
     mean, median, sd = zip(*stats)
 
-    return {'mean': np.squeeze(mean), 'median': np.squeeze(median),
-            'sd': np.squeeze(sd)}
+    return {
+        "mean": np.squeeze(mean),
+        "median": np.squeeze(median),
+        "sd": np.squeeze(sd),
+    }

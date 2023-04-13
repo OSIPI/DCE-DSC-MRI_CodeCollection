@@ -34,8 +34,7 @@ def minimize_global(cost, x_0_all, **minimizer_kwargs):
 
     """
     results = [minimize(cost, x_0, **minimizer_kwargs) for x_0 in x_0_all]
-    costs = [result.fun if result.success is False else np.nan
-             for result in results]
+    costs = [result.fun if result.success is False else np.nan for result in results]
     cost = min(costs)
     idx = costs.index(cost)
     result = results[idx]
@@ -63,8 +62,7 @@ def least_squares_global(res, x_0_all, **least_squares_kwargs):
     """
 
     results = [least_squares(res, x_0, **least_squares_kwargs) for x_0 in x_0_all]
-    costs = [result.cost if result.success is False else np.nan
-             for result in results]
+    costs = [result.cost if result.success is False else np.nan for result in results]
     cost = min(costs)
     idx = costs.index(cost)
     result = results[idx]

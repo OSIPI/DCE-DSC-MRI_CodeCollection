@@ -59,9 +59,9 @@ class FXL(WaterExModel):
 
     def R1_components(self, p, R1):
         """Get R1 components for this model. Overrides superclass method."""
-        R1 = p['b']*R1['b'] + p['e']*R1['e'] + p['i']*R1['i']
+        R1 = p["b"] * R1["b"] + p["e"] * R1["e"] + p["i"] * R1["i"]
         R1_components = [R1]
-        p_components = [1.]
+        p_components = [1.0]
         return R1_components, p_components
 
 
@@ -73,8 +73,8 @@ class NXL(WaterExModel):
 
     def R1_components(self, p, R1):
         """Get R1 components for this model. Overrides superclass method."""
-        R1_components = [R1['b'], R1['e'], R1['i']]
-        p_components = [p['b'], p['e'], p['i']]
+        R1_components = [R1["b"], R1["e"], R1["i"]]
+        p_components = [p["b"], p["e"], p["i"]]
         return R1_components, p_components
 
 
@@ -88,9 +88,9 @@ class NTEXL(WaterExModel):
 
     def R1_components(self, p, R1):
         """Get R1 components for this model. Overrides superclass method."""
-        p_ev = p['e'] + p['i']
-        R1_ev = (p['e']*R1['e'] + p['i']*R1['i']) / p_ev
+        p_ev = p["e"] + p["i"]
+        R1_ev = (p["e"] * R1["e"] + p["i"] * R1["i"]) / p_ev
 
-        R1_components = [R1['b'], R1_ev]
-        p_components = [p['b'], p_ev]
+        R1_components = [R1["b"], R1_ev]
+        p_components = [p["b"], p_ev]
         return R1_components, p_components

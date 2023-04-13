@@ -7,8 +7,8 @@ logo: logo.png
 execute:
   timeout: 600
 repository:
-  url                       : https://github.com/OSIPI/DCE-DSC-MRI_CodeCollection 
-  path_to_book              : notebooks 
+  url                       : https://github.com/OSIPI/DCE-DSC-MRI_CodeCollection
+  path_to_book              : notebooks
   branch                    : demo
 launch_buttons:
   notebook_interface: "jupyterlab"

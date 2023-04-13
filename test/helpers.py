@@ -3,10 +3,11 @@ import csv
 import pathlib
 import pandas as pd
 
+
 def osipi_parametrize(arg_names, test_data, xf_labels=None):
     """
     Generate parametrize decorator with XFail marks.
-    
+
     Adds XFail mark to any test case whose label is contained in xf_labels.
 
     Parameters
@@ -30,14 +31,18 @@ def osipi_parametrize(arg_names, test_data, xf_labels=None):
     """
     if xf_labels is None:
         xf_labels = []
-        
-    data = [ case if case[0] not in xf_labels
-            else pytest.param(*case, marks=pytest.mark.xfail)
-            for case in test_data ]
-    
+
+    data = [
+        case
+        if case[0] not in xf_labels
+        else pytest.param(*case, marks=pytest.mark.xfail)
+        for case in test_data
+    ]
+
     p = pytest.mark.parametrize(arg_names, data)
-    
+
     return p
+
 
 def log_init(filename_prefix, filename_label, headers):
     """
@@ -57,9 +62,9 @@ def log_init(filename_prefix, filename_label, headers):
     -------
 
     """
-    pathlib.Path('./test/results/').mkdir(parents=True, exist_ok=True)
-    filename = './test/results/' + filename_prefix + filename_label + '.csv'
-    with open(filename, 'w', newline='') as f:
+    pathlib.Path("./test/results/").mkdir(parents=True, exist_ok=True)
+    filename = "./test/results/" + filename_prefix + filename_label + ".csv"
+    with open(filename, "w", newline="") as f:
         writer = csv.writer(f)
         writer.writerow(headers)
 
@@ -81,8 +86,8 @@ def log_results(filename_prefix, filename_label, row_data):
     -------
 
     """
-    filename = './test/results/' + filename_prefix + filename_label + '.csv'
+    filename = "./test/results/" + filename_prefix + filename_label + ".csv"
 
     # use pandas dataframe to save data. This is useful for data with time curves. Instead of saving it as a large array, each time point is a row in the csv file.
     # as they have the same label, it can be grouped later when imported with pandas
-    pd.DataFrame(data=row_data).to_csv(filename, index=False, header=False, mode='a')
+    pd.DataFrame(data=row_data).to_csv(filename, index=False, header=False, mode="a")

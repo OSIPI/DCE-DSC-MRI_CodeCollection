@@ -99,11 +99,13 @@ class PKModel(ABC):
 
         # set variable parameters and bounds, depending whether AIF delay fixed
         if fixed_delay is None:  # add AIF delay as a variable parameter
-            self.parameter_names = type(self).PARAMETER_NAMES + ('delay',)
+            self.parameter_names = type(self).PARAMETER_NAMES + ("delay",)
             self.typical_vals = np.append(type(self).TYPICAL_VALS, 1)
             if bounds is None:
-                self.bounds = (type(self).LOWER_BOUNDS + (-10,),
-                               type(self).UPPER_BOUNDS + (10,))
+                self.bounds = (
+                    type(self).LOWER_BOUNDS + (-10,),
+                    type(self).UPPER_BOUNDS + (10,),
+                )
             else:
                 self.bounds = bounds
         else:  # AIF delay is fixed; store AIF as a vector for speed
@@ -151,7 +153,7 @@ class PKModel(ABC):
         """
         # If delay is supplied as argument, use it to shift the AIF
         if self.fixed_delay is None:
-            delay = pars_kw['delay'] if pars_kw else pars[-1]
+            delay = pars_kw["delay"] if pars_kw else pars[-1]
             c_ap_upsample = self.aif.c_ap(self.t_upsample - delay)
         else:  # otherwise, use the stored AIF
             c_ap_upsample = self.c_ap_upsample
@@ -163,12 +165,18 @@ class PKModel(ABC):
 
         # Do the convolution to get C at every upsampled time point, then
         # interpolate to get C at the measured time points.
-        C_cp_upsample = self.dt_upsample * convolve(c_ap_upsample, irf_cp,
-                                                    mode='full', method='auto')[
-                                           :self.n_upsample]
-        C_e_upsample = self.dt_upsample * convolve(c_ap_upsample, irf_e,
-                                                   mode='full', method='auto')[
-                                          :self.n_upsample]
+        C_cp_upsample = (
+            self.dt_upsample
+            * convolve(c_ap_upsample, irf_cp, mode="full", method="auto")[
+                : self.n_upsample
+            ]
+        )
+        C_e_upsample = (
+            self.dt_upsample
+            * convolve(c_ap_upsample, irf_e, mode="full", method="auto")[
+                : self.n_upsample
+            ]
+        )
         # Downsample concentrations back to the measured time points
         C_cp = np.interp(self.t, self.t_upsample, C_cp_upsample)
         C_e = np.interp(self.t, self.t_upsample, C_e_upsample)
@@ -226,7 +234,7 @@ class SteadyStateVp(PKModel):
     Parameters: vp
     """
 
-    PARAMETER_NAMES = ('vp',)
+    PARAMETER_NAMES = ("vp",)
     TYPICAL_VALS = np.array([0.1])
     LOWER_BOUNDS = (0,)
     UPPER_BOUNDS = (1,)
@@ -235,7 +243,7 @@ class SteadyStateVp(PKModel):
         """Get IRF for this model. Overrides superclass method."""
         # calculate irf for capillary plasma (delta function centred at t=0)
         irf_cp = np.zeros(self.n_upsample, dtype=float)
-        irf_cp[0] = 2. * vp / self.dt_upsample
+        irf_cp[0] = 2.0 * vp / self.dt_upsample
 
         # calculate irf for the EES (zero)
         irf_e = np.zeros(self.n_upsample, dtype=float)
@@ -251,8 +259,8 @@ class Patlak(PKModel):
     Parameters: vp, ps
     """
 
-    PARAMETER_NAMES = ('vp', 'ps')
-    TYPICAL_VALS = np.array([0.1, 1.e-3])
+    PARAMETER_NAMES = ("vp", "ps")
+    TYPICAL_VALS = np.array([0.1, 1.0e-3])
     LOWER_BOUNDS = (0, -1e-3)
     UPPER_BOUNDS = (1, 1)
 
@@ -260,10 +268,10 @@ class Patlak(PKModel):
         """Get IRF for this model. Overrides superclass method."""
         # calculate irf for capillary plasma (delta function centred at t=0)
         irf_cp = np.zeros(self.n_upsample, dtype=float)
-        irf_cp[0] = 2. * vp / self.dt_upsample
+        irf_cp[0] = 2.0 * vp / self.dt_upsample
 
         # calculate irf for the EES (constant term)
-        irf_e = np.ones(self.n_upsample, dtype=float) * (1. / 60.) * ps
+        irf_e = np.ones(self.n_upsample, dtype=float) * (1.0 / 60.0) * ps
 
         return irf_cp, irf_e
 
@@ -276,7 +284,7 @@ class ExtendedTofts(PKModel):
     Parameters: vp, ps, ve
     """
 
-    PARAMETER_NAMES = ('vp', 'ps', 've')
+    PARAMETER_NAMES = ("vp", "ps", "ve")
     TYPICAL_VALS = np.array([0.1, 1e-3, 0.2])
     LOWER_BOUNDS = (0, -1e-3, 1e-8)
     UPPER_BOUNDS = (1, 1, 1)
@@ -285,10 +293,10 @@ class ExtendedTofts(PKModel):
         """Get IRF for this model. Overrides superclass method."""
         # calculate irf for capillary plasma (delta function centred at t=0)
         irf_cp = np.zeros(self.n_upsample, dtype=float)
-        irf_cp[0] = 2. * vp / self.dt_upsample
+        irf_cp[0] = 2.0 * vp / self.dt_upsample
 
         # calculate irf for the EES
-        irf_e = (1. / 60.) * ps * np.exp(-(self.tau_upsample * ps) / (60. * ve))
+        irf_e = (1.0 / 60.0) * ps * np.exp(-(self.tau_upsample * ps) / (60.0 * ve))
 
         return irf_cp, irf_e
 
@@ -301,15 +309,15 @@ class TCUM(PKModel):
     Parameters: vp, ps, fp
     """
 
-    PARAMETER_NAMES = ('vp', 'ps', 'fp')
-    TYPICAL_VALS = np.array([0.1, 0.05, 50.])
+    PARAMETER_NAMES = ("vp", "ps", "fp")
+    TYPICAL_VALS = np.array([0.1, 0.05, 50.0])
     LOWER_BOUNDS = (1e-8, -1e-3, 1e-8)
     UPPER_BOUNDS = (1, 1, 200)
 
     def irf(self, vp, ps, fp, *args, **kwargs):
         """Get IRF for this model. Overrides superclass method."""
-        fp_per_s = fp / (60. * 100.)
-        ps_per_s = ps / 60.
+        fp_per_s = fp / (60.0 * 100.0)
+        ps_per_s = ps / 60.0
         tp = vp / (fp_per_s + ps_per_s)
         ktrans = ps_per_s / (1 + ps_per_s / fp_per_s)
 
@@ -330,34 +338,42 @@ class TCXM(PKModel):
     Parameters: vp, ps, ve, fp
     """
 
-    PARAMETER_NAMES = ('vp', 'ps', 've', 'fp')
-    TYPICAL_VALS = np.array([0.1, 0.05, 0.5, 50.])
+    PARAMETER_NAMES = ("vp", "ps", "ve", "fp")
+    TYPICAL_VALS = np.array([0.1, 0.05, 0.5, 50.0])
     LOWER_BOUNDS = (1e-8, -1e-3, 1e-8, 1e-8)
     UPPER_BOUNDS = (1, 1, 1, 200)
 
     def irf(self, vp, ps, ve, fp, *args, **kwargs):
         """Get IRF for this model. Overrides superclass method."""
-        fp_per_s = fp / (60. * 100.)
-        ps_per_s = ps / 60.
+        fp_per_s = fp / (60.0 * 100.0)
+        ps_per_s = ps / 60.0
         v = ve + vp
         T = v / fp_per_s
         tc = vp / fp_per_s
         te = ve / ps_per_s
-        sig_p = ((T + te) + np.sqrt((T + te) ** 2 - (4 * tc * te))) / (
-                2 * tc * te)
-        sig_n = ((T + te) - np.sqrt((T + te) ** 2 - (4 * tc * te))) / (
-                2 * tc * te)
+        sig_p = ((T + te) + np.sqrt((T + te) ** 2 - (4 * tc * te))) / (2 * tc * te)
+        sig_n = ((T + te) - np.sqrt((T + te) ** 2 - (4 * tc * te))) / (2 * tc * te)
 
         # calculate irf for capillary plasma
-        irf_cp = vp * sig_p * sig_n * (
-                (1 - te * sig_n) * np.exp(-self.tau_upsample * sig_n) + (
-                    te * sig_p - 1.) * np.exp(-self.tau_upsample * sig_p)) / (
-                         sig_p - sig_n)
+        irf_cp = (
+            vp
+            * sig_p
+            * sig_n
+            * (
+                (1 - te * sig_n) * np.exp(-self.tau_upsample * sig_n)
+                + (te * sig_p - 1.0) * np.exp(-self.tau_upsample * sig_p)
+            )
+            / (sig_p - sig_n)
+        )
 
         # calculate irf for the EES
-        irf_e = ve * sig_p * sig_n * (
-                np.exp(-self.tau_upsample * sig_n) - np.exp(
-                    -self.tau_upsample * sig_p)) / (sig_p - sig_n)
+        irf_e = (
+            ve
+            * sig_p
+            * sig_n
+            * (np.exp(-self.tau_upsample * sig_n) - np.exp(-self.tau_upsample * sig_p))
+            / (sig_p - sig_n)
+        )
 
         return irf_cp, irf_e
 
@@ -370,14 +386,14 @@ class Tofts(PKModel):
     Parameters: ktrans, ve
     """
 
-    PARAMETER_NAMES = ('ktrans', 've')
+    PARAMETER_NAMES = ("ktrans", "ve")
     TYPICAL_VALS = np.array([1e-2, 0.2])
     LOWER_BOUNDS = (-1e-3, 1e-8)
     UPPER_BOUNDS = (1, 1)
 
     def irf(self, ktrans, ve, *args, **kwargs):
         """Get IRF for this model. Overrides superclass method."""
-        ktrans_per_s = ktrans / 60.
+        ktrans_per_s = ktrans / 60.0
 
         # calculate irf for capillary plasma (zeros)
         irf_cp = np.zeros(self.n_upsample, dtype=float)

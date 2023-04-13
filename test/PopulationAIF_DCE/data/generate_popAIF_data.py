@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import math
 
+
 def generate_GeorgiouAIF_refdata():
     """
     This function imports and creates the test data to test implementations of the Georgiou AIF.
@@ -26,9 +27,11 @@ def generate_GeorgiouAIF_refdata():
     time = []
     cb_ref_values = []
 
-    label.append('original_AIF')
+    label.append("original_AIF")
     # import xsl file
-    filename_original_aif = os.path.join(os.path.dirname(__file__), 'mrm27524-sup-0002-figs2.xlsx')
+    filename_original_aif = os.path.join(
+        os.path.dirname(__file__), "mrm27524-sup-0002-figs2.xlsx"
+    )
     original_data_xls = pd.read_excel(filename_original_aif)
     time_original = original_data_xls["time (min)"].to_numpy()
     values_original = original_data_xls["[Gd-DOTA] (mM)"].to_numpy()
@@ -36,9 +39,11 @@ def generate_GeorgiouAIF_refdata():
     cb_ref_values.append(values_original)
 
     # create for loop with different permutations of temporal resolution (original is at 0.1 s)
-    range_dt = np.array([0.5, 1, 2, 2.5, 5, 7.5])  #range of realistic temporal resolutions
+    range_dt = np.array(
+        [0.5, 1, 2, 2.5, 5, 7.5]
+    )  # range of realistic temporal resolutions
     for current_dt in range_dt:
-        current_label = 'temp_res_' + str(current_dt) + 's'
+        current_label = "temp_res_" + str(current_dt) + "s"
         label.append(current_label)
         current_dt_min = current_dt / 60
         time_int = np.arange(0, 5, current_dt_min)
@@ -51,8 +56,10 @@ def generate_GeorgiouAIF_refdata():
     for lb, tm, ref in zip(label, time, cb_ref_values):
         for t, r in zip(tm, ref):
             ref_values.append([lb, t, r])
-    filename_ref = os.path.join(os.path.dirname(__file__), '', 'GeorgiouAIF_ref.csv')
-    pd.DataFrame(data=ref_values, columns=["label", "time", "Cb"]).to_csv(filename_ref, index=False)
+    filename_ref = os.path.join(os.path.dirname(__file__), "", "GeorgiouAIF_ref.csv")
+    pd.DataFrame(data=ref_values, columns=["label", "time", "Cb"]).to_csv(
+        filename_ref, index=False
+    )
 
 
 def generate_ParkerAIF_refdata():
@@ -91,11 +98,21 @@ def generate_ParkerAIF_refdata():
     cb_ref_values = []
     delay = []
 
-    label.append('original_AIF')
-    time_original = np.arange(0, 5, 4.97/60) # in min
-    gaussian1 = A1 / (sigma1 * np.sqrt(2 * np.pi)) * np.exp(-np.square(time_original - T1) / (2 * np.square(sigma1)))
-    gaussian2 = A2 / (sigma2 * np.sqrt(2 * np.pi)) * np.exp(-np.square(time_original - T2) / (2 * np.square(sigma2)))
-    modSigm = (alpha * np.exp(-beta * time_original)) / (1 + np.exp(-s * (time_original - tau)))
+    label.append("original_AIF")
+    time_original = np.arange(0, 5, 4.97 / 60)  # in min
+    gaussian1 = (
+        A1
+        / (sigma1 * np.sqrt(2 * np.pi))
+        * np.exp(-np.square(time_original - T1) / (2 * np.square(sigma1)))
+    )
+    gaussian2 = (
+        A2
+        / (sigma2 * np.sqrt(2 * np.pi))
+        * np.exp(-np.square(time_original - T2) / (2 * np.square(sigma2)))
+    )
+    modSigm = (alpha * np.exp(-beta * time_original)) / (
+        1 + np.exp(-s * (time_original - tau))
+    )
     cb = np.add(gaussian1, gaussian2)
     cb = np.add(cb, modSigm)
     time.append(time_original)
@@ -103,15 +120,27 @@ def generate_ParkerAIF_refdata():
     delay.append(0)  # assume no delay
 
     # similar for a range of temporal resolutions
-    range_dt = np.array([0.5, 1, 2, 2.5, 5, 7.5])  # range of realistic temporal resolutions
+    range_dt = np.array(
+        [0.5, 1, 2, 2.5, 5, 7.5]
+    )  # range of realistic temporal resolutions
     for current_dt in range_dt:
-        current_label = 'temp_res_' + str(current_dt) + 's'
+        current_label = "temp_res_" + str(current_dt) + "s"
         label.append(current_label)
         current_dt_min = current_dt / 60
         time_int = np.arange(0, 5, current_dt_min)
-        gaussian1 = A1 / (sigma1 * np.sqrt(2 * np.pi)) * np.exp(-np.square(time_int - T1) / (2 * np.square(sigma1)))
-        gaussian2 = A2 / (sigma2 * np.sqrt(2 * np.pi)) * np.exp(-np.square(time_int - T2) / (2 * np.square(sigma2)))
-        modSigm = (alpha * np.exp(-beta * time_int)) / (1 + np.exp(-s * (time_int - tau)))
+        gaussian1 = (
+            A1
+            / (sigma1 * np.sqrt(2 * np.pi))
+            * np.exp(-np.square(time_int - T1) / (2 * np.square(sigma1)))
+        )
+        gaussian2 = (
+            A2
+            / (sigma2 * np.sqrt(2 * np.pi))
+            * np.exp(-np.square(time_int - T2) / (2 * np.square(sigma2)))
+        )
+        modSigm = (alpha * np.exp(-beta * time_int)) / (
+            1 + np.exp(-s * (time_int - tau))
+        )
         cb = np.add(gaussian1, gaussian2)
         cb = np.add(cb, modSigm)
         time.append(time_int)
@@ -122,12 +151,22 @@ def generate_ParkerAIF_refdata():
     range_endt = np.array([3, 5, 7, 10])  # range of total acquisition time
     current_dt_min = 2.5 / 60  # current temp resolution 2.5 s
     for current_endt in range_endt:
-        current_label = 'acq_time_' + str(current_endt) + 'min'
+        current_label = "acq_time_" + str(current_endt) + "min"
         label.append(current_label)
         time_int = np.arange(0, current_endt, current_dt_min)
-        gaussian1 = A1 / (sigma1 * np.sqrt(2 * np.pi)) * np.exp(-np.square(time_int - T1) / (2 * np.square(sigma1)))
-        gaussian2 = A2 / (sigma2 * np.sqrt(2 * np.pi)) * np.exp(-np.square(time_int - T2) / (2 * np.square(sigma2)))
-        modSigm = (alpha * np.exp(-beta * time_int)) / (1 + np.exp(-s * (time_int - tau)))
+        gaussian1 = (
+            A1
+            / (sigma1 * np.sqrt(2 * np.pi))
+            * np.exp(-np.square(time_int - T1) / (2 * np.square(sigma1)))
+        )
+        gaussian2 = (
+            A2
+            / (sigma2 * np.sqrt(2 * np.pi))
+            * np.exp(-np.square(time_int - T2) / (2 * np.square(sigma2)))
+        )
+        modSigm = (alpha * np.exp(-beta * time_int)) / (
+            1 + np.exp(-s * (time_int - tau))
+        )
         cb = np.add(gaussian1, gaussian2)
         cb = np.add(cb, modSigm)
         time.append(time_int)
@@ -139,8 +178,10 @@ def generate_ParkerAIF_refdata():
     for lb, tm, ref, dl in zip(label, time, cb_ref_values, delay):
         for t, r in zip(tm, ref):
             ref_values.append([lb, t, r, dl])
-    filename_ref = os.path.join(os.path.dirname(__file__), '', 'ParkerAIF_ref.csv')
-    pd.DataFrame(data=ref_values, columns=["label", "time", "Cb", "delay"]).to_csv(filename_ref, index=False)
+    filename_ref = os.path.join(os.path.dirname(__file__), "", "ParkerAIF_ref.csv")
+    pd.DataFrame(data=ref_values, columns=["label", "time", "Cb", "delay"]).to_csv(
+        filename_ref, index=False
+    )
 
 
 def generate_ParkerAIF_refdata_delay():
@@ -177,51 +218,66 @@ def generate_ParkerAIF_refdata_delay():
 
     dt = 1.5  # temp resolution in seconds
     # for a range of different delays
-    delay_range = np.array([0, dt, 2*dt, 5*dt, 2, 5, 10, 18, 31])  # indicated in seconds
+    delay_range = np.array(
+        [0, dt, 2 * dt, 5 * dt, 2, 5, 10, 18, 31]
+    )  # indicated in seconds
     # recalculate concentration values based on change in start time.
     time_original = np.arange(0, 5, dt / 60)  # in min
     for current_delay in delay_range:
-        current_label = 'delay_' + str(current_delay) + 's'
+        current_label = "delay_" + str(current_delay) + "s"
         label.append(current_label)
-        time_current = time_original - current_delay/60
-        gaussian1 = A1 / (sigma1 * np.sqrt(2 * np.pi)) * np.exp(-np.square(time_current - T1) / (2 * np.square(sigma1)))
-        gaussian2 = A2 / (sigma2 * np.sqrt(2 * np.pi)) * np.exp(-np.square(time_current - T2) / (2 * np.square(sigma2)))
-        modSigm = (alpha * np.exp(-beta * time_current)) / (1 + np.exp(-s * (time_current - tau)))
+        time_current = time_original - current_delay / 60
+        gaussian1 = (
+            A1
+            / (sigma1 * np.sqrt(2 * np.pi))
+            * np.exp(-np.square(time_current - T1) / (2 * np.square(sigma1)))
+        )
+        gaussian2 = (
+            A2
+            / (sigma2 * np.sqrt(2 * np.pi))
+            * np.exp(-np.square(time_current - T2) / (2 * np.square(sigma2)))
+        )
+        modSigm = (alpha * np.exp(-beta * time_current)) / (
+            1 + np.exp(-s * (time_current - tau))
+        )
         cb = np.add(gaussian1, gaussian2)
         cb = np.add(cb, modSigm)
         # shift cb according to delay value
-        cb[time_original < current_delay/60] = 0.
+        cb[time_original < current_delay / 60] = 0.0
         time.append(time_original)
         cb_ref_values.append(cb)
         delay.append(current_delay)
-
 
     # write to csv file: label, time, cb_ref_values, delay
     ref_values = []
     for lb, tm, ref, dl in zip(label, time, cb_ref_values, delay):
         for t, r in zip(tm, ref):
             ref_values.append([lb, t, r, dl])
-    filename_ref = os.path.join(os.path.dirname(__file__), '', 'ParkerAIF_ref_with_delay.csv')
-    pd.DataFrame(data=ref_values, columns=["label", "time", "Cb", "delay"]).to_csv(filename_ref, index=False)
+    filename_ref = os.path.join(
+        os.path.dirname(__file__), "", "ParkerAIF_ref_with_delay.csv"
+    )
+    pd.DataFrame(data=ref_values, columns=["label", "time", "Cb", "delay"]).to_csv(
+        filename_ref, index=False
+    )
 
 
 def generate_preclinicalAIF_refdata():
     """
-        This function creates the test data to test implementations of a pre-clinical AIF presented by McGrath et al.
+    This function creates the test data to test implementations of a pre-clinical AIF presented by McGrath et al.
 
-        To create the AIF the parameters of the functional form are copied from Table 1, Model B of the reference
+    To create the AIF the parameters of the functional form are copied from Table 1, Model B of the reference
 
-        The original data had a temp resolution of 0.5 s and tot acquisition time of 300s. This data was labeled as 'Original_AIF'
-        The other reference entries include AIF values with varying temporal resolutions and varying total acquisition times.
-        Data without a delay or pre-contrast value are assumed. Those are included in a separate test-set
+    The original data had a temp resolution of 0.5 s and tot acquisition time of 300s. This data was labeled as 'Original_AIF'
+    The other reference entries include AIF values with varying temporal resolutions and varying total acquisition times.
+    Data without a delay or pre-contrast value are assumed. Those are included in a separate test-set
 
-        Bolus arrival time variations are included in ParkerAIF_refdata_delay
+    Bolus arrival time variations are included in ParkerAIF_refdata_delay
 
-        data are saved in a csv file: preclinicalAIF_ref.csv
+    data are saved in a csv file: preclinicalAIF_ref.csv
 
-        References: McGrath et al. MRM 2009, DOI: 10.1002/mrm.21959
+    References: McGrath et al. MRM 2009, DOI: 10.1002/mrm.21959
 
-        """
+    """
 
     # copied from Table 1 of the reference
     A1 = 3.4  # mmol
@@ -236,15 +292,15 @@ def generate_preclinicalAIF_refdata():
     delay = []
 
     # original contribution
-    label.append('original_AIF')
+    label.append("original_AIF")
     dt = 0.5  # temp resolution in seconds
-    time_original = np.arange(0, 5*60, dt)  # in seconds
-    cb =[]
+    time_original = np.arange(0, 5 * 60, dt)  # in seconds
+    cb = []
     for t in time_original:
         if t <= t0:
-            cb.append(A1*(t/t0)+A2*(t/t0))
+            cb.append(A1 * (t / t0) + A2 * (t / t0))
         else:
-            cb.append(A1*np.exp(-K1 * (t-t0)) + A2*np.exp(-K2 * (t-t0)))
+            cb.append(A1 * np.exp(-K1 * (t - t0)) + A2 * np.exp(-K2 * (t - t0)))
     time.append(time_original)
     cb_ref_values.append(cb)
     delay.append(0)  # assume no delay
@@ -252,9 +308,9 @@ def generate_preclinicalAIF_refdata():
     # similar for a range of temporal resolutions
     range_dt = np.array([1, 2, 2.5, 5, 7.5])  # range of realistic temporal resolutions
     for current_dt in range_dt:
-        current_label = 'temp_res_' + str(current_dt) + 's'
+        current_label = "temp_res_" + str(current_dt) + "s"
         label.append(current_label)
-        time_int = np.arange(0, 5*60, current_dt)
+        time_int = np.arange(0, 5 * 60, current_dt)
         cb = []
         for t in time_int:
             if t <= t0:
@@ -269,9 +325,9 @@ def generate_preclinicalAIF_refdata():
     range_endt = np.array([3, 5, 7, 10])  # range of total acquisition time in min
     current_dt = 2.5  # current temp resolution 2.5 s
     for current_endt in range_endt:
-        current_label = 'acq_time_' + str(current_endt) + 'min'
+        current_label = "acq_time_" + str(current_endt) + "min"
         label.append(current_label)
-        time_int = np.arange(0, current_endt*60, current_dt) #in seconds
+        time_int = np.arange(0, current_endt * 60, current_dt)  # in seconds
         cb = []
         for t in time_int:
             if t <= t0:
@@ -287,14 +343,16 @@ def generate_preclinicalAIF_refdata():
     for lb, tm, ref, dl in zip(label, time, cb_ref_values, delay):
         for t, r in zip(tm, ref):
             ref_values.append([lb, t, r, dl])
-    filename_ref = os.path.join(os.path.dirname(__file__), '', 'preclinicalAIF_ref.csv')
-    pd.DataFrame(data=ref_values, columns=["label", "time", "Cb", "delay"]).to_csv(filename_ref, index=False)
+    filename_ref = os.path.join(os.path.dirname(__file__), "", "preclinicalAIF_ref.csv")
+    pd.DataFrame(data=ref_values, columns=["label", "time", "Cb", "delay"]).to_csv(
+        filename_ref, index=False
+    )
 
 
 def generate_preclinicalAIF_refdata_delay():
     """
-        This function creates the test data to test implementations of the preclinical AIF including a delay or pre-contrast signal.
-        This is an extension of generate_preclinicalAIF_refdata. Approach is similar as for the Parker AIF
+    This function creates the test data to test implementations of the preclinical AIF including a delay or pre-contrast signal.
+    This is an extension of generate_preclinicalAIF_refdata. Approach is similar as for the Parker AIF
 
     """
 
@@ -312,9 +370,11 @@ def generate_preclinicalAIF_refdata_delay():
 
     dt = 0.5  # temp resolution in seconds
     time_original = np.arange(0, 5 * 60, dt)  # in seconds
-    delay_range = np.array([dt, 2 * dt, 5 * dt, 2, 5, 10, 18, 31])  # indicated in seconds
+    delay_range = np.array(
+        [dt, 2 * dt, 5 * dt, 2, 5, 10, 18, 31]
+    )  # indicated in seconds
     for current_delay in delay_range:
-        current_label = 'delay_' + str(current_delay) + 's'
+        current_label = "delay_" + str(current_delay) + "s"
         label.append(current_label)
         time_current = time_original - current_delay
         cb = []
@@ -324,7 +384,7 @@ def generate_preclinicalAIF_refdata_delay():
             else:
                 cb.append(A1 * np.exp(-K1 * (t - t0)) + A2 * np.exp(-K2 * (t - t0)))
         cb = np.array(cb)
-        cb[time_original < current_delay] = 0.
+        cb[time_original < current_delay] = 0.0
         time.append(time_original)
         cb_ref_values.append(cb)
         delay.append(current_delay)
@@ -334,8 +394,13 @@ def generate_preclinicalAIF_refdata_delay():
     for lb, tm, ref, dl in zip(label, time, cb_ref_values, delay):
         for t, r in zip(tm, ref):
             ref_values.append([lb, t, r, dl])
-    filename_ref = os.path.join(os.path.dirname(__file__), '', 'preclinicalAIF_ref_delay.csv')
-    pd.DataFrame(data=ref_values, columns=["label", "time", "Cb", "delay"]).to_csv(filename_ref, index=False)
+    filename_ref = os.path.join(
+        os.path.dirname(__file__), "", "preclinicalAIF_ref_delay.csv"
+    )
+    pd.DataFrame(data=ref_values, columns=["label", "time", "Cb", "delay"]).to_csv(
+        filename_ref, index=False
+    )
+
 
 generate_GeorgiouAIF_refdata()
 generate_ParkerAIF_refdata()

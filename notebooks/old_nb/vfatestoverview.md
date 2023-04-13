@@ -10,14 +10,14 @@ Test for specific inputs and expected outputs. Assertion tests determine if the 
 
 This test case would check for validity of the input arguments passed to the VFA function. For example, if invalid flip angles are used i.e. flip angle < 0, then an exception will be raised.
 
-**Current Status:** Check for negative flip angle is part of the test framework. 
+**Current Status:** Check for negative flip angle is part of the test framework.
 
 ## Test for valid input data types:
-   
-Check if the correct data types are used for the variables 
-       
+
+Check if the correct data types are used for the variables
+
 
 ## Test for array dimensionality:
 
-Check for array dimensionality mismatch which could result in an error while computing fit. 
+Check for array dimensionality mismatch which could result in an error while computing fit.
 For example : len(signal array) not equal to len(flip angle array)

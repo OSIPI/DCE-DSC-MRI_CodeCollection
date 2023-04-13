@@ -71,9 +71,13 @@ class PatientSpecific(AIF):
         """
         self.t_data = t_data
         self.c_ap_data = c_ap_data
-        self.c_ap_func = interp1d(t_data, c_ap_data,
-                                  kind='quadratic', bounds_error=False,
-                                  fill_value=(0, c_ap_data[-1]))
+        self.c_ap_func = interp1d(
+            t_data,
+            c_ap_data,
+            kind="quadratic",
+            bounds_error=False,
+            fill_value=(0, c_ap_data[-1]),
+        )
 
     def c_ap(self, t):
         """Get AIF plasma concentration(t). Overrides superclass method."""
@@ -90,10 +94,24 @@ class ParkerLike(AIF):
     Parameters default to the original Parker function.
     """
 
-    def __init__(self, hct, a1=0.809, a2=0.330, t1=0.17046, t2=0.365,
-                 sigma1=0.0563, sigma2=0.132, s=38.078, tau=0.483,
-                 alpha=0, beta=0, alpha2=1.050, beta2=0.1685, scale_factor=1,
-                 t_start=0):
+    def __init__(
+        self,
+        hct,
+        a1=0.809,
+        a2=0.330,
+        t1=0.17046,
+        t2=0.365,
+        sigma1=0.0563,
+        sigma2=0.132,
+        s=38.078,
+        tau=0.483,
+        alpha=0,
+        beta=0,
+        alpha2=1.050,
+        beta2=0.1685,
+        scale_factor=1,
+        t_start=0,
+    ):
         """
 
         Args:
@@ -116,19 +134,23 @@ class ParkerLike(AIF):
 
     def c_ap(self, t):
         """Get AIF plasma concentration(t). Overrides superclass method."""
-        t_mins = (t - self.t_start) / 60.
+        t_mins = (t - self.t_start) / 60.0
 
         # calculate c(t) for arterial blood
-        c_ab = (self.a1 / (self.sigma1 * np.sqrt(2. * np.pi))) * \
-            np.exp(-((t_mins - self.t1) ** 2) / (2. * self.sigma1 ** 2)) + \
-            (self.a2 / (self.sigma2 * np.sqrt(2. * np.pi))) * \
-            np.exp(-((t_mins - self.t2) ** 2) / (2. * self.sigma2 ** 2)) + \
-            (self.alpha * np.exp(-self.beta * t_mins) +
-             self.alpha2 * np.exp(-self.beta2 * t_mins)) / \
-            (1 + np.exp(-self.s * (t_mins - self.tau)))
+        c_ab = (
+            (self.a1 / (self.sigma1 * np.sqrt(2.0 * np.pi)))
+            * np.exp(-((t_mins - self.t1) ** 2) / (2.0 * self.sigma1**2))
+            + (self.a2 / (self.sigma2 * np.sqrt(2.0 * np.pi)))
+            * np.exp(-((t_mins - self.t2) ** 2) / (2.0 * self.sigma2**2))
+            + (
+                self.alpha * np.exp(-self.beta * t_mins)
+                + self.alpha2 * np.exp(-self.beta2 * t_mins)
+            )
+            / (1 + np.exp(-self.s * (t_mins - self.tau)))
+        )
         c_ab *= self.scale_factor
         c_ap = c_ab / (1 - self.hct)
-        c_ap[t < self.t_start] = 0.
+        c_ap[t < self.t_start] = 0.0
         return c_ap
 
 
@@ -171,8 +193,15 @@ class ManningFast(ParkerLike):
             t_start (float): Start time (s). The AIF function is time-shifted by
                 this delay. Defaults to 0.
         """
-        super().__init__(hct, alpha=0.246, alpha2=0.765, beta=0.180,
-                         beta2=0.0240, scale_factor=0.89, t_start=t_start)
+        super().__init__(
+            hct,
+            alpha=0.246,
+            alpha2=0.765,
+            beta=0.180,
+            beta2=0.0240,
+            scale_factor=0.89,
+            t_start=t_start,
+        )
 
 
 class ManningSlow(PatientSpecific):
@@ -189,19 +218,75 @@ class ManningSlow(PatientSpecific):
         # Define a patient-specific AIF based on reference data.
         # We define first time point as t=3*39.62 to ensure c_ap=0 until the
         # end of the 3rd pre-contrast acquisition.
-        c_ap_ref = np.array([0.000000,
-                             0.137956, 0.719692, 1.634260, 2.134626, 1.875262,
-                             1.757133, 1.596487, 1.470386, 1.352991, 1.280691,
-                             1.206125, 1.146877, 1.098958, 1.056410, 1.024845,
-                             0.992435, 0.969435, 0.944838, 0.919047, 0.899973,
-                             0.880771, 0.862782, 0.844603, 0.829817, 0.816528,
-                             0.800179, 0.781698, 0.774622, 0.754376])
+        c_ap_ref = np.array(
+            [
+                0.000000,
+                0.137956,
+                0.719692,
+                1.634260,
+                2.134626,
+                1.875262,
+                1.757133,
+                1.596487,
+                1.470386,
+                1.352991,
+                1.280691,
+                1.206125,
+                1.146877,
+                1.098958,
+                1.056410,
+                1.024845,
+                0.992435,
+                0.969435,
+                0.944838,
+                0.919047,
+                0.899973,
+                0.880771,
+                0.862782,
+                0.844603,
+                0.829817,
+                0.816528,
+                0.800179,
+                0.781698,
+                0.774622,
+                0.754376,
+            ]
+        )
 
-        t_ref = 39.62 * np.array([3.0,
-                                  3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5, 10.5, 11.5,
-                                  12.5, 13.5, 14.5, 15.5, 16.5, 17.5, 18.5,
-                                  19.5, 20.5, 21.5, 22.5, 23.5, 24.5, 25.5,
-                                  26.5, 27.5, 28.5, 29.5, 30.5, 31.5])
+        t_ref = 39.62 * np.array(
+            [
+                3.0,
+                3.5,
+                4.5,
+                5.5,
+                6.5,
+                7.5,
+                8.5,
+                9.5,
+                10.5,
+                11.5,
+                12.5,
+                13.5,
+                14.5,
+                15.5,
+                16.5,
+                17.5,
+                18.5,
+                19.5,
+                20.5,
+                21.5,
+                22.5,
+                23.5,
+                24.5,
+                25.5,
+                26.5,
+                27.5,
+                28.5,
+                29.5,
+                30.5,
+                31.5,
+            ]
+        )
 
         super().__init__(t_ref, c_ap_ref)
 
@@ -224,5 +309,12 @@ class Heye(ParkerLike):
             t_start (float): Start time (s). The AIF function is time-shifted by
                 this delay. Defaults to 0.
         """
-        super().__init__(hct, alpha=3.1671, alpha2=0.5628, beta=1.0165,
-                         beta2=0.0266, scale_factor=1, t_start=t_start)
+        super().__init__(
+            hct,
+            alpha=3.1671,
+            alpha2=0.5628,
+            beta=1.0165,
+            beta2=0.0266,
+            scale_factor=1,
+            t_start=t_start,
+        )

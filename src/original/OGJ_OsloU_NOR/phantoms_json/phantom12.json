@@ -1,10 +1,10 @@
 {
 	"dt"                  : 0,
 	"units"               : "min",
-	"AIF"                 : "standard", 
-	"firstParamaterRange" : [1, 30], 
+	"AIF"                 : "standard",
+	"firstParamaterRange" : [1, 30],
 	"secondParamaterRange": [2, 20],
-	"axisParamaterNames"  : {     
+	"axisParamaterNames"  : {
 		"first" : "K_trans",
 		"second": "v_p"
 	},
@@ -12,7 +12,7 @@
 	"v_e"           : 30,
 	"noRows"        : 5,
 	"noCols"        : 5,
-	"sectionHeight" : 10, 
+	"sectionHeight" : 10,
 	"sectionWidth"  : 10,
 	"sectionSpacing": 3,
 	"showAIFSection": false,

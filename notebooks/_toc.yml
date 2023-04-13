@@ -28,5 +28,3 @@ sections:
     - file: DSC_pars.ipynb
 - file: guidelines.md
 - file: Acknowledgements.ipynb
-
-
