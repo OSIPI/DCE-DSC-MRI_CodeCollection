@@ -20,7 +20,7 @@ def test_LEK_UoEdinburghUK_SI2Conc(label, fa, tr, T1base, BLpts, r1, s_array, co
     #Nothing to do for this function
     
     # run test
-    conc_curve = SI2Conc.SI2Conc(s_array,tr,fa,T1base,BLpts,S0=None)
+    conc_curve = SI2Conc.SI2Conc(s_array,tr,fa,T1base,[1,BLpts],S0=None)
     conc_array=conc_array*r1 # This function doesn't include r1, so multiply it out before testing
     np.testing.assert_allclose( [conc_curve], [conc_array], rtol=r_tol, atol=a_tol)
 
