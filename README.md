@@ -5,10 +5,10 @@
 
 
 
-- [code database with links to source code](https://osipi.org/DCE-DSC-MRI_TestResults/overview_of_code_collection.html)
-- [test-results website](https://osipi.org/DCE-DSC-MRI_TestResults)
+- [code database with links to source code](https://osipi.github.io/DCE-DSC-MRI_TestResults/overview_of_code_collection.html)
+- [test-results website](https://osipi.github.io/DCE-DSC-MRI_TestResults/intro.html)
 
-The ISMRM Open Science Initiative for Perfusion Imaging ([OSIPI](https://www.osipi.org/)) aims to promote the sharing of perfusion imaging software in order to reduce duplication, improve reproducibility and speed up translation. This **DCE-DSC-MRI_CodeCollection** code library is maintained by [Taskforce 2.3](https://www.osipi.org/task-force-2-3/) of OSIPI and aims to collect, test and share open-source perfusion imaging code for use in research and software development. Code contributions can include modules covering one or more steps within the image processing pipeline, for example T1 mapping, converting signal to concentration and pharmacokinetic modelling. A further aim of OSIPI is to develop a fully tested and harmonised code library, drawing on the contributions within this repository.
+The ISMRM Open Science Initiative for Perfusion Imaging ([OSIPI](https://osipi.ismrm.org)) aims to promote the sharing of perfusion imaging software in order to reduce duplication, improve reproducibility and speed up translation. This **DCE-DSC-MRI_CodeCollection** code library is maintained by [Taskforce 2.3](https://www.osipi.ismrm.org/task-force-2-3/) of OSIPI and aims to collect, test and share open-source perfusion imaging code for use in research and software development. Code contributions can include modules covering one or more steps within the image processing pipeline, for example T1 mapping, converting signal to concentration and pharmacokinetic modelling. A further aim of OSIPI is to develop a fully tested and harmonised code library, drawing on the contributions within this repository.
 
 A summary of the repository structure is shown below. More detailed information and documentation is located in the repository [wiki](https://github.com/OSIPI/DCE-DSC-MRI_CodeCollection/wiki)
 
@@ -36,11 +36,11 @@ OSIPI/DCE-DSC-MRI_CodeCollection
 Wiki                                   # Information and guidelines 
 ```
 
-Click [here](https://osipi.org/DCE-DSC-MRI_TestResults/overview_of_code_collection.html) for 
+Click [here](https://osipi.github.io/DCE-DSC-MRI_TestResults/overview_of_code_collection.html) for 
 database of code available with links to code. 
 
-The results of the validated code are published on the [test-results website](http://osipi.org/DCE-DSC-MRI_TestResults), which is hosted via a separate [repository](https://github.com/OSIPI/DCE-DSC-MRI_TestResults).
+The results of the validated code are published on the [test-results website](https://osipi.github.io/DCE-DSC-MRI_TestResults/intro.html), which is hosted via a separate [repository](https://github.com/OSIPI/DCE-DSC-MRI_TestResults).
 
 
 
-This is an ongoing project, we welcome new contributions. If you would like to contribute to the OSIPI initiative please email the contacts listed on our [website](https://www.osipi.org/task-force-2-3/).
+This is an ongoing project, we welcome new contributions. If you would like to contribute to the OSIPI initiative please email the contacts listed on our [website](https://www.osipi.ismrm.org/task-force-2-3/).
