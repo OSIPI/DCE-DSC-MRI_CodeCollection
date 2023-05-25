@@ -20,7 +20,6 @@ jobs:
     - name: Install dependencies
       run: |
         pip install wheel pytest
-        pip install -r notebooks/requirements.txt
         pip install .
     - name: Test with pytest
       run: |
@@ -39,7 +38,7 @@ jobs:
     # End job early if we are on a fork OR if we are not on the "develop" branch OR if we are on a pull request
     - name: END JOB EARLY?
       if: env.CONTINUE == 'false'
-      run: echo Ending job early. No need to build notebooks."
+      run: echo Ending job early. No need to build notebooks.
     - name: Convert contributors csv to md
       if: env.CONTINUE == 'true'
       run: |
@@ -47,6 +46,7 @@ jobs:
     - name: Build the book
       if: env.CONTINUE == 'true'
       run: |
+        pip install -r notebooks/requirements.txt
         jupyter-book build notebooks/
         touch notebooks/_build/html/.nojekyll
     - name: Re-organize files
