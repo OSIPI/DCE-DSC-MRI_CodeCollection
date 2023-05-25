@@ -5,7 +5,7 @@ on:
   - pull_request
 
 jobs:
-  test-and-optionally-deploy-jupyterbook:
+  main:
     strategy:
       matrix:
         os: [ubuntu-latest]
