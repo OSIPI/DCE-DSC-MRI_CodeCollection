@@ -30,7 +30,7 @@ jobs:
         echo "GITHUB_REF = $GITHUB_REF"
         echo "GITHUB_EVENT_NAME = $GITHUB_EVENT_NAME"
         echo "GITHUB_REPOSITORY_OWNER = $GITHUB_REPOSITORY_OWNER"
-        if [[ $GITHUB_REPOSITORY_OWNER == 'osipi' && $GITHUB_REF = 'refs/heads/develop' && $GITHUB_EVENT_NAME == 'push' ]]; then
+        if [[ $GITHUB_REPOSITORY_OWNER == 'OSIPI' && $GITHUB_REF = 'refs/heads/develop' && $GITHUB_EVENT_NAME == 'push' ]]; then
             echo "CONTINUE=true" >> "$GITHUB_ENV"
         else
             echo "CONTINUE=false" >> "$GITHUB_ENV"
