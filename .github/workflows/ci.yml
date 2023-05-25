@@ -1,23 +1,18 @@
-name: deploy
+name: Test and Deploy
 
 on:
-  # Trigger the workflow on push to main branch
-  push:
-    branches:
-      - develop
+  - push
+  - pull_request
 
-# This job installs dependencies, build the book, and pushes it to `gh-pages`
 jobs:
-  build-and-deploy-book:
-    runs-on: ${{ matrix.os }}
+  test-and-optionally-deploy-jupyterbook:
     strategy:
       matrix:
         os: [ubuntu-latest]
         python-version: [3.8]
+    runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v2
-
-    # Install dependencies
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v1
       with:
@@ -30,22 +25,38 @@ jobs:
     - name: Test with pytest
       run: |
         pytest .
-    # Build the book
+    - name: Determine if notebooks should be built
+      run: |
+        echo Printing a few variables for debugging
+        echo "GITHUB_REF = $GITHUB_REF"
+        echo "GITHUB_EVENT_NAME = $GITHUB_EVENT_NAME"
+        echo "GITHUB_REPOSITORY_OWNER = $GITHUB_REPOSITORY_OWNER"
+        if [[ $GITHUB_REPOSITORY_OWNER == 'osipi' && $GITHUB_REF = 'refs/heads/develop' && $GITHUB_EVENT_NAME == 'push' ]]; then
+            echo "CONTINUE=true" >> "$GITHUB_ENV"
+        else
+            echo "CONTINUE=false" >> "$GITHUB_ENV"
+        fi
+    # End job early if we are on a fork OR if we are not on the "develop" branch OR if we are on a pull request
+    - name: END JOB EARLY?
+      if: env.CONTINUE == 'false'
+      run: echo Ending job early. No need to build notebooks."
     - name: Convert contributors csv to md
+      if: env.CONTINUE == 'true'
       run: |
         python doc/convert_to_md.py
     - name: Build the book
+      if: env.CONTINUE == 'true'
       run: |
         jupyter-book build notebooks/
         touch notebooks/_build/html/.nojekyll
     - name: Re-organize files
+      if: env.CONTINUE == 'true'
       run: |
         mkdir out
         mv notebooks/_build/html out/docs
         mv test out/test
-
-    # Deploy the book's HTML to another repo
-    - name: publish:starters
+    - name: Deploy notebook's html to DCE-DSC-MRI_TestResults repository
+      if: env.CONTINUE == 'true'
       uses: cpina/github-action-push-to-another-repository@master
       env:
         API_TOKEN_GITHUB: ${{ secrets.DEMO_TOKEN }}
