@@ -46,11 +46,11 @@ jobs:
     - name: Convert contributors csv to md
       if: env.CONTINUE == 'true'
       run: |
+        pip install -r notebooks/requirements.txt
         python doc/convert_to_md.py
     - name: Build the book
       if: env.CONTINUE == 'true'
       run: |
-        pip install -r notebooks/requirements.txt
         jupyter-book build notebooks/
         touch notebooks/_build/html/.nojekyll
     - name: Re-organize files
