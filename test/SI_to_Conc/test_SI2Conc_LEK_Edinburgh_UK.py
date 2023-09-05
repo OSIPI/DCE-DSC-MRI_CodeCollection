@@ -32,7 +32,7 @@ def test_LEK_UoEdinburgh_UK_SI2Conc(label, fa, tr, T1base, BLpts, r1, s_array, c
     
     # run test
     tic = perf_counter()
-    conc_curve = SI2Conc.SI2Conc(s_array,tr,fa,T1base,BLpts,S0=None)
+    conc_curve = SI2Conc.SI2Conc(s_array,tr,fa,T1base,[1,BLpts],S0=None)
     exc_time = 1e6 * (perf_counter() - tic)
 
     # log results
