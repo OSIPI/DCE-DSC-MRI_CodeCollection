@@ -1,0 +1,32 @@
+# Table of contents
+# More info: https://jupyterbook.org/customize/toc.html
+
+format: jb-article
+root: intro.md
+sections:
+- file: overview_of_code_collection.md
+- file: DCE.md
+  sections:
+    - file: T1mapping.md
+      sections:
+        - file: VariableFlipAngle.ipynb
+    - file: PopulationAIF.md
+      sections:
+        - file: ParkerAIF.ipynb
+        - file: GeorgiouAIF.ipynb
+        - file: PreclinicalAIF.ipynb
+    - file: SItoC.ipynb
+    - file: DCEmodels.md
+      sections:
+        - file: ToftsModel.ipynb
+        - file: ExtendedToftsModel.ipynb
+        - file: PatlakModel.ipynb
+        - file: 2CXM.ipynb
+        - file: 2CUM.ipynb
+- file: DSC.md
+  sections:
+    - file: DSC_pars.ipynb
+- file: guidelines.md
+- file: Acknowledgements.ipynb
+
+

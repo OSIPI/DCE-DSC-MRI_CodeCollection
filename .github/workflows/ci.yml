@@ -1,35 +1,71 @@
-# This workflow will install Python dependencies, run tests and lint with a variety of Python versions 
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
-
-name: ci
+name: Test and Deploy
 
 on:
   - push
   - pull_request
 
 jobs:
-  build:
-
-    runs-on: ${{ matrix.os }}
+  main:
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [ubuntu-latest]
         python-version: [3.8]
-
+    runs-on: ${{ matrix.os }}
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
         python-version: ${{ matrix.python-version }}
+        cache: 'pip'
+        cache-dependency-path: |
+          setup.py
+          notebooks/requirements.txt
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        pip install flake8 pytest codecov
-        pip install ".[test]"
+        pip install wheel pytest
+        pip install .
     - name: Test with pytest
       run: |
-        coverage run -m pytest
-    - name: Upload coverage to codecov
+        pytest .
+    - name: Determine if notebooks should be built
       run: |
-        codecov
+        echo Printing a few variables for debugging
+        echo "GITHUB_REF = $GITHUB_REF"
+        echo "GITHUB_EVENT_NAME = $GITHUB_EVENT_NAME"
+        echo "GITHUB_REPOSITORY_OWNER = $GITHUB_REPOSITORY_OWNER"
+        if [[ $GITHUB_REPOSITORY_OWNER == 'OSIPI' && $GITHUB_REF = 'refs/heads/develop' && $GITHUB_EVENT_NAME == 'push' ]]; then
+            echo "CONTINUE=true" >> "$GITHUB_ENV"
+        else
+            echo "CONTINUE=false" >> "$GITHUB_ENV"
+        fi
+    # End job early if we are on a fork OR if we are not on the "develop" branch OR if we are on a pull request
+    - name: END JOB EARLY?
+      if: env.CONTINUE == 'false'
+      run: echo Ending job early. No need to build notebooks.
+    - name: Convert contributors csv to md
+      if: env.CONTINUE == 'true'
+      run: |
+        pip install -r notebooks/requirements.txt
+        python doc/convert_to_md.py
+    - name: Build the book
+      if: env.CONTINUE == 'true'
+      run: |
+        jupyter-book build notebooks/
+        touch notebooks/_build/html/.nojekyll
+    - name: Re-organize files
+      if: env.CONTINUE == 'true'
+      run: |
+        mkdir out
+        mv notebooks/_build/html out/docs
+        mv test out/test
+    - name: Deploy notebook's html to DCE-DSC-MRI_TestResults repository
+      if: env.CONTINUE == 'true'
+      uses: cpina/github-action-push-to-another-repository@master
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.DEMO_TOKEN }}
+      with:
+        source-directory: 'out'
+        destination-github-username: 'OSIPI'
+        destination-repository-name: 'DCE-DSC-MRI_TestResults'
+        user-email: zaki@live.ca

@@ -78,6 +78,9 @@ docs/_build/
 .pybuilder/
 target/
 
+# Pycharm
+.idea/
+
 # Jupyter Notebook
 .ipynb_checkpoints
 
@@ -140,6 +143,19 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
+# vscode
+.vscode/
+
+# test output
+test/results-old
+
+# notebook data
+notebooks/data
+notebooks/_build
+
+# test results (these are commited to separate repository)
+/results
+test/results
 
 # Pycharm
 .idea
@@ -147,4 +163,4 @@ cython_debug/
 
 # Misc
 .DS_Store
-
+.pylint.d

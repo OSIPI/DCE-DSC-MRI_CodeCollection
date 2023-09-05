@@ -1,0 +1,14 @@
+# Book settings
+# More info: https://jupyterbook.org/customize/config.html
+title: OSIPI Code
+author: OSIPI
+copyright: "2021"
+logo: logo.png
+execute:
+  timeout: 600
+repository:
+  url                       : https://github.com/OSIPI/DCE-DSC-MRI_CodeCollection 
+  path_to_book              : notebooks 
+  branch                    : demo
+launch_buttons:
+  notebook_interface: "jupyterlab"
