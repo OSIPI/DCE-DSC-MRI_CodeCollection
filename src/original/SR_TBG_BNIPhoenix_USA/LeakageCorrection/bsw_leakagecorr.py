@@ -53,7 +53,7 @@ def BSWleakagecorr(dR2s, nonenhance_map):
     for x in range(nX*nY*nZ):
         print("Voxel "+str(x))
         if np.all(~np.isnan(dR2s_vec[x,:])) and np.all(~np.isinf(dR2s_vec[x,:])):
-            BSW_kvals,BSW_fitcov = curve_fit(BSWfunction,(dR2s_WBNE[x,:],dR2s_WBNE_integral),dR2s_vec[x,:],p0)
+            BSW_kvals,BSW_fitcov = curve_fit(BSWfunction,(dR2s_WBNE_avg,dR2s_WBNE_integral),dR2s_vec[x,:],p0)
             K1_dR2s[x] = BSW_kvals[0]
             K2_dR2s[x] = BSW_kvals[1]
             leakage = (-K2_dR2s[x]) * dR2s_WBNE_integral
