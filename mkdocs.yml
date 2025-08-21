@@ -150,7 +150,7 @@ not_in_nav: |
 
 # Page tree
 nav:
-  - Home: notebooks/index.md
+  - Home: index.md
   - Overview of Code Collection: notebooks/overview_of_code_collection.md
   - DCE functionality:
       - DCE Overview: notebooks/DCE.md
