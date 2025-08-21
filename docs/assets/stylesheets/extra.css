@@ -1,0 +1,8 @@
+.md-grid {
+    max-width: 90vw;
+}
+
+.md-header__button.md-logo{
+    padding-bottom: 18px;
+    scale: 1.2;
+}
