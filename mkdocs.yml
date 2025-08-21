@@ -150,28 +150,28 @@ not_in_nav: |
 
 # Page tree
 nav:
-  - Home: index.md
-  - Overview of Code Collection: overview_of_code_collection.md
+  - Home: notebooks/index.md
+  - Overview of Code Collection: notebooks/overview_of_code_collection.md
   - DCE functionality:
-      - DCE Overview: DCE.md
+      - DCE Overview: notebooks/DCE.md
       - T1 Mapping:
-          - T1 Mapping Overview: T1mapping.md
-          - Variable Flip Angle: VariableFlipAngle.ipynb
+          - T1 Mapping Overview: notebooks/T1mapping.md
+          - Variable Flip Angle: notebooks/VariableFlipAngle.ipynb
       - Population AIF:
-          - Population AIF Overview: PopulationAIF.md
-          - Parker AIF: ParkerAIF.ipynb
-          - Georgiou AIF: GeorgiouAIF.ipynb
-          - Preclinical AIF: PreclinicalAIF.ipynb
-      - Signal Intensity to Concentration: SItoC.ipynb
+          - Population AIF Overview: notebooks/PopulationAIF.md
+          - Parker AIF: notebooks/ParkerAIF.ipynb
+          - Georgiou AIF: notebooks/GeorgiouAIF.ipynb
+          - Preclinical AIF: notebooks/PreclinicalAIF.ipynb
+      - Signal Intensity to Concentration: notebooks/SItoC.ipynb
       - DCE Models:
-          - DCE Models Overview: DCEmodels.md
-          - Tofts Model: ToftsModel.ipynb
-          - Extended Tofts Model: ExtendedToftsModel.ipynb
-          - Patlak Model: PatlakModel.ipynb
-          - 2CXM: 2CXM.ipynb
-          - 2CUM: 2CUM.ipynb
+          - DCE Models Overview: notebooks/DCEmodels.md
+          - Tofts Model: notebooks/ToftsModel.ipynb
+          - Extended Tofts Model: notebooks/ExtendedToftsModel.ipynb
+          - Patlak Model: notebooks/PatlakModel.ipynb
+          - 2CXM: notebooks/2CXM.ipynb
+          - 2CUM: notebooks/2CUM.ipynb
   - DSC functionality:
-      - DSC Overview: DSC.md
-      - DSC Parameters: DSC_pars.ipynb
-  - Guidelines: guidelines.md
-  - Contributors: Acknowledgements.ipynb
+      - DSC Overview: notebooks/DSC.md
+      - DSC Parameters: notebooks/DSC_pars.ipynb
+  - Guidelines: notebooks/guidelines.md
+  - Contributors: notebooks/Acknowledgements.ipynb

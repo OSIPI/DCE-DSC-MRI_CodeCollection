@@ -3,7 +3,7 @@ name: Deploy MkDocs to GitHub Pages
 on:
   push:
     branches:
-      - feat/mkdocs-migration
+      - testing/feat-mkdocs-migration
 
 jobs:
   deploy:
@@ -30,7 +30,7 @@ jobs:
 
       - name: Execute notebooks before building docs
         run: |
-          find notebooks -type f -name "*.ipynb" ! -path "*/old_nb/*" | while read nb; do
+          find docs/notebooks -type f -name "*.ipynb" ! -path "*/old_nb/*" | while read nb; do
             echo "Executing $nb"
             jupyter nbconvert --to notebook --execute --inplace "$nb"
           done

@@ -6,7 +6,7 @@
 To execute all notebooks in the `notebooks/` folder (excluding the `old_nb`), use the following shell script:
 
 ```bash
-find notebooks -type f -name "*.ipynb" ! -path "*/old_nb/*" | while read nb; do
+find docs/notebooks -type f -name "*.ipynb" ! -path "*/old_nb/*" | while read nb; do
     echo "Executing $nb"
     jupyter nbconvert --to notebook --execute --inplace "$nb"
 done

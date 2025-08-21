@@ -150,8 +150,8 @@ cython_debug/
 test/results-old
 
 # notebook data
-notebooks/data
-notebooks/_build
+docs/notebooks/data
+docs/notebooks/_build
 
 # test results (these are commited to separate repository)
 /results
