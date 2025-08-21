@@ -59,13 +59,13 @@ jobs:
         mkdir out
         mv notebooks/_build/html out/docs
         mv test out/test
-    - name: Deploy notebook's html to DCE-DSC-MRI_TestResults repository
-      if: env.CONTINUE == 'true'
-      uses: cpina/github-action-push-to-another-repository@master
-      env:
-        API_TOKEN_GITHUB: ${{ secrets.DEMO_TOKEN }}
-      with:
-        source-directory: 'out'
-        destination-github-username: 'OSIPI'
-        destination-repository-name: 'DCE-DSC-MRI_TestResults'
-        user-email: zaki@live.ca
+    # - name: Deploy notebook's html to DCE-DSC-MRI_TestResults repository
+    #   if: env.CONTINUE == 'true'
+    #   uses: cpina/github-action-push-to-another-repository@master
+    #   env:
+    #     API_TOKEN_GITHUB: ${{ secrets.DEMO_TOKEN }}
+    #   with:
+    #     source-directory: 'out'
+    #     destination-github-username: 'OSIPI'
+    #     destination-repository-name: 'DCE-DSC-MRI_TestResults'
+    #     user-email: zaki@live.ca

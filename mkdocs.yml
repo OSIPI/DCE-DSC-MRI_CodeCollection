@@ -1,0 +1,177 @@
+# Project information
+site_name: OSIPI DCE-DSC-MRI_CodeCollection
+site_url: https://github.com/OSIPI/DCE-DSC-MRI_CodeCollection
+site_author: OSIPI
+site_description: >-
+  OSIPI aims to develop resources and best practices for the analysis of perfusion imaging data and interoperability of the analysis results.
+
+# Repository
+repo_name: OSIPI/DCE-DSC-MRI_CodeCollection
+repo_url: https://github.com/OSIPI/DCE-DSC-MRI_CodeCollection
+
+# Copyright
+copyright: Copyright &copy; 2025 OSIPI
+
+# Configuration
+theme:
+  name: material
+  logo: assets/osipiImgs/OSIPI_logo.png
+  favicon: assets/osipiImgs/OSIPI_logo_only_square.png
+  features:
+    - announce.dismiss
+    - content.action.edit
+    - content.action.view
+    - content.code.annotate
+    - content.code.copy
+    # - content.code.select
+    # - content.footnote.tooltips
+    # - content.tabs.link
+    - content.tooltips
+    # - header.autohide
+    # - navigation.expand
+    - navigation.footer
+    - navigation.indexes
+    # - navigation.instant
+    # - navigation.instant.prefetch
+    # - navigation.instant.progress
+    # - navigation.prune
+    # - navigation.sections
+    - navigation.tabs
+    # - navigation.tabs.sticky
+    - navigation.top
+    - navigation.tracking
+    - search.highlight
+    - search.share
+    - search.suggest
+    - toc.follow
+    # - toc.integrate
+  palette:
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/link
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: indigo
+      toggle:
+        icon: material/toggle-switch-off
+        name: Switch to system preference
+  font:
+    text: Roboto
+    code: Roboto Mono
+
+plugins:
+  - search:
+      separator: '[\s\u200b\-_,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
+  - minify:
+      minify_html: true
+
+  - mknotebooks
+
+hooks:
+  - mk_hooks.py
+
+# Additional configuration
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/OSIPI
+    - icon: fontawesome/brands/slack
+      link: https://app.slack.com/client/TFGVCE9HS
+
+extra_css:
+    - assets/stylesheets/extra.css
+extra_javascript:
+  - js/mathjax-config.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+
+# Extensions
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - codehilite
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      normalize_issue_symbols: true
+      repo_url_shorthand: true
+      user: squidfunk
+      repo: mkdocs-material
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.snippets:
+      auto_append:
+        - includes/mkdocs.md
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+      combine_header_slug: true
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+
+not_in_nav: |
+  /tutorials/**/*.md
+
+# Page tree
+nav:
+  - Home: index.md
+  - Overview of Code Collection: overview_of_code_collection.md
+  - DCE functionality:
+      - DCE Overview: DCE.md
+      - T1 Mapping:
+          - T1 Mapping Overview: T1mapping.md
+          - Variable Flip Angle: VariableFlipAngle.ipynb
+      - Population AIF:
+          - Population AIF Overview: PopulationAIF.md
+          - Parker AIF: ParkerAIF.ipynb
+          - Georgiou AIF: GeorgiouAIF.ipynb
+          - Preclinical AIF: PreclinicalAIF.ipynb
+      - Signal Intensity to Concentration: SItoC.ipynb
+      - DCE Models:
+          - DCE Models Overview: DCEmodels.md
+          - Tofts Model: ToftsModel.ipynb
+          - Extended Tofts Model: ExtendedToftsModel.ipynb
+          - Patlak Model: PatlakModel.ipynb
+          - 2CXM: 2CXM.ipynb
+          - 2CUM: 2CUM.ipynb
+  - DSC functionality:
+      - DSC Overview: DSC.md
+      - DSC Parameters: DSC_pars.ipynb
+  - Guidelines: guidelines.md
+  - Contributors: Acknowledgements.ipynb

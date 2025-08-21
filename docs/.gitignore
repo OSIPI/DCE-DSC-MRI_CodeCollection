@@ -1,0 +1,9 @@
+*
+
+!.gitignore
+
+!assets/
+!assets/**
+
+!js/
+!js/**
