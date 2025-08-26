@@ -2,7 +2,7 @@
 # More info: https://jupyterbook.org/customize/toc.html
 
 format: jb-article
-root: intro.md
+root: index.md
 sections:
 - file: overview_of_code_collection.md
 - file: DCE.md

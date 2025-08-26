@@ -31,7 +31,7 @@ def SI2Conc(SIcurve,TR,flip,T1base,baselinepts,S0=None):
 
 	# If S0 isn't specified, calculate from baseline
 	if S0 is None:
-		SIbase=np.mean(SIcurve[1:baselinepts])
+		SIbase = np.mean(SIcurve[baselinepts[0]:baselinepts[1]])
 		S0=CalcM0(SIbase,TR,flip,T1base)
 	
 	# Now calculate the R1 curve
