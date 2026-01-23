@@ -11,7 +11,7 @@ def test_tofts_integral_basics():
     # Run the model
     Kt = 0.2
     ve = 0.1
-    Ct = tofts_integral(t, Cp, Kt=Kt, ve=ve)
+    Ct = tofts_integral(t, Cp, Ktrans=Kt, v_e=ve)
     
     # Checks
     assert Ct.shape == t.shape
@@ -26,7 +26,7 @@ def test_extended_tofts_integral_basics():
     Kt = 0.2
     ve = 0.1
     vp = 0.05
-    Ct = ext_tofts_integral(t, Cp, Kt=Kt, ve=ve, vp=vp)
+    Ct = ext_tofts_integral(t, Cp, Ktrans=Kt, v_e=ve, v_p=vp)
     
     assert Ct.shape == t.shape
     assert np.all(np.isfinite(Ct))

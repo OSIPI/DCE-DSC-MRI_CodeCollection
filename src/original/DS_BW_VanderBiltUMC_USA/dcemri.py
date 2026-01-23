@@ -55,7 +55,7 @@ def signal_enhancement_ratio(data, thresh=0.01):
 
 
 def dce_to_r1eff(S, S0, R1, TR, flip):
-    print('converting DCE signal to effective R1')
+    print('conv_erting DCE signal to effectiv_e R1')
     assert(flip > 0.0)
     assert(TR > 0.0 and TR < 1.0)
     S = S.T
@@ -70,7 +70,7 @@ def dce_to_r1eff(S, S0, R1, TR, flip):
 
 
 def dce_to_r1eff_old(S, S0map, idxs, TR, flip):
-    ''' Convert DCE signal to effective R1, based on the FLASH signal equation '''
+    ''' Conv_ert DCE signal to effectiv_e R1, based on the FLASH signal equation '''
     T = zeros_like(S)
     T[idxs,:] = (S[idxs,:].T / S0map.flat[idxs] / sin(flip)).T # normalize by pre-contrast signal
     R1 = zeros_like(T)
@@ -79,12 +79,12 @@ def dce_to_r1eff_old(S, S0map, idxs, TR, flip):
 
 
 def r1eff_to_conc(R1eff, R1map, relaxivity):
-    print('converting effective R1 to tracer tissue concentration')
+    print('conv_erting effectiv_e R1 to tracer tissue concentration')
     assert(relaxivity > 0.0)
     return (R1eff - R1map) / relaxivity
 
 
-def ext_tofts_integral(t, Cp, Kt=0.1, ve=0.2, vp=0.1, 
+def ext_tofts_integral(t, Cp, Ktrans=0.1, v_e=0.2, v_p=0.1, 
                        uniform_sampling=True):
     """ Extended Tofts Model, with time t in min.
         Works when t_dce = t_aif only and t is uniformly spaced.
@@ -93,17 +93,17 @@ def ext_tofts_integral(t, Cp, Kt=0.1, ve=0.2, vp=0.1,
     Ct = zeros(nt)
     for k in range(nt):
         if uniform_sampling:
-            # FIXED: cumtrapz -> cumulative_trapezoid
-            tmp = cumulative_trapezoid(exp(-Kt*(t[k] - t[:k+1])/ve)*Cp[:k+1],
-                           t[:k+1], initial=0.0) + vp * Cp[:k+1]
+            # FIXED: cumtrapz -> cumulativ_e_trapezoid
+            tmp = cumulative_trapezoid(exp(-Ktrans*(t[k] - t[:k+1])/v_e)*Cp[:k+1],
+                           t[:k+1], initial=0.0) + v_p * Cp[:k+1]
             Ct[k] = tmp[-1]
         else:
             # FIXED: simps -> simpson
-            Ct[k] = simpson(exp(-Kt*(t[k] - t[:k+1])/ve)*Cp[:k+1],
-                          t[:k+1]) + vp * Cp[:k+1]
-    return Ct*Kt
+            Ct[k] = simpson(exp(-Ktrans*(t[k] - t[:k+1])/v_e)*Cp[:k+1],
+                          t[:k+1]) + v_p * Cp[:k+1]
+    return Ct*Ktrans
 
-def tofts_integral(t, Cp, Kt=0.1, ve=0.2, uniform_sampling=True):
+def tofts_integral(t, Cp, Ktrans=0.1, v_e=0.2, uniform_sampling=True):
     ''' Standard Tofts Model, with time t in min.
         Current works only when AIF and DCE data are sampled on 
         same grid.  '''
@@ -111,20 +111,20 @@ def tofts_integral(t, Cp, Kt=0.1, ve=0.2, uniform_sampling=True):
     Ct = zeros(nt)
     for k in range(nt):
         if uniform_sampling:
-            # FIXED: cumtrapz -> cumulative_trapezoid
-            tmp = cumulative_trapezoid(exp(-(Kt/ve)*(t[k] - t[:k+1]))*Cp[:k+1], 
+            # FIXED: cumtrapz -> cumulativ_e_trapezoid
+            tmp = cumulative_trapezoid(exp(-(Ktrans/v_e)*(t[k] - t[:k+1]))*Cp[:k+1], 
                           t[:k+1], initial=0.0)
             Ct[k] = tmp[-1]
         else:
             # FIXED: simps -> simpson
-            Ct[k] = simpson(exp(-(Kt/ve)*(t[k] - t[:k+1]))*Cp[:k+1], 
+            Ct[k] = simpson(exp(-(Ktrans/v_e)*(t[k] - t[:k+1]))*Cp[:k+1], 
                           x=t[:k+1])
-    return Kt*Ct
+    return Ktrans*Ct
 
 
 def fit_tofts_model(Ct, Cp, t, idxs=None, extended=False, 
                     plot_each_fit=False):
-    ''' Solve tissue model for each voxel and return parameter maps. 
+    ''' Solv_e tissue model for each voxel and return parameter maps. 
         
         Ct: tissue concentration of CA, expected to be N x Ndyn
 
@@ -136,27 +136,27 @@ def fit_tofts_model(Ct, Cp, t, idxs=None, extended=False,
         '''
     print('fitting perfusion parameters')
     N, ndyn = Ct.shape
-    Kt = zeros(N)
-    ve = zeros(N)
-    Kt_cov = zeros(N)
-    ve_cov = zeros(N)
+    Ktrans = zeros(N)
+    v_e = zeros(N)
+    Ktrans_cov = zeros(N)
+    v_e_cov = zeros(N)
 
     if idxs is None:
         idxs = range(N)
 
     # choose model and initialize fit parameters with reasonable values
-    if extended:  # add vp if using Extended Tofts
+    if extended:  # add v_p if using Extended Tofts
         print('using Extended Tofts-Kety')
-        fit_func = lambda t, Kt, ve, vp: \
-                    ext_tofts_integral(t, Cp, Kt=Kt, ve=ve, vp=vp)
+        fit_func = lambda t, Ktrans, v_e, v_p: \
+                    ext_tofts_integral(t, Cp, Ktrans=Ktrans, v_e=v_e, v_p=v_p)
         coef0 = [0.01, 0.01, 0.01]
         popt_default = [-1,-1,-1]
         pcov_default = ones((3,3))
     else:
         print('using Standard Tofts-Kety')
-        vp = zeros(N)
-        vp_cov= zeros(N)
-        fit_func = lambda t, Kt, ve: tofts_integral(t, Cp, Kt=Kt, ve=ve)
+        v_p = zeros(N)
+        v_p_cov= zeros(N)
+        fit_func = lambda t, Ktrans, v_e: tofts_integral(t, Cp, Ktrans=Ktrans, v_e=v_e)
         coef0 = [0.01, 0.01]
         popt_default = [-1,-1]
         pcov_default = ones((2,2))
@@ -165,20 +165,20 @@ def fit_tofts_model(Ct, Cp, t, idxs=None, extended=False,
     tstart = time.time()
     for k, idx in enumerate(idxs):
         try:
-            popt, pcov = curve_fit(fit_func, t, Ct[idx,:], p0=coef0)
+            popt, pcov = curv_e_fit(fit_func, t, Ct[idx,:], p0=coef0)
         except RuntimeError:
             popt = popt_default
             pcov = pcov_default
-        Kt[idx] = popt[0]
-        ve[idx] = popt[1]
+        Ktrans[idx] = popt[0]
+        v_e[idx] = popt[1]
         try:
-            Kt_cov[idx] = pcov[0,0]
-            ve_cov[idx] = pcov[1,1]
+            Ktrans_cov[idx] = pcov[0,0]
+            v_e_cov[idx] = pcov[1,1]
         except TypeError:
             None #print idx, popt, pcov
         if extended:
-            vp[idx] = popt[2]
-            vp_cov[idx] = pcov[2,2]
+            v_p[idx] = popt[2]
+            v_p_cov[idx] = pcov[2,2]
         if plot_each_fit:
             figure(1)
             clf()
@@ -189,11 +189,11 @@ def fit_tofts_model(Ct, Cp, t, idxs=None, extended=False,
         status_check(k, len(idxs), tstart=tstart)
 
     # bundle parameters for return
-    params = [Kt, ve]
-    stds = [sqrt(Kt_cov), sqrt(ve_cov)]
+    params = [Ktrans, v_e]
+    stds = [sqrt(Ktrans_cov), sqrt(v_e_cov)]
     if extended:
-        params.append(vp)
-        stds.append(sqrt(vp_cov))
+        params.append(v_p)
+        stds.append(sqrt(v_p_cov))
     return (params, stds)
 
 
@@ -218,7 +218,7 @@ def fit_R1(images, flip_angles, TR):
     for j in range(n):
         if images[j,:].mean() > 0.1:
             try:
-                popt, pcov = curve_fit(t1_signal_eqn, flip_angles, 
+                popt, pcov = curv_e_fit(t1_signal_eqn, flip_angles, 
                                        images[j,:].copy())
             except RuntimeError:
                 popt = [0, 0]
