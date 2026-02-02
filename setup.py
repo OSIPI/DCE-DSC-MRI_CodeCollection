@@ -6,7 +6,7 @@ setup(
     install_requires=['dicom==0.9.9.post1', 'imageio==2.19.3', 'joblib==1.1.0', 'lmfit==1.0.3',
                       'mat73==0.59', 'matplotlib==3.5.2', 'nibabel==3.2.2', 'numpy>=1.23.0',
                       'opencv-python==4.5.5.64', 'openpyxl==3.2.0b1', 'pandas==1.4.2',
-                      'progressbar==2.5', 'pytest==7.1.2', 'scipy==1.8.1'],
+                      'progressbar==2.5', 'pytest==7.1.2', 'scipy==1.8.1','pydicom'],
     include_package_data=True,
     package_dir={'osipi_code_collection': 'src'},
     packages=[f'osipi_code_collection.{module}' for module in find_packages('src')],
