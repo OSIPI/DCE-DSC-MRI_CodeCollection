@@ -105,11 +105,25 @@ def make_catplot(x, y, data, ylabel, **plotopts):
     g.set_ylabels(ylabel, clear_inner=False);
     g.set_xticklabels(rotation=45, fontsize=16, ha='right', rotation_mode='anchor')
     g._legend.set_title('ContributionID')
-    # Add vertical add midpoints between each major tick
+    # Add vertical grid lines at midpoints between each major tick
     for ax in g.axes.flatten():
         ax.xaxis.set_minor_locator(AutoMinorLocator(2))
         ax.grid(which="minor", axis='x', linestyle=":")
         # Hide the minor ticks (distracting) by making it white
         ax.tick_params(axis='x', which='minor', colors='white')
     plt.show() # Could also do `return g` for more flexibility
-    
+
+
+def make_contribution_label(row):
+    """Build a display label combining author and fitting method.
+
+    For contributions where a fitting method is specified in the metadata,
+    this appends the fitting method to the author name so that different
+    fitting approaches from the same author are displayed separately in plots.
+
+    :param row: a pandas Series (one row of the dataframe)
+    :return: string label, e.g. 'OGJ_OsloU_Norway (LLSQ)'
+    """
+    if 'fitting_method' in row and row['fitting_method']:
+        return f"{row['author']} ({row['fitting_method']})"
+    return row['author']
