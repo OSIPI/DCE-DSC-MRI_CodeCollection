@@ -4,7 +4,7 @@ import numpy as np
 from time import perf_counter
 from ..helpers import osipi_parametrize, log_init, log_results
 from . import t1_data
-from osipi_code_collection.original.MJT_UoEdinburgh_UK.t1_fit import VFALinear, VFANonLinear, VFA2Points
+from src.original.MJT_UoEdinburgh_UK.t1_fit import VFALinear, VFANonLinear, VFA2Points
 
 
 # All tests will use the same arguments and same data...

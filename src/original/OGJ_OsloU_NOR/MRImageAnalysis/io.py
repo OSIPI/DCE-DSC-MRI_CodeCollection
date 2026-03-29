@@ -1,4 +1,5 @@
-import dicom, dicom.UID
+import pydicom as dicom
+import pydicom.uid
 from dicom.dataset import Dataset, FileDataset
 import datetime, time
 import os
