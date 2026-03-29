@@ -1,0 +1,74 @@
+name: Test, Build, and Deploy Book
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: [3.8]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install wheel pytest
+          pip install -r notebooks/requirements.txt
+
+      - name: Run tests
+        run: |
+          pytest --maxfail=1 --disable-warnings -q
+
+      - name: Check if we should build
+        run: |
+          if [[ $GITHUB_REF == 'refs/heads/develop' && $GITHUB_EVENT_NAME == 'push' ]]; then
+            echo "CONTINUE=true" >> $GITHUB_ENV
+          else
+            echo "CONTINUE=false" >> $GITHUB_ENV
+          fi
+
+      - name: Skip build?
+        if: env.CONTINUE == 'false'
+        run: echo "Not building the book."
+
+      - name: Build the Jupyter Book
+        if: env.CONTINUE == 'true'
+        run: |
+          jupyter-book build notebooks/
+          touch notebooks/_build/html/.nojekyll
+
+      - name: Move output files
+        if: env.CONTINUE == 'true'
+        run: |
+          mkdir out
+          mv notebooks/_build/html out/docs
+          mv test out/test
+
+      - name: Deploy Book
+        if: env.CONTINUE == 'true'
+        uses: cpina/github-action-push-to-another-repository@master
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          source-directory: 'out'
+          destination-github-username: 'OSIPI'
+          destination-repository-name: 'DCE-DSC-MRI_TestResults'
+          user-email: 'ahmed.tahan71@gmail.com'
