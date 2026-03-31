@@ -11,17 +11,17 @@ import numpy as np
 
 # Inputs:
 	# SIcurve		numpy array of SI values
-	# TR			TR for FLAHS sequence, in seconds
+	# TR			TR for FLASH sequence, in seconds
 	# flip			Flip angle for FLASH sequence in degrees
 	# T1base		Native T1 corresponding to the baseline signal intensity, in seconds
-	# baselinepts	Number of data points before the arrival of contrast agent
+	# baselinepts	Range of data points to be used for baseline, indexes to start and end at [start,end]
 	# S0 			Equilibrium signal, if known. Default is to calculate it here
 
 # Output:
 	#H				numpy array of curve as delta R1 in s^-1
 
 
-def SI2Conc(SIcurve,TR,flip,T1base,baselinepts,S0=None):
+def SI2Conc(SIcurve,TR,flip,T1base,baselinepts_range,S0=None):
 
 	# Convert flip angle to radians
 	rflip=flip*np.pi/180
@@ -31,7 +31,7 @@ def SI2Conc(SIcurve,TR,flip,T1base,baselinepts,S0=None):
 
 	# If S0 isn't specified, calculate from baseline
 	if S0 is None:
-		SIbase=np.mean(SIcurve[1:baselinepts])
+		SIbase=np.mean(SIcurve[baselinepts_range[0]:baselinepts_range[1]])
 		S0=CalcM0(SIbase,TR,flip,T1base)
 	
 	# Now calculate the R1 curve
